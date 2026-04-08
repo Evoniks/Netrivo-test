@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo 3 – Premium brand</title>
+  <style>
+    :root{
+      --bg:#f4efe8;--ink:#141414;--muted:#5f5a53;--line:rgba(20,20,20,.08);--paper:#fffdf9;--gold:#b7865c;--shadow:0 28px 70px rgba(28,20,16,.08);--max:1240px;
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:
+    radial-gradient(circle at top left, rgba(183,134,92,.12), transparent 28%),
+    linear-gradient(180deg,#f8f4ee 0%,#f1ebe3 100%)}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(var(--max),calc(100% - 36px));margin:auto}
+    .top{padding:18px 0 0}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .mark{width:44px;height:44px;border-radius:14px;background:#171717;color:#f7f0e6;display:grid;place-items:center;font-weight:700}
+    .nav{display:flex;gap:28px;color:var(--muted);font-size:.95rem}
+    .hero{padding:28px 0 0}
+    .hero-shell{border:1px solid var(--line);border-radius:42px;overflow:hidden;background:rgba(255,255,255,.46);box-shadow:var(--shadow)}
+    .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;min-height:780px}
+    .left{padding:72px 62px 56px;background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,.16))}
+    .tag{display:inline-block;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.62);font-size:.78rem;color:var(--muted)}
+    h1{font-size:clamp(3.2rem,8vw,6.8rem);line-height:.93;letter-spacing:-.07em;margin:24px 0 0;max-width:780px}
+    .lead{font-size:1.14rem;line-height:1.9;color:var(--muted);max-width:660px;margin-top:26px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;padding:15px 24px;border-radius:999px;font-weight:700}
+    .primary{background:#171717;color:#fff}.secondary{border:1px solid var(--line)}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+    .metric{padding-top:22px;border-top:1px solid var(--line)}
+    .metric strong{display:block;font-size:1.42rem;letter-spacing:-.04em}
+    .metric span{display:block;margin-top:8px;font-size:.93rem;line-height:1.6;color:var(--muted)}
+    .right{position:relative;padding:38px;background:linear-gradient(150deg,#171412,#4b3024 52%,#1c1714);color:#f8f1e6;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+    .right:before{content:"";position:absolute;right:-10%;bottom:-14%;width:78%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.1)}
+    .right:after{content:"";position:absolute;left:-12%;top:8%;width:52%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.1), transparent 64%)}
+    .glass{position:relative;z-index:1;padding:26px;border-radius:28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)}
+    .glass + .glass{margin-top:16px}
+    .glass small{display:block;text-transform:uppercase;letter-spacing:.22em;color:rgba(248,241,230,.64)}
+    .glass h3{margin:12px 0 0;font-size:1.55rem;line-height:1.08;letter-spacing:-.05em}
+    .glass p{margin-top:12px;color:rgba(248,241,230,.74);line-height:1.72}
+    .section{padding:92px 0 0}
+    .head{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:end;margin-bottom:28px}
+    .kicker{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+    h2{font-size:clamp(2.1rem,4vw,4rem);line-height:.98;letter-spacing:-.05em;margin:12px 0 0}
+    .copy{font-size:1.03rem;color:var(--muted);line-height:1.84}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .service,.maincase,.sidelist,.processwrap,.contact-left,.contact-right{border:1px solid var(--line);border-radius:34px;background:rgba(255,255,255,.5);box-shadow:var(--shadow)}
+    .service{padding:28px;min-height:250px;display:flex;flex-direction:column;justify-content:space-between}
+    .service small{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.22em;color:var(--muted)}
+    .service h3{margin:18px 0 0;font-size:1.5rem;line-height:1.06;letter-spacing:-.04em}
+    .service p{margin-top:12px;color:var(--muted);line-height:1.75}
+    .showcase{display:grid;grid-template-columns:1.08fr .92fr;gap:18px}
+    .maincase{padding:32px;min-height:560px;display:flex;flex-direction:column;justify-content:space-between}
+    .browser{border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--paper)}
+    .browser-top{display:flex;align-items:center;gap:8px;padding:16px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.7)}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(20,20,20,.18)}
+    .url{margin-left:10px;color:var(--muted);font-size:.78rem}
+    .browser-body{padding:24px;display:grid;gap:16px}
+    .feature{padding:30px;border-radius:24px;background:linear-gradient(145deg,#191513,#5a3828);color:#fff}
+    .feature h3{margin:0;font-size:1.95rem;line-height:1.02;letter-spacing:-.06em}
+    .feature p{color:rgba(255,255,255,.76);line-height:1.74}
+    .miniwrap{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .mini{padding:18px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+    .mini p{margin:10px 0 0;color:var(--muted);line-height:1.6}
+    .sidelist{padding:22px;display:grid;gap:16px}
+    .project{padding:24px;border-radius:24px;background:rgba(255,255,255,.64);border:1px solid var(--line)}
+    .project small{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted)}
+    .project strong{display:block;margin-top:12px;font-size:1.3rem;letter-spacing:-.04em}
+    .project p{margin-top:12px;color:var(--muted);line-height:1.72}
+    .project span{display:inline-block;margin-top:14px;font-weight:700}
+    .quote{padding-top:22px;border-top:1px solid var(--line);color:var(--muted);line-height:1.76;max-width:600px}
+    .processwrap{padding:28px}
+    .process{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .step{padding:24px;border-radius:26px;background:rgba(255,255,255,.62);border:1px solid var(--line);min-height:250px}
+    .step small{display:block;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+    .step strong{display:block;margin-top:18px;font-size:1.36rem;line-height:1.08;letter-spacing:-.04em}
+    .step p{margin-top:12px;color:var(--muted);line-height:1.75}
+    .contact{display:grid;grid-template-columns:1.14fr .86fr;gap:18px;padding-bottom:92px}
+    .contact-left,.contact-right{padding:36px}
+    .contact-right{display:grid;gap:20px}
+    .item small{display:block;color:var(--muted)} .item strong{display:block;margin-top:8px;line-height:1.56}
+    footer{padding:0 0 40px;color:var(--muted);font-size:.92rem}
+    @media (max-width:1080px){
+      .hero-grid,.head,.grid4,.showcase,.process,.contact,.metrics{grid-template-columns:1fr}
+      .left,.right,.maincase,.sidelist,.processwrap,.contact-left,.contact-right,.service{padding:24px}
+    }
+    @media (max-width:760px){.nav{display:none}.actions{flex-direction:column}.btn{justify-content:center}.container{width:min(var(--max),calc(100% - 20px))}}
+  </style>
+</head>
+<body>
+  <div class="container top">
+    <div class="topbar">
+      <div class="brand"><div class="mark">N</div><div><strong>Demo 3</strong></div></div>
+      <nav class="nav"><a href="#services">Tjenester</a><a href="#work">Arbeid</a><a href="#contact">Kontakt</a></nav>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-grid">
+          <div class="left">
+            <div class="tag">Premium brand / høg opplevd verdi / sterk identitet</div>
+            <h1>Ei nettside som får verksemda til å sjå meir eksklusiv ut enn konkurrentane.</h1>
+            <div class="lead">Denne demoen er laga for kundar som vil ha meir enn “ein fin nettside”. Ho er bygd for å gi merkevara meir pondus, høgare opplevd kvalitet og eit nivå som gjer det lettare å ta betre betalt.</div>
+            <div class="actions">
+              <a class="btn primary" href="#contact">Book gjennomgang</a>
+              <a class="btn secondary" href="#work">Sjå case</a>
+            </div>
+            <div class="metrics">
+              <div class="metric"><strong>Meir verdi</strong><span>Designet aukar opplevd kvalitet på heile verksemda.</span></div>
+              <div class="metric"><strong>Meir særpreg</strong><span>Bygd for å skilje seg frå vanlege malbaserte sider.</span></div>
+              <div class="metric"><strong>Meir autoritet</strong><span>Gir ei kjensle av at dette er eit meir etablert og bevisst brand.</span></div>
+            </div>
+          </div>
+
+          <aside class="right">
+            <div class="glass">
+              <small>Premium direction</small>
+              <h3>Kuraterte flater, meir luft og sterkare visuell kontroll.</h3>
+              <p>Dette er ei side for kundar som ønskjer at nettsida skal vere ein aktiv del av merkevara – ikkje berre ein plass for informasjon.</p>
+            </div>
+            <div class="glass">
+              <small>Perception</small>
+              <h3>Ser dyr ut. Kjennest gjennomarbeidd. Gir meir tyngde.</h3>
+              <p>Når sida di ser ut som ho er designa med intensjon, påverkar det også korleis kunden oppfattar pris, kvalitet og profesjonalitet.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="head">
+          <div><div class="kicker">Tjenester</div><h2>Dette er demoen som skal vise premium-nivået ditt.</h2></div>
+          <div class="copy">Bruk denne når du vil vise kva som skjer når nettsida ikkje berre skal fungere, men også løfte heile inntrykket av verksemda. Ho eignar seg for sterke tenestebrand, premium nisjer og kundar med høgare ambisjonar.</div>
+        </div>
+        <div class="grid4">
+          <article class="service"><small>01 / Identity</small><div><h3>Starkare merkevarekjensle</h3><p>Uttrykket blir brukt aktivt for å skape meir verdi rundt tenesta eller selskapet.</p></div></article>
+          <article class="service"><small>02 / Art direction</small><div><h3>Meir designa og kuratert</h3><p>Store flater, nøye rytme og kontrollert kontrast gir ei meir eksklusiv oppleving.</p></div></article>
+          <article class="service"><small>03 / Premium UX</small><div><h3>Enkel å bruke, men ikkje enkel i uttrykket</h3><p>Sida er framleis tydeleg og funksjonell, men med eit mykje høgare kvalitetsnivå.</p></div></article>
+          <article class="service"><small>04 / Positioning</small><div><h3>Bygd for å støtte høgare pris</h3><p>Når førsteinntrykket er sterkare, aukar også betalingsvilje og tillit.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="container">
+        <div class="head">
+          <div><div class="kicker">Arbeid</div><h2>Case-oppsett for dei mest påkosta prosjekta.</h2></div>
+          <div class="copy">Denne layouten gir mykje plass til eit sterkt hovudcase, med fleire mindre prosjekt ved sida av. Det får porteføljen til å sjå meir gjennomarbeidd og meir etablert ut.</div>
+        </div>
+        <div class="showcase">
+          <div class="maincase">
+            <div class="browser">
+              <div class="browser-top"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="url">premium-demo.netrivo.no</div></div>
+              <div class="browser-body">
+                <div class="feature">
+                  <h3>Ei premium side som signaliserer kvalitet før eit ord er lese.</h3>
+                  <p>Her er fokuset på meir pondus, meir særpreg og ei visuell ro som gjer at heile verksemda verkar meir verdifull.</p>
+                </div>
+                <div class="miniwrap">
+                  <div class="mini"><strong>Editorial feel</strong><p>Ser meir ut som eit kuratert brand enn ei standard bedriftsside.</p></div>
+                  <div class="mini"><strong>High-trust</strong><p>Bygd for å støtte høgare pris og sterkare førsteinntrykk.</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="quote">Dette er demoen du bruker når du vil vise det høgaste nivået ditt – ikkje nødvendigvis til alle kundar, men til dei rette.</div>
+          </div>
+          <div class="sidelist">
+            <a class="project" href="#"><small>Case 01</small><strong>Luxury service brand</strong><p>For kundar der opplevd kvalitet og estetikk er ein stor del av verdien dei sel.</p><span>Opne demo →</span></a>
+            <a class="project" href="#"><small>Case 02</small><strong>Premium consultant site</strong><p>Ei sterk løysing for spesialistar som vil posisjonere seg høgare i marknaden.</p><span>Opne demo →</span></a>
+            <a class="project" href="#"><small>Case 03</small><strong>Signature landing page</strong><p>Ein meir påkosta landingsside for eitt tilbod, eitt konsept eller eitt sterkt produkt.</p><span>Opne demo →</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container processwrap">
+        <div class="head" style="margin-bottom:22px">
+          <div><div class="kicker">Prosess</div><h2>Bygd rundt posisjonering, ikkje berre levering.</h2></div>
+          <div class="copy">På dette nivået handlar prosessen ikkje berre om å få noko live. Det handlar om å skape ei side som løftar heile oppfatninga av merkevara.</div>
+        </div>
+        <div class="process">
+          <article class="step"><small>01</small><strong>Retning</strong><p>Vi avklarer kva slags inntrykk verksemda skal gi, og kva nivå sida må signalisere.</p></article>
+          <article class="step"><small>02</small><strong>Komposisjon</strong><p>Layout, fargar og typografi blir valde for å gi sterkare særpreg og meir ro.</p></article>
+          <article class="step"><small>03</small><strong>Utføring</strong><p>Designet blir omsett til ei rask og gjennomarbeidd løysing med høg opplevd kvalitet.</p></article>
+          <article class="step"><small>04</small><strong>Lansering</strong><p>Resultatet er ei side som ser ut som ho høyrer til i ein høgare prisklasse.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact">
+        <div class="contact-left">
+          <div class="kicker">Kontakt</div>
+          <h2>Dette er den rette demoen for premium-kundar.</h2>
+          <div class="copy">Bruk denne når du vil vise kva du kan levere når kunden ønskjer eit meir særmerkt, meir designa og meir verdifullt digitalt uttrykk.</div>
+        </div>
+        <div class="contact-right">
+          <div class="item"><small>Passar for</small><strong>Premium tenesteverksemd, sterke personlege brand, eksklusive nisjer, høgare prisklasse</strong></div>
+          <div class="item"><small>Nivå</small><strong>Premium / high-end / signaturprosjekt</strong></div>
+          <a class="btn primary" href="#">Bruk som demo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container">Netrivo demo 3 — premium brand.</div></footer>
+</body>
+</html>
