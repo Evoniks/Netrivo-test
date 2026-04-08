@@ -4,913 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netrivo</title>
-  <meta name="description" content="Netrivo utviklar eksklusive nettsider med sterk identitet, tydeleg posisjonering og premium digital framtoning." />
+  <meta name="description" content="Netrivo utviklar premium nettsider som gir bedrifter ein skarpare, meir profesjonell og meir tillitvekkande digital profil." />
   <style>
-    :root {
-      --bg: #f5f1ea;
-      --paper: #fbf8f3;
-      --ink: #151515;
-      --muted: #5f5a53;
-      --line: rgba(21,21,21,0.1);
-      --accent: #8a5a44;
-      --accent-deep: #5f3727;
-      --stone: #ded4c7;
-      --card: rgba(255,255,255,0.55);
-      --shadow: 0 30px 80px rgba(40, 27, 17, 0.08);
-      --radius-xl: 40px;
-      --radius-lg: 28px;
-      --radius-md: 18px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(138,90,68,0.08), transparent 30%),
-        radial-gradient(circle at 90% 20%, rgba(95,55,39,0.06), transparent 28%),
-        linear-gradient(180deg, #f7f3ed 0%, #f2ede5 100%);
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(var(--max), calc(100% - 36px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(247,243,237,0.78);
-      border-bottom: 1px solid rgba(21,21,21,0.06);
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 0;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: var(--ink);
-      color: #f7f3ed;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      font-size: 0.88rem;
-      box-shadow: var(--shadow);
-    }
-
-    .brand-copy strong {
-      display: block;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-copy span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.78rem;
-      margin-top: 3px;
-    }
-
-    .nav {
-      display: flex;
-      gap: 28px;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .nav a:hover { color: var(--ink); }
-
-    .hero {
-      padding: 44px 0 24px;
-    }
-
-    .hero-shell {
-      border: 1px solid var(--line);
-      border-radius: 44px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.44);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      min-height: 760px;
-    }
-
-    .hero-copy {
-      padding: 72px 64px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.16));
-    }
-
-    .hero-panel {
-      position: relative;
-      min-height: 100%;
-      background:
-        linear-gradient(145deg, rgba(95,55,39,0.92), rgba(28,24,22,0.96));
-      color: #f4eee7;
-      overflow: hidden;
-    }
-
-    .hero-panel::before {
-      content: "";
-      position: absolute;
-      inset: auto -8% -18% auto;
-      width: 78%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-panel::after {
-      content: "";
-      position: absolute;
-      inset: 10% auto auto -10%;
-      width: 56%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
-      filter: blur(8px);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(21,21,21,0.1);
-      background: rgba(255,255,255,0.55);
-      font-size: 0.78rem;
-      color: var(--muted);
-      width: fit-content;
-    }
-
-    h1 {
-      margin: 24px 0 0;
-      font-size: clamp(3.1rem, 8vw, 6.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      max-width: 780px;
-    }
-
-    .lead {
-      margin-top: 28px;
-      max-width: 690px;
-      color: var(--muted);
-      font-size: clamp(1.06rem, 1.8vw, 1.28rem);
-      line-height: 1.85;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 36px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 24px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 0.95rem;
-      font-weight: 700;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      background: var(--ink);
-      color: #f6f1ea;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--ink);
-      border-color: rgba(21,21,21,0.12);
-    }
-
-    .hero-bottom {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 48px;
-    }
-
-    .metric {
-      padding-top: 22px;
-      border-top: 1px solid rgba(21,21,21,0.12);
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 1.42rem;
-      letter-spacing: -0.04em;
-    }
-
-    .metric span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.92rem;
-    }
-
-    .panel-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 100%;
-      padding: 40px;
-    }
-
-    .panel-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .panel-badge {
-      color: rgba(244,238,231,0.72);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-    }
-
-    .panel-card {
-      align-self: flex-end;
-      width: min(100%, 420px);
-      padding: 26px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-    }
-
-    .panel-card + .panel-card {
-      margin-top: 16px;
-    }
-
-    .panel-title {
-      font-size: 1.55rem;
-      line-height: 1.12;
-      letter-spacing: -0.04em;
-      font-weight: 700;
-    }
-
-    .panel-copy {
-      margin-top: 12px;
-      color: rgba(244,238,231,0.72);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .section {
-      padding: 90px 0 0;
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-
-    .kicker {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      color: var(--muted);
-    }
-
-    h2 {
-      margin: 14px 0 0;
-      font-size: clamp(2.1rem, 4vw, 4rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 820px;
-    }
-
-    .section-copy {
-      color: var(--muted);
-      line-height: 1.85;
-      font-size: 1.03rem;
-      max-width: 720px;
-    }
-
-    .services-grid,
-    .showcase-grid,
-    .process-grid,
-    .contact-grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .services-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .service {
-      padding: 26px;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.46);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      min-height: 240px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .service-index {
-      font-size: 0.76rem;
-      color: var(--muted);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .service h3 {
-      margin: 24px 0 0;
-      font-size: 1.5rem;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-    }
-
-    .service p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.95rem;
-    }
-
-    .showcase-grid {
-      grid-template-columns: 1.1fr 0.9fr;
-    }
-
-    .showcase-main,
-    .showcase-list,
-    .process-wrap,
-    .contact-cta,
-    .contact-card {
-      border: 1px solid var(--line);
-      border-radius: 34px;
-      background: rgba(255,255,255,0.46);
-      box-shadow: var(--shadow);
-    }
-
-    .showcase-main {
-      padding: 34px;
-      min-height: 540px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .showcase-main-top {
-      display: grid;
-      gap: 26px;
-    }
-
-    .fake-browser {
-      border: 1px solid rgba(21,21,21,0.08);
-      border-radius: 26px;
-      overflow: hidden;
-      background: #f9f5ef;
-    }
-
-    .fake-top {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 18px;
-      border-bottom: 1px solid rgba(21,21,21,0.07);
-      background: rgba(255,255,255,0.56);
-    }
-
-    .fake-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(21,21,21,0.18);
-    }
-
-    .fake-url {
-      margin-left: 10px;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .fake-body {
-      padding: 24px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .fake-block-dark {
-      padding: 28px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, #1d1a18, #4a2f23);
-      color: #f6f0e8;
-    }
-
-    .fake-block-dark h3 {
-      margin: 8px 0 0;
-      font-size: 1.9rem;
-      line-height: 1.04;
-      letter-spacing: -0.05em;
-    }
-
-    .fake-block-dark p,
-    .fake-mini p {
-      margin: 12px 0 0;
-      line-height: 1.7;
-      color: rgba(246,240,232,0.74);
-    }
-
-    .fake-mini-wrap {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .fake-mini {
-      padding: 18px;
-      border-radius: 22px;
-      background: #fffdf9;
-      border: 1px solid rgba(21,21,21,0.08);
-    }
-
-    .showcase-quote {
-      padding-top: 22px;
-      border-top: 1px solid rgba(21,21,21,0.08);
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 580px;
-    }
-
-    .showcase-list {
-      padding: 22px;
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .project {
-      padding: 24px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.54);
-      border: 1px solid rgba(21,21,21,0.08);
-      transition: transform .18s ease, background .18s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.78);
-    }
-
-    .project small {
-      display: block;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.72rem;
-    }
-
-    .project strong {
-      display: block;
-      margin-top: 12px;
-      font-size: 1.3rem;
-      letter-spacing: -0.04em;
-    }
-
-    .project p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .project span {
-      display: inline-block;
-      margin-top: 16px;
-      font-weight: 700;
-    }
-
-    .process-wrap {
-      padding: 26px;
-    }
-
-    .process-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .step {
-      padding: 24px;
-      border-radius: 26px;
-      background: rgba(255,255,255,0.5);
-      border: 1px solid rgba(21,21,21,0.08);
-      min-height: 250px;
-    }
-
-    .step small {
-      color: var(--muted);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .step strong {
-      display: block;
-      margin-top: 18px;
-      font-size: 1.35rem;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-    }
-
-    .step p {
-      margin-top: 12px;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.95rem;
-    }
-
-    .contact-grid {
-      grid-template-columns: 1.15fr 0.85fr;
-      padding-bottom: 90px;
-    }
-
-    .contact-cta {
-      padding: 42px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.56), rgba(222,212,199,0.44));
-    }
-
-    .contact-card {
-      padding: 34px;
-      display: grid;
-      gap: 22px;
-      align-content: start;
-    }
-
-    .contact-item small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.85rem;
-      letter-spacing: 0.03em;
-    }
-
-    .contact-item strong {
-      display: block;
-      margin-top: 8px;
-      font-size: 1.1rem;
-      line-height: 1.55;
-      letter-spacing: -0.02em;
-    }
-
-    footer {
-      padding: 0 0 42px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 1120px) {
-      .hero-grid,
-      .section-head,
-      .services-grid,
-      .showcase-grid,
-      .process-grid,
-      .contact-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero-grid,
-      .section-head,
-      .showcase-grid,
-      .process-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy {
-        padding: 52px 34px 42px;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 760px) {
-      .container {
-        width: min(var(--max), calc(100% - 20px));
-      }
-
-      .nav,
-      .hero-bottom,
-      .fake-mini-wrap,
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav { display: none; }
-      .hero-actions { flex-direction: column; align-items: stretch; }
-      .btn { width: 100%; }
-      .hero-shell { border-radius: 28px; }
-      .hero-copy, .panel-inner, .showcase-main, .showcase-list, .process-wrap, .contact-cta, .contact-card { padding: 24px; }
-      .hero { padding-top: 20px; }
-      h1 { line-height: 0.98; }
-    }
+    body { font-family: Inter, system-ui; margin:0; background:#f4efe8; color:#141414; }
+    .wrap { max-width:1100px; margin:auto; padding:40px 20px; }
+    h1 { font-size:clamp(40px,6vw,72px); line-height:1; letter-spacing:-2px; }
+    h2 { font-size:clamp(28px,4vw,42px); letter-spacing:-1px; }
+    p { color:#5f5a53; line-height:1.7; font-size:18px; }
+    .btn { display:inline-block; padding:14px 22px; border-radius:999px; font-weight:600; }
+    .btn-primary { background:#141414; color:white; }
+    .btn-secondary { border:1px solid #ccc; }
+    .hero { padding:80px 0; }
+    .grid { display:grid; gap:20px; }
+    .grid-3 { grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
+    .card { background:white; padding:24px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.05); }
+    .section { padding:80px 0; }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand" href="#top">
-        <div class="brand-mark">N</div>
-        <div class="brand-copy">
-          <strong>Netrivo</strong>
-          <span>Eksklusive nettsider med premium uttrykk</span>
-        </div>
-      </a>
-      <nav class="nav">
-        <a href="#services">Tjenester</a>
-        <a href="#work">Arbeid</a>
-        <a href="#process">Prosess</a>
-        <a href="#contact">Kontakt</a>
-      </nav>
+
+<div class="wrap">
+
+<section class="hero">
+  <h1>Nettsider som får deg til å framstå som det beste valet.</h1>
+  <p>
+    Netrivo lagar nettsider som gir verksemda di meir tyngde, meir tillit og eit langt meir profesjonelt førsteinntrykk. 
+    Målet er enkelt: Kunden skal tenke "dei her verkar seriøse" før dei har lese ferdig.
+  </p>
+  <div style="margin-top:30px; display:flex; gap:12px; flex-wrap:wrap;">
+    <a class="btn btn-primary" href="#contact">Start prosjekt</a>
+    <a class="btn btn-secondary" href="#work">Sjå eksempel</a>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Kva du får</h2>
+  <div class="grid grid-3" style="margin-top:30px;">
+    <div class="card">
+      <strong>Seriøs framtoning</strong>
+      <p>Nettsida di skal få deg til å framstå som etablert og profesjonell.</p>
     </div>
-  </header>
+    <div class="card">
+      <strong>Tydeleg bodskap</strong>
+      <p>Kunden skal forstå kva du tilbyr på få sekund.</p>
+    </div>
+    <div class="card">
+      <strong>Meir verdi</strong>
+      <p>Rett design gir høgare opplevd kvalitet – og høgare betalingsvilje.</p>
+    </div>
+  </div>
+</section>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-shell">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <div>
-              <div class="eyebrow">Nettløysingar med sterk identitet og høg opplevd kvalitet</div>
-              <h1>Ei nettside skal ikkje berre sjå bra ut. Ho skal setje standarden.</h1>
-              <p class="lead">
-                Netrivo utviklar nettsider med meir særpreg, meir tyngde og langt sterkare visuell autoritet enn den typiske småbedriftssida. Målet er ikkje berre å vere synleg. Målet er å sjå ut som det beste valet.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#contact">Start prosjekt</a>
-                <a class="btn btn-secondary" href="#work">Sjå eksempel</a>
-              </div>
-            </div>
+<section class="section" id="work">
+  <h2>Eksempel</h2>
+  <p>Her skal demo-sidene dine ligge. Dette er det viktigaste på heile sida.</p>
 
-            <div class="hero-bottom">
-              <div class="metric">
-                <strong>Premiumprega</strong>
-                <span>Art direction, hierarki og layout som kjennest meir eksklusiv og bevisst.</span>
-              </div>
-              <div class="metric">
-                <strong>Tydeleg</strong>
-                <span>Struktur og bodskap som gjer at kunden raskt forstår kvaliteten du tilbyr.</span>
-              </div>
-              <div class="metric">
-                <strong>Minneverdig</strong>
-                <span>Nettsider som skil seg frå standardmaler og faktisk blir hugsa etter besøket.</span>
-              </div>
-            </div>
-          </div>
+  <div class="grid grid-3" style="margin-top:30px;">
+    <a class="card" href="#">
+      <strong>Enkel side</strong>
+      <p>Rask og ryddig side for små bedrifter.</p>
+    </a>
+    <a class="card" href="#">
+      <strong>Standard side</strong>
+      <p>Typisk kunde – god balanse mellom design og pris.</p>
+    </a>
+    <a class="card" href="#">
+      <strong>Premium side</strong>
+      <p>Meir design, meir identitet og høgare nivå.</p>
+    </a>
+  </div>
+</section>
 
-          <aside class="hero-panel">
-            <div class="panel-inner">
-              <div class="panel-top">
-                <div class="panel-badge">Preview / Netrivo</div>
-              </div>
+<section class="section">
+  <h2>Korleis det fungerer</h2>
+  <div class="grid grid-3" style="margin-top:30px;">
+    <div class="card">
+      <strong>1. Avklaring</strong>
+      <p>Vi finn ut kva du treng og kva nivå du vil ligge på.</p>
+    </div>
+    <div class="card">
+      <strong>2. Design</strong>
+      <p>Eg lagar eit uttrykk som passar di bedrift.</p>
+    </div>
+    <div class="card">
+      <strong>3. Levering</strong>
+      <p>Du får ei ferdig side klar til bruk.</p>
+    </div>
+  </div>
+</section>
 
-              <div>
-                <div class="panel-card">
-                  <div class="panel-title">Digital framtoning med meir pondus, meir ro og meir presisjon.</div>
-                  <div class="panel-copy">Denne retninga er med vilje heilt annleis enn ei mørk tech-side eller ein klassisk byråmal. Her er uttrykket meir redaksjonelt, meir kuratert og meir premium.</div>
-                </div>
-                <div class="panel-card">
-                  <div class="panel-title">For bedrifter som vil sjå gjennomarbeidde ut.</div>
-                  <div class="panel-copy">Nettstaden skal signalisere kvalitet før kunden har lese ferdig første avsnitt.</div>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
+<section class="section" id="contact">
+  <h2>Ta kontakt</h2>
+  <p>
+    Send meg ei melding, så kan eg gi deg ei enkel vurdering av nettsida di eller kva du bør gjere vidare.
+  </p>
 
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Tjenester</div>
-            <h2>Ei høgare klasse nettsider for verksemder som bryr seg om korleis dei blir oppfatta.</h2>
-          </div>
-          <div class="section-copy">
-            Netrivo er ikkje meint å likne eit standard webstudio. Retninga her er meir raffinert, meir visuell og meir merkevareorientert. Resultatet skal kjennast som ein premium presentasjon, ikkje berre ei nettside med informasjon.
-          </div>
-        </div>
+  <div style="margin-top:20px;">
+    <a class="btn btn-primary" href="mailto:post@netrivo.no">Send e-post</a>
+  </div>
+</section>
 
-        <div class="services-grid">
-          <article class="service">
-            <div class="service-index">01 / Positioning</div>
-            <div>
-              <h3>Tydelegare digital identitet</h3>
-              <p>Vi etablerer eit uttrykk som gjer at verksemda di framstår skarpare, meir bevisst og meir seriøs.</p>
-            </div>
-          </article>
-          <article class="service">
-            <div class="service-index">02 / Design</div>
-            <div>
-              <h3>Premium layout og art direction</h3>
-              <p>Fargar, rytme, typografi og komposisjon blir brukt bevisst for å skape ei meir eksklusiv kjensle.</p>
-            </div>
-          </article>
-          <article class="service">
-            <div class="service-index">03 / Build</div>
-            <div>
-              <h3>Skreddarsydd front-end</h3>
-              <p>Løysinga blir bygd for å vere rein, rask og overtydande på både mobil og store skjermar.</p>
-            </div>
-          </article>
-          <article class="service">
-            <div class="service-index">04 / Presence</div>
-            <div>
-              <h3>Ei side som faktisk løftar merkevara</h3>
-              <p>Målet er at heile verksemda di skal framstå meir verdifull, ikkje berre meir synleg.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+</div>
 
-    <section class="section" id="work">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Arbeid</div>
-            <h2>Eksempel som viser spenn, nivå og retning.</h2>
-          </div>
-          <div class="section-copy">
-            Her skal demo-prosjekta dine inn. Eg har laga oppsettet slik at hovudprosjektet får mykje plass, medan dei andre ligg som kuraterte case ved sida av.
-          </div>
-        </div>
-
-        <div class="showcase-grid">
-          <div class="showcase-main">
-            <div class="showcase-main-top">
-              <div class="fake-browser">
-                <div class="fake-top">
-                  <div class="fake-dot"></div>
-                  <div class="fake-dot"></div>
-                  <div class="fake-dot"></div>
-                  <div class="fake-url">demo.netrivo.no / featured concept</div>
-                </div>
-                <div class="fake-body">
-                  <div class="fake-block-dark">
-                    <div class="kicker" style="color: rgba(246,240,232,0.62);">Featured project</div>
-                    <h3>Ei meir redaksjonell og luksuriøs retning for moderne bedrifter.</h3>
-                    <p>Eit meir kuratert uttrykk med store flater, meir luft, meir kontrollert kontrast og sterkare visuell identitet.</p>
-                  </div>
-                  <div class="fake-mini-wrap">
-                    <div class="fake-mini">
-                      <strong>Meir særpreg</strong>
-                      <p>Bygd for å skilje seg frå enkle standardmaler.</p>
-                    </div>
-                    <div class="fake-mini">
-                      <strong>Meir autoritet</strong>
-                      <p>Ryddig struktur kombinert med høgare opplevd verdi.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="showcase-quote">Denne hovudblokka kan erstattast med eit ekte preview-bilete eller ein direkte lenke til den sterkaste demo-sida di når den er klar.</div>
-          </div>
-
-          <div class="showcase-list">
-            <a class="project" href="#">
-              <small>Case 01</small>
-              <strong>Editorial service brand</strong>
-              <p>Ein varm, raffinert og tillitsbyggande stil for verksemder som vil framstå meir eksklusive og gjennomtenkte.</p>
-              <span>Opne demo →</span>
-            </a>
-            <a class="project" href="#">
-              <small>Case 02</small>
-              <strong>Minimal premium consultant</strong>
-              <p>Ei roleg og svært presis side for rådgivarar, konsulentar og spesialistar som vil ha eit meir etablert uttrykk.</p>
-              <span>Opne demo →</span>
-            </a>
-            <a class="project" href="#">
-              <small>Case 03</small>
-              <strong>Bold campaign landing page</strong>
-              <p>Ei meir kommersiell landingsside der tempo, klarheit og visuell energi skal drive konkrete førespurnader.</p>
-              <span>Opne demo →</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="process">
-      <div class="container process-wrap">
-        <div class="section-head" style="margin-bottom:22px;">
-          <div>
-            <div class="kicker">Prosess</div>
-            <h2>Frå retning til ferdig uttrykk.</h2>
-          </div>
-          <div class="section-copy">
-            Eg har bevisst flytta denne sida bort frå typisk byråoppsett. Her er prosessen bygd rundt kvalitet i uttrykk, ikkje berre levering av ein funksjonell nettstad.
-          </div>
-        </div>
-
-        <div class="process-grid">
-          <article class="step">
-            <small>01</small>
-            <strong>Posisjonering</strong>
-            <p>Vi definerer kva slags inntrykk merkevara di skal gi, og kva nivå sida må signalisere.</p>
-          </article>
-          <article class="step">
-            <small>02</small>
-            <strong>Retning</strong>
-            <p>Layout, fargar, typografi og komposisjon blir valde for å skape ei tydeleg og særmerkt kjensle.</p>
-          </article>
-          <article class="step">
-            <small>03</small>
-            <strong>Utføring</strong>
-            <p>Den visuelle retninga blir omsett til ei rask, responsiv og gjennomarbeidd nettløysing.</p>
-          </article>
-          <article class="step">
-            <small>04</small>
-            <strong>Lansering</strong>
-            <p>Resultatet er ei side som gir meir tyngde til verksemda di frå første møte med kunden.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container contact-grid">
-        <div class="contact-cta">
-          <div class="kicker">Kontakt</div>
-          <h2>Klar for ei nettside som ser ut som ho kostar meir enn standarden?</h2>
-          <div class="section-copy">
-            Netrivo er for bedrifter som ønskjer noko skarpare, meir bevisst og meir premium enn den vanlege nettsidemalen. Her blir design brukt som posisjonering.
-          </div>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-item">
-            <small>E-post</small>
-            <strong>post@netrivo.no</strong>
-          </div>
-          <div class="contact-item">
-            <small>Tilgjenge</small>
-            <strong>Open for utvalde prosjekt med høge krav til uttrykk og kvalitet</strong>
-          </div>
-          <div class="contact-item">
-            <small>Passar for</small>
-            <strong>Småbedrifter, konsulentar, fagmiljø og tenesteverksemder som vil ha ei meir eksklusiv digital framtoning</strong>
-          </div>
-          <a class="btn btn-primary" href="mailto:post@netrivo.no">Send førespurnad</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">Netrivo — premium digital presentasjon for verksemder som vil sjå gjennomarbeidde ut.</div>
-  </footer>
 </body>
 </html>
