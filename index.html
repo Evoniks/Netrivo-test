@@ -4,107 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netrivo</title>
-  <meta name="description" content="Netrivo utviklar premium nettsider som gir bedrifter ein skarpare, meir profesjonell og meir tillitvekkande digital profil." />
+  <meta name="description" content="Netrivo utviklar premium nettsider som gir verksemder sterkare førsteinntrykk, meir tillit og fleire førespurnader." />
   <style>
-    body { font-family: Inter, system-ui; margin:0; background:#f4efe8; color:#141414; }
-    .wrap { max-width:1100px; margin:auto; padding:40px 20px; }
-    h1 { font-size:clamp(40px,6vw,72px); line-height:1; letter-spacing:-2px; }
-    h2 { font-size:clamp(28px,4vw,42px); letter-spacing:-1px; }
-    p { color:#5f5a53; line-height:1.7; font-size:18px; }
-    .btn { display:inline-block; padding:14px 22px; border-radius:999px; font-weight:600; }
-    .btn-primary { background:#141414; color:white; }
-    .btn-secondary { border:1px solid #ccc; }
-    .hero { padding:80px 0; }
-    .grid { display:grid; gap:20px; }
-    .grid-3 { grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
-    .card { background:white; padding:24px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.05); }
-    .section { padding:80px 0; }
+    :root{
+      --bg:#f4efe8;--ink:#141414;--muted:#5f5a53;--card:#ffffff;--line:rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui;background:var(--bg);color:var(--ink)}
+    .wrap{max-width:1200px;margin:auto;padding:40px 20px}
+    h1{font-size:clamp(42px,6vw,78px);line-height:.95;letter-spacing:-2px}
+    h2{font-size:clamp(28px,4vw,44px);letter-spacing:-1px}
+    p{color:var(--muted);line-height:1.75;font-size:18px}
+    .btn{display:inline-block;padding:14px 24px;border-radius:999px;font-weight:600}
+    .btn-primary{background:#141414;color:#fff}
+    .btn-secondary{border:1px solid #ccc}
+    .hero{padding:80px 0}
+    .grid{display:grid;gap:20px}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);padding:26px;border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.06)}
+    .section{padding:80px 0}
   </style>
 </head>
 <body>
-
 <div class="wrap">
 
 <section class="hero">
   <h1>Nettsider som får deg til å framstå som det beste valet.</h1>
   <p>
-    Netrivo lagar nettsider som gir verksemda di meir tyngde, meir tillit og eit langt meir profesjonelt førsteinntrykk. 
-    Målet er enkelt: Kunden skal tenke "dei her verkar seriøse" før dei har lese ferdig.
+    Dei fleste nettsider ser greie ut. Problemet er at dei ikkje bygger tillit. 
+    Netrivo lagar nettsider som får verksemda di til å framstå meir seriøs, meir profesjonell og meir verdifull.
   </p>
-  <div style="margin-top:30px; display:flex; gap:12px; flex-wrap:wrap;">
-    <a class="btn btn-primary" href="#contact">Start prosjekt</a>
+  <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+    <a class="btn btn-primary" href="#contact">Få vurdering</a>
     <a class="btn btn-secondary" href="#work">Sjå eksempel</a>
   </div>
 </section>
 
 <section class="section">
-  <h2>Kva du får</h2>
-  <div class="grid grid-3" style="margin-top:30px;">
+  <h2>Kva dette faktisk gir deg</h2>
+  <div class="grid grid-3" style="margin-top:30px">
     <div class="card">
-      <strong>Seriøs framtoning</strong>
-      <p>Nettsida di skal få deg til å framstå som etablert og profesjonell.</p>
+      <strong>Fleire førespurnader</strong>
+      <p>Ein klar og gjennomtenkt struktur gjer det enklare for kundar å ta kontakt.</p>
     </div>
     <div class="card">
-      <strong>Tydeleg bodskap</strong>
-      <p>Kunden skal forstå kva du tilbyr på få sekund.</p>
+      <strong>Høgare betalingsvilje</strong>
+      <p>Ein profesjonell nettside gir automatisk høgare opplevd verdi.</p>
     </div>
     <div class="card">
-      <strong>Meir verdi</strong>
-      <p>Rett design gir høgare opplevd kvalitet – og høgare betalingsvilje.</p>
+      <strong>Betre førsteinntrykk</strong>
+      <p>Kunden bestemmer seg raskt – vi sørger for at inntrykket er riktig.</p>
     </div>
   </div>
 </section>
 
 <section class="section" id="work">
   <h2>Eksempel</h2>
-  <p>Her skal demo-sidene dine ligge. Dette er det viktigaste på heile sida.</p>
-
-  <div class="grid grid-3" style="margin-top:30px;">
+  <p>Dette er det viktigaste på heile sida. Her skal du vise kva du faktisk kan.</p>
+  <div class="grid grid-3" style="margin-top:30px">
     <a class="card" href="#">
       <strong>Enkel side</strong>
-      <p>Rask og ryddig side for små bedrifter.</p>
+      <p>For små verksemder som treng ein ryddig og profesjonell start.</p>
     </a>
     <a class="card" href="#">
       <strong>Standard side</strong>
-      <p>Typisk kunde – god balanse mellom design og pris.</p>
+      <p>Den mest aktuelle løysinga – god balanse mellom design og pris.</p>
     </a>
     <a class="card" href="#">
       <strong>Premium side</strong>
-      <p>Meir design, meir identitet og høgare nivå.</p>
+      <p>For dei som vil skilje seg ut og framstå på eit høgare nivå.</p>
     </a>
   </div>
 </section>
 
 <section class="section">
-  <h2>Korleis det fungerer</h2>
-  <div class="grid grid-3" style="margin-top:30px;">
+  <h2>Slik jobbar eg</h2>
+  <div class="grid grid-3" style="margin-top:30px">
     <div class="card">
-      <strong>1. Avklaring</strong>
-      <p>Vi finn ut kva du treng og kva nivå du vil ligge på.</p>
+      <strong>1. Forstå</strong>
+      <p>Kva du tilbyr og kva du ønskjer å oppnå.</p>
     </div>
     <div class="card">
-      <strong>2. Design</strong>
-      <p>Eg lagar eit uttrykk som passar di bedrift.</p>
+      <strong>2. Bygge</strong>
+      <p>Eg lagar ei side som faktisk representerer nivået ditt.</p>
     </div>
     <div class="card">
-      <strong>3. Levering</strong>
-      <p>Du får ei ferdig side klar til bruk.</p>
+      <strong>3. Levere</strong>
+      <p>Du får ei ferdig side klar til bruk og vidare vekst.</p>
     </div>
   </div>
 </section>
 
 <section class="section" id="contact">
-  <h2>Ta kontakt</h2>
+  <h2>Vil du ha ei betre nettside?</h2>
   <p>
-    Send meg ei melding, så kan eg gi deg ei enkel vurdering av nettsida di eller kva du bør gjere vidare.
+    Send meg ei melding, så gir eg deg ei konkret vurdering av kva du bør gjere.
   </p>
-
-  <div style="margin-top:20px;">
+  <div style="margin-top:20px">
     <a class="btn btn-primary" href="mailto:post@netrivo.no">Send e-post</a>
   </div>
 </section>
 
 </div>
-
 </body>
 </html>
