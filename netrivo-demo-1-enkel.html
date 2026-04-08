@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo 1 – Lokal tenesteverksemd</title>
+  <style>
+    :root{
+      --bg:#f6f1ea;--ink:#151515;--muted:#5e5a55;--line:rgba(21,21,21,.08);--card:#ffffff;
+      --accent:#8b5e47;--shadow:0 24px 60px rgba(31,22,18,.08);--max:1180px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,#f8f4ee 0%,#f3ede5 100%);color:var(--ink)}
+    .container{width:min(var(--max),calc(100% - 36px));margin:auto}
+    a{text-decoration:none;color:inherit}
+    .top{position:sticky;top:0;background:rgba(248,244,238,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5}
+    .top-inner{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:700}
+    .mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#161616;color:#f8f4ee}
+    .nav{display:flex;gap:24px;color:var(--muted);font-size:.95rem}
+    .hero{padding:52px 0 28px}
+    .hero-shell{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);border-radius:38px;overflow:hidden;background:rgba(255,255,255,.52);box-shadow:var(--shadow)}
+    .hero-copy{padding:64px 58px 50px}
+    .eyebrow{display:inline-block;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+    h1{font-size:clamp(3rem,8vw,5.8rem);line-height:.95;letter-spacing:-.06em;margin:24px 0 0;max-width:760px}
+    .lead{font-size:1.15rem;line-height:1.85;color:var(--muted);max-width:640px;margin-top:24px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+    .btn{padding:15px 22px;border-radius:999px;font-weight:700;border:1px solid transparent;display:inline-flex}
+    .btn-primary{background:#161616;color:#fff}
+    .btn-secondary{border-color:var(--line);background:rgba(255,255,255,.4)}
+    .hero-visual{background:linear-gradient(145deg,#3c2a20,#171412);padding:34px;color:#f7efe6;display:flex;flex-direction:column;justify-content:space-between}
+    .panel{padding:24px;border-radius:26px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+    .panel + .panel{margin-top:16px}
+    .panel h3{margin:0;font-size:1.5rem;line-height:1.1;letter-spacing:-.04em}
+    .panel p{color:rgba(247,239,230,.76);line-height:1.7}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+    .metric{padding-top:18px;border-top:1px solid var(--line)}
+    .metric strong{display:block;font-size:1.3rem;letter-spacing:-.04em}
+    .metric span{display:block;margin-top:8px;color:var(--muted);line-height:1.6;font-size:.94rem}
+    section{padding:88px 0 0}
+    .section-head{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:end;margin-bottom:26px}
+    .kicker{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+    h2{font-size:clamp(2rem,4vw,3.8rem);line-height:.98;letter-spacing:-.05em;margin:12px 0 0}
+    .copy{font-size:1.02rem;color:var(--muted);line-height:1.82;max-width:720px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{padding:26px;border-radius:28px;background:rgba(255,255,255,.6);border:1px solid var(--line);box-shadow:var(--shadow)}
+    .card small{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.22em;color:var(--muted)}
+    .card h3{margin:18px 0 0;font-size:1.45rem;line-height:1.08;letter-spacing:-.04em}
+    .card p{margin-top:12px;color:var(--muted);line-height:1.75}
+    .quote{padding:36px;border-radius:34px;background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(221,211,198,.55));border:1px solid var(--line);box-shadow:var(--shadow)}
+    .quote p{font-size:1.25rem;line-height:1.7;max-width:860px}
+    .contact{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding-bottom:88px}
+    .contact-box,.contact-card{padding:34px;border-radius:32px;border:1px solid var(--line);background:rgba(255,255,255,.58);box-shadow:var(--shadow)}
+    .contact-card{display:grid;gap:20px}
+    .contact-item small{display:block;color:var(--muted)}
+    .contact-item strong{display:block;margin-top:8px;font-size:1.06rem;line-height:1.55}
+    footer{padding:0 0 38px;color:var(--muted);font-size:.92rem}
+    @media (max-width:1020px){
+      .hero-shell,.section-head,.grid3,.contact{grid-template-columns:1fr}
+      .metrics{grid-template-columns:1fr}
+      .hero-copy,.hero-visual{padding:32px}
+    }
+    @media (max-width:760px){
+      .nav{display:none}
+      .actions{flex-direction:column}
+      .btn{justify-content:center}
+      .container{width:min(var(--max),calc(100% - 20px))}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="container top-inner">
+      <div class="brand"><div class="mark">N</div><div>Demo 1</div></div>
+      <nav class="nav">
+        <a href="#services">Tjenester</a>
+        <a href="#why">Kvifor velje oss</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-copy">
+          <div class="eyebrow">Lokal tenesteverksemd / ryddig og tillitsbyggande</div>
+          <h1>Ei varm og profesjonell side for bedrifter som vil verke seriøse med ein gong.</h1>
+          <div class="lead">Denne demoen er laga for frisørar, verkstader, behandlingsstader, små kontor og lokale tenester som treng ei enkel, vakker og truverdig nettside med låg terskel for kontakt.</div>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Bestill vurdering</a>
+            <a class="btn btn-secondary" href="#services">Sjå innhald</a>
+          </div>
+          <div class="metrics">
+            <div class="metric"><strong>Ryddig</strong><span>Kunden forstår raskt kva du tilbyr og korleis dei tek kontakt.</span></div>
+            <div class="metric"><strong>Trygt</strong><span>Mjuke fargar og roleg layout gir meir tillit frå første blikk.</span></div>
+            <div class="metric"><strong>Effektivt</strong><span>Passar godt for små verksemder som treng noko skikkeleg utan å overkomplisere.</span></div>
+          </div>
+        </div>
+        <aside class="hero-visual">
+          <div class="panel">
+            <h3>Bygd for å skape ro, kvalitet og nærleik.</h3>
+            <p>Dette er ei side som ikkje ropar. Ho overtyder gjennom godt hierarki, god luft og ein profesjonell tone.</p>
+          </div>
+          <div class="panel">
+            <h3>Perfekt for verksemder der førsteinntrykk betyr alt.</h3>
+            <p>Når nettsida di kjennest gjennomarbeidd, aukar også opplevd kvalitet på tenesta du sel.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Tjenester</div><h2>Kva denne typen nettside eignar seg for.</h2></div>
+          <div class="copy">Denne malen er meint for verksemder som ikkje treng ein stor digital plattform, men som treng ei nettside som ser skikkeleg ut og gjer det lett for kunden å ta neste steg.</div>
+        </div>
+        <div class="grid3">
+          <article class="card"><small>01</small><h3>Oversiktleg framside</h3><p>Klar presentasjon av tenester, verdi og kontaktpunkt.</p></article>
+          <article class="card"><small>02</small><h3>Tillit og referansar</h3><p>Passar godt for omtalar, bilde, opningstider og lokal forankring.</p></article>
+          <article class="card"><small>03</small><h3>Låg terskel for kontakt</h3><p>Telefon, e-post, skjema og kart kan få ei tydeleg plassering.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="quote">
+          <div class="kicker">Kvifor denne fungerer</div>
+          <p>For små lokale bedrifter handlar ei god nettside sjeldan om å vere avansert. Det handlar om å sjå tillitsvekkande ut, forklare ting enkelt og gjere det lett å ta kontakt.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact">
+        <div class="contact-box">
+          <div class="kicker">Kontakt</div>
+          <h2>Dette er ein sterk demo for “enkel side”-nivået.</h2>
+          <div class="copy">Bruk denne som eksempel når du vil vise korleis ei litt mindre nettside framleis kan sjå premium og profesjonell ut.</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-item"><small>Passar for</small><strong>Frisør, salong, verkstad, lokal teneste, mindre kontor</strong></div>
+          <div class="contact-item"><small>Nivå</small><strong>Enkel / rimelig / rask å forstå</strong></div>
+          <a class="btn btn-primary" href="#">Bruk som demo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container">Netrivo demo 1 — lokal tenesteverksemd.</div></footer>
+</body>
+</html>
