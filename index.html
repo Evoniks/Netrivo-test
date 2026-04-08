@@ -1,285 +1,710 @@
-export default function NetrivoLandingPage() {
-  const examples = [
-    {
-      title: "Service business demo",
-      category: "Fast, clear, conversion-focused",
-      description:
-        "A polished website structure for local businesses that need trust, clarity, and more inbound leads.",
-    },
-    {
-      title: "Professional firm demo",
-      category: "Clean, credible, modern",
-      description:
-        "A premium layout for consultants, advisors, and specialist companies that need a sharper digital profile.",
-    },
-    {
-      title: "Campaign / landing page demo",
-      category: "Focused and high-impact",
-      description:
-        "A streamlined page built to present one offer clearly and turn visitors into enquiries quickly.",
-    },
-  ];
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netrivo</title>
+  <meta name="description" content="Netrivo lager moderne nettsider for små bedrifter og profesjonelle tjenestevirksomheter." />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: rgba(255,255,255,0.05);
+      --card: rgba(255,255,255,0.06);
+      --card-strong: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.68);
+      --subtle: rgba(255,255,255,0.45);
+      --accent: #7dd3fc;
+      --accent-soft: rgba(125, 211, 252, 0.16);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1180px;
+    }
 
-  const services = [
-    "Custom websites tailored to your business",
-    "Redesign of outdated or weak existing sites",
-    "Landing pages built to generate enquiries",
-    "Clear structure, premium presentation, and mobile-first design",
-  ];
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56,189,248,0.12), transparent 28%),
+        radial-gradient(circle at 100% 35%, rgba(59,130,246,0.09), transparent 24%),
+        radial-gradient(circle at 0% 70%, rgba(99,102,241,0.08), transparent 22%),
+        var(--bg);
+      min-height: 100vh;
+    }
 
-  const process = [
-    {
-      step: "01",
-      title: "Strategy",
-      text: "We identify what the website needs to achieve: trust, clarity, enquiries, or stronger branding.",
-    },
-    {
-      step: "02",
-      title: "Design",
-      text: "The page is designed to feel modern, premium, and easy to navigate across desktop and mobile.",
-    },
-    {
-      step: "03",
-      title: "Build",
-      text: "The final website is developed with performance, simplicity, and presentation in mind.",
-    },
-    {
-      step: "04",
-      title: "Launch",
-      text: "You get a professional online presence that is ready to represent your business properly.",
-    },
-  ];
+    a { color: inherit; text-decoration: none; }
 
-  return (
-    <div className="min-h-screen bg-neutral-950 text-white">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="absolute right-0 top-[20rem] h-[26rem] w-[26rem] rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute left-0 top-[34rem] h-[20rem] w-[20rem] rounded-full bg-indigo-500/10 blur-3xl" />
-      </div>
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-      <header className="relative z-10 border-b border-white/10 bg-black/20 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/15 bg-white/5 shadow-lg shadow-cyan-500/10">
-              <span className="text-sm font-semibold tracking-[0.25em]">N</span>
-            </div>
-            <div>
-              <div className="text-lg font-semibold tracking-wide">Netrivo</div>
-              <div className="text-xs text-white/50">Modern websites for ambitious businesses</div>
-            </div>
-          </div>
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(5,8,22,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-          <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
-            <a href="#services" className="transition hover:text-white">Services</a>
-            <a href="#work" className="transition hover:text-white">Examples</a>
-            <a href="#process" className="transition hover:text-white">Process</a>
-            <a href="#contact" className="transition hover:text-white">Contact</a>
-          </nav>
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 30px rgba(34,211,238,0.08);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      font-size: 0.9rem;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--subtle);
+      font-size: 0.78rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    .hero {
+      padding: 56px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(125,211,252,0.18);
+      background: var(--accent-soft);
+      color: #d8f3ff;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    h1 {
+      margin: 22px 0 0;
+      font-size: clamp(2.7rem, 7vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      max-width: 900px;
+    }
+
+    .lead {
+      margin-top: 24px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 1.8vw, 1.3rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: #ffffff;
+      color: #050816;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-copy {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .preview-shell {
+      padding: 16px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .preview {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: #0a1023;
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+    }
+
+    .browser-url {
+      margin-left: 10px;
+      color: rgba(255,255,255,0.38);
+      font-size: 0.78rem;
+    }
+
+    .preview-body {
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .preview-hero {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(34,211,238,0.14), rgba(59,130,246,0.06));
+      border: 1px solid rgba(125,211,252,0.16);
+    }
+
+    .preview-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(216,243,255,0.75);
+    }
+
+    .preview-title {
+      margin-top: 12px;
+      font-size: 1.7rem;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .preview-copy {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.94rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .mini-card.wide { grid-column: 1 / -1; }
+
+    section { padding: 22px 0; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 20px;
+    }
+
+    .section-kicker {
+      color: var(--subtle);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    h2 {
+      margin: 12px 0 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 700px;
+    }
+
+    .services-grid,
+    .examples-grid,
+    .process-grid,
+    .contact-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .examples-grid { grid-template-columns: repeat(3, 1fr); }
+    .process-grid { grid-template-columns: repeat(4, 1fr); margin-top: 26px; }
+    .contact-grid { grid-template-columns: 1fr 0.9fr; }
+
+    .service-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .service-dot {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(125,211,252,0.45);
+    }
+
+    .example-card {
+      transition: transform .22s ease, background .22s ease;
+    }
+
+    .example-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .example-inner {
+      border-radius: 22px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(59,130,246,0.05));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .example-type {
+      color: rgba(216,243,255,0.72);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .example-title {
+      margin-top: 14px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .example-copy {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    .example-link {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.95rem;
+    }
+
+    .process-item {
+      background: rgba(0,0,0,0.18);
+    }
+
+    .process-step {
+      color: rgba(216,243,255,0.8);
+      font-size: 0.8rem;
+      letter-spacing: 0.26em;
+      font-weight: 700;
+    }
+
+    .process-title {
+      margin-top: 14px;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .process-copy {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    .contact-panel {
+      background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(59,130,246,0.04));
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .contact-label {
+      font-size: 0.88rem;
+      color: var(--subtle);
+    }
+
+    .contact-value {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.92);
+    }
+
+    footer {
+      padding: 28px 0 56px;
+      color: rgba(255,255,255,0.42);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .split,
+      .contact-grid,
+      .examples-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .hero { padding-top: 36px; }
+    }
+
+    @media (max-width: 780px) {
+      .nav { display: none; }
+      .stats,
+      .services-grid,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      .topbar-inner { padding: 14px 0; }
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .card { padding: 18px; border-radius: 22px; }
+      .preview-shell { border-radius: 24px; }
+      .preview { border-radius: 20px; }
+      h1 { line-height: 1.02; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#top" class="brand">
+        <div class="brand-icon">N</div>
+        <div class="brand-copy">
+          <strong>Netrivo</strong>
+          <span>Moderne nettsider for ambisiøse bedrifter</span>
         </div>
-      </header>
+      </a>
 
-      <main className="relative z-10">
-        <section className="mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pb-28 lg:pt-24">
-          <div className="flex flex-col justify-center">
-            <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium text-cyan-200">
-              Professional presentation. Clear communication. Better first impressions.
-            </div>
-
-            <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
-              Websites that make small businesses look serious from the first second.
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70 md:text-xl">
-              Netrivo creates modern, high-trust websites for businesses that need a cleaner profile, stronger branding, and a better digital first impression.
-            </p>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:scale-[1.02]"
-              >
-                Let’s build your site
-              </a>
-              <a
-                href="#work"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white/90 transition hover:bg-white/10"
-              >
-                View examples
-              </a>
-            </div>
-
-            <div className="mt-12 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
-                <div className="text-2xl font-semibold">Clean</div>
-                <div className="mt-2 text-sm leading-6 text-white/60">
-                  Sharp layouts with clear hierarchy and strong typography.
-                </div>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
-                <div className="text-2xl font-semibold">Fast</div>
-                <div className="mt-2 text-sm leading-6 text-white/60">
-                  Built to load smoothly and look great on desktop and mobile.
-                </div>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
-                <div className="text-2xl font-semibold">Focused</div>
-                <div className="mt-2 text-sm leading-6 text-white/60">
-                  Designed to help visitors understand your offer quickly.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative flex items-center justify-center">
-            <div className="relative w-full max-w-xl rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-4 shadow-2xl shadow-cyan-500/10 backdrop-blur-2xl">
-              <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-neutral-900">
-                <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
-                  <div className="h-3 w-3 rounded-full bg-white/30" />
-                  <div className="h-3 w-3 rounded-full bg-white/20" />
-                  <div className="h-3 w-3 rounded-full bg-white/10" />
-                  <div className="ml-4 text-xs text-white/40">netrivo.no</div>
-                </div>
-                <div className="grid gap-4 p-5">
-                  <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 p-5">
-                    <div className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">Preview</div>
-                    <div className="mt-3 text-2xl font-semibold leading-tight">
-                      Better digital presentation for serious businesses
-                    </div>
-                    <div className="mt-3 text-sm leading-6 text-white/70">
-                      Purpose-built websites designed to improve trust, clarity, and perceived quality.
-                    </div>
-                  </div>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                      <div className="text-sm font-medium text-white/90">Modern layout</div>
-                      <div className="mt-2 text-sm text-white/55">Clear structure and premium spacing.</div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                      <div className="text-sm font-medium text-white/90">Built for trust</div>
-                      <div className="mt-2 text-sm text-white/55">Designed to make your business look established.</div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:col-span-2">
-                      <div className="text-sm font-medium text-white/90">Suitable for service businesses, consultants, local companies, and more</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="services" className="mx-auto max-w-7xl px-6 py-6 lg:px-8 lg:py-10">
-          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
-              <div className="text-sm uppercase tracking-[0.25em] text-white/40">Services</div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight">A website should feel simple, premium, and convincing.</h2>
-              <p className="mt-4 max-w-xl text-base leading-7 text-white/65">
-                Netrivo focuses on clear digital presentation for companies that need a stronger online presence without unnecessary complexity.
-              </p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {services.map((service) => (
-                <div
-                  key={service}
-                  className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/8 to-white/[0.03] p-6 backdrop-blur-xl"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 h-2.5 w-2.5 rounded-full bg-cyan-300" />
-                    <p className="text-base leading-7 text-white/80">{service}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="work" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="text-sm uppercase tracking-[0.25em] text-white/40">Examples</div>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Demonstration projects built to show quality and range.</h2>
-            </div>
-            <p className="max-w-xl text-base leading-7 text-white/60">
-              Use this section to link to your three example websites hosted on GitHub Pages.
-            </p>
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            {examples.map((item) => (
-              <div
-                key={item.title}
-                className="group rounded-[2rem] border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07]"
-              >
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-400/10 to-blue-400/5 p-5">
-                  <div className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">{item.category}</div>
-                  <h3 className="mt-4 text-2xl font-semibold">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-white/65">{item.description}</p>
-                </div>
-                <div className="mt-5 flex items-center justify-between text-sm text-white/60">
-                  <span>Open example</span>
-                  <span className="transition group-hover:translate-x-1">→</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="process" className="mx-auto max-w-7xl px-6 py-6 lg:px-8 lg:py-10">
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl lg:p-10">
-            <div className="text-sm uppercase tracking-[0.25em] text-white/40">Process</div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">A simple workflow with a professional result.</h2>
-
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {process.map((item) => (
-                <div key={item.step} className="rounded-[1.75rem] border border-white/10 bg-black/20 p-6">
-                  <div className="text-sm font-semibold tracking-[0.3em] text-cyan-200/80">{item.step}</div>
-                  <div className="mt-4 text-xl font-semibold">{item.title}</div>
-                  <p className="mt-3 text-sm leading-7 text-white/60">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
-            <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-cyan-400/10 to-blue-500/5 p-8 backdrop-blur-xl lg:p-10">
-              <div className="text-sm uppercase tracking-[0.25em] text-cyan-100/70">Contact</div>
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight md:text-4xl">
-                Need a website that actually reflects the quality of your business?
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-white/70">
-                Netrivo helps businesses upgrade their online presence with clean design, strong presentation, and clear communication.
-              </p>
-            </div>
-
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl lg:p-10">
-              <div className="space-y-6">
-                <div>
-                  <div className="text-sm text-white/45">Email</div>
-                  <div className="mt-2 text-lg text-white/90">post@netrivo.no</div>
-                </div>
-                <div>
-                  <div className="text-sm text-white/45">Availability</div>
-                  <div className="mt-2 text-lg text-white/90">Open for selected freelance projects</div>
-                </div>
-                <div>
-                  <div className="text-sm text-white/45">Positioning</div>
-                  <div className="mt-2 text-lg text-white/90">Modern websites for small businesses and professional service companies</div>
-                </div>
-                <a
-                  href="mailto:post@netrivo.no"
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:scale-[1.01]"
-                >
-                  Send an enquiry
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+      <nav class="nav">
+        <a href="#services">Tjenester</a>
+        <a href="#examples">Eksempler</a>
+        <a href="#process">Prosess</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
     </div>
-  );
-}
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Profesjonelt uttrykk. Tydeleg kommunikasjon. Betre førsteinntrykk.</div>
+          <h1>Nettsider som får små bedrifter til å sjå seriøse ut frå første sekund.</h1>
+          <p class="lead">
+            Netrivo lagar moderne og gjennomarbeidde nettsider for verksemder som vil ha ei skarpare digital profil,
+            sterkare tillit og ei side som faktisk representerer kvaliteten dei leverer.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Ta kontakt</a>
+            <a class="btn btn-secondary" href="#examples">Sjå eksempel</a>
+          </div>
+
+          <div class="stats">
+            <div class="card">
+              <div class="stat-title">Reint</div>
+              <div class="stat-copy">Tydeleg struktur, sterk typografi og premium spacing.</div>
+            </div>
+            <div class="card">
+              <div class="stat-title">Raskt</div>
+              <div class="stat-copy">Bygd for å fungere godt på mobil, nettbrett og desktop.</div>
+            </div>
+            <div class="card">
+              <div class="stat-title">Målretta</div>
+              <div class="stat-copy">Designa for at kunden raskt skal forstå tilbodet ditt.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-shell">
+          <div class="preview">
+            <div class="browser-top">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="browser-url">netrivo.no</div>
+            </div>
+            <div class="preview-body">
+              <div class="preview-hero">
+                <div class="preview-tag">Preview</div>
+                <div class="preview-title">Betre digital profil for seriøse bedrifter</div>
+                <div class="preview-copy">
+                  Formålstenlege nettsider designa for å styrke tillit, gjere bodskapen klar og gi eit meir profesjonelt førsteinntrykk.
+                </div>
+              </div>
+              <div class="mini-grid">
+                <div class="mini-card">
+                  <strong>Moderne layout</strong>
+                  <div class="stat-copy">Oversiktleg oppbygging og gjennomført design.</div>
+                </div>
+                <div class="mini-card">
+                  <strong>Bygd for tillit</strong>
+                  <div class="stat-copy">Nettsider som får verksemda di til å sjå etablert ut.</div>
+                </div>
+                <div class="mini-card wide">
+                  <strong>Passar for småbedrifter, konsulentar, lokale tenester og profesjonelle fagmiljø</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container split">
+        <div class="card">
+          <div class="section-kicker">Tjenester</div>
+          <h2>Ei god nettside skal kjennast enkel, premium og overtydande.</h2>
+          <p class="section-copy">
+            Netrivo fokuserer på tydeleg digital presentasjon for bedrifter som ønskjer ei sterkare nettløysing utan unødvendig kompleksitet.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="card service-item">
+            <div class="service-dot"></div>
+            <div>Skreddarsydde nettsider tilpassa verksemda di</div>
+          </div>
+          <div class="card service-item">
+            <div class="service-dot"></div>
+            <div>Oppgradering av utdaterte eller svake eksisterande sider</div>
+          </div>
+          <div class="card service-item">
+            <div class="service-dot"></div>
+            <div>Landingssider bygde for fleire førespurnader og betre førsteinntrykk</div>
+          </div>
+          <div class="card service-item">
+            <div class="service-dot"></div>
+            <div>Mobilvenleg design med klar struktur og profesjonell framtoning</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;gap:24px;align-items:end;flex-wrap:wrap;margin-bottom:20px;">
+          <div>
+            <div class="section-kicker">Eksempler</div>
+            <h2>Demo-prosjekt som viser kvalitet, nivå og spenn.</h2>
+          </div>
+          <p class="section-copy" style="max-width:480px;margin:0;">
+            Her kan du legge inn lenker til demo-sidene dine på GitHub Pages når dei er klare.
+          </p>
+        </div>
+
+        <div class="examples-grid">
+          <a class="card example-card" href="#">
+            <div class="example-inner">
+              <div class="example-type">Rask, tydeleg, konverteringsretta</div>
+              <div class="example-title">Service business demo</div>
+              <div class="example-copy">
+                Ei gjennomarbeidd oppbygging for lokale verksemder som treng meir tillit, meir struktur og fleire henvendingar.
+              </div>
+            </div>
+            <div class="example-link"><span>Opne eksempel</span><span>→</span></div>
+          </a>
+
+          <a class="card example-card" href="#">
+            <div class="example-inner">
+              <div class="example-type">Rein, truverdig, moderne</div>
+              <div class="example-title">Professional firm demo</div>
+              <div class="example-copy">
+                Ei premium side for rådgivarar, konsulentar og fagmiljø som treng eit skarpare og meir etablert digitalt uttrykk.
+              </div>
+            </div>
+            <div class="example-link"><span>Opne eksempel</span><span>→</span></div>
+          </a>
+
+          <a class="card example-card" href="#">
+            <div class="example-inner">
+              <div class="example-type">Spissa og slagkraftig</div>
+              <div class="example-title">Campaign / landing page demo</div>
+              <div class="example-copy">
+                Ei fokusert side bygd for å presentere eitt tilbod klart og gjere besøkande om til konkrete førespurnader.
+              </div>
+            </div>
+            <div class="example-link"><span>Opne eksempel</span><span>→</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container card">
+        <div class="section-kicker">Prosess</div>
+        <h2>Ein enkel arbeidsflyt med profesjonelt resultat.</h2>
+
+        <div class="process-grid">
+          <div class="card process-item">
+            <div class="process-step">01</div>
+            <div class="process-title">Strategi</div>
+            <div class="process-copy">Vi finn ut kva nettsida faktisk skal oppnå: tillit, klarheit, fleire førespurnader eller sterkare profil.</div>
+          </div>
+          <div class="card process-item">
+            <div class="process-step">02</div>
+            <div class="process-title">Design</div>
+            <div class="process-copy">Sida blir designa for å kjennast moderne, ryddig og enkel å bruke på alle skjermstorleikar.</div>
+          </div>
+          <div class="card process-item">
+            <div class="process-step">03</div>
+            <div class="process-title">Bygging</div>
+            <div class="process-copy">Den ferdige løysinga blir utvikla med fokus på ytelse, enkelheit og eit solid visuelt uttrykk.</div>
+          </div>
+          <div class="card process-item">
+            <div class="process-step">04</div>
+            <div class="process-title">Lansering</div>
+            <div class="process-copy">Du får ei profesjonell nettløysing som er klar til å representere bedrifta di på ein ordentleg måte.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-grid">
+        <div class="card contact-panel">
+          <div class="section-kicker" style="color: rgba(216,243,255,0.74);">Kontakt</div>
+          <h2>Treng du ei nettside som faktisk speglar kvaliteten på bedrifta di?</h2>
+          <p class="section-copy">
+            Netrivo hjelper verksemder med å løfte den digitale profilen sin gjennom reint design, tydeleg kommunikasjon og sterkare presentasjon.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="contact-list">
+            <div>
+              <div class="contact-label">E-post</div>
+              <div class="contact-value">post@netrivo.no</div>
+            </div>
+            <div>
+              <div class="contact-label">Tilgjenge</div>
+              <div class="contact-value">Open for utvalde frilansprosjekt</div>
+            </div>
+            <div>
+              <div class="contact-label">Posisjonering</div>
+              <div class="contact-value">Moderne nettsider for småbedrifter og profesjonelle tenesteverksemder</div>
+            </div>
+            <a class="btn btn-primary" href="mailto:post@netrivo.no">Send førespurnad</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Netrivo — moderne nettsider med tydeleg uttrykk og profesjonell framtoning.</div>
+  </footer>
+</body>
+</html>
