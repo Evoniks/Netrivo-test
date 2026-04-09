@@ -3,33 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Premium demo 1 – Boutique hotel</title>
+  <title>Premium demo 1 – Boutique luxury</title>
   <style>
     :root {
-      --ink: #141414;
-      --muted: #615b54;
-      --line: rgba(0,0,0,0.08);
+      --bg: #f6f0e8;
+      --paper: #fffaf4;
+      --ink: #181512;
+      --muted: #6c6259;
+      --line: rgba(24,21,18,0.08);
+      --gold: #b58a5a;
+      --shadow: 0 30px 80px rgba(31, 22, 16, 0.08);
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, system-ui, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(165,115,83,0.10), transparent 26%),
-        linear-gradient(180deg,#f8f4ee,#f0e9e1);
       color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(181,138,90,0.12), transparent 24%),
+        linear-gradient(180deg, #faf6f0 0%, #f2ebe3 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .container {
       width: min(1240px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
+      margin: 0 auto;
     }
 
     .top {
@@ -47,50 +52,66 @@
       display: flex;
       gap: 28px;
       color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .hero {
       padding: 26px 0 0;
     }
 
-    .shell {
+    .hero-shell {
       border: 1px solid var(--line);
       border-radius: 42px;
       overflow: hidden;
-      background: rgba(255,255,255,0.46);
-      box-shadow: 0 30px 80px rgba(28,20,16,0.08);
+      background: rgba(255,255,255,0.42);
+      box-shadow: var(--shadow);
     }
 
-    .grid {
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      min-height: 760px;
+      grid-template-columns: 1.08fr 0.92fr;
+      min-height: 780px;
     }
 
-    .left {
-      padding: 72px 62px 56px;
-      background: linear-gradient(180deg,rgba(255,255,255,0.34),rgba(255,255,255,0.16));
+    .hero-left {
+      padding: 74px 64px 58px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12));
     }
 
-    .right {
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, #241914, #6f4a34 58%, #201713);
+      color: #f8efe5;
       padding: 36px;
-      background: linear-gradient(150deg,#1b1512,#5f3d2e 56%,#201815);
-      color: #f8f1e6;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
     }
 
-    .right::before {
+    .hero-right::before {
       content: "";
       position: absolute;
-      right: -10%;
+      right: -12%;
       bottom: -16%;
-      width: 78%;
+      width: 72%;
       aspect-ratio: 1;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .hero-right::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      top: 8%;
+      width: 50%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 62%);
+      filter: blur(10px);
     }
 
     .tag {
@@ -99,63 +120,70 @@
       border-radius: 999px;
       background: rgba(255,255,255,0.72);
       border: 1px solid var(--line);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(3.2rem, 8vw, 6.8rem);
-      line-height: 0.93;
-      letter-spacing: -0.07em;
       margin: 24px 0 0;
+      font-size: clamp(3.3rem, 8vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
       max-width: 760px;
     }
 
     .lead {
-      margin-top: 24px;
+      margin-top: 26px;
+      max-width: 660px;
       color: var(--muted);
-      line-height: 1.9;
       font-size: 1.14rem;
-      max-width: 650px;
+      line-height: 1.9;
     }
 
     .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 34px;
+      margin-top: 36px;
     }
 
     .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 15px 24px;
       border-radius: 999px;
       font-weight: 700;
+      border: 1px solid transparent;
     }
 
-    .primary {
-      background: #141414;
+    .btn-primary {
+      background: var(--ink);
       color: #fff;
     }
 
-    .secondary {
-      border: 1px solid var(--line);
+    .btn-secondary {
+      border-color: var(--line);
+      background: transparent;
     }
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin-top: 48px;
+      margin-top: 52px;
     }
 
     .metric {
       padding-top: 22px;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid rgba(24,21,18,0.12);
     }
 
     .metric strong {
       display: block;
-      font-size: 1.42rem;
+      font-size: 1.4rem;
       letter-spacing: -0.04em;
     }
 
@@ -163,8 +191,8 @@
       display: block;
       margin-top: 8px;
       color: var(--muted);
-      font-size: 0.93rem;
       line-height: 1.6;
+      font-size: 0.93rem;
     }
 
     .glass {
@@ -174,27 +202,39 @@
       border-radius: 28px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
     }
 
     .glass + .glass {
       margin-top: 16px;
     }
 
+    .glass small {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(248,239,229,0.7);
+    }
+
     .glass h3 {
-      margin: 0;
-      font-size: 1.55rem;
+      margin: 12px 0 0;
+      font-size: 1.6rem;
+      line-height: 1.08;
+      letter-spacing: -0.05em;
     }
 
     .glass p {
-      color: rgba(248,241,230,0.76);
-      line-height: 1.72;
+      margin-top: 12px;
+      color: rgba(248,239,229,0.78);
+      line-height: 1.74;
     }
 
     .section {
       padding: 92px 0 0;
     }
 
-    .head {
+    .section-head {
       display: grid;
       grid-template-columns: 0.85fr 1.15fr;
       gap: 24px;
@@ -204,35 +244,36 @@
 
     .kicker {
       font-size: 0.76rem;
-      letter-spacing: 0.24em;
       text-transform: uppercase;
+      letter-spacing: 0.24em;
       color: var(--muted);
     }
 
     h2 {
-      font-size: clamp(2.1rem, 4vw, 4rem);
+      margin: 12px 0 0;
+      font-size: clamp(2.2rem, 4vw, 4.1rem);
       line-height: 0.98;
       letter-spacing: -0.05em;
-      margin: 10px 0 0;
     }
 
-    .copy {
+    .section-copy {
       color: var(--muted);
       line-height: 1.86;
+      font-size: 1.04rem;
     }
 
     .grid4 {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 18px;
     }
 
     .card {
       padding: 28px;
+      border-radius: 30px;
       border: 1px solid var(--line);
-      border-radius: 32px;
-      background: rgba(255,255,255,0.52);
-      box-shadow: 0 30px 80px rgba(28,20,16,0.08);
+      background: rgba(255,255,255,0.62);
+      box-shadow: var(--shadow);
     }
 
     .card small {
@@ -245,7 +286,9 @@
 
     .card h3 {
       margin: 16px 0 0;
-      font-size: 1.46rem;
+      font-size: 1.42rem;
+      line-height: 1.06;
+      letter-spacing: -0.04em;
     }
 
     .card p {
@@ -254,50 +297,80 @@
       line-height: 1.76;
     }
 
-    .contact {
-      display: grid;
-      grid-template-columns: 1.14fr 0.86fr;
-      gap: 18px;
-      padding-bottom: 90px;
+    .quote {
+      padding: 38px;
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,0.74), rgba(231,220,209,0.56));
+      box-shadow: var(--shadow);
     }
 
-    .box {
+    .quote p {
+      margin: 12px 0 0;
+      font-size: 1.18rem;
+      line-height: 1.82;
+      max-width: 880px;
+      color: #5f554d;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 18px;
+      padding-bottom: 92px;
+    }
+
+    .contact-box,
+    .contact-card {
       padding: 36px;
-      border: 1px solid var(--line);
       border-radius: 34px;
-      background: rgba(255,255,255,0.52);
-      box-shadow: 0 30px 80px rgba(28,20,16,0.08);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.58);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 20px;
+    }
+
+    .item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .item strong {
+      display: block;
+      margin-top: 8px;
+      line-height: 1.55;
+      font-size: 1.06rem;
     }
 
     @media (max-width: 1080px) {
-      .grid,
-      .head,
+      .hero-grid,
+      .section-head,
       .grid4,
       .contact,
       .metrics {
         grid-template-columns: 1fr;
       }
 
-      .left,
-      .right,
+      .hero-left,
+      .hero-right,
       .card,
-      .box {
+      .quote,
+      .contact-box,
+      .contact-card {
         padding: 24px;
       }
     }
 
-    @media (max-width: 720px) {
-      .nav {
-        display: none;
-      }
-
-      .actions {
-        flex-direction: column;
-      }
-
-      .btn {
-        text-align: center;
-      }
+    @media (max-width: 760px) {
+      .nav { display: none; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .container { width: min(1240px, calc(100% - 20px)); }
     }
   </style>
 </head>
@@ -306,7 +379,7 @@
     <div class="topbar">
       <strong>Maison Fjell</strong>
       <nav class="nav">
-        <a href="#suite">Suiter</a>
+        <a href="#opplevelse">Opplevelse</a>
         <a href="#retning">Retning</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -315,105 +388,117 @@
 
   <main class="container">
     <section class="hero">
-      <div class="shell">
-        <div class="grid">
-          <div class="left">
-            <div class="tag">Premium demo / boutique hotel og high-end oppleving</div>
-            <h1>Ei side som får merkevara til å kjennast dyrare og meir eksklusiv.</h1>
+      <div class="hero-shell">
+        <div class="hero-grid">
+          <div class="hero-left">
+            <div class="tag">Premium demo / boutique luxury</div>
+            <h1>En nettside som får merkevaren til å føles dyrere, roligere og mer eksklusiv.</h1>
             <div class="lead">
-              Denne demoen viser ein luksuriøs og kuratert premiumretning. Ho eignar seg for boutique-hotell, eksklusive opplevingar og merkevarer som vil løfte heile inntrykket sitt.
+              Denne demoen er laget for boutique-hoteller, high-end opplevelser og premium servicekonsepter som ønsker et mer kuratert, luksuriøst og redaksjonelt uttrykk.
             </div>
 
             <div class="actions">
-              <a class="btn primary" href="#kontakt">Book konsultasjon</a>
-              <a class="btn secondary" href="#suite">Sjå detaljar</a>
+              <a class="btn btn-primary" href="#kontakt">Book møte</a>
+              <a class="btn btn-secondary" href="#opplevelse">Se konsept</a>
             </div>
 
             <div class="metrics">
               <div class="metric">
                 <strong>Eksklusiv</strong>
-                <span>Design som støttar høgare pris og høgare opplevd verdi.</span>
+                <span>Bygd for høyere opplevd verdi og sterkere førsteinntrykk.</span>
               </div>
               <div class="metric">
                 <strong>Kuratert</strong>
-                <span>Store flater, tydeleg rytme og meir visuell ro.</span>
+                <span>Mer luft, mer rytme og mer visuell kontroll enn vanlige bedriftssider.</span>
               </div>
               <div class="metric">
-                <strong>Minneverdig</strong>
-                <span>Laga for å stå ut frå vanlege malbaserte sider.</span>
+                <strong>Editorial</strong>
+                <span>Uttrykket kjennes mer som et brand-univers enn en vanlig nettside.</span>
               </div>
             </div>
           </div>
 
-          <div class="right">
+          <div class="hero-right">
             <div class="glass">
-              <h3>Meir pondus. Meir luksus. Meir kontroll.</h3>
-              <p>Her er nettsida ein aktiv del av merkevara, ikkje berre ein plass for informasjon.</p>
+              <small>Luxury direction</small>
+              <h3>Varm, rolig og gjennomført.</h3>
+              <p>Dette er premium i form av atmosfære, eleganse og visuell selvtillit – ikke bare flere effekter.</p>
             </div>
 
             <div class="glass">
-              <h3>For kundar som vil sjå betre ut enn konkurrentane.</h3>
-              <p>Perfekt når kunden ønskjer eit uttrykk som faktisk løftar heile prisoppfatninga.</p>
+              <small>Perception</small>
+              <h3>For kunder som vil se dyrere ut enn konkurrentene.</h3>
+              <p>Når nettsiden føles mer eksklusiv, påvirker det også hvordan pris, kvalitet og seriøsitet blir oppfattet.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="suite">
-      <div class="head">
+    <section class="section" id="opplevelse">
+      <div class="section-head">
         <div>
-          <div class="kicker">Premium</div>
-          <h2>Ei premiumretning som kjennest roleg, varm og eksklusiv.</h2>
+          <div class="kicker">Opplevelse</div>
+          <h2>Premium med luksus, varme og høy opplevd kvalitet.</h2>
         </div>
-        <div class="copy">
-          Denne er meir luksuriøs enn dei andre premiumdemoane. Ho eignar seg når eleganse, premiumkjensle og høg opplevd verdi er avgjerande for salet.
+        <div class="section-copy">
+          Denne retningen er laget for virksomheter der opplevelse, atmosfære og estetikk er en stor del av verdien som selges. Målet er at nettsiden skal føles som en naturlig del av merkevaren.
         </div>
       </div>
 
       <div class="grid4">
-        <div class="card">
+        <article class="card">
           <small>01</small>
-          <h3>Premium merkevare</h3>
-          <p>Løftar det totale inntrykket av bedrifta eller tenesta.</p>
-        </div>
-
-        <div class="card">
+          <h3>Merkevareløft</h3>
+          <p>Hele virksomheten fremstår mer gjennomarbeidet og mer verdifull.</p>
+        </article>
+        <article class="card">
           <small>02</small>
-          <h3>Støttar høgare pris</h3>
-          <p>Visuell kvalitet påverkar betalingsvilje og posisjon.</p>
-        </div>
-
-        <div class="card">
+          <h3>Prisforsterkende</h3>
+          <p>Et sterkere visuelt uttrykk støtter høyere pris og bedre posisjon.</p>
+        </article>
+        <article class="card">
           <small>03</small>
           <h3>Kuraterte flater</h3>
-          <p>Meir ro, meir luft og meir presis komposisjon.</p>
-        </div>
-
-        <div class="card">
+          <p>Store flater, mykere rytme og et mer kontrollert visuelt tempo.</p>
+        </article>
+        <article class="card">
           <small>04</small>
-          <h3>For dei rette kundane</h3>
-          <p>Passar best når uttrykk og estetikk er ein viktig del av verdien.</p>
-        </div>
+          <h3>Riktig for premium</h3>
+          <p>Passer når det estetiske uttrykket er en viktig del av salget.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="quote">
+        <div class="kicker">Retning</div>
+        <p>
+          Dette er ikke en premiumside som prøver å se “avansert” ut. Den prøver å se trygg, vakker og eksklusiv ut. Det er en viktig forskjell. Her handler premium om smak, atmosfære og opplevd kvalitet.
+        </p>
       </div>
     </section>
 
     <section class="section" id="kontakt">
       <div class="contact">
-        <div class="box">
+        <div class="contact-box">
           <div class="kicker">Kontakt</div>
-          <h2>Premium kan ha ulike uttrykk – dette er den varme og luksuriøse varianten.</h2>
-          <div class="copy">
-            Bruk denne demoen når du vil vise noko som ser eksklusivt, redaksjonelt og merkevaresterkt ut.
+          <h2>Dette er premium-varianten for luksus, boutique og eksklusiv opplevelse.</h2>
+          <div class="section-copy">
+            Bruk denne demoen når du vil vise et uttrykk som føles dyrt, gjennomført og tydelig posisjonert i en høyere klasse.
           </div>
         </div>
 
-        <div class="box">
-          <div class="kicker">Passar for</div>
-          <p>Boutique hotell, high-end oppleving, premium brand</p>
-
-          <div class="kicker">Nivå</div>
-          <p>Premium</p>
+        <div class="contact-card">
+          <div class="item">
+            <small>Passer for</small>
+            <strong>Boutique-hotell, high-end opplevelser, eksklusive tjenester og premium brands</strong>
+          </div>
+          <div class="item">
+            <small>Nivå</small>
+            <strong>Premium</strong>
+          </div>
+          <a class="btn btn-primary" href="#">Bruk som demo</a>
         </div>
       </div>
     </section>
