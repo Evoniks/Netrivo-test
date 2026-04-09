@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium demo 3 – Personleg brand</title>
+  <style>
+    :root {
+      --ink: #131313;
+      --muted: #615b55;
+      --line: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(188,118,66,0.10), transparent 26%),
+        linear-gradient(180deg,#f8f4ee,#efe8df);
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .top {
+      padding: 18px 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .nav {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 28px 0 0;
+    }
+
+    .shell {
+      border: 1px solid var(--line);
+      border-radius: 42px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.48);
+      box-shadow: 0 28px 70px rgba(22,18,15,0.08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      min-height: 760px;
+    }
+
+    .left {
+      padding: 72px 60px 56px;
+    }
+
+    .right {
+      padding: 34px;
+      background: linear-gradient(150deg,#201714,#6b4736);
+      color: #f8f1e8;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 8vw, 6.6rem);
+      line-height: 0.93;
+      letter-spacing: -0.07em;
+      margin: 24px 0 0;
+      max-width: 760px;
+    }
+
+    .lead {
+      margin-top: 24px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1.14rem;
+      max-width: 650px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .btn {
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #131313;
+      color: #fff;
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+      margin-top: 48px;
+    }
+
+    .metric {
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.42rem;
+      letter-spacing: -0.04em;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .glass {
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .glass + .glass {
+      margin-top: 16px;
+    }
+
+    .glass h3 {
+      margin: 0;
+      font-size: 1.54rem;
+      line-height: 1.08;
+    }
+
+    .glass p {
+      color: rgba(248,241,232,0.76);
+      line-height: 1.74;
+    }
+
+    .section {
+      padding: 92px 0 0;
+    }
+
+    .head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      font-size: 0.76rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      margin: 10px 0 0;
+    }
+
+    .copy {
+      color: var(--muted);
+      line-height: 1.86;
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: rgba(255,255,255,0.52);
+      box-shadow: 0 28px 70px rgba(22,18,15,0.08);
+    }
+
+    .card small {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card h3 {
+      margin: 16px 0 0;
+      font-size: 1.46rem;
+    }
+
+    .card p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.76;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.14fr 0.86fr;
+      gap: 18px;
+      padding-bottom: 90px;
+    }
+
+    .box {
+      padding: 36px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.52);
+      box-shadow: 0 28px 70px rgba(22,18,15,0.08);
+    }
+
+    @media (max-width: 1080px) {
+      .grid,
+      .head,
+      .grid4,
+      .contact,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .left,
+      .right,
+      .card,
+      .box {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        display: none;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container top">
+    <div class="topbar">
+      <strong>Elin Varde</strong>
+      <nav class="nav">
+        <a href="#arbeid">Arbeid</a>
+        <a href="#profil">Profil</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="shell">
+        <div class="grid">
+          <div class="left">
+            <div class="tag">Premium demo / personleg brand, foredrag og ekspertprofil</div>
+            <h1>Ei signaturside for personlege brand med høgare ambisjonar.</h1>
+            <div class="lead">
+              Denne demoen er laga for ekspertar, foredragshaldarar, profiler og sterke personlege merkevarer som vil ha noko meir særmerkt og redaksjonelt enn ei vanleg bedriftsside.
+            </div>
+
+            <div class="actions">
+              <a class="btn primary" href="#kontakt">Book samtale</a>
+              <a class="btn secondary" href="#arbeid">Sjå oppsett</a>
+            </div>
+
+            <div class="metrics">
+              <div class="metric">
+                <strong>Signaturpreg</strong>
+                <span>Bygd rundt person og stemme, ikkje berre teneste.</span>
+              </div>
+              <div class="metric">
+                <strong>Meir autoritet</strong>
+                <span>Får ekspertrolla til å kjennast sterkare og meir etablert.</span>
+              </div>
+              <div class="metric">
+                <strong>Premium profil</strong>
+                <span>Perfekt når personen sjølv er ein viktig del av salet.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="glass">
+              <h3>Personleg, men framleis premium.</h3>
+              <p>Her får uttrykket meir nerve og meir identitet, samtidig som det held seg elegant og kontrollert.</p>
+            </div>
+
+            <div class="glass">
+              <h3>For dei som sel namn, tillit og tyngde.</h3>
+              <p>Passar godt for foredrag, mentoring, rådgiving, bøker og ekspertprofilering.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="arbeid">
+      <div class="head">
+        <div>
+          <div class="kicker">Profil</div>
+          <h2>Ei premiumretning med meir redaksjonell og personleg kjensle.</h2>
+        </div>
+        <div class="copy">
+          Denne demoen skil seg frå dei andre premiumvariantane ved at han er meir personfokusert. Han er perfekt når kundane vel leverandør på grunnlag av personen bak, ikkje berre selskapet.
+        </div>
+      </div>
+
+      <div class="grid4">
+        <div class="card">
+          <small>01</small>
+          <h3>Personleg autoritet</h3>
+          <p>Gjer ekspert- eller foredragsprofilen meir etablert og tydeleg.</p>
+        </div>
+
+        <div class="card">
+          <small>02</small>
+          <h3>Redaksjonell kjensle</h3>
+          <p>Meir kuratert og innhaldssterk enn ei vanleg profilside.</p>
+        </div>
+
+        <div class="card">
+          <small>03</small>
+          <h3>Signaturuttrykk</h3>
+          <p>Perfekt når du vil ha noko som kjennest meir eigent enn generisk.</p>
+        </div>
+
+        <div class="card">
+          <small>04</small>
+          <h3>Høg opplevd verdi</h3>
+          <p>Bygd for å støtte eit sterkare personleg brand og høgare pris.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="contact">
+        <div class="box">
+          <div class="kicker">Kontakt</div>
+          <h2>Premium kan også vere personleg og meir redaksjonell.</h2>
+          <div class="copy">
+            Bruk denne når du vil vise ei premiumløysing som passar ekspertar, profiler og personlege merkevarer med tydeleg signatur.
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="kicker">Passar for</div>
+          <p>Foredragshaldar, ekspertprofil, mentor, rådgivar, personleg brand</p>
+
+          <div class="kicker">Nivå</div>
+          <p>Premium</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
