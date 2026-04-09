@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Premium – Netrivo</title>
+  <style>
+    :root {
+      --bg: #0b0d14;
+      --paper: #111523;
+      --ink: #eef3ff;
+      --muted: #b7bfd6;
+      --line: rgba(255,255,255,0.1);
+      --shadow: 0 24px 70px rgba(0,0,0,0.34);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(119,69,255,0.24), transparent 24%),
+        radial-gradient(circle at 80% 18%, rgba(32,205,255,0.18), transparent 24%),
+        linear-gradient(180deg, #090b12 0%, #12192c 100%);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0 34px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(9,11,18,0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: white;
+    }
+
+    .hero {
+      padding-top: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -16%;
+      bottom: -18%;
+      width: 62%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 18px 0 0;
+      font-size: clamp(2.4rem, 10vw, 4.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      color: white;
+    }
+
+    .lead {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+      max-width: 360px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #0b0d14;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: white;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h3 {
+      margin: 8px 0 0;
+      font-size: 1.55rem;
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      color: white;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h2 {
+      margin: 0;
+      font-size: 1.3rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: white;
+    }
+
+    .info-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .glass-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .glass-box {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      line-height: 1.48;
+      color: #eef3ff;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Syntrix Mobile</div>
+      <div style="color:#b7bfd6;font-size:0.9rem;">Mobil Premium</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / premium</div>
+        <h1>Mer wow, mer sceneplass og mer identitet.</h1>
+        <p class="lead">
+          Denne mobil-demoen er laget for sterkere visuell effekt på små skjermer, med tydeligere art direction og mer påkostet følelse.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#retning">Se retning</a>
+          <a class="btn btn-secondary" href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="section-head">
+        <div class="kicker">Retning</div>
+        <h3>Premium også på mobil.</h3>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h2>Mer dramatikk</h2>
+          <p>Premium på mobil handler ikke bare om mørke farger. Det handler om rytme, kontrast og følelse av sceneplass.</p>
+          <div class="glass-grid">
+            <div class="glass-box">Sterkere førsteinntrykk på små skjermer</div>
+            <div class="glass-box">Mer kontrollert bruk av kontrast, lys og dybde</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h2>Passer for</h2>
+          <p>SaaS, app, high-end tjenester, sterke personlige konsepter og merkevarer som vil føles mer avanserte og mer eksklusive på mobil.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h3>Bygget for høyere opplevd verdi.</h3>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>E-post</small>
+          <strong>premium@eksempel.no</strong>
+        </div>
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>Prosjekter der mobilopplevelsen skal føles mer eksklusiv, mer minneverdig og tydeligere designet.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
