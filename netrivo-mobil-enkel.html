@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Enkel – Netrivo</title>
+  <style>
+    :root {
+      --bg: #f6f1ea;
+      --paper: #fffaf4;
+      --ink: #161616;
+      --muted: #6a6259;
+      --line: rgba(22,22,22,0.08);
+      --shadow: 0 24px 60px rgba(31, 22, 16, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #faf6f0 0%, #f2ebe2 100%);
+      color: var(--ink);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0 34px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(250,246,240,0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(22,22,22,0.06);
+    }
+
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .hero {
+      padding-top: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.8);
+      color: var(--muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 18px 0 0;
+      font-size: clamp(2.3rem, 10vw, 4rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+    }
+
+    .lead {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background: #161616;
+      color: white;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.84);
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 14px;
+      border-radius: 18px;
+      background: #f6efe7;
+      border: 1px solid var(--line);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h3 {
+      margin: 8px 0 0;
+      font-size: 1.55rem;
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Nordlys Kaffe</div>
+      <div style="color:#6a6259;font-size:0.9rem;">Mobil Enkel</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / enkel</div>
+        <h1>Rask, tydelig og lett å bruke.</h1>
+        <p class="lead">
+          Denne mobil-demoen er laget for små virksomheter som trenger en enkel side med tydelige handlinger, korte tekster og rask vei til kontakt.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Bestill nå</a>
+          <a class="btn btn-secondary" href="#tilbud">Se tilbud</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tilbud">
+      <div class="section-head">
+        <div class="kicker">Tilbud</div>
+        <h3>Bygget for mobil først.</h3>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h2>Lite friksjon</h2>
+          <p>Kunden skal skjønne hva du tilbyr med én gang og kunne trykke seg videre uten å lete.</p>
+          <div class="mini-grid">
+            <div class="mini">Kort tekst og tydelig hierarki</div>
+            <div class="mini">Knapper med høy synlighet</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h2>Passer for</h2>
+          <p>Kafé, frisør, liten butikk, lokal tjeneste, enkelt konsept eller kampanjeside.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h3>Lav terskel for handling.</h3>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>Telefon</small>
+          <strong>99 99 99 99</strong>
+        </div>
+        <div class="contact-item">
+          <small>E-post</small>
+          <strong>hei@eksempel.no</strong>
+        </div>
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>Små og enkle mobilopplevelser der tydelig handling er viktigere enn mye innhold.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
