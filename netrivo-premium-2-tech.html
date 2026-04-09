@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium demo 2 – Tech brand</title>
+  <style>
+    :root {
+      --ink: #f6f7fb;
+      --muted: #b4b8c8;
+      --line: rgba(255,255,255,0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(98,0,255,0.22), transparent 26%),
+        radial-gradient(circle at 90% 20%, rgba(0,180,255,0.18), transparent 24%),
+        #090b12;
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .top {
+      padding: 18px 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .nav {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 30px 0 0;
+    }
+
+    .shell {
+      border: 1px solid var(--line);
+      border-radius: 42px;
+      overflow: hidden;
+      background: linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));
+      box-shadow: 0 24px 70px rgba(0,0,0,0.34);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      min-height: 760px;
+    }
+
+    .left {
+      padding: 72px 62px 56px;
+    }
+
+    .right {
+      padding: 34px;
+      background: linear-gradient(155deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: #c7cbda;
+    }
+
+    h1 {
+      font-size: clamp(3.3rem, 8vw, 6.9rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      margin: 24px 0 0;
+      max-width: 760px;
+    }
+
+    .lead {
+      margin-top: 24px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1.14rem;
+      max-width: 650px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .btn {
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #f6f7fb;
+      color: #090b12;
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+      margin-top: 48px;
+    }
+
+    .metric {
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.42rem;
+      letter-spacing: -0.04em;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .glass {
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .glass + .glass {
+      margin-top: 16px;
+    }
+
+    .glass h3 {
+      margin: 0;
+      font-size: 1.56rem;
+    }
+
+    .glass p {
+      color: var(--muted);
+      line-height: 1.74;
+    }
+
+    .section {
+      padding: 92px 0 0;
+    }
+
+    .head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      font-size: 0.76rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #c7cbda;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      margin: 10px 0 0;
+    }
+
+    .copy {
+      color: var(--muted);
+      line-height: 1.86;
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.34);
+    }
+
+    .card small {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #c7cbda;
+    }
+
+    .card h3 {
+      margin: 16px 0 0;
+      font-size: 1.46rem;
+    }
+
+    .card p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.76;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.14fr 0.86fr;
+      gap: 18px;
+      padding-bottom: 90px;
+    }
+
+    .box {
+      padding: 36px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.34);
+    }
+
+    @media (max-width: 1080px) {
+      .grid,
+      .head,
+      .grid4,
+      .contact,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .left,
+      .right,
+      .card,
+      .box {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        display: none;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container top">
+    <div class="topbar">
+      <strong>Syntrix</strong>
+      <nav class="nav">
+        <a href="#platform">Platform</a>
+        <a href="#retning">Retning</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="shell">
+        <div class="grid">
+          <div class="left">
+            <div class="tag">Premium demo / tech, SaaS og moderne produkt</div>
+            <h1>Ei premium side med meir futuristisk og high-tech uttrykk.</h1>
+            <div class="lead">
+              Denne demoen viser ei heilt anna premiumretning enn dei varme og luksuriøse variantane. Ho eignar seg for produkt, SaaS, AI, programvare og tech-orienterte merkevarer.
+            </div>
+
+            <div class="actions">
+              <a class="btn primary" href="#kontakt">Be om demo</a>
+              <a class="btn secondary" href="#platform">Sjå oppsett</a>
+            </div>
+
+            <div class="metrics">
+              <div class="metric">
+                <strong>High-tech</strong>
+                <span>Mørk, glasaktig og meir futuristisk.</span>
+              </div>
+              <div class="metric">
+                <strong>Premium</strong>
+                <span>Høg opplevd kvalitet og meir avansert kjensle.</span>
+              </div>
+              <div class="metric">
+                <strong>Skalérbar</strong>
+                <span>Passar godt for produkt, funksjonar og mange undersider.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="glass">
+              <h3>Premium tech utan å bli generisk.</h3>
+              <p>Her er målet å sjå moderne og påkosta ut, ikkje som endå ein standard startup-mal.</p>
+            </div>
+
+            <div class="glass">
+              <h3>For merkevarer som vil verke meir avanserte.</h3>
+              <p>Dette oppsettet eignar seg svært godt når det digitale produktet sjølv er ein viktig del av salet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="head">
+        <div>
+          <div class="kicker">Retning</div>
+          <h2>Premium kan også vere mørk, teknisk og skarp.</h2>
+        </div>
+        <div class="copy">
+          Denne demoen viser at premium ikkje berre betyr luksus og varme tonar. Han kan også vere meir digital, meir avansert og meir produktdriven – utan å miste kvalitet og kontroll.
+        </div>
+      </div>
+
+      <div class="grid4">
+        <div class="card">
+          <small>01</small>
+          <h3>Moderne tech-estetikk</h3>
+          <p>Glassflater, mørk base og meir dramatisk lysbruk.</p>
+        </div>
+
+        <div class="card">
+          <small>02</small>
+          <h3>Produktfokus</h3>
+          <p>Perfekt for funksjonar, dashboards, plattform og demo-flow.</p>
+        </div>
+
+        <div class="card">
+          <small>03</small>
+          <h3>Avansert kjensle</h3>
+          <p>Får merkevara til å verke meir utvikla og meir påkosta.</p>
+        </div>
+
+        <div class="card">
+          <small>04</small>
+          <h3>Tech-premium</h3>
+          <p>Ei heilt anna premiumretning enn boutique og luksus.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="contact">
+        <div class="box">
+          <div class="kicker">Kontakt</div>
+          <h2>Premium med tech-vri.</h2>
+          <div class="copy">
+            Bruk denne demoen når du vil vise at du også kan levere mørke, moderne og meir produktorienterte premium-sider.
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="kicker">Passar for</div>
+          <p>SaaS, AI, programvare, tech-brand, app og plattform</p>
+
+          <div class="kicker">Nivå</div>
+          <p>Premium</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
