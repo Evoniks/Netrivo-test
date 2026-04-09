@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard demo 2 – Rådgiving</title>
+  <style>
+    :root {
+      --ink: #101316;
+      --muted: #59646d;
+      --line: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg,#f5f8fa,#eaf0f4);
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 34px));
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.66);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 52px 0 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(255,255,255,0.64);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.06);
+    }
+
+    .left {
+      padding: 56px;
+    }
+
+    .right {
+      padding: 28px;
+      background: linear-gradient(150deg,#132b40,#1b4a70);
+      color: #f1f7fb;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(2.9rem, 7vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin: 22px 0 0;
+    }
+
+    .lead {
+      margin-top: 22px;
+      color: var(--muted);
+      line-height: 1.86;
+      font-size: 1.1rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #101316;
+      color: #fff;
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel + .panel {
+      margin-top: 14px;
+    }
+
+    .panel h3 {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .panel p {
+      color: rgba(241,247,251,0.76);
+      line-height: 1.72;
+    }
+
+    .section {
+      padding: 82px 0 0;
+    }
+
+    .head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin: 10px 0 0;
+    }
+
+    .copy {
+      color: var(--muted);
+      line-height: 1.84;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .item {
+      padding: 26px;
+    }
+
+    .item h3 {
+      margin: 0 0 10px;
+      font-size: 1.28rem;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.76;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      padding-bottom: 84px;
+    }
+
+    .box {
+      padding: 32px;
+    }
+
+    @media(max-width:960px){
+      .hero-grid,
+      .head,
+      .grid,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .left,
+      .right,
+      .item,
+      .box {
+        padding: 24px;
+      }
+    }
+
+    @media(max-width:720px){
+      .nav {
+        display: none;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container row">
+      <strong>NordRåd</strong>
+      <nav class="nav">
+        <a href="#tenester">Tenester</a>
+        <a href="#fordelar">Fordelar</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card left">
+          <div class="badge">Standard demo / rådgiving og økonomi</div>
+          <h1>Ei truverdig side for verksemder som må verke trygge og presise.</h1>
+          <div class="lead">
+            Laga for rekneskap, juridiske tenester, HR, rådgiving og andre kompetanseverksemder der kunden må kjenne tillit med ein gong.
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="#kontakt">Book samtale</a>
+            <a class="btn secondary" href="#tenester">Sjå tenester</a>
+          </div>
+        </div>
+
+        <div class="card right">
+          <div class="panel">
+            <h3>Høg truverd.</h3>
+            <p>Dette oppsettet brukar klare flater, strengare fargar og meir struktur for å gi ei trygg kjensle.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Meir konservativ stil.</h3>
+            <p>Ein annan type “standard”-demo enn arkitekt-versjonen, meir retta mot tillit og profesjonalitet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tenester">
+      <div class="head">
+        <div>
+          <div class="kicker">Tenester</div>
+          <h2>Standard med meir “business”-preg.</h2>
+        </div>
+        <div class="copy">
+          Her ser du korleis standardnivået kan ta ei heilt anna retning. Denne er mindre kreativ og meir trygg, meir formell og meir autoritetsbasert.
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card item">
+          <h3>Formell framtoning</h3>
+          <p>Gir kunden kjensla av tryggleik, presisjon og kontroll.</p>
+        </div>
+
+        <div class="card item">
+          <h3>Passar for fleire tenester</h3>
+          <p>God plass til fagområde, prosess og team.</p>
+        </div>
+
+        <div class="card item">
+          <h3>Bygd for tillit</h3>
+          <p>Særleg godt eigna når kunden vel leverandør ut frå truverd.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="contact">
+        <div class="card box">
+          <div class="kicker">Kontakt</div>
+          <h2>Ei anna standardretning enn dei meir kreative demoane.</h2>
+          <div class="copy">
+            Denne viser at standardnivået kan vere både nøkternt, seriøst og salgbart – utan å bli kjedeleg.
+          </div>
+        </div>
+
+        <div class="card box">
+          <div class="kicker">Passar for</div>
+          <p>Rekneskap, juridisk, HR, økonomi, rådgiving</p>
+
+          <div class="kicker">Nivå</div>
+          <p>Standard</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
