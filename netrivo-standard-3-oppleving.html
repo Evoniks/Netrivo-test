@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard demo 3 – Oppleving</title>
+  <style>
+    :root {
+      --ink: #131313;
+      --muted: #5f655e;
+      --line: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg,#f6f7f4,#eceee9);
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 34px));
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .top {
+      padding: 20px 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.62);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.06);
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 26px 0 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.56);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.06);
+    }
+
+    .left {
+      padding: 58px 54px;
+    }
+
+    .right {
+      padding: 24px;
+      background: linear-gradient(145deg,#1f2d26,#3a6a59);
+      color: #f4faf7;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      margin: 22px 0 0;
+    }
+
+    .lead {
+      margin-top: 22px;
+      color: var(--muted);
+      line-height: 1.86;
+      font-size: 1.1rem;
+    }
+
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #131313;
+      color: #fff;
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel + .panel {
+      margin-top: 14px;
+    }
+
+    .panel h3 {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .panel p {
+      color: rgba(244,250,247,0.76);
+      line-height: 1.72;
+    }
+
+    .section {
+      padding: 82px 0 0;
+    }
+
+    .head {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin: 10px 0 0;
+    }
+
+    .copy {
+      color: var(--muted);
+      line-height: 1.84;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .item {
+      padding: 26px;
+    }
+
+    .item h3 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.76;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      padding-bottom: 84px;
+    }
+
+    .box {
+      padding: 32px;
+    }
+
+    @media(max-width:960px){
+      .hero-grid,
+      .head,
+      .grid,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .left,
+      .right,
+      .item,
+      .box {
+        padding: 24px;
+      }
+    }
+
+    @media(max-width:720px){
+      .nav {
+        display: none;
+      }
+
+      .btns {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container top">
+    <div class="topbar">
+      <strong>Fjordspor</strong>
+      <nav class="nav">
+        <a href="#tenester">Opplevingar</a>
+        <a href="#kvifor">Kvifor</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card left">
+          <div class="badge">Standard demo / oppleving og reiseliv</div>
+          <h1>Ei meir levande standardside for opplevingar og aktivitetar.</h1>
+          <div class="lead">
+            Denne demoen viser at standardnivået ikkje berre treng vere roleg og formelt. Ho kan også vere meir stemningsfull, med tydelegare tematikk og meir visuell energi.
+          </div>
+          <div class="btns">
+            <a class="btn primary" href="#kontakt">Be om tilbod</a>
+            <a class="btn secondary" href="#tenester">Sjå opplevingar</a>
+          </div>
+        </div>
+
+        <div class="card right">
+          <div class="panel">
+            <h3>Meir stemning.</h3>
+            <p>Fargar og layout er valde for å gi kjensla av natur, rørsle og oppleving.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Fortsatt standardnivå.</h3>
+            <p>Ho er framleis balansert og salbar, men meir karaktersterk enn dei meir formelle demoane.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tenester">
+      <div class="head">
+        <div>
+          <div class="kicker">Opplevingar</div>
+          <h2>Standardnivå med meir tema og meir liv.</h2>
+        </div>
+        <div class="copy">
+          Her ser du korleis same nivå kan få heilt ulik kjensle avhengig av kundetype. Dette er ein sterk demo for aktivitet, reiseliv, event og opplevingsbaserte tenester.
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card item">
+          <h3>Stemningsfull hero</h3>
+          <p>Får fram tema og oppleving utan å bli for “reklamete”.</p>
+        </div>
+
+        <div class="card item">
+          <h3>Klart tilbod</h3>
+          <p>Aktivitetar, booking og praktisk informasjon blir enkle å finne.</p>
+        </div>
+
+        <div class="card item">
+          <h3>Meir personleg</h3>
+          <p>Eit godt døme på korleis standardnivået kan kjennast meir levande.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="contact">
+        <div class="card box">
+          <div class="kicker">Kontakt</div>
+          <h2>Ei standardside med meir karakter.</h2>
+          <div class="copy">
+            Bruk denne når du vil vise at du kan lage meir temaorienterte sider utan at dei blir for kompliserte eller for premium.
+          </div>
+        </div>
+
+        <div class="card box">
+          <div class="kicker">Passar for</div>
+          <p>Event, reiseliv, guide, aktivitet, oppleving</p>
+
+          <div class="kicker">Nivå</div>
+          <p>Standard</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
