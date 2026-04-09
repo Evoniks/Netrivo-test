@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netrivo</title>
-  <meta name="description" content="Netrivo utviklar eksklusive nettsider med sterk identitet, tydeleg posisjonering og premium digital framtoning." />
+  <meta name="description" content="Netrivo utviklar premium nettsider med sterk identitet, tydeleg posisjonering og gjennomarbeidd digital framtoning." />
   <style>
     :root {
       --bg: #f5f1ea;
@@ -12,10 +12,12 @@
       --ink: #151515;
       --muted: #5f5a53;
       --line: rgba(21,21,21,0.1);
+      --line-soft: rgba(21,21,21,0.06);
       --accent: #8a5a44;
       --accent-deep: #5f3727;
       --stone: #ded4c7;
       --card: rgba(255,255,255,0.55);
+      --card-strong: rgba(255,255,255,0.72);
       --shadow: 0 30px 80px rgba(40, 27, 17, 0.08);
       --radius-xl: 40px;
       --radius-lg: 28px;
@@ -124,15 +126,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.16));
+      background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.16));
     }
 
     .hero-panel {
       position: relative;
       min-height: 100%;
-      background:
-        linear-gradient(145deg, rgba(95,55,39,0.92), rgba(28,24,22,0.96));
+      background: linear-gradient(145deg, rgba(95,55,39,0.92), rgba(28,24,22,0.96));
       color: #f4eee7;
       overflow: hidden;
     }
@@ -333,7 +333,6 @@
     }
 
     .services-grid,
-    .showcase-grid,
     .process-grid,
     .contact-grid {
       display: grid;
@@ -377,12 +376,208 @@
       font-size: 0.95rem;
     }
 
-    .showcase-grid {
-      grid-template-columns: 1.1fr 0.9fr;
+    .portfolio-group {
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.46);
+      box-shadow: var(--shadow);
     }
 
-    .showcase-main,
-    .showcase-list,
+    .portfolio-group + .portfolio-group {
+      margin-top: 24px;
+    }
+
+    .portfolio-header {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(21,21,21,0.08);
+    }
+
+    .portfolio-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .portfolio-badge {
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(21,21,21,0.08);
+      background: rgba(255,255,255,0.62);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .portfolio-group h3 {
+      margin: 0;
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 20px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(21,21,21,0.08);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.78);
+      border-color: rgba(21,21,21,0.12);
+    }
+
+    .project-preview {
+      position: relative;
+      overflow: hidden;
+      min-height: 235px;
+      border-radius: 22px;
+      padding: 18px;
+      border: 1px solid rgba(21,21,21,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .theme-simple-cafe {
+      background: linear-gradient(145deg, #f7efe4, #efe2d4);
+      color: #2a201a;
+    }
+
+    .theme-simple-build {
+      background: linear-gradient(145deg, #eef6f5, #dff0ed);
+      color: #17302e;
+    }
+
+    .theme-simple-fitness {
+      background: linear-gradient(145deg, #f7ede7, #f1d9c3);
+      color: #2a1911;
+    }
+
+    .theme-standard-architect {
+      background: linear-gradient(145deg, #f2f0ed, #e2ddd6);
+      color: #212121;
+    }
+
+    .theme-standard-advice {
+      background: linear-gradient(145deg, #eef4f8, #d7e4ef);
+      color: #142635;
+    }
+
+    .theme-standard-travel {
+      background: linear-gradient(145deg, #edf5ef, #d8e9de);
+      color: #1d342a;
+    }
+
+    .theme-premium-boutique {
+      background: linear-gradient(145deg, #2b1d17, #825742);
+      color: #f9f1e7;
+    }
+
+    .theme-premium-tech {
+      background: radial-gradient(circle at top left, rgba(119,69,255,0.35), transparent 30%), linear-gradient(145deg, #080a11, #10172b);
+      color: #eff3ff;
+    }
+
+    .theme-premium-personal {
+      background: linear-gradient(145deg, #251a16, #8a5d47);
+      color: #faf1e8;
+    }
+
+    .preview-topline {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      opacity: 0.72;
+    }
+
+    .preview-heading {
+      margin-top: 8px;
+      font-size: 1.55rem;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+      max-width: 320px;
+    }
+
+    .preview-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .preview-mini {
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .theme-simple-cafe .preview-mini,
+    .theme-simple-build .preview-mini,
+    .theme-simple-fitness .preview-mini,
+    .theme-standard-architect .preview-mini,
+    .theme-standard-advice .preview-mini,
+    .theme-standard-travel .preview-mini {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(21,21,21,0.08);
+    }
+
+    .project-meta {
+      padding-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .project-small {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .project-title {
+      font-size: 1.28rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .project-copy {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .project-link {
+      margin-top: auto;
+      padding-top: 12px;
+      font-weight: 700;
+    }
+
     .process-wrap,
     .contact-cta,
     .contact-card {
@@ -390,144 +585,6 @@
       border-radius: 34px;
       background: rgba(255,255,255,0.46);
       box-shadow: var(--shadow);
-    }
-
-    .showcase-main {
-      padding: 34px;
-      min-height: 540px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .showcase-main-top {
-      display: grid;
-      gap: 26px;
-    }
-
-    .fake-browser {
-      border: 1px solid rgba(21,21,21,0.08);
-      border-radius: 26px;
-      overflow: hidden;
-      background: #f9f5ef;
-    }
-
-    .fake-top {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 18px;
-      border-bottom: 1px solid rgba(21,21,21,0.07);
-      background: rgba(255,255,255,0.56);
-    }
-
-    .fake-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(21,21,21,0.18);
-    }
-
-    .fake-url {
-      margin-left: 10px;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .fake-body {
-      padding: 24px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .fake-block-dark {
-      padding: 28px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, #1d1a18, #4a2f23);
-      color: #f6f0e8;
-    }
-
-    .fake-block-dark h3 {
-      margin: 8px 0 0;
-      font-size: 1.9rem;
-      line-height: 1.04;
-      letter-spacing: -0.05em;
-    }
-
-    .fake-block-dark p,
-    .fake-mini p {
-      margin: 12px 0 0;
-      line-height: 1.7;
-      color: rgba(246,240,232,0.74);
-    }
-
-    .fake-mini-wrap {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .fake-mini {
-      padding: 18px;
-      border-radius: 22px;
-      background: #fffdf9;
-      border: 1px solid rgba(21,21,21,0.08);
-    }
-
-    .showcase-quote {
-      padding-top: 22px;
-      border-top: 1px solid rgba(21,21,21,0.08);
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 580px;
-    }
-
-    .showcase-list {
-      padding: 22px;
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .project {
-      padding: 24px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.54);
-      border: 1px solid rgba(21,21,21,0.08);
-      transition: transform .18s ease, background .18s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.78);
-    }
-
-    .project small {
-      display: block;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.72rem;
-    }
-
-    .project strong {
-      display: block;
-      margin-top: 12px;
-      font-size: 1.3rem;
-      letter-spacing: -0.04em;
-    }
-
-    .project p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .project span {
-      display: inline-block;
-      margin-top: 16px;
-      font-weight: 700;
     }
 
     .process-wrap {
@@ -611,15 +668,8 @@
       .hero-grid,
       .section-head,
       .services-grid,
-      .showcase-grid,
-      .process-grid,
-      .contact-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero-grid,
-      .section-head,
-      .showcase-grid,
+      .portfolio-header,
+      .portfolio-grid,
       .process-grid,
       .contact-grid {
         grid-template-columns: 1fr;
@@ -641,8 +691,8 @@
 
       .nav,
       .hero-bottom,
-      .fake-mini-wrap,
-      .services-grid {
+      .services-grid,
+      .metrics {
         grid-template-columns: 1fr;
       }
 
@@ -650,9 +700,9 @@
       .hero-actions { flex-direction: column; align-items: stretch; }
       .btn { width: 100%; }
       .hero-shell { border-radius: 28px; }
-      .hero-copy, .panel-inner, .showcase-main, .showcase-list, .process-wrap, .contact-cta, .contact-card { padding: 24px; }
+      .hero-copy, .panel-inner, .portfolio-group, .process-wrap, .contact-cta, .contact-card { padding: 24px; }
       .hero { padding-top: 20px; }
-      h1 { line-height: 0.98; }
+      .project-preview { min-height: 210px; }
     }
   </style>
 </head>
@@ -780,63 +830,222 @@
         <div class="section-head">
           <div>
             <div class="kicker">Arbeid</div>
-            <h2>Eksempel som viser spenn, nivå og retning.</h2>
+            <h2>Ni demoar som viser spenn, nivå og stilretningar.</h2>
           </div>
           <div class="section-copy">
-            Dette er den viktigaste delen av sida di. Her må du vise kva du faktisk kan – med ekte demoar og konkrete eksempel.
+            Dette er den viktigaste delen av sida di. Her må du vise kva du faktisk kan – med ekte demoar og konkrete eksempel. Derfor er porteføljen delt i tre nivå: Enkel, Standard og Premium.
           </div>
         </div>
 
-        <div class="showcase-grid">
-          <div class="showcase-main">
-            <div class="showcase-main-top">
-              <div class="fake-browser">
-                <div class="fake-top">
-                  <div class="fake-dot"></div>
-                  <div class="fake-dot"></div>
-                  <div class="fake-dot"></div>
-                  <div class="fake-url">demo.netrivo.no / featured concept</div>
-                </div>
-                <div class="fake-body">
-                  <div class="fake-block-dark">
-                    <div class="kicker" style="color: rgba(246,240,232,0.62);">Featured project</div>
-                    <h3>Ei meir redaksjonell og luksuriøs retning for moderne bedrifter.</h3>
-                    <p>Eit meir kuratert uttrykk med store flater, meir luft, meir kontrollert kontrast og sterkare visuell identitet.</p>
-                  </div>
-                  <div class="fake-mini-wrap">
-                    <div class="fake-mini">
-                      <strong>Meir særpreg</strong>
-                      <p>Bygd for å skilje seg frå enkle standardmaler.</p>
-                    </div>
-                    <div class="fake-mini">
-                      <strong>Meir autoritet</strong>
-                      <p>Ryddig struktur kombinert med høgare opplevd verdi.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="portfolio-group">
+          <div class="portfolio-header">
+            <div class="portfolio-title-wrap">
+              <div class="portfolio-badge">Enkel</div>
+              <h3>Tre enkle nettsider med tre heilt ulike uttrykk.</h3>
             </div>
-            <div class="showcase-quote">Her bør du legge inn den beste demo-sida di. Dette er det som avgjer om kunden tek kontakt eller ikkje.</div>
+            <div class="section-copy">
+              Ein enkel nettside treng ikkje vere generisk. Her viser du tre tydelege retningar: varm og lun, praktisk og rett fram, og meir energisk og personleg.
+            </div>
           </div>
 
-          <div class="showcase-list">
-            <a class="project" href="./netrivo-demo-1-enkel.html">
-              <small>Demo 01</small>
-              <strong>Enkel nettside</strong>
-              <p>For små lokale verksemder som treng ei ryddig, tillitsbyggande og effektiv side.</p>
-              <span>Opne demo →</span>
+          <div class="portfolio-grid">
+            <a class="project-card" href="./netrivo-enkel-1-kafe.html">
+              <div class="project-preview theme-simple-cafe">
+                <div>
+                  <div class="preview-topline">Enkel / lokal kafé</div>
+                  <div class="preview-heading">Ei lun og innbydande side for ei lokal kafé.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Varme tonar og låg terskel for kontakt</div>
+                  <div class="preview-mini">Passar for kafé, bakeri og mindre serveringsstad</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 01</div>
+                <div class="project-title">Kafé / servering</div>
+                <div class="project-copy">Viser korleis ei enkel side kan kjennast hyggeleg, profesjonell og innbydande utan å bli komplisert.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
             </a>
-            <a class="project" href="./netrivo-demo-2-standard.html">
-              <small>Demo 02</small>
-              <strong>Standard nettside</strong>
-              <p>For konsulentar og fagmiljø som treng ei meir etablert og profesjonell framtoning.</p>
-              <span>Opne demo →</span>
+
+            <a class="project-card" href="./netrivo-enkel-2-handverkar.html">
+              <div class="project-preview theme-simple-build">
+                <div>
+                  <div class="preview-topline">Enkel / handverkar</div>
+                  <div class="preview-heading">Ei tydeleg side som gjer det lett å velje deg.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Rett på sak med klar struktur</div>
+                  <div class="preview-mini">Passar for handverkarar og små entreprenørar</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 02</div>
+                <div class="project-title">Handverkar / service</div>
+                <div class="project-copy">Meir praktisk og meir direkte enn dei andre enkle sidene. Laga for førespurnader, ikkje pynt.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
             </a>
-            <a class="project" href="./netrivo-demo-3-premium.html">
-              <small>Demo 03</small>
-              <strong>Premium nettside</strong>
-              <p>For kundar som vil ha eit meir eksklusivt uttrykk med høg opplevd verdi.</p>
-              <span>Opne demo →</span>
+
+            <a class="project-card" href="./netrivo-enkel-3-ptstudio.html">
+              <div class="project-preview theme-simple-fitness">
+                <div>
+                  <div class="preview-topline">Enkel / helse og trening</div>
+                  <div class="preview-heading">Ei energisk side med låg terskel for booking.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Meir kontrast, meir tempo, meir personlegdom</div>
+                  <div class="preview-mini">Passar for PT, studio og coaching</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 03</div>
+                <div class="project-title">PT / studio</div>
+                <div class="project-copy">Ei enkel side med meir energi og meir personleg framtoning. God for booking og raske henvendingar.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-group">
+          <div class="portfolio-header">
+            <div class="portfolio-title-wrap">
+              <div class="portfolio-badge">Standard</div>
+              <h3>Tre standard-nettsider med ulik tone og målgruppe.</h3>
+            </div>
+            <div class="section-copy">
+              Standard-nivået skal vere den mest realistiske pakken for mange kundar. Her viser du at same nivå kan vere raffinert, forretningsprega eller meir levande – alt etter kven sida er for.
+            </div>
+          </div>
+
+          <div class="portfolio-grid">
+            <a class="project-card" href="./netrivo-standard-1-arkitekt.html">
+              <div class="project-preview theme-standard-architect">
+                <div>
+                  <div class="preview-topline">Standard / arkitekt og design</div>
+                  <div class="preview-heading">Ei roleg og profesjonell side for verksemder som blir vurderte på kvalitet.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Redaksjonelt og raffinert</div>
+                  <div class="preview-mini">Passar for arkitekt, design og rådgiving</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 04</div>
+                <div class="project-title">Arkitekt / designstudio</div>
+                <div class="project-copy">Meir roleg, meir fagleg og meir etablert. Eit sterkt døme på standardnivå med høg truverd.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
+            </a>
+
+            <a class="project-card" href="./netrivo-standard-2-radgiving.html">
+              <div class="project-preview theme-standard-advice">
+                <div>
+                  <div class="preview-topline">Standard / rådgiving og økonomi</div>
+                  <div class="preview-heading">Ei truverdig side for verksemder som må verke trygge og presise.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Formell og autoritetsbasert</div>
+                  <div class="preview-mini">Passar for rekneskap, juridisk og HR</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 05</div>
+                <div class="project-title">Rådgiving / økonomi</div>
+                <div class="project-copy">Ein meir konservativ og trygg retning. Passar når kunden vel leverandør ut frå tillit og profesjonalitet.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
+            </a>
+
+            <a class="project-card" href="./netrivo-standard-3-oppleving.html">
+              <div class="project-preview theme-standard-travel">
+                <div>
+                  <div class="preview-topline">Standard / oppleving og reiseliv</div>
+                  <div class="preview-heading">Ei meir levande standardside for opplevingar og aktivitetar.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Meir stemning og meir tema</div>
+                  <div class="preview-mini">Passar for reiseliv, event og guide</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 06</div>
+                <div class="project-title">Oppleving / reiseliv</div>
+                <div class="project-copy">Viser at standardnivået også kan vere karaktersterkt og meir visuelt levande utan å bli for premium.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-group">
+          <div class="portfolio-header">
+            <div class="portfolio-title-wrap">
+              <div class="portfolio-badge">Premium</div>
+              <h3>Tre premium-retningar for kundar som vil ha meir særpreg.</h3>
+            </div>
+            <div class="section-copy">
+              Premium betyr ikkje berre éin stil. Her viser du tre ulike retningar: varm og luksuriøs, mørk og teknologisk, og meir personleg og redaksjonell. Det gjer porteføljen din mykje sterkare.
+            </div>
+          </div>
+
+          <div class="portfolio-grid">
+            <a class="project-card" href="./netrivo-premium-1-boutique.html">
+              <div class="project-preview theme-premium-boutique">
+                <div>
+                  <div class="preview-topline">Premium / boutique og luksus</div>
+                  <div class="preview-heading">Ei side som får merkevara til å kjennast dyrare og meir eksklusiv.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Varm, kuratert og luksuriøs</div>
+                  <div class="preview-mini">Passar for boutique, high-end og premium brand</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 07</div>
+                <div class="project-title">Boutique / luksus</div>
+                <div class="project-copy">Den varme premiumvarianten. Laga for kundar som vil ha meir pondus, meir ro og høgare opplevd verdi.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
+            </a>
+
+            <a class="project-card" href="./netrivo-premium-2-tech.html">
+              <div class="project-preview theme-premium-tech">
+                <div>
+                  <div class="preview-topline">Premium / tech og SaaS</div>
+                  <div class="preview-heading">Ei premium side med meir futuristisk og high-tech uttrykk.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Mørk, glasaktig og meir avansert</div>
+                  <div class="preview-mini">Passar for SaaS, AI, app og plattform</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 08</div>
+                <div class="project-title">Tech / SaaS</div>
+                <div class="project-copy">Ei heilt anna premiumretning enn boutique og luksus. Perfekt når produktet sjølv skal sjå påkosta ut.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
+            </a>
+
+            <a class="project-card" href="./netrivo-premium-3-personlegbrand.html">
+              <div class="project-preview theme-premium-personal">
+                <div>
+                  <div class="preview-topline">Premium / personleg brand</div>
+                  <div class="preview-heading">Ei signaturside for personlege brand med høgare ambisjonar.</div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-mini">Meir redaksjonell og personfokusert</div>
+                  <div class="preview-mini">Passar for ekspertar, foredrag og profiler</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="project-small">Demo 09</div>
+                <div class="project-title">Personleg brand</div>
+                <div class="project-copy">Viser ei premiumløysing bygd rundt person, autoritet og identitet – ikkje berre rundt bedrifta som system.</div>
+                <div class="project-link">Opne demo →</div>
+              </div>
             </a>
           </div>
         </div>
@@ -884,9 +1093,9 @@
       <div class="container contact-grid">
         <div class="contact-cta">
           <div class="kicker">Kontakt</div>
-          <h2>Klar for ei nettside som ser ut som ho kostar meir enn standarden?</h2>
+          <h2>Send meg ei melding, så får du ei konkret vurdering av nettsida di.</h2>
           <div class="section-copy">
-            Send meg ei melding, så får du ei konkret vurdering av nettsida di – og kva du bør gjere for å få fleire kundar.
+            Netrivo er for bedrifter som ønskjer noko skarpare, meir bevisst og meir premium enn den vanlege nettsidemalen. Her blir design brukt som posisjonering.
           </div>
         </div>
 
