@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard demo 1 – Arkitektstudio</title>
+  <style>
+    :root {
+      --ink: #141414;
+      --muted: #625d57;
+      --line: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg,#f8f5f1,#f0ebe4);
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 34px));
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .top {
+      padding: 18px 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.6);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.06);
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 24px 0 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.56);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.06);
+    }
+
+    .left {
+      padding: 58px 52px;
+    }
+
+    .right {
+      padding: 28px;
+      background: linear-gradient(150deg,#202225,#5c6368);
+      color: #f6f6f6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      margin: 22px 0 0;
+    }
+
+    .lead {
+      margin-top: 22px;
+      color: var(--muted);
+      line-height: 1.86;
+      font-size: 1.1rem;
+      max-width: 620px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #141414;
+      color: #fff;
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel + .panel {
+      margin-top: 14px;
+    }
+
+    .panel h3 {
+      margin: 0;
+      font-size: 1.48rem;
+    }
+
+    .panel p {
+      color: rgba(246,246,246,0.76);
+      line-height: 1.72;
+    }
+
+    .section {
+      padding: 86px 0 0;
+    }
+
+    .head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin: 10px 0 0;
+    }
+
+    .copy {
+      color: var(--muted);
+      line-height: 1.84;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .item {
+      padding: 26px;
+    }
+
+    .item small {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .item h3 {
+      margin: 16px 0 0;
+      font-size: 1.34rem;
+    }
+
+    .item p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.76;
+    }
+
+    .band {
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: linear-gradient(145deg,rgba(255,255,255,0.7),rgba(231,226,220,0.6));
+      box-shadow: 0 24px 64px rgba(0,0,0,0.06);
+    }
+
+    .band p {
+      font-size: 1.18rem;
+      max-width: 900px;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      padding-bottom: 86px;
+    }
+
+    .box {
+      padding: 34px;
+    }
+
+    @media (max-width: 1020px) {
+      .grid,
+      .head,
+      .cards,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .left,
+      .right,
+      .item,
+      .box {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        display: none;
+      }
+
+      .btns {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container top">
+    <div class="topbar">
+      <strong>Studio Kyst</strong>
+      <nav class="nav">
+        <a href="#tenester">Tenester</a>
+        <a href="#retning">Retning</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="grid">
+        <div class="card left">
+          <div class="tag">Standard demo / arkitekt og design</div>
+          <h1>Ei roleg og profesjonell side for verksemder som blir vurderte på kvalitet.</h1>
+          <div class="lead">
+            Denne demoen er meir redaksjonell og meir presis. Perfekt for arkitektar, interiørstudio, rådgivarar og andre fagmiljø som vil ha ei meir etablert framtoning.
+          </div>
+          <div class="btns">
+            <a class="btn primary" href="#kontakt">Be om møte</a>
+            <a class="btn secondary" href="#tenester">Sjå tenester</a>
+          </div>
+        </div>
+
+        <div class="card right">
+          <div class="panel">
+            <h3>Viser kontroll og fagleg tyngde.</h3>
+            <p>Her er uttrykket meir kuratert enn i enkle demoar, med meir luft og sterkare komposisjon.</p>
+          </div>
+
+          <div class="panel">
+            <h3>God “standard”-demo.</h3>
+            <p>Perfekt for kundar som vil ha noko som ser gjennomarbeidd ut utan å gå heilt premium.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tenester">
+      <div class="head">
+        <div>
+          <div class="kicker">Tenester</div>
+          <h2>Standardnivå med meir retning og meir ro.</h2>
+        </div>
+        <div class="copy">
+          Denne demoen viser eit meir raffinert og kompetansebasert uttrykk. Ho eignar seg for kundar som vil sjå meir etablerte ut og treng plass til meir innhald.
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card item">
+          <small>01</small>
+          <h3>Fagleg struktur</h3>
+          <p>Presenterer tenester, metode og referansar på ein oversiktleg måte.</p>
+        </div>
+
+        <div class="card item">
+          <small>02</small>
+          <h3>Meir etablert uttrykk</h3>
+          <p>Gir ei meir seriøs og designa kjensle enn enkle nettsider.</p>
+        </div>
+
+        <div class="card item">
+          <small>03</small>
+          <h3>Skalerbar løysing</h3>
+          <p>Kan byggast vidare med undersider, case og innsikt.</p>
+        </div>
+
+        <div class="card item">
+          <small>04</small>
+          <h3>Balansert nivå</h3>
+          <p>Ei realistisk løysing for mange små og mellomstore verksemder.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="band">
+        <div class="kicker">Retning</div>
+        <p>
+          Dette er eit godt døme på korleis “standard”-nivået kan sjå meir gjennomarbeidd og fagleg ut, utan å bli så eksklusivt at det berre passar for premium-kundar.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="contact">
+        <div class="card box">
+          <div class="kicker">Kontakt</div>
+          <h2>Standardnivå betyr ikkje standard uttrykk.</h2>
+          <div class="copy">
+            Bruk denne demoen for å vise at “mellomnivået” kan vere både truverdig, skalerbart og visuelt sterkt.
+          </div>
+        </div>
+
+        <div class="card box">
+          <div class="kicker">Passar for</div>
+          <p>Arkitekt, designstudio, rådgivar, fagmiljø</p>
+
+          <div class="kicker">Nivå</div>
+          <p>Standard</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
