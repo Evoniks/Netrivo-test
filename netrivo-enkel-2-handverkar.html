@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enkel demo 2 – Handverkar</title>
+
+  <style>
+    :root {
+      --ink: #111315;
+      --muted: #5e666b;
+      --line: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg,#f4f7f8,#e9eef0);
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 28px));
+      margin: auto;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      padding: 18px 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 50px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.05);
+    }
+
+    .left {
+      padding: 50px;
+    }
+
+    .right {
+      padding: 30px;
+      background: linear-gradient(145deg,#083c3a,#0f766e);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      margin: 20px 0 0;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .lead {
+      margin-top: 20px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .primary {
+      background: #111;
+      color: #fff;
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .panel + .panel {
+      margin-top: 12px;
+    }
+
+    .panel h3 {
+      margin: 0;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .item {
+      padding: 24px;
+    }
+
+    .item h3 {
+      margin: 0 0 10px;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .box {
+      padding: 30px;
+    }
+
+    @media(max-width:900px){
+      .grid, .grid3, .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .nav { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container row">
+    <strong>Nordbygg AS</strong>
+    <nav class="nav">
+      <a href="#">Tenester</a>
+      <a href="#">Om oss</a>
+      <a href="#">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <div class="grid">
+
+    <div class="card left">
+      <div class="tag">Enkel demo / handverkar</div>
+      <h1>Ei side som får deg fleire førespurnader.</h1>
+      <p class="lead">
+        Perfekt for mindre handverksbedrifter som treng ei enkel, profesjonell nettside som gjer det lett for kunden å ta kontakt.
+      </p>
+
+      <div class="buttons">
+        <a class="btn primary" href="#">Be om pris</a>
+        <a class="btn secondary" href="#">Sjå arbeid</a>
+      </div>
+    </div>
+
+    <div class="card right">
+      <div class="panel">
+        <h3>Rett på sak</h3>
+        <p>Kunden finn raskt ut kva du tilbyr.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Mobilvennleg</h3>
+        <p>Perfekt for folk som søker etter handverkar.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="grid3">
+
+    <div class="card item">
+      <h3>Tenester</h3>
+      <p>Tømrar, rehabilitering, tilbygg.</p>
+    </div>
+
+    <div class="card item">
+      <h3>Område</h3>
+      <p>Lokale oppdrag i regionen.</p>
+    </div>
+
+    <div class="card item">
+      <h3>Kontakt</h3>
+      <p>Telefon og e-post lett tilgjengelig.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="contact">
+
+    <div class="card box">
+      <h2>Enkel og effektiv nettside</h2>
+      <p class="lead">
+        Denne typen side er laga for å få kunden til å ta kontakt raskt.
+      </p>
+    </div>
+
+    <div class="card box">
+      <strong>Passar for</strong><br>
+      Handverkarar, små entreprenørar<br><br>
+      <strong>Nivå</strong><br>
+      Enkel
+    </div>
+
+  </div>
+</section>
+
+</main>
+</body>
+</html>
