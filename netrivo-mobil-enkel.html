@@ -1,91 +1,411 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobil Enkel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Enkel – Lokal kafé</title>
+  <meta name="description" content="Mobiltilpasset enkel nettside for kafé, bakeri eller liten serveringsbedrift." />
+  <style>
+    :root {
+      --bg: #f6f1ea;
+      --paper: #fffaf4;
+      --ink: #181614;
+      --muted: #6d645b;
+      --line: rgba(24,22,20,0.08);
+      --accent: #6b4633;
+      --accent-dark: #2d2019;
+      --shadow: 0 22px 56px rgba(35, 24, 17, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Inter, sans-serif;
-  background: #faf5ee;
-  color: #1a1a1a;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-.wrap {
-  max-width: 420px;
-  margin: auto;
-  padding: 16px;
-}
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(107,70,51,0.08), transparent 24%),
+        linear-gradient(180deg, #faf6f0 0%, #f2ebe2 100%);
+    }
 
-.card {
-  background: white;
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-h1 {
-  font-size: 2.2rem;
-  margin: 0;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(250,246,240,0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(24,22,20,0.06);
+    }
 
-p {
-  color: #666;
-  line-height: 1.6;
-}
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
 
-.actions {
-  margin-top: 16px;
-  display: grid;
-  gap: 10px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.btn {
-  padding: 14px;
-  border-radius: 999px;
-  text-align: center;
-  font-weight: 600;
-  text-decoration: none;
-}
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-dark);
+      color: #fff6ee;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
 
-.primary {
-  background: black;
-  color: white;
-}
+    .brand-copy strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+    }
 
-.secondary {
-  border: 1px solid #ddd;
-}
-</style>
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 16px 0 34px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.74);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding-top: 6px;
+    }
+
+    .hero-card {
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-size: clamp(2.35rem, 12vw, 4rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 340px;
+    }
+
+    .lead {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.98rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #181614;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.86);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-side {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #3d2a21, #1a1411);
+      color: #f8f0e6;
+      display: grid;
+      gap: 12px;
+    }
+
+    .side-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .side-card strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .side-card span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(248,240,230,0.78);
+      line-height: 1.58;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 0;
+      font-size: 1.6rem;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 330px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 0.94rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 13px;
+      border-radius: 16px;
+      background: #f5ede4;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .quote-card {
+      padding: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(243,233,221,0.66));
+    }
+
+    .quote-card p {
+      margin: 10px 0 0;
+      color: #5f564f;
+      line-height: 1.74;
+      font-size: 0.98rem;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.98rem;
+      line-height: 1.52;
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="wrap">
-  <div class="card">
-    <h1>Rask mobiloppleving</h1>
-    <p>Optimalisert for mobil: korte tekster, tydelige knapper og rask handling.</p>
-
-    <div class="actions">
-      <a class="btn primary" href="#">Kontakt</a>
-      <a class="btn secondary" href="./netrivo-enkel-1-kafe.html?view=desktop">Se full versjon</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">SB</div>
+        <div class="brand-copy">
+          <strong>Sol & Bønner</strong>
+          <span>Lokal kafé og bakeri</span>
+        </div>
+      </div>
+      <div class="top-note">Mobil Enkel</div>
     </div>
-  </div>
-</div>
+  </header>
 
-<script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const forceView = params.get("view");
-  const isDesktop = window.innerWidth > 768;
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / enkel</div>
+        <h1>Varm, tydelig og lett å bruke.</h1>
+        <p class="lead">
+          Denne mobilversjonen er laget for å gi et raskt og hyggelig førsteinntrykk, med korte tekster, tydelige knapper og lav terskel for handling.
+        </p>
 
-  if (forceView !== "mobile" && isDesktop) {
-    window.location.href = "./netrivo-enkel-1-kafe.html";
-  }
-})();
-</script>
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Bestill bord</a>
+          <a class="btn btn-secondary" href="./netrivo-enkel-1-kafe.html?view=desktop">Se full versjon</a>
+        </div>
 
+        <div class="hero-side">
+          <div class="side-card">
+            <strong>Kaffe, bakst og rolig stemning.</strong>
+            <span>En mobilopplevelse som passer godt for små serveringssteder med enkel informasjon og tydelig kontakt.</span>
+          </div>
+          <div class="side-card">
+            <strong>Bygget for rask handling.</strong>
+            <span>Kunden finner det viktigste med én gang og kommer seg lett videre.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tilbud">
+      <div class="section-head">
+        <div class="kicker">Innhold</div>
+        <h2>Mobil først, uten å føles tynn.</h2>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h3>Korte og tydelige valg</h3>
+          <p>Her er målet at brukeren raskt skal forstå hva stedet tilbyr og hva de kan gjøre videre.</p>
+          <div class="mini-grid">
+            <div class="mini">Kort tekst og tydelig hierarki</div>
+            <div class="mini">Knapper med høy synlighet</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h3>Passer for</h3>
+          <p>Kafé, bakeri, liten serveringsbedrift eller andre enkle konsepter som trenger en varm og oversiktlig mobilside.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hvorfor">
+      <div class="card quote-card">
+        <div class="kicker">Hvorfor denne fungerer</div>
+        <p>
+          En god mobilside trenger ikke være stor eller komplisert. Den må bare føles trygg, enkel å bruke og tydelig nok til at kunden faktisk tar neste steg.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h2>Lav terskel for handling.</h2>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>Telefon</small>
+          <strong>99 99 99 99</strong>
+        </div>
+        <div class="contact-item">
+          <small>E-post</small>
+          <strong>hei@eksempel.no</strong>
+        </div>
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>Små og enkle mobilopplevelser der tydelig handling er viktigere enn mye innhold.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isDesktop = window.innerWidth > 768;
+
+      if (forceView !== "mobile" && isDesktop) {
+        window.location.href = "./netrivo-enkel-1-kafe.html";
+      }
+    })();
+  </script>
 </body>
 </html>
