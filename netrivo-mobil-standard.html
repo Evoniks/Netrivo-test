@@ -1,313 +1,252 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobil Standard – Netrivo</title>
-  <style>
-    :root {
-      --bg: #eef3f7;
-      --paper: #f8fbfd;
-      --ink: #142432;
-      --muted: #60707d;
-      --line: rgba(20,36,50,0.08);
-      --shadow: 0 24px 60px rgba(17, 30, 42, 0.08);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standard – Rådgiver / Arkitekt</title>
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+<style>
+:root {
+  --bg: #f4f5f7;
+  --ink: #121316;
+  --muted: #5b616b;
+  --line: rgba(18,19,22,0.08);
+  --accent: #2f3b52;
+  --accent-soft: #e7ebf2;
+  --card: white;
+  --shadow: 0 30px 80px rgba(20,25,40,0.08);
+}
 
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: linear-gradient(180deg, #f6f9fb 0%, #e9f0f4 100%);
-      color: var(--ink);
-    }
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+}
 
-    .wrap {
-      width: min(460px, calc(100% - 20px));
-      margin: 0 auto;
-      padding: 14px 0 34px;
-    }
+/* HEADER */
+.topbar {
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(246,249,251,0.88);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(20,36,50,0.06);
-    }
+.topbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
 
-    .topbar-inner {
-      width: min(460px, calc(100% - 20px));
-      margin: 0 auto;
-      padding: 14px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.brand {
+  font-weight: 700;
+}
 
-    .brand {
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
+.nav {
+  display: flex;
+  gap: 24px;
+  color: var(--muted);
+}
 
-    .hero {
-      padding-top: 18px;
-    }
+/* HERO */
+.hero {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 30px;
+}
 
-    .card {
-      background: rgba(255,255,255,0.8);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-    }
+.hero-left {
+  padding: 40px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
 
-    .hero-card {
-      padding: 20px;
-    }
+.hero-left h1 {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin: 0;
+}
 
-    .tag {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.9);
-      color: var(--muted);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
+.hero-left p {
+  margin-top: 20px;
+  color: var(--muted);
+  line-height: 1.7;
+}
 
-    h1 {
-      margin: 18px 0 0;
-      font-size: clamp(2.35rem, 10vw, 4.1rem);
-      line-height: 0.94;
-      letter-spacing: -0.06em;
-    }
+.actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 12px;
+}
 
-    .lead {
-      margin-top: 18px;
-      color: var(--muted);
-      line-height: 1.72;
-      font-size: 1rem;
-    }
+.btn {
+  padding: 14px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+}
 
-    .actions {
-      display: grid;
-      gap: 10px;
-      margin-top: 20px;
-    }
+.primary {
+  background: var(--ink);
+  color: white;
+}
 
-    .btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 50px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
+.secondary {
+  border: 1px solid var(--line);
+}
 
-    .btn-primary {
-      background: #142432;
-      color: white;
-    }
+/* SIDE PANEL */
+.hero-right {
+  background: linear-gradient(145deg, #2f3b52, #151a24);
+  color: white;
+  border-radius: 24px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-    .btn-secondary {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.88);
-    }
+.panel {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 18px;
+}
 
-    .section {
-      margin-top: 18px;
-    }
+.panel strong {
+  display: block;
+  font-size: 1.2rem;
+}
 
-    .section-head {
-      margin-bottom: 12px;
-      padding: 0 4px;
-    }
+/* SECTION */
+.section {
+  margin-top: 50px;
+}
 
-    .kicker {
-      color: var(--muted);
-      font-size: 0.73rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
-    .section-head h3 {
-      margin: 8px 0 0;
-      font-size: 1.55rem;
-      line-height: 1.04;
-      letter-spacing: -0.05em;
-    }
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
 
-    .stack {
-      display: grid;
-      gap: 14px;
-    }
+.card h3 {
+  margin: 0;
+}
 
-    .info-card {
-      padding: 18px;
-    }
+.card p {
+  margin-top: 10px;
+  color: var(--muted);
+}
 
-    .info-card h2 {
-      margin: 0;
-      font-size: 1.3rem;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-    }
+/* CONTACT */
+.contact {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
 
-    .info-card p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.96rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .feature {
-      padding: 14px;
-      border-radius: 18px;
-      background: #edf4f8;
-      border: 1px solid var(--line);
-      font-size: 0.92rem;
-      line-height: 1.48;
-    }
-
-    .case-strip {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .case-box {
-      padding: 14px;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #eff4f8, #dbe7ef);
-      border: 1px solid var(--line);
-    }
-
-    .case-box strong {
-      display: block;
-      font-size: 0.96rem;
-      line-height: 1.4;
-    }
-
-    .case-box span {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.45;
-    }
-
-    .contact-card {
-      padding: 20px;
-    }
-
-    .contact-item + .contact-item {
-      margin-top: 16px;
-    }
-
-    .contact-item small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.83rem;
-    }
-
-    .contact-item strong {
-      display: block;
-      margin-top: 6px;
-      font-size: 1rem;
-      line-height: 1.55;
-    }
-  </style>
+@media(max-width: 900px){
+  .hero, .grid, .contact {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">Studio Nord</div>
-      <div style="color:#60707d;font-size:0.9rem;">Mobil Standard</div>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">Nordic Rådgivning</div>
+    <div class="nav">
+      <span>Tjenester</span>
+      <span>Prosjekter</span>
+      <span>Kontakt</span>
     </div>
-  </header>
+  </div>
+</div>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="card hero-card">
-        <div class="tag">Mobil demo / standard</div>
-        <h1>Mer struktur, mer tillit og bedre flyt.</h1>
-        <p class="lead">
-          Denne mobil-demoen er laget for virksomheter som trenger mer innhold, mer troverdighet og en tydeligere presentasjon enn det enkleste nivået.
-        </p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#tjenester">Se tjenester</a>
-          <a class="btn btn-secondary" href="#kontakt">Kontakt</a>
-        </div>
+<div class="container">
+
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Ei profesjonell side som bygger tillit.</h1>
+      <p>
+        Denne demoen viser et mer strukturert og gjennomarbeidet nivå. Perfekt for rådgivere, arkitekter og fagmiljøer som ønsker å fremstå tydeligere og mer etablert.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="#">Be om møte</a>
+        <a class="btn secondary" href="./netrivo-mobil-standard.html?view=mobile">Se mobilversjon</a>
       </div>
-    </section>
+    </div>
 
-    <section class="section" id="tjenester">
-      <div class="section-head">
-        <div class="kicker">Tjenester</div>
-        <h3>Mer gjennomarbeidet på mobil.</h3>
+    <div class="hero-right">
+      <div class="panel">
+        <strong>Struktur og klarhet</strong>
+        <span>Informasjon organisert for profesjonelle kunder</span>
       </div>
-
-      <div class="stack">
-        <div class="card info-card">
-          <h2>Tydelig presentasjon</h2>
-          <p>Her er innholdet organisert for å gi mer oversikt, mer tillit og bedre flyt mellom seksjoner.</p>
-          <div class="feature-grid">
-            <div class="feature">Bedre rytme mellom overskrifter og innhold</div>
-            <div class="feature">Sterkere presentasjon av tjenester og kompetanse</div>
-          </div>
-        </div>
-
-        <div class="card info-card">
-          <h2>Case og troverdighet</h2>
-          <p>Mobilopplevelsen gir plass til å vise mer enn bare en knapp og en tittel.</p>
-          <div class="case-strip">
-            <div class="case-box">
-              <strong>Arkitekt / rådgivning</strong>
-              <span>Passer når uttrykket skal være rolig, faglig og etablert.</span>
-            </div>
-            <div class="case-box">
-              <strong>Reiseliv / opplevelse</strong>
-              <span>Passer når mobilopplevelsen også skal gi stemning og tematikk.</span>
-            </div>
-          </div>
-        </div>
+      <div class="panel">
+        <strong>Mer autoritet</strong>
+        <span>Gir et mer etablert og solid inntrykk</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="kontakt">
-      <div class="section-head">
-        <div class="kicker">Kontakt</div>
-        <h3>Et tryggere mellomnivå.</h3>
-      </div>
+  <section class="section grid">
+    <div class="card">
+      <h3>Tjenester</h3>
+      <p>Tydelig presentasjon av hva du tilbyr og hvem du hjelper.</p>
+    </div>
+    <div class="card">
+      <h3>Prosjekter</h3>
+      <p>Vis frem arbeid og bygg troverdighet.</p>
+    </div>
+    <div class="card">
+      <h3>Kontakt</h3>
+      <p>Enklere for kunden å ta neste steg.</p>
+    </div>
+  </section>
 
-      <div class="card contact-card">
-        <div class="contact-item">
-          <small>E-post</small>
-          <strong>kontakt@eksempel.no</strong>
-        </div>
-        <div class="contact-item">
-          <small>Passer best til</small>
-          <strong>Virksomheter som vil ha mer troverdighet og mer innhold på mobil uten å gå helt premium.</strong>
-        </div>
-      </div>
-    </section>
-  </main>
+  <section class="contact">
+    <div class="card">
+      <h3>Standard nivå</h3>
+      <p>Dette nivået gir mer struktur, bedre inntrykk og høyere opplevd verdi enn en enkel side.</p>
+    </div>
+
+    <div class="card">
+      <h3>Passer for</h3>
+      <p>Rådgivere, konsulenter, arkitekter og tekniske fag.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const forceView = params.get("view");
+  const isMobile = window.innerWidth <= 768;
+
+  if (forceView !== "desktop" && isMobile) {
+    window.location.href = "./netrivo-mobil-standard.html";
+  }
+})();
+</script>
+
 </body>
 </html>
