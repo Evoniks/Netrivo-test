@@ -3,236 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Standard – Rådgiver / Arkitekt</title>
 
 <style>
-:root {
-  --bg: #f4f5f7;
-  --ink: #121316;
-  --muted: #5b616b;
-  --line: rgba(18,19,22,0.08);
-  --accent: #2f3b52;
-  --accent-soft: #e7ebf2;
-  --card: white;
-  --shadow: 0 30px 80px rgba(20,25,40,0.08);
-}
-
 body {
   margin: 0;
   font-family: Inter, sans-serif;
-  background: var(--bg);
-  color: var(--ink);
+  background: #f4f5f7;
 }
 
-.container {
-  max-width: 1200px;
+.wrap {
+  max-width: 420px;
   margin: auto;
-  padding: 30px;
-}
-
-/* HEADER */
-.topbar {
-  background: white;
-  border-bottom: 1px solid var(--line);
-}
-
-.topbar-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 0;
-}
-
-.brand {
-  font-weight: 700;
-}
-
-.nav {
-  display: flex;
-  gap: 24px;
-  color: var(--muted);
-}
-
-/* HERO */
-.hero {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-}
-
-.hero-left {
-  padding: 40px;
-  background: white;
-  border-radius: 24px;
-  box-shadow: var(--shadow);
-}
-
-.hero-left h1 {
-  font-size: 3.5rem;
-  line-height: 1;
-  margin: 0;
-}
-
-.hero-left p {
-  margin-top: 20px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.actions {
-  margin-top: 25px;
-  display: flex;
-  gap: 12px;
-}
-
-.btn {
-  padding: 14px 20px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.primary {
-  background: var(--ink);
-  color: white;
-}
-
-.secondary {
-  border: 1px solid var(--line);
-}
-
-/* SIDE PANEL */
-.hero-right {
-  background: linear-gradient(145deg, #2f3b52, #151a24);
-  color: white;
-  border-radius: 24px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.panel {
-  background: rgba(255,255,255,0.08);
-  padding: 20px;
-  border-radius: 18px;
-}
-
-.panel strong {
-  display: block;
-  font-size: 1.2rem;
-}
-
-/* SECTION */
-.section {
-  margin-top: 50px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  padding: 16px;
 }
 
 .card {
   background: white;
-  padding: 24px;
+  padding: 20px;
   border-radius: 20px;
-  box-shadow: var(--shadow);
+  margin-bottom: 16px;
 }
 
-.card h3 {
+h1 {
+  font-size: 2.2rem;
   margin: 0;
 }
 
-.card p {
+p {
+  color: #666;
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 999px;
   margin-top: 10px;
-  color: var(--muted);
+  text-decoration: none;
 }
 
-/* CONTACT */
-.contact {
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+.primary {
+  background: black;
+  color: white;
 }
 
-@media(max-width: 900px){
-  .hero, .grid, .contact {
-    grid-template-columns: 1fr;
-  }
+.secondary {
+  border: 1px solid #ddd;
 }
 </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <div class="container topbar-inner">
-    <div class="brand">Nordic Rådgivning</div>
-    <div class="nav">
-      <span>Tjenester</span>
-      <span>Prosjekter</span>
-      <span>Kontakt</span>
-    </div>
+<div class="wrap">
+
+  <div class="card">
+    <h1>Profesjonell og tydelig.</h1>
+    <p>Denne mobilversjonen er laget for rådgivere og fagmiljøer som trenger struktur og klarhet.</p>
+
+    <a class="btn primary" href="#">Kontakt</a>
+    <a class="btn secondary" href="./netrivo-standard-1-arkitekt.html?view=desktop">Full versjon</a>
   </div>
-</div>
 
-<div class="container">
+  <div class="card">
+    <strong>Tydelig struktur</strong>
+    <p>Enkel navigasjon og rask forståelse.</p>
+  </div>
 
-  <section class="hero">
-    <div class="hero-left">
-      <h1>Ei profesjonell side som bygger tillit.</h1>
-      <p>
-        Denne demoen viser et mer strukturert og gjennomarbeidet nivå. Perfekt for rådgivere, arkitekter og fagmiljøer som ønsker å fremstå tydeligere og mer etablert.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="#">Be om møte</a>
-        <a class="btn secondary" href="./netrivo-mobil-standard.html?view=mobile">Se mobilversjon</a>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="panel">
-        <strong>Struktur og klarhet</strong>
-        <span>Informasjon organisert for profesjonelle kunder</span>
-      </div>
-      <div class="panel">
-        <strong>Mer autoritet</strong>
-        <span>Gir et mer etablert og solid inntrykk</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section grid">
-    <div class="card">
-      <h3>Tjenester</h3>
-      <p>Tydelig presentasjon av hva du tilbyr og hvem du hjelper.</p>
-    </div>
-    <div class="card">
-      <h3>Prosjekter</h3>
-      <p>Vis frem arbeid og bygg troverdighet.</p>
-    </div>
-    <div class="card">
-      <h3>Kontakt</h3>
-      <p>Enklere for kunden å ta neste steg.</p>
-    </div>
-  </section>
-
-  <section class="contact">
-    <div class="card">
-      <h3>Standard nivå</h3>
-      <p>Dette nivået gir mer struktur, bedre inntrykk og høyere opplevd verdi enn en enkel side.</p>
-    </div>
-
-    <div class="card">
-      <h3>Passer for</h3>
-      <p>Rådgivere, konsulenter, arkitekter og tekniske fag.</p>
-    </div>
-  </section>
+  <div class="card">
+    <strong>Høyere nivå</strong>
+    <p>Mer profesjonelt enn enkel.</p>
+  </div>
 
 </div>
 
@@ -240,10 +81,10 @@ body {
 (function () {
   const params = new URLSearchParams(window.location.search);
   const forceView = params.get("view");
-  const isMobile = window.innerWidth <= 768;
+  const isDesktop = window.innerWidth > 768;
 
-  if (forceView !== "desktop" && isMobile) {
-    window.location.href = "./netrivo-mobil-standard.html";
+  if (forceView !== "mobile" && isDesktop) {
+    window.location.href = "./netrivo-standard-1-arkitekt.html";
   }
 })();
 </script>
