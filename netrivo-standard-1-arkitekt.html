@@ -7,12 +7,14 @@
 
 <style>
 :root {
-  --bg: #f4f5f7;
+  --bg: #eef3f7;
   --ink: #121316;
-  --muted: #5b616b;
+  --muted: #5c6670;
   --line: rgba(18,19,22,0.08);
+
   --accent: #2f3b52;
-  --accent-soft: #e7ebf2;
+  --accent-soft: #e3eaf2;
+
   --card: white;
   --shadow: 0 30px 80px rgba(20,25,40,0.08);
 }
@@ -20,7 +22,7 @@
 body {
   margin: 0;
   font-family: Inter, sans-serif;
-  background: var(--bg);
+  background: linear-gradient(180deg, #f6f9fb 0%, #e9f0f4 100%);
   color: var(--ink);
 }
 
@@ -32,15 +34,17 @@ body {
 
 /* HEADER */
 .topbar {
-  background: white;
-  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
 }
 
 .topbar-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 0;
+  background: white;
+  padding: 16px 22px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
 }
 
 .brand {
@@ -56,15 +60,15 @@ body {
 /* HERO */
 .hero {
   margin-top: 30px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
 }
 
-.hero-left {
+.hero-box {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
   padding: 40px;
   background: white;
-  border-radius: 24px;
+  border-radius: 28px;
   box-shadow: var(--shadow);
 }
 
@@ -102,21 +106,21 @@ body {
   border: 1px solid var(--line);
 }
 
-/* SIDE PANEL */
+/* RIGHT PANEL – GJORT MYKJE MEIR VISUELL */
 .hero-right {
+  border-radius: 24px;
+  padding: 24px;
   background: linear-gradient(145deg, #2f3b52, #151a24);
   color: white;
-  border-radius: 24px;
-  padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
 }
 
 .panel {
-  background: rgba(255,255,255,0.08);
-  padding: 20px;
+  padding: 18px;
   border-radius: 18px;
+  background: rgba(255,255,255,0.08);
 }
 
 .panel strong {
@@ -124,12 +128,34 @@ body {
   font-size: 1.2rem;
 }
 
-/* SECTION */
-.section {
-  margin-top: 50px;
+.panel span {
+  display: block;
+  margin-top: 6px;
+  opacity: 0.85;
 }
 
+/* NY SEKSJON – GIR LIV */
+.highlight {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.highlight-box {
+  padding: 26px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #e3eaf2, #d5e0ea);
+}
+
+.highlight-box strong {
+  display: block;
+  font-size: 1.4rem;
+}
+
+/* GRID */
 .grid {
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -153,14 +179,17 @@ body {
 
 /* CONTACT */
 .contact {
-  margin-top: 50px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
 @media(max-width: 900px){
-  .hero, .grid, .contact {
+  .hero-box,
+  .highlight,
+  .grid,
+  .contact {
     grid-template-columns: 1fr;
   }
 }
@@ -169,53 +198,73 @@ body {
 
 <body>
 
-<div class="topbar">
-  <div class="container topbar-inner">
-    <div class="brand">Nordic Rådgivning</div>
-    <div class="nav">
-      <span>Tjenester</span>
-      <span>Prosjekter</span>
-      <span>Kontakt</span>
-    </div>
-  </div>
-</div>
-
 <div class="container">
 
-  <section class="hero">
-    <div class="hero-left">
-      <h1>Ei profesjonell side som bygger tillit.</h1>
-      <p>
-        Denne demoen viser et mer strukturert og gjennomarbeidet nivå. Perfekt for rådgivere, arkitekter og fagmiljøer som ønsker å fremstå tydeligere og mer etablert.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="#">Be om møte</a>
-        <a class="btn secondary" href="./netrivo-mobil-standard.html?view=mobile">Se mobilversjon</a>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Nordic Rådgivning</div>
+      <div class="nav">
+        <span>Tjenester</span>
+        <span>Prosjekter</span>
+        <span>Kontakt</span>
       </div>
     </div>
+  </div>
 
-    <div class="hero-right">
-      <div class="panel">
-        <strong>Struktur og klarhet</strong>
-        <span>Informasjon organisert for profesjonelle kunder</span>
+  <section class="hero">
+    <div class="hero-box">
+
+      <div class="hero-left">
+        <h1>Ei profesjonell side som faktisk bygger tillit.</h1>
+        <p>
+          Denne demoen viser et tydelig steg opp fra enkel nivå. Mer struktur, mer design og mer autoritet – uten at det blir tungt.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#">Be om møte</a>
+          <a class="btn secondary" href="./netrivo-mobil-standard.html?view=mobile">Se mobilversjon</a>
+        </div>
       </div>
-      <div class="panel">
-        <strong>Mer autoritet</strong>
-        <span>Gir et mer etablert og solid inntrykk</span>
+
+      <div class="hero-right">
+        <div class="panel">
+          <strong>Struktur og klarhet</strong>
+          <span>Informasjon organisert for profesjonelle kunder</span>
+        </div>
+
+        <div class="panel">
+          <strong>Mer autoritet</strong>
+          <span>Gir et mer etablert og solid inntrykk</span>
+        </div>
       </div>
+
     </div>
   </section>
 
-  <section class="section grid">
+  <!-- NY SEKSJON SOM GIR LIV -->
+  <section class="highlight">
+    <div class="highlight-box">
+      <strong>Bygget for fagmiljø</strong>
+      <p>Perfekt for rådgivere, arkitekter og konsulenter.</p>
+    </div>
+
+    <div class="highlight-box">
+      <strong>Et tydelig steg opp</strong>
+      <p>Mer struktur, bedre inntrykk og høyere opplevd verdi.</p>
+    </div>
+  </section>
+
+  <section class="grid">
     <div class="card">
       <h3>Tjenester</h3>
-      <p>Tydelig presentasjon av hva du tilbyr og hvem du hjelper.</p>
+      <p>Tydelig presentasjon av hva du tilbyr.</p>
     </div>
+
     <div class="card">
       <h3>Prosjekter</h3>
-      <p>Vis frem arbeid og bygg troverdighet.</p>
+      <p>Bygg troverdighet med konkrete referanser.</p>
     </div>
+
     <div class="card">
       <h3>Kontakt</h3>
       <p>Enklere for kunden å ta neste steg.</p>
@@ -225,12 +274,12 @@ body {
   <section class="contact">
     <div class="card">
       <h3>Standard nivå</h3>
-      <p>Dette nivået gir mer struktur, bedre inntrykk og høyere opplevd verdi enn en enkel side.</p>
+      <p>Mer gjennomarbeidet og mer profesjonelt enn enkel.</p>
     </div>
 
     <div class="card">
       <h3>Passer for</h3>
-      <p>Rådgivere, konsulenter, arkitekter og tekniske fag.</p>
+      <p>Rådgivere, arkitekter og tekniske fag.</p>
     </div>
   </section>
 
