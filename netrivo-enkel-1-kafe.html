@@ -1,91 +1,566 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enkel – Kafé</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enkel demo – Lokal kafé</title>
+  <meta name="description" content="En enkel, varm og innbydende nettside for kafé, bakeri eller liten serveringsbedrift." />
+  <style>
+    :root {
+      --bg: #f6f1ea;
+      --paper: #fffaf4;
+      --ink: #181614;
+      --muted: #6d645b;
+      --line: rgba(24, 22, 20, 0.08);
+      --accent: #6b4633;
+      --accent-dark: #2d2019;
+      --card: rgba(255,255,255,0.72);
+      --shadow: 0 26px 70px rgba(35, 24, 17, 0.08);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Inter, sans-serif;
-  background: #f6f1ea;
-  color: #1a1a1a;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(107,70,51,0.08), transparent 26%),
+        linear-gradient(180deg, #faf6f0 0%, #f2ebe2 100%);
+    }
 
-.card {
-  background: white;
-  border-radius: 24px;
-  padding: 30px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-h1 {
-  font-size: 3rem;
-  margin: 0;
-}
+    .container {
+      width: min(1160px, calc(100% - 28px));
+      margin: 0 auto;
+    }
 
-p {
-  color: #666;
-  line-height: 1.6;
-}
+    .topbar {
+      padding: 18px 0;
+    }
 
-.actions {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.58);
+      box-shadow: var(--shadow);
+    }
 
-.btn {
-  padding: 12px 20px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.primary {
-  background: black;
-  color: white;
-}
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-dark);
+      color: #fff6ee;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+    }
 
-.secondary {
-  border: 1px solid #ddd;
-}
-</style>
+    .brand-copy strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero {
+      padding: 18px 0 0;
+    }
+
+    .hero-shell {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.56);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      min-height: 680px;
+    }
+
+    .hero-copy {
+      padding: 56px 52px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.1));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    h1 {
+      margin: 22px 0 0;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      max-width: 700px;
+    }
+
+    .lead {
+      margin-top: 22px;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1.08rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: #181614;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.82);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 42px;
+    }
+
+    .metric {
+      padding-top: 18px;
+      border-top: 1px solid rgba(24,22,20,0.1);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.22rem;
+      letter-spacing: -0.04em;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.9rem;
+    }
+
+    .hero-side {
+      padding: 22px;
+      background: linear-gradient(145deg, #3d2a21, #1a1411);
+      color: #f8f0e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-side::after {
+      content: "";
+      position: absolute;
+      right: -14%;
+      bottom: -20%;
+      width: 74%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .side-card {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .side-card + .side-card {
+      margin-top: 14px;
+    }
+
+    .side-card h2 {
+      margin: 0;
+      font-size: 1.55rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .side-card p {
+      margin: 12px 0 0;
+      color: rgba(248,240,230,0.78);
+      line-height: 1.72;
+      font-size: 0.96rem;
+    }
+
+    .section {
+      padding: 78px 0 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    .section-head h3 {
+      margin: 10px 0 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: 1.02rem;
+      max-width: 720px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h4 {
+      margin: 0;
+      font-size: 1.28rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.74;
+      font-size: 0.95rem;
+    }
+
+    .quote-band {
+      padding: 34px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,0.76), rgba(241,231,219,0.58));
+      box-shadow: var(--shadow);
+    }
+
+    .quote-band p {
+      margin: 10px 0 0;
+      max-width: 860px;
+      color: #5f564f;
+      line-height: 1.84;
+      font-size: 1.08rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 18px;
+      padding-bottom: 84px;
+    }
+
+    .contact-box,
+    .contact-card {
+      padding: 30px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.68);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 8px;
+      line-height: 1.55;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-head,
+      .grid3,
+      .contact-grid,
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-side,
+      .info-card,
+      .quote-band,
+      .contact-box,
+      .contact-card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(1160px, calc(100% - 20px));
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .topbar-inner {
+        padding: 14px 16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="container">
-  <div class="card">
-    <h1>Ei lun kaféoppleving</h1>
-    <p>En enkel nettside som gir kunden det viktigste raskt: hva du tilbyr og hvordan de tar kontakt.</p>
-
-    <div class="actions">
-      <a class="btn primary" href="#">Bestill bord</a>
-      <a class="btn secondary" href="./netrivo-mobil-enkel.html?view=mobile">Se mobilversjon</a>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">SB</div>
+        <div class="brand-copy">
+          <strong>Sol & Bønner</strong>
+          <span>Lokal kafé og bakeri</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#meny">Meny</a>
+        <a href="#hvorfor">Hvorfor oss</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
     </div>
-  </div>
-</div>
+  </header>
 
-<script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const forceView = params.get("view");
-  const isMobile = window.innerWidth <= 768;
+  <main class="container">
+    <section class="hero">
+      <div class="hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div>
+              <div class="eyebrow">Enkel demo / lokal kafé</div>
+              <h1>En lun og innbydende side for en lokal kafé.</h1>
+              <p class="lead">
+                Denne demoen viser hvordan en enkel nettside kan skape varme, tillit og lyst til å besøke stedet – uten å bli komplisert. Den passer for små serveringssteder som trenger noe oversiktlig, tydelig og profesjonelt.
+              </p>
 
-  if (forceView !== "desktop" && isMobile) {
-    window.location.href = "./netrivo-mobil-enkel.html";
-  }
-})();
-</script>
+              <div class="actions">
+                <a class="btn btn-primary" href="#kontakt">Bestill bord</a>
+                <a class="btn btn-secondary" href="./netrivo-mobil-enkel.html?view=mobile">Se mobilversjon</a>
+              </div>
+            </div>
 
+            <div class="hero-metrics">
+              <div class="metric">
+                <strong>Varm</strong>
+                <span>Bygget for å gi et hyggelig og tillitvekkende førsteinntrykk.</span>
+              </div>
+              <div class="metric">
+                <strong>Tydelig</strong>
+                <span>Kunden finner raskt meny, kontakt og det viktigste de trenger å vite.</span>
+              </div>
+              <div class="metric">
+                <strong>Lav terskel</strong>
+                <span>En enkel nettside som gjør det lett å ta neste steg.</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-side">
+            <div class="side-card">
+              <h2>Kaffe, bakst og rolig stemning.</h2>
+              <p>Perfekt for kaféer, bakerier og små serveringssteder som vil ha en enkel, smakfull nettside.</p>
+            </div>
+            <div class="side-card">
+              <h2>Bygget for nærhet.</h2>
+              <p>Åpningstider, lokasjon og budskap er lett å finne med én gang, både på mobil og desktop.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="meny">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Innhold</div>
+          <h3>Det viktigste kunden trenger å vite.</h3>
+        </div>
+        <div class="section-copy">
+          På dette nivået handler det om å gjøre informasjon lett tilgjengelig og gi stedet et godt, profesjonelt førsteinntrykk. Målet er ikke å imponere med kompleksitet, men å gjøre det enkelt å velge deg.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <article class="info-card">
+          <h4>Åpningstider</h4>
+          <p>Tydelig presentert, lett å lese og lett å finne når kunden trenger rask informasjon.</p>
+        </article>
+        <article class="info-card">
+          <h4>Utvalg</h4>
+          <p>Kort og oversiktlig presentasjon av menyer, signaturprodukter og det som gjør stedet attraktivt.</p>
+        </article>
+        <article class="info-card">
+          <h4>Kontakt</h4>
+          <p>Telefon, adresse og bestilling presentert på en enkel måte som senker terskelen for handling.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="hvorfor">
+      <div class="quote-band">
+        <div class="kicker">Hvorfor denne fungerer</div>
+        <p>
+          En enkel nettside trenger ikke være kjedelig. Når uttrykket er riktig, kan selv en liten og oversiktlig side føles gjennomarbeidet, lun og salgsutløsende. Det er det denne demoen er laget for å vise.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="contact-grid">
+        <div class="contact-box">
+          <div class="kicker">Kontakt</div>
+          <h3>Enkel, varm og effektiv.</h3>
+          <div class="section-copy">
+            Dette er typen nettside som passer godt når kunden trenger noe enkelt, troverdig og raskt å forstå. Den viser at “enkel” fortsatt kan ha identitet, stemning og kvalitet.
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-item">
+            <small>Passer for</small>
+            <strong>Kafé, bakeri, mindre serveringssted og lokale konsepter</strong>
+          </div>
+          <div class="contact-item">
+            <small>Nivå</small>
+            <strong>Enkel</strong>
+          </div>
+          <div class="contact-item">
+            <small>Mobilversjon</small>
+            <strong>Koblet til egen mobilside som kan vises automatisk på små skjermer</strong>
+          </div>
+          <a class="btn btn-primary" href="./netrivo-mobil-enkel.html?view=mobile">Åpne mobilversjon</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isMobile = window.innerWidth <= 768;
+
+      if (forceView !== "desktop" && isMobile) {
+        window.location.href = "./netrivo-mobil-enkel.html";
+      }
+    })();
+  </script>
 </body>
 </html>
