@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Premium demo 1 – Boutique luxury</title>
+  <title>Premium – Boutique og luksus</title>
+  <meta name="description" content="En eksklusiv nettside for boutique-hoteller, high-end opplevelser, premium service og merkevarer som vil fremstå dyrere og mer gjennomarbeidet." />
   <style>
     :root {
       --bg: #f6f0e8;
@@ -13,6 +14,9 @@
       --line: rgba(24,21,18,0.08);
       --gold: #b58a5a;
       --shadow: 0 30px 80px rgba(31, 22, 16, 0.08);
+      --radius-xl: 42px;
+      --radius-lg: 30px;
+      --radius-md: 22px;
     }
 
     * { box-sizing: border-box; }
@@ -20,7 +24,7 @@
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, sans-serif;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
         radial-gradient(circle at top left, rgba(181,138,90,0.12), transparent 24%),
@@ -45,7 +49,44 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 0;
+      gap: 20px;
+      padding: 18px 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.56);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #2d1f18, #8a6140);
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.84rem;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.78rem;
     }
 
     .nav {
@@ -61,7 +102,7 @@
 
     .hero-shell {
       border: 1px solid var(--line);
-      border-radius: 42px;
+      border-radius: var(--radius-xl);
       overflow: hidden;
       background: rgba(255,255,255,0.42);
       box-shadow: var(--shadow);
@@ -77,6 +118,9 @@
       padding: 74px 64px 58px;
       background:
         linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .hero-right {
@@ -124,6 +168,7 @@
       color: var(--muted);
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      width: fit-content;
     }
 
     h1 {
@@ -153,10 +198,16 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 15px 24px;
+      min-height: 52px;
+      padding: 0 24px;
       border-radius: 999px;
       font-weight: 700;
       border: 1px solid transparent;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
     }
 
     .btn-primary {
@@ -377,7 +428,13 @@
 <body>
   <div class="container top">
     <div class="topbar">
-      <strong>Maison Fjell</strong>
+      <div class="brand">
+        <div class="brand-mark">MF</div>
+        <div class="brand-copy">
+          <strong>Maison Fjell</strong>
+          <span>Boutique og eksklusiv opplevelse</span>
+        </div>
+      </div>
       <nav class="nav">
         <a href="#opplevelse">Opplevelse</a>
         <a href="#retning">Retning</a>
@@ -391,29 +448,31 @@
       <div class="hero-shell">
         <div class="hero-grid">
           <div class="hero-left">
-            <div class="tag">Premium demo / boutique luxury</div>
-            <h1>En nettside som får merkevaren til å føles dyrere, roligere og mer eksklusiv.</h1>
-            <div class="lead">
-              Denne demoen er laget for boutique-hoteller, high-end opplevelser og premium servicekonsepter som ønsker et mer kuratert, luksuriøst og redaksjonelt uttrykk.
-            </div>
+            <div>
+              <div class="tag">Premium demo / boutique og luksus</div>
+              <h1>En nettside som får merkevaren til å føles dyrere, roligere og mer eksklusiv.</h1>
+              <div class="lead">
+                Denne demoen er laget for boutique-hoteller, high-end opplevelser og premium servicekonsepter som ønsker et mer kuratert, luksuriøst og redaksjonelt uttrykk.
+              </div>
 
-            <div class="actions">
-              <a class="btn btn-primary" href="#kontakt">Book møte</a>
-              <a class="btn btn-secondary" href="#opplevelse">Se konsept</a>
+              <div class="actions">
+                <a class="btn btn-primary" href="#kontakt">Book møte</a>
+                <a class="btn btn-secondary" href="./netrivo-mobil-premium-boutique.html?view=mobile">Se mobilversjon</a>
+              </div>
             </div>
 
             <div class="metrics">
               <div class="metric">
                 <strong>Eksklusiv</strong>
-                <span>Bygd for høyere opplevd verdi og sterkere førsteinntrykk.</span>
+                <span>Bygget for høyere opplevd verdi og et sterkere førsteinntrykk.</span>
               </div>
               <div class="metric">
                 <strong>Kuratert</strong>
                 <span>Mer luft, mer rytme og mer visuell kontroll enn vanlige bedriftssider.</span>
               </div>
               <div class="metric">
-                <strong>Editorial</strong>
-                <span>Uttrykket kjennes mer som et brand-univers enn en vanlig nettside.</span>
+                <strong>Redaksjonell</strong>
+                <span>Uttrykket oppleves mer som et brand-univers enn en vanlig nettside.</span>
               </div>
             </div>
           </div>
@@ -474,7 +533,7 @@
       <div class="quote">
         <div class="kicker">Retning</div>
         <p>
-          Dette er ikke en premiumside som prøver å se “avansert” ut. Den prøver å se trygg, vakker og eksklusiv ut. Det er en viktig forskjell. Her handler premium om smak, atmosfære og opplevd kvalitet.
+          Dette er ikke en premiumside som prøver å se avansert ut. Den prøver å se trygg, vakker og eksklusiv ut. Det er en viktig forskjell. Her handler premium om smak, atmosfære og opplevd kvalitet.
         </p>
       </div>
     </section>
@@ -498,10 +557,26 @@
             <small>Nivå</small>
             <strong>Premium</strong>
           </div>
-          <a class="btn btn-primary" href="#">Bruk som demo</a>
+          <div class="item">
+            <small>Mobilversjon</small>
+            <strong>Koblet til egen mobilside som kan vises automatisk på små skjermer</strong>
+          </div>
+          <a class="btn btn-primary" href="./netrivo-mobil-premium-boutique.html?view=mobile">Åpne mobilversjon</a>
         </div>
       </div>
     </section>
   </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isMobile = window.innerWidth <= 768;
+
+      if (forceView !== "desktop" && isMobile) {
+        window.location.href = "./netrivo-mobil-premium-boutique.html";
+      }
+    })();
+  </script>
 </body>
 </html>
