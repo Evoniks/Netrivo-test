@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Standard – Opplevelse og reiseliv</title>
+  <meta name="description" content="Mobiltilpasset standard nettside for opplevelser, reiseliv, guidede aktiviteter og konsepter som trenger mer stemning og mer tillit." />
+  <style>
+    :root {
+      --ink: #183126;
+      --muted: #5f7267;
+      --line: rgba(24,49,38,0.08);
+      --paper: rgba(255,255,255,0.86);
+      --shadow: 0 24px 60px rgba(20,35,28,0.08);
+      --accent: #345f49;
+      --accent-2: #8aac86;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f5faf5, #e8f0e9);
+      color: var(--ink);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(245,250,245,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(24,49,38,0.06);
+    }
+
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 16px 0 34px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding-top: 6px;
+    }
+
+    .hero-card {
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-size: clamp(2.35rem, 12vw, 4rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 340px;
+    }
+
+    .lead {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #183126;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.88);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-panel {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      background: linear-gradient(150deg, #345f49, #8aac86);
+      color: #f4fbf5;
+      display: grid;
+      gap: 12px;
+    }
+
+    .panel-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel-box strong {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-box span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(244,251,245,0.8);
+      line-height: 1.56;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 0;
+      font-size: 1.58rem;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 340px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 13px;
+      border-radius: 16px;
+      background: #edf4ee;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .quote-card {
+      padding: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(220,233,223,0.76));
+    }
+
+    .quote-card p {
+      margin: 10px 0 0;
+      color: #52645a;
+      line-height: 1.74;
+      font-size: 0.98rem;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.98rem;
+      line-height: 1.52;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">NL</div>
+        <div class="brand-copy">
+          <strong>Nordlys Opplevelser</strong>
+          <span>Opplevelser og reiseliv</span>
+        </div>
+      </div>
+      <div class="top-note">Mobil Standard</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / standard opplevelse</div>
+        <h1>Mer stemning, mer tillit og mer opplevelse.</h1>
+        <p class="lead">
+          Denne mobilversjonen er laget for opplevelser, reiseliv, guiding og aktiviteter der kunden både må føle noe og oppleve at tilbudet er trygt og godt organisert.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Be om forslag</a>
+          <a class="btn btn-secondary" href="./netrivo-standard-3-oppleving.html?view=desktop">Se full versjon</a>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-box">
+            <strong>Mer stemning i uttrykket</strong>
+            <span>Denne retningen er mer tematisk og mer levende enn de mer formelle standardvariantene.</span>
+          </div>
+          <div class="panel-box">
+            <strong>God for opplevelser</strong>
+            <span>Passer godt når aktivitet, natur og atmosfære er en viktig del av det kunden kjøper.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tilbud">
+      <div class="section-head">
+        <div class="kicker">Tilbud</div>
+        <h2>Standard med mer natur og mer opplevelse.</h2>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h3>Mer opplevelse</h3>
+          <p>Denne mobilretningen er laget for å løfte frem tematikk, aktivitet og en tydeligere følelse i uttrykket.</p>
+          <div class="mini-grid">
+            <div class="mini">God for guiding, reiseliv og aktivitetskonsepter</div>
+            <div class="mini">Mer stemning uten å miste struktur</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h3>Bygget for booking</h3>
+          <p>Mobilopplevelsen gir nok trygghet og tydelighet til at kunden lettere tar neste steg.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="card quote-card">
+        <div class="kicker">Hvorfor denne fungerer</div>
+        <p>
+          Denne typen mobilside passer godt når virksomheten trenger mer liv og mer tematikk enn en vanlig standardside. Målet er å formidle både opplevelse og trygghet samtidig.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h2>Et mer levende mellomnivå.</h2>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>Reiseliv, guiding, aktiviteter, eventer og naturbaserte opplevelser som trenger mer stemning og mer troverdighet.</strong>
+        </div>
+        <div class="contact-item">
+          <small>Kobling</small>
+          <strong>Denne siden er koblet direkte til desktop-versjonen og kan vises automatisk på små skjermer.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isDesktop = window.innerWidth > 768;
+
+      if (forceView !== "mobile" && isDesktop) {
+        window.location.href = "./netrivo-standard-3-oppleving.html";
+      }
+    })();
+  </script>
+</body>
+</html>
