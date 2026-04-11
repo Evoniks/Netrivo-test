@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Enkel – PT / studio</title>
+  <meta name="description" content="Mobiltilpasset enkel nettside for PT, studio, coaching og andre tjenester der booking og personlighet er viktig." />
+  <style>
+    :root {
+      --ink: #111111;
+      --muted: #625c57;
+      --line: rgba(0,0,0,0.08);
+      --paper: rgba(255,255,255,0.88);
+      --shadow: 0 22px 56px rgba(0,0,0,0.06);
+      --accent-dark: #191515;
+      --accent: #8a4a07;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7f4f1 0%, #efe9e3 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(247,244,241,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #191515, #8a4a07);
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 16px 0 34px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding-top: 6px;
+    }
+
+    .hero-card {
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-size: clamp(2.3rem, 12vw, 4rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 340px;
+    }
+
+    .lead {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.98rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #111111;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.88);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-panel {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #191515, #8a4a07);
+      color: #ffffff;
+      display: grid;
+      gap: 12px;
+    }
+
+    .panel-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel-box strong {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-box span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.56;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 0;
+      font-size: 1.58rem;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 330px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 0.94rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 13px;
+      border-radius: 16px;
+      background: #f2ece6;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .quote-card {
+      padding: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(239,233,227,0.76));
+    }
+
+    .quote-card p {
+      margin: 10px 0 0;
+      color: #5e5853;
+      line-height: 1.74;
+      font-size: 0.98rem;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.98rem;
+      line-height: 1.52;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">CP</div>
+        <div class="brand-copy">
+          <strong>Core PT Studio</strong>
+          <span>PT, coaching og trening</span>
+        </div>
+      </div>
+      <div class="top-note">Mobil Enkel</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / enkel PT og studio</div>
+        <h1>Mer energi og lav terskel for booking.</h1>
+        <p class="lead">
+          Denne mobilversjonen er laget for PT, coaching, studio og andre tjenester der tydelig handling, personlighet og rask kontakt er viktig.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Book time</a>
+          <a class="btn btn-secondary" href="./netrivo-enkel-3-ptstudio.html?view=desktop">Se full versjon</a>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-box">
+            <strong>Mer driv i uttrykket</strong>
+            <span>En enklere mobilside med tydeligere energi og mer personlighet enn de andre enkle variantene.</span>
+          </div>
+          <div class="panel-box">
+            <strong>God for booking</strong>
+            <span>Passer godt når kunden raskt skal forstå tilbudet og komme videre til neste steg.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tilbud">
+      <div class="section-head">
+        <div class="kicker">Tilbud</div>
+        <h2>Enkel, aktiv og lett å bruke.</h2>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h3>Klart tilbud</h3>
+          <p>Denne mobilretningen er laget for å vise raskt hva virksomheten tilbyr og hvordan kunden kommer videre.</p>
+          <div class="mini-grid">
+            <div class="mini">Tydeligere energi og mer personlighet</div>
+            <div class="mini">God for PT, coaching, studio og velvære</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h3>Bygget for handling</h3>
+          <p>Mobilopplevelsen legger vekt på booking, kontakt og enkel vei videre fra første skjerm.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hvorfor">
+      <div class="card quote-card">
+        <div class="kicker">Hvorfor denne fungerer</div>
+        <p>
+          Denne typen mobilside passer godt når virksomheten trenger en enkel digital tilstedeværelse med mer energi og mer karakter. Målet er å gjøre det lett å få interesse og lett å bestille.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h2>Enkel, tydelig og mer aktiv.</h2>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>PT, coaching, studio, helse og velvære der personlighet og booking er en viktig del av salget.</strong>
+        </div>
+        <div class="contact-item">
+          <small>Kobling</small>
+          <strong>Denne siden er koblet direkte til desktop-versjonen og kan vises automatisk på små skjermer.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isDesktop = window.innerWidth > 768;
+
+      if (forceView !== "mobile" && isDesktop) {
+        window.location.href = "./netrivo-enkel-3-ptstudio.html";
+      }
+    })();
+  </script>
+</body>
+</html>
