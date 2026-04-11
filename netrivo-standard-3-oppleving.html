@@ -3,26 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Standard demo 3 – Oppleving</title>
+  <title>Standard – Opplevelse og reiseliv</title>
+  <meta name="description" content="En levende og gjennomarbeidet nettside for opplevelser, reiseliv, guidede aktiviteter og konsepter som trenger mer stemning og mer tillit." />
   <style>
     :root {
-      --ink: #131313;
-      --muted: #5f655e;
-      --line: rgba(0,0,0,0.08);
+      --ink: #183126;
+      --muted: #5f7267;
+      --line: rgba(24,49,38,0.08);
+      --paper: rgba(255,255,255,0.78);
+      --shadow: 0 24px 60px rgba(20, 35, 28, 0.08);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --accent: #345f49;
+      --accent-2: #7fa783;
+      --accent-soft: #dce9df;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: linear-gradient(180deg,#f6f7f4,#eceee9);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f5faf5, #e8f0e9);
       color: var(--ink);
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 34px));
-      margin: auto;
     }
 
     a {
@@ -30,55 +35,111 @@
       color: inherit;
     }
 
-    .top {
-      padding: 20px 0;
+    .container {
+      width: min(1180px, calc(100% - 34px));
+      margin: auto;
+    }
+
+    header {
+      padding: 18px 0 0;
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 22px;
-      border-radius: 24px;
+      gap: 20px;
+      padding: 16px 20px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.62);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.06);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.84);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.82rem;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.78rem;
     }
 
     .nav {
       display: flex;
       gap: 24px;
       color: var(--muted);
+      font-size: 0.94rem;
     }
 
     .hero {
-      padding: 26px 0 0;
+      padding: 30px 0 0;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.02fr 0.98fr;
       gap: 18px;
     }
 
     .card {
       border: 1px solid var(--line);
-      border-radius: 34px;
-      background: rgba(255,255,255,0.56);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.06);
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      box-shadow: var(--shadow);
     }
 
     .left {
-      padding: 58px 54px;
-    }
-
-    .right {
-      padding: 24px;
-      background: linear-gradient(145deg,#1f2d26,#3a6a59);
-      color: #f4faf7;
+      padding: 56px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+
+    .right {
+      padding: 28px;
+      background: linear-gradient(150deg, #345f49, #8aac86);
+      color: #f4fbf5;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .right::after {
+      content: "";
+      position: absolute;
+      right: -14%;
+      bottom: -18%;
+      width: 72%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.10);
     }
 
     .badge {
@@ -89,23 +150,26 @@
       border: 1px solid var(--line);
       font-size: 0.8rem;
       color: var(--muted);
+      width: fit-content;
     }
 
     h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: 0.94;
+      font-size: clamp(2.9rem, 7vw, 5.9rem);
+      line-height: 0.95;
       letter-spacing: -0.06em;
       margin: 22px 0 0;
+      max-width: 660px;
     }
 
     .lead {
       margin-top: 22px;
       color: var(--muted);
       line-height: 1.86;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
+      max-width: 620px;
     }
 
-    .btns {
+    .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
@@ -113,39 +177,78 @@
     }
 
     .btn {
-      padding: 14px 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
       border-radius: 999px;
       font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
     }
 
     .primary {
-      background: #131313;
+      background: #183126;
       color: #fff;
     }
 
     .secondary {
       border: 1px solid var(--line);
+      background: rgba(255,255,255,0.86);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .metric {
+      padding-top: 18px;
+      border-top: 1px solid rgba(24,49,38,0.08);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
     }
 
     .panel {
-      padding: 22px;
+      position: relative;
+      z-index: 1;
+      padding: 24px;
       border-radius: 22px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.10);
       border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .panel + .panel {
-      margin-top: 14px;
     }
 
     .panel h3 {
       margin: 0;
-      font-size: 1.45rem;
+      font-size: 1.38rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
     }
 
     .panel p {
-      color: rgba(244,250,247,0.76);
+      margin-top: 12px;
+      color: rgba(244,251,245,0.78);
       line-height: 1.72;
+      font-size: 0.96rem;
     }
 
     .section {
@@ -154,7 +257,7 @@
 
     .head {
       display: grid;
-      grid-template-columns: 0.86fr 1.14fr;
+      grid-template-columns: 0.85fr 1.15fr;
       gap: 24px;
       align-items: end;
       margin-bottom: 26px;
@@ -168,7 +271,7 @@
     }
 
     h2 {
-      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-size: clamp(2rem, 4vw, 3.5rem);
       line-height: 1;
       letter-spacing: -0.05em;
       margin: 10px 0 0;
@@ -177,6 +280,7 @@
     .copy {
       color: var(--muted);
       line-height: 1.84;
+      font-size: 1rem;
     }
 
     .grid {
@@ -191,13 +295,32 @@
 
     .item h3 {
       margin: 0 0 10px;
-      font-size: 1.3rem;
+      font-size: 1.28rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
     }
 
     .item p {
       margin: 0;
       color: var(--muted);
       line-height: 1.76;
+      font-size: 0.95rem;
+    }
+
+    .quote-band {
+      padding: 30px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(220,233,223,0.78));
+      box-shadow: var(--shadow);
+    }
+
+    .quote-band p {
+      margin: 10px 0 0;
+      color: #52645a;
+      line-height: 1.82;
+      font-size: 1.02rem;
+      max-width: 860px;
     }
 
     .contact {
@@ -211,104 +334,163 @@
       padding: 32px;
     }
 
-    @media(max-width:960px){
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 8px;
+      line-height: 1.55;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 960px) {
       .hero-grid,
       .head,
       .grid,
-      .contact {
+      .contact,
+      .metrics {
         grid-template-columns: 1fr;
       }
 
       .left,
       .right,
       .item,
-      .box {
+      .box,
+      .quote-band {
         padding: 24px;
       }
     }
 
-    @media(max-width:720px){
+    @media (max-width: 720px) {
       .nav {
         display: none;
       }
 
-      .btns {
+      .actions {
         flex-direction: column;
       }
 
       .btn {
+        width: 100%;
         text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container top">
-    <div class="topbar">
-      <strong>Fjordspor</strong>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <div class="brand-mark">NL</div>
+        <div class="brand-copy">
+          <strong>Nordlys Opplevelser</strong>
+          <span>Opplevelser og reiseliv</span>
+        </div>
+      </div>
       <nav class="nav">
-        <a href="#tenester">Opplevingar</a>
-        <a href="#kvifor">Kvifor</a>
+        <a href="#tilbud">Tilbud</a>
+        <a href="#retning">Retning</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
-  </div>
+  </header>
 
   <main class="container">
     <section class="hero">
       <div class="hero-grid">
         <div class="card left">
-          <div class="badge">Standard demo / oppleving og reiseliv</div>
-          <h1>Ei meir levande standardside for opplevingar og aktivitetar.</h1>
-          <div class="lead">
-            Denne demoen viser at standardnivået ikkje berre treng vere roleg og formelt. Ho kan også vere meir stemningsfull, med tydelegare tematikk og meir visuell energi.
+          <div>
+            <div class="badge">Standard demo / opplevelse og reiseliv</div>
+            <h1>En mer levende standardside for opplevelser og aktivitet.</h1>
+            <div class="lead">
+              Denne demoen viser en mer stemningsfull standardretning for virksomheter som selger opplevelser, aktivitet, guiding og reiseliv. Målet er å bygge tillit og struktur, men med mer tematikk og mer visuell energi.
+            </div>
+
+            <div class="actions">
+              <a class="btn primary" href="#kontakt">Be om forslag</a>
+              <a class="btn secondary" href="./netrivo-mobil-standard-oppleving.html?view=mobile">Se mobilversjon</a>
+            </div>
           </div>
-          <div class="btns">
-            <a class="btn primary" href="#kontakt">Be om tilbod</a>
-            <a class="btn secondary" href="#tenester">Sjå opplevingar</a>
+
+          <div class="metrics">
+            <div class="metric">
+              <strong>Mer stemning</strong>
+              <span>Uttrykket er bygget for å støtte tema, opplevelse og en tydeligere følelse.</span>
+            </div>
+            <div class="metric">
+              <strong>Mer tillit</strong>
+              <span>Standardnivået gir fortsatt struktur og trygghet, selv med mer liv i designet.</span>
+            </div>
+            <div class="metric">
+              <strong>Mer tematikk</strong>
+              <span>Passer godt for reiseliv, aktivitet, naturbaserte konsepter og guider.</span>
+            </div>
           </div>
         </div>
 
         <div class="card right">
           <div class="panel">
-            <h3>Meir stemning.</h3>
-            <p>Fargar og layout er valde for å gi kjensla av natur, rørsle og oppleving.</p>
+            <h3>Mer stemning i uttrykket.</h3>
+            <p>Denne retningen viser at standard også kan være visuell og temabasert uten å miste struktur og troverdighet.</p>
           </div>
 
           <div class="panel">
-            <h3>Fortsatt standardnivå.</h3>
-            <p>Ho er framleis balansert og salbar, men meir karaktersterk enn dei meir formelle demoane.</p>
+            <h3>Bygget for opplevelser.</h3>
+            <p>God for guiding, aktiviteter, eventer og konsepter der kunden skal kjenne noe før de bestiller.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Tryggere enn enkel.</h3>
+            <p>Mer gjennomarbeidet og mer innholdsbåret enn en enkel side, men mindre eksklusiv og iscenesatt enn premium.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="tenester">
+    <section class="section" id="tilbud">
       <div class="head">
         <div>
-          <div class="kicker">Opplevingar</div>
-          <h2>Standardnivå med meir tema og meir liv.</h2>
+          <div class="kicker">Tilbud</div>
+          <h2>Standard med mer natur, tematikk og opplevelse.</h2>
         </div>
         <div class="copy">
-          Her ser du korleis same nivå kan få heilt ulik kjensle avhengig av kundetype. Dette er ein sterk demo for aktivitet, reiseliv, event og opplevingsbaserte tenester.
+          Her ser du hvordan standardnivået kan bli mer levende og mer stemningsfullt uten å miste profesjonalitet. Denne passer når innholdet skal oppleves mer inspirerende, men fortsatt være tydelig og lett å forstå.
         </div>
       </div>
 
       <div class="grid">
         <div class="card item">
-          <h3>Stemningsfull hero</h3>
-          <p>Får fram tema og oppleving utan å bli for “reklamete”.</p>
+          <h3>Mer opplevelse</h3>
+          <p>Bygger opp under natur, aktivitet og stemning på en måte som gjør siden mer levende.</p>
         </div>
 
         <div class="card item">
-          <h3>Klart tilbod</h3>
-          <p>Aktivitetar, booking og praktisk informasjon blir enkle å finne.</p>
+          <h3>God for booking</h3>
+          <p>Passer når kunden trenger nok trygghet til å bestille, men også må føle at dette er verdt å velge.</p>
         </div>
 
         <div class="card item">
-          <h3>Meir personleg</h3>
-          <p>Eit godt døme på korleis standardnivået kan kjennast meir levande.</p>
+          <h3>Temabasert standard</h3>
+          <p>Et godt mellomnivå for virksomheter som trenger mer særpreg uten å gå helt premium.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="quote-band">
+        <div class="kicker">Hvorfor denne fungerer</div>
+        <p>
+          Denne demoen viser at standard kan være mer enn ryddig og trygg. Den kan også formidle tematikk, natur og opplevelse – så lenge strukturen fortsatt er tydelig og salgsveien er enkel å forstå.
+        </p>
       </div>
     </section>
 
@@ -316,21 +498,44 @@
       <div class="contact">
         <div class="card box">
           <div class="kicker">Kontakt</div>
-          <h2>Ei standardside med meir karakter.</h2>
+          <h2>En mer levende standardretning for opplevelsesbaserte konsepter.</h2>
           <div class="copy">
-            Bruk denne når du vil vise at du kan lage meir temaorienterte sider utan at dei blir for kompliserte eller for premium.
+            Denne viser hvordan standardnivået kan brukes til å bygge både tillit og stemning, og passer godt for konsepter som lever av opplevelse, guiding og atmosfære.
           </div>
         </div>
 
         <div class="card box">
-          <div class="kicker">Passar for</div>
-          <p>Event, reiseliv, guide, aktivitet, oppleving</p>
+          <div class="contact-item">
+            <small>Passer for</small>
+            <strong>Reiseliv, guiding, aktiviteter, eventer og naturbaserte opplevelser</strong>
+          </div>
 
-          <div class="kicker">Nivå</div>
-          <p>Standard</p>
+          <div class="contact-item">
+            <small>Nivå</small>
+            <strong>Standard</strong>
+          </div>
+
+          <div class="contact-item">
+            <small>Mobilversjon</small>
+            <strong>Koblet til egen mobilside som kan vises automatisk på små skjermer</strong>
+          </div>
+
+          <a class="btn primary" href="./netrivo-mobil-standard-oppleving.html?view=mobile" style="margin-top:18px;">Åpne mobilversjon</a>
         </div>
       </div>
     </section>
   </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isMobile = window.innerWidth <= 768;
+
+      if (forceView !== "desktop" && isMobile) {
+        window.location.href = "./netrivo-mobil-standard-oppleving.html";
+      }
+    })();
+  </script>
 </body>
 </html>
