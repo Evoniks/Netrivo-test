@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enkel – PT / studio</title>
+  <title>Enkel â€“ PT / studio</title>
   <meta name="description" content="En enkel og energisk nettside for PT, studio, coaching og andre tjenester der booking og personlighet er viktig." />
   <style>
     :root {
@@ -379,6 +379,98 @@
         text-align: center;
       }
     }
+      .brand-copy {
+      min-width: 0;
+    }
+    .demo-home {
+      justify-self: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.88);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .demo-home:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.96);
+    }
+    .demo-home img {
+      display: block;
+      width: auto;
+      height: 32px;
+    }
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+    }
+    .brand {
+      justify-self: start;
+      min-width: 0;
+    }
+    .nav {
+      justify-self: end;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+    .nav a {
+      position: relative;
+      transition: color .18s ease;
+    }
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      opacity: 0;
+      transform: scaleX(0.6);
+      transform-origin: center;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .nav a:hover::after {
+      opacity: 0.45;
+      transform: scaleX(1);
+    }
+    @media (max-width: 900px) {
+      .topbar {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+      .nav {
+        grid-column: 1 / -1;
+        padding-top: 4px;
+      }
+    }
+    @media (max-width: 760px) {
+      .topbar {
+        padding: 14px 16px;
+      }
+      .nav {
+        display: flex;
+        gap: 12px 16px;
+        font-size: 0.88rem;
+      }
+    }
+    @media (max-width: 560px) {
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+      .demo-home,
+      .nav {
+        justify-self: start;
+      }
+      .demo-home img {
+        height: 28px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -391,6 +483,9 @@
           <span>PT, coaching og trening</span>
         </div>
       </div>
+      <a class="demo-home" href="./index.html" aria-label="Tilbake til Netrivo">
+        <img src="./assets/netrivo-home-logo.png" alt="Netrivo" />
+      </a>
       <nav class="nav">
         <a href="#tilbud">Tilbud</a>
         <a href="#hvorfor">Hvorfor oss</a>
@@ -407,7 +502,7 @@
             <div class="badge">Enkel demo / helse og trening</div>
             <h1>En energisk side med lav terskel for booking.</h1>
             <div class="lead">
-              Denne demoen viser hvordan en enkel nettside kan få mer tempo og mer personlighet, samtidig som den er ryddig og lett å forstå. Den passer godt for PT, coaching, studio og andre tjenester der personen bak er en viktig del av salget.
+              Denne demoen viser hvordan en enkel nettside kan fÃ¥ mer tempo og mer personlighet, samtidig som den er ryddig og lett Ã¥ forstÃ¥. Den passer godt for PT, coaching, studio og andre tjenester der personen bak er en viktig del av salget.
             </div>
             <div class="btns">
               <a class="btn primary" href="#kontakt">Book time</a>
@@ -418,15 +513,15 @@
           <div class="metrics">
             <div class="metric">
               <strong>Mer energi</strong>
-              <span>Et enklere nivå med tydeligere driv og mer personlighet i uttrykket.</span>
+              <span>Et enklere nivÃ¥ med tydeligere driv og mer personlighet i uttrykket.</span>
             </div>
             <div class="metric">
               <strong>God for booking</strong>
-              <span>Utformet for å gjøre det lett å ta kontakt og bestille raskt.</span>
+              <span>Utformet for Ã¥ gjÃ¸re det lett Ã¥ ta kontakt og bestille raskt.</span>
             </div>
             <div class="metric">
               <strong>Personlig profil</strong>
-              <span>Passer godt når personen bak virksomheten er en viktig del av verdien.</span>
+              <span>Passer godt nÃ¥r personen bak virksomheten er en viktig del av verdien.</span>
             </div>
           </div>
         </div>
@@ -444,7 +539,7 @@
 
           <div class="panel">
             <h3>Enkel, men karaktersterk.</h3>
-            <p>Viser at enkel-nivået også kan ha særpreg og en tydeligere kommersiell retning.</p>
+            <p>Viser at enkel-nivÃ¥et ogsÃ¥ kan ha sÃ¦rpreg og en tydeligere kommersiell retning.</p>
           </div>
         </div>
       </div>
@@ -457,7 +552,7 @@
           <h2>Enkel side, men med mer tempo.</h2>
         </div>
         <div class="copy">
-          Dette er en annen retning innenfor enkel-nivået. Den er mer aktiv og mer personlig enn de andre, og passer for virksomheter som vil fremstå mer energiske og mer direkte.
+          Dette er en annen retning innenfor enkel-nivÃ¥et. Den er mer aktiv og mer personlig enn de andre, og passer for virksomheter som vil fremstÃ¥ mer energiske og mer direkte.
         </div>
       </div>
 
@@ -468,11 +563,11 @@
         </div>
         <div class="card item">
           <h3>Personlig fremtoning</h3>
-          <p>Perfekt når personen bak virksomheten er en viktig del av salget.</p>
+          <p>Perfekt nÃ¥r personen bak virksomheten er en viktig del av salget.</p>
         </div>
         <div class="card item">
           <h3>Bookingfokus</h3>
-          <p>Knapp, kontakt og handling fremheves fra første skjerm.</p>
+          <p>Knapp, kontakt og handling fremheves fra fÃ¸rste skjerm.</p>
         </div>
       </div>
     </section>
@@ -481,7 +576,7 @@
       <div class="quote-band">
         <div class="kicker">Hvorfor denne fungerer</div>
         <p>
-          Denne demoen viser at enkel ikke trenger å være rolig og nøytral hver gang. Den kan også være mer energisk, mer personlig og mer direkte – så lenge strukturen fortsatt er tydelig.
+          Denne demoen viser at enkel ikke trenger Ã¥ vÃ¦re rolig og nÃ¸ytral hver gang. Den kan ogsÃ¥ vÃ¦re mer energisk, mer personlig og mer direkte â€“ sÃ¥ lenge strukturen fortsatt er tydelig.
         </p>
       </div>
     </section>
@@ -492,27 +587,27 @@
           <div class="kicker">Kontakt</div>
           <h2>Tre ulike enkle retninger kan selges forskjellig.</h2>
           <div class="copy">
-            Denne viser at enkel ikke trenger å bety samme stil hver gang. Du kan spisse tema, energi og oppsett mot ulike typer kunder og fortsatt holde deg på samme nivå.
+            Denne viser at enkel ikke trenger Ã¥ bety samme stil hver gang. Du kan spisse tema, energi og oppsett mot ulike typer kunder og fortsatt holde deg pÃ¥ samme nivÃ¥.
           </div>
         </div>
 
         <div class="card box">
           <div class="contact-item">
             <small>Passer for</small>
-            <strong>PT, studio, coaching, helse og velvære</strong>
+            <strong>PT, studio, coaching, helse og velvÃ¦re</strong>
           </div>
 
           <div class="contact-item">
-            <small>Nivå</small>
+            <small>NivÃ¥</small>
             <strong>Enkel</strong>
           </div>
 
           <div class="contact-item">
             <small>Mobilversjon</small>
-            <strong>Koblet til egen mobilside som kan vises automatisk på små skjermer</strong>
+            <strong>Koblet til egen mobilside som kan vises automatisk pÃ¥ smÃ¥ skjermer</strong>
           </div>
 
-          <a class="btn primary" href="./netrivo-mobil-enkel-ptstudio.html?view=mobile" style="margin-top:18px;">Åpne mobilversjon</a>
+          <a class="btn primary" href="./netrivo-mobil-enkel-ptstudio.html?view=mobile" style="margin-top:18px;">Ã…pne mobilversjon</a>
         </div>
       </div>
     </section>
@@ -531,3 +626,4 @@
   </script>
 </body>
 </html>
+

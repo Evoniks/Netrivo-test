@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Standard – Opplevelse og reiseliv</title>
+  <title>Standard â€“ Opplevelse og reiseliv</title>
   <meta name="description" content="En levende og gjennomarbeidet nettside for opplevelser, reiseliv, guidede aktiviteter og konsepter som trenger mer stemning og mer tillit." />
   <style>
     :root {
@@ -384,6 +384,98 @@
         text-align: center;
       }
     }
+      .brand-copy {
+      min-width: 0;
+    }
+    .demo-home {
+      justify-self: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.88);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .demo-home:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.96);
+    }
+    .demo-home img {
+      display: block;
+      width: auto;
+      height: 32px;
+    }
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+    }
+    .brand {
+      justify-self: start;
+      min-width: 0;
+    }
+    .nav {
+      justify-self: end;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+    .nav a {
+      position: relative;
+      transition: color .18s ease;
+    }
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      opacity: 0;
+      transform: scaleX(0.6);
+      transform-origin: center;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .nav a:hover::after {
+      opacity: 0.45;
+      transform: scaleX(1);
+    }
+    @media (max-width: 900px) {
+      .topbar {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+      .nav {
+        grid-column: 1 / -1;
+        padding-top: 4px;
+      }
+    }
+    @media (max-width: 760px) {
+      .topbar {
+        padding: 14px 16px;
+      }
+      .nav {
+        display: flex;
+        gap: 12px 16px;
+        font-size: 0.88rem;
+      }
+    }
+    @media (max-width: 560px) {
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+      .demo-home,
+      .nav {
+        justify-self: start;
+      }
+      .demo-home img {
+        height: 28px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -396,6 +488,9 @@
           <span>Opplevelser og reiseliv</span>
         </div>
       </div>
+      <a class="demo-home" href="./index.html" aria-label="Tilbake til Netrivo">
+        <img src="./assets/netrivo-home-logo.png" alt="Netrivo" />
+      </a>
       <nav class="nav">
         <a href="#tilbud">Tilbud</a>
         <a href="#retning">Retning</a>
@@ -412,7 +507,7 @@
             <div class="badge">Standard demo / opplevelse og reiseliv</div>
             <h1>En mer levende standardside for opplevelser og aktivitet.</h1>
             <div class="lead">
-              Denne demoen viser en mer stemningsfull standardretning for virksomheter som selger opplevelser, aktivitet, guiding og reiseliv. Målet er å bygge tillit og struktur, men med mer tematikk og mer visuell energi.
+              Denne demoen viser en mer stemningsfull standardretning for virksomheter som selger opplevelser, aktivitet, guiding og reiseliv. MÃ¥let er Ã¥ bygge tillit og struktur, men med mer tematikk og mer visuell energi.
             </div>
 
             <div class="actions">
@@ -424,11 +519,11 @@
           <div class="metrics">
             <div class="metric">
               <strong>Mer stemning</strong>
-              <span>Uttrykket er bygget for å støtte tema, opplevelse og en tydeligere følelse.</span>
+              <span>Uttrykket er bygget for Ã¥ stÃ¸tte tema, opplevelse og en tydeligere fÃ¸lelse.</span>
             </div>
             <div class="metric">
               <strong>Mer tillit</strong>
-              <span>Standardnivået gir fortsatt struktur og trygghet, selv med mer liv i designet.</span>
+              <span>StandardnivÃ¥et gir fortsatt struktur og trygghet, selv med mer liv i designet.</span>
             </div>
             <div class="metric">
               <strong>Mer tematikk</strong>
@@ -440,17 +535,17 @@
         <div class="card right">
           <div class="panel">
             <h3>Mer stemning i uttrykket.</h3>
-            <p>Denne retningen viser at standard også kan være visuell og temabasert uten å miste struktur og troverdighet.</p>
+            <p>Denne retningen viser at standard ogsÃ¥ kan vÃ¦re visuell og temabasert uten Ã¥ miste struktur og troverdighet.</p>
           </div>
 
           <div class="panel">
             <h3>Bygget for opplevelser.</h3>
-            <p>God for guiding, aktiviteter, eventer og konsepter der kunden skal kjenne noe før de bestiller.</p>
+            <p>God for guiding, aktiviteter, eventer og konsepter der kunden skal kjenne noe fÃ¸r de bestiller.</p>
           </div>
 
           <div class="panel">
             <h3>Tryggere enn enkel.</h3>
-            <p>Mer gjennomarbeidet og mer innholdsbåret enn en enkel side, men mindre eksklusiv og iscenesatt enn premium.</p>
+            <p>Mer gjennomarbeidet og mer innholdsbÃ¥ret enn en enkel side, men mindre eksklusiv og iscenesatt enn premium.</p>
           </div>
         </div>
       </div>
@@ -463,24 +558,24 @@
           <h2>Standard med mer natur, tematikk og opplevelse.</h2>
         </div>
         <div class="copy">
-          Her ser du hvordan standardnivået kan bli mer levende og mer stemningsfullt uten å miste profesjonalitet. Denne passer når innholdet skal oppleves mer inspirerende, men fortsatt være tydelig og lett å forstå.
+          Her ser du hvordan standardnivÃ¥et kan bli mer levende og mer stemningsfullt uten Ã¥ miste profesjonalitet. Denne passer nÃ¥r innholdet skal oppleves mer inspirerende, men fortsatt vÃ¦re tydelig og lett Ã¥ forstÃ¥.
         </div>
       </div>
 
       <div class="grid">
         <div class="card item">
           <h3>Mer opplevelse</h3>
-          <p>Bygger opp under natur, aktivitet og stemning på en måte som gjør siden mer levende.</p>
+          <p>Bygger opp under natur, aktivitet og stemning pÃ¥ en mÃ¥te som gjÃ¸r siden mer levende.</p>
         </div>
 
         <div class="card item">
           <h3>God for booking</h3>
-          <p>Passer når kunden trenger nok trygghet til å bestille, men også må føle at dette er verdt å velge.</p>
+          <p>Passer nÃ¥r kunden trenger nok trygghet til Ã¥ bestille, men ogsÃ¥ mÃ¥ fÃ¸le at dette er verdt Ã¥ velge.</p>
         </div>
 
         <div class="card item">
           <h3>Temabasert standard</h3>
-          <p>Et godt mellomnivå for virksomheter som trenger mer særpreg uten å gå helt premium.</p>
+          <p>Et godt mellomnivÃ¥ for virksomheter som trenger mer sÃ¦rpreg uten Ã¥ gÃ¥ helt premium.</p>
         </div>
       </div>
     </section>
@@ -489,7 +584,7 @@
       <div class="quote-band">
         <div class="kicker">Hvorfor denne fungerer</div>
         <p>
-          Denne demoen viser at standard kan være mer enn ryddig og trygg. Den kan også formidle tematikk, natur og opplevelse – så lenge strukturen fortsatt er tydelig og salgsveien er enkel å forstå.
+          Denne demoen viser at standard kan vÃ¦re mer enn ryddig og trygg. Den kan ogsÃ¥ formidle tematikk, natur og opplevelse â€“ sÃ¥ lenge strukturen fortsatt er tydelig og salgsveien er enkel Ã¥ forstÃ¥.
         </p>
       </div>
     </section>
@@ -500,7 +595,7 @@
           <div class="kicker">Kontakt</div>
           <h2>En mer levende standardretning for opplevelsesbaserte konsepter.</h2>
           <div class="copy">
-            Denne viser hvordan standardnivået kan brukes til å bygge både tillit og stemning, og passer godt for konsepter som lever av opplevelse, guiding og atmosfære.
+            Denne viser hvordan standardnivÃ¥et kan brukes til Ã¥ bygge bÃ¥de tillit og stemning, og passer godt for konsepter som lever av opplevelse, guiding og atmosfÃ¦re.
           </div>
         </div>
 
@@ -511,16 +606,16 @@
           </div>
 
           <div class="contact-item">
-            <small>Nivå</small>
+            <small>NivÃ¥</small>
             <strong>Standard</strong>
           </div>
 
           <div class="contact-item">
             <small>Mobilversjon</small>
-            <strong>Koblet til egen mobilside som kan vises automatisk på små skjermer</strong>
+            <strong>Koblet til egen mobilside som kan vises automatisk pÃ¥ smÃ¥ skjermer</strong>
           </div>
 
-          <a class="btn primary" href="./netrivo-mobil-standard-oppleving.html?view=mobile" style="margin-top:18px;">Åpne mobilversjon</a>
+          <a class="btn primary" href="./netrivo-mobil-standard-oppleving.html?view=mobile" style="margin-top:18px;">Ã…pne mobilversjon</a>
         </div>
       </div>
     </section>
@@ -539,3 +634,4 @@
   </script>
 </body>
 </html>
+
