@@ -6,1108 +6,1115 @@
   <title>Netrivo</title>
   <meta name="description" content="Netrivo utvikler nettsider med tydeligere identitet, mer struktur og høyere opplevd verdi." />
   <style>
-    :root {
-      --bg: #f5f1ea;
-      --paper: #fbf8f3;
-      --ink: #151515;
-      --muted: #5f5a53;
-      --line: rgba(21,21,21,0.1);
-      --line-soft: rgba(21,21,21,0.06);
-      --shadow: 0 30px 80px rgba(40, 27, 17, 0.08);
-      --max: 1260px;
+    :root{
+      --bg:#f5f1ea;
+      --paper:#fbf8f3;
+      --ink:#151515;
+      --muted:#5f5a53;
+      --line:rgba(21,21,21,0.1);
+      --softline:rgba(21,21,21,0.06);
+      --shadow:0 30px 80px rgba(40,27,17,0.08);
+      --max:1260px;
+      --radius-xl:40px;
+      --radius-lg:30px;
+      --radius-md:22px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
       background:
         radial-gradient(circle at top left, rgba(138,90,68,0.08), transparent 30%),
         radial-gradient(circle at 90% 20%, rgba(95,55,39,0.05), transparent 28%),
-        linear-gradient(180deg, #f7f3ed 0%, #f2ede5 100%);
+        linear-gradient(180deg,#f7f3ed 0%,#f2ede5 100%);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    .container {
-      width: min(var(--max), calc(100% - 36px));
-      margin: 0 auto;
+    .container{
+      width:min(var(--max), calc(100% - 36px));
+      margin:0 auto;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(247,243,237,0.78);
-      border-bottom: 1px solid rgba(21,21,21,0.06);
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(247,243,237,0.78);
+      border-bottom:1px solid rgba(21,21,21,0.06);
     }
 
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 0;
-      gap: 20px;
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0;
+      gap:20px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
     }
 
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: var(--ink);
-      color: #f7f3ed;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      font-size: 0.88rem;
-      box-shadow: var(--shadow);
+    .brand-mark{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:var(--ink);
+      color:#f7f3ed;
+      font-weight:700;
+      letter-spacing:0.18em;
+      font-size:0.88rem;
+      box-shadow:var(--shadow);
+      flex-shrink:0;
     }
 
-    .brand-copy strong {
-      display: block;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
+    .brand-copy strong{
+      display:block;
+      font-size:1.05rem;
+      letter-spacing:-0.02em;
     }
 
-    .brand-copy span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.78rem;
-      margin-top: 3px;
+    .brand-copy span{
+      display:block;
+      color:var(--muted);
+      font-size:0.78rem;
+      margin-top:3px;
     }
 
-    .nav {
-      display: flex;
-      gap: 28px;
-      font-size: 0.95rem;
-      color: var(--muted);
+    .nav{
+      display:flex;
+      gap:28px;
+      font-size:0.95rem;
+      color:var(--muted);
     }
 
-    .nav a:hover { color: var(--ink); }
+    .nav a:hover{color:var(--ink)}
 
-    .hero {
-      padding: 44px 0 24px;
+    .hero{
+      padding:44px 0 24px;
     }
 
-    .hero-shell {
-      border: 1px solid var(--line);
-      border-radius: 44px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.44);
-      box-shadow: var(--shadow);
+    .hero-shell{
+      border:1px solid var(--line);
+      border-radius:44px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.44);
+      box-shadow:var(--shadow);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      min-height: 760px;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr 0.92fr;
+      min-height:760px;
     }
 
-    .hero-copy {
-      padding: 72px 64px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.16));
+    .hero-copy{
+      padding:72px 64px 56px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.16));
     }
 
-    .hero-panel {
-      position: relative;
-      min-height: 100%;
-      background: linear-gradient(145deg, rgba(95,55,39,0.92), rgba(28,24,22,0.96));
-      color: #f4eee7;
-      overflow: hidden;
+    .hero-panel{
+      position:relative;
+      min-height:100%;
+      background:linear-gradient(145deg, rgba(95,55,39,0.92), rgba(28,24,22,0.96));
+      color:#f4eee7;
+      overflow:hidden;
     }
 
-    .hero-panel::before {
-      content: "";
-      position: absolute;
-      inset: auto -8% -18% auto;
-      width: 78%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.08);
+    .hero-panel::before{
+      content:"";
+      position:absolute;
+      inset:auto -8% -18% auto;
+      width:78%;
+      aspect-ratio:1;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.08);
     }
 
-    .hero-panel::after {
-      content: "";
-      position: absolute;
-      inset: 10% auto auto -10%;
-      width: 56%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
-      filter: blur(8px);
+    .hero-panel::after{
+      content:"";
+      position:absolute;
+      inset:10% auto auto -10%;
+      width:56%;
+      aspect-ratio:1;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
+      filter:blur(8px);
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(21,21,21,0.1);
-      background: rgba(255,255,255,0.55);
-      font-size: 0.78rem;
-      color: var(--muted);
-      width: fit-content;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(21,21,21,0.1);
+      background:rgba(255,255,255,0.55);
+      font-size:0.78rem;
+      color:var(--muted);
+      width:fit-content;
     }
 
-    h1 {
-      margin: 24px 0 0;
-      font-size: clamp(3.1rem, 8vw, 6.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      max-width: 800px;
+    h1{
+      margin:24px 0 0;
+      font-size:clamp(3.1rem, 8vw, 6.3rem);
+      line-height:0.95;
+      letter-spacing:-0.06em;
+      max-width:820px;
     }
 
-    .lead {
-      margin-top: 28px;
-      max-width: 700px;
-      color: var(--muted);
-      font-size: clamp(1.06rem, 1.8vw, 1.28rem);
-      line-height: 1.85;
+    .lead{
+      margin-top:28px;
+      max-width:700px;
+      color:var(--muted);
+      font-size:clamp(1.06rem, 1.8vw, 1.24rem);
+      line-height:1.85;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 36px;
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:36px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 24px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 0.95rem;
-      font-weight: 700;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 24px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:0.95rem;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
 
-    .btn:hover { transform: translateY(-1px); }
+    .btn:hover{transform:translateY(-1px)}
 
-    .btn-primary {
-      background: var(--ink);
-      color: #f6f1ea;
-      box-shadow: var(--shadow);
+    .btn-primary{
+      background:var(--ink);
+      color:#f6f1ea;
+      box-shadow:var(--shadow);
     }
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--ink);
-      border-color: rgba(21,21,21,0.12);
+    .btn-secondary{
+      background:transparent;
+      color:var(--ink);
+      border-color:rgba(21,21,21,0.12);
     }
 
-    .hero-bottom {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 48px;
+    .hero-bottom{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:48px;
     }
 
-    .metric {
-      padding-top: 22px;
-      border-top: 1px solid rgba(21,21,21,0.12);
+    .metric{
+      padding-top:22px;
+      border-top:1px solid rgba(21,21,21,0.12);
     }
 
-    .metric strong {
-      display: block;
-      font-size: 1.42rem;
-      letter-spacing: -0.04em;
+    .metric strong{
+      display:block;
+      font-size:1.42rem;
+      letter-spacing:-0.04em;
     }
 
-    .metric span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.92rem;
+    .metric span{
+      display:block;
+      margin-top:8px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:0.92rem;
     }
 
-    .panel-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 100%;
-      padding: 40px;
+    .panel-inner{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:100%;
+      padding:40px;
     }
 
-    .panel-badge {
-      color: rgba(244,238,231,0.72);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
+    .panel-badge{
+      color:rgba(244,238,231,0.72);
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
     }
 
-    .panel-card {
-      align-self: flex-end;
-      width: min(100%, 420px);
-      padding: 26px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
+    .panel-card{
+      align-self:flex-end;
+      width:min(100%, 420px);
+      padding:26px;
+      border-radius:28px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(10px);
     }
 
-    .panel-card + .panel-card {
-      margin-top: 16px;
+    .panel-card + .panel-card{margin-top:16px}
+
+    .panel-title{
+      font-size:1.55rem;
+      line-height:1.12;
+      letter-spacing:-0.04em;
+      font-weight:700;
     }
 
-    .panel-title {
-      font-size: 1.55rem;
-      line-height: 1.12;
-      letter-spacing: -0.04em;
-      font-weight: 700;
+    .panel-copy{
+      margin-top:12px;
+      color:rgba(244,238,231,0.72);
+      line-height:1.7;
+      font-size:0.95rem;
     }
 
-    .panel-copy {
-      margin-top: 12px;
-      color: rgba(244,238,231,0.72);
-      line-height: 1.7;
-      font-size: 0.95rem;
+    .section{
+      padding:92px 0 0;
     }
 
-    .section {
-      padding: 90px 0 0;
+    .section-head{
+      display:grid;
+      grid-template-columns:0.82fr 1.18fr;
+      gap:24px;
+      align-items:end;
+      margin-bottom:28px;
     }
 
-    .section-head {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 28px;
+    .kicker{
+      font-size:0.76rem;
+      text-transform:uppercase;
+      letter-spacing:0.24em;
+      color:var(--muted);
     }
 
-    .kicker {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      color: var(--muted);
+    h2{
+      margin:14px 0 0;
+      font-size:clamp(2.1rem, 4vw, 4rem);
+      line-height:0.98;
+      letter-spacing:-0.05em;
+      max-width:860px;
     }
 
-    h2 {
-      margin: 14px 0 0;
-      font-size: clamp(2.1rem, 4vw, 4rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 860px;
-    }
-
-    .section-copy {
-      color: var(--muted);
-      line-height: 1.85;
-      font-size: 1.03rem;
-      max-width: 760px;
+    .section-copy{
+      color:var(--muted);
+      line-height:1.85;
+      font-size:1.03rem;
+      max-width:760px;
     }
 
     .services-grid,
-    .contact-grid {
-      display: grid;
-      gap: 18px;
+    .contact-grid{
+      display:grid;
+      gap:18px;
     }
 
-    .services-grid {
-      grid-template-columns: repeat(4, 1fr);
+    .services-grid{
+      grid-template-columns:repeat(4,1fr);
     }
 
-    .service {
-      padding: 26px;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.46);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      min-height: 240px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .service{
+      padding:26px;
+      border-radius:30px;
+      background:rgba(255,255,255,0.46);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      min-height:230px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .service-index {
-      font-size: 0.76rem;
-      color: var(--muted);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    .service-index{
+      font-size:0.76rem;
+      color:var(--muted);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
     }
 
-    .service h3 {
-      margin: 24px 0 0;
-      font-size: 1.5rem;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+    .service h3{
+      margin:24px 0 0;
+      font-size:1.46rem;
+      line-height:1.05;
+      letter-spacing:-0.04em;
     }
 
-    .service p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.95rem;
+    .service p{
+      margin:14px 0 0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.95rem;
     }
 
-    .offer-band {
-      margin-top: 22px;
-      padding: 28px 30px;
-      border-radius: 30px;
-      border: 1px solid var(--line);
-      background: linear-gradient(145deg, rgba(255,255,255,0.72), rgba(240,232,223,0.54));
-      box-shadow: var(--shadow);
+    .offer-band{
+      margin-top:22px;
+      padding:28px 30px;
+      border-radius:30px;
+      border:1px solid var(--line);
+      background:linear-gradient(145deg, rgba(255,255,255,0.72), rgba(240,232,223,0.54));
+      box-shadow:var(--shadow);
     }
 
-    .offer-band p {
-      margin: 10px 0 0;
-      color: #5f564f;
-      line-height: 1.8;
-      font-size: 1rem;
-      max-width: 880px;
+    .offer-band p{
+      margin:10px 0 0;
+      color:#5f564f;
+      line-height:1.8;
+      font-size:1rem;
+      max-width:900px;
     }
 
-    .level-section {
-      border: 1px solid var(--line);
-      border-radius: 36px;
-      background: rgba(255,255,255,0.44);
-      box-shadow: var(--shadow);
-      padding: 34px;
+    .level-section{
+      border:1px solid var(--line);
+      border-radius:36px;
+      background:rgba(255,255,255,0.44);
+      box-shadow:var(--shadow);
+      padding:34px;
     }
 
-    .level-section + .level-section {
-      margin-top: 26px;
+    .level-section + .level-section{
+      margin-top:26px;
     }
 
-    .level-head {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(21,21,21,0.08);
+    .level-head{
+      display:grid;
+      grid-template-columns:0.8fr 1.2fr;
+      gap:24px;
+      align-items:end;
+      margin-bottom:24px;
+      padding-bottom:20px;
+      border-bottom:1px solid rgba(21,21,21,0.08);
     }
 
-    .level-badge {
-      width: fit-content;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(21,21,21,0.08);
-      background: rgba(255,255,255,0.62);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .level-badge{
+      width:fit-content;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.62);
+      font-size:0.78rem;
+      font-weight:700;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    .level-title {
-      margin-top: 12px;
-      font-size: clamp(1.85rem, 3vw, 3rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 640px;
+    .level-title{
+      margin-top:12px;
+      font-size:clamp(1.85rem, 3vw, 3rem);
+      line-height:1.02;
+      letter-spacing:-0.05em;
+      max-width:700px;
+    }
+
+    .level-note{
+      display:inline-block;
+      margin-top:14px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(21,21,21,0.08);
+      font-size:0.82rem;
+      color:var(--muted);
     }
 
     .simple-grid,
     .standard-grid,
-    .mobile-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .mobile-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
     }
 
     .simple-card,
     .standard-card,
-    .mobile-card {
-      display: flex;
-      flex-direction: column;
-      border-radius: 28px;
-      border: 1px solid rgba(21,21,21,0.08);
-      background: rgba(255,255,255,0.72);
-      transition: transform .18s ease, background .18s ease;
-      overflow: hidden;
-      box-shadow: var(--shadow);
+    .mobile-card{
+      display:flex;
+      flex-direction:column;
+      border-radius:28px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.72);
+      transition:transform .18s ease, background .18s ease;
+      overflow:hidden;
+      box-shadow:var(--shadow);
     }
 
     .simple-card:hover,
     .standard-card:hover,
     .premium-feature:hover,
-    .mobile-card:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.84);
+    .mobile-card:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,0.84);
     }
 
     .simple-preview,
-    .standard-preview {
-      border-bottom: 1px solid rgba(21,21,21,0.08);
-      position: relative;
-      overflow: hidden;
+    .standard-preview{
+      border-bottom:1px solid rgba(21,21,21,0.08);
+      position:relative;
+      overflow:hidden;
     }
 
     .simple-inner,
-    .standard-inner {
-      padding: 22px;
+    .standard-inner{
+      padding:22px;
     }
 
     .simple-meta,
     .standard-meta,
-    .mobile-meta {
-      padding: 18px 22px 22px;
-      display: grid;
-      gap: 12px;
+    .mobile-meta{
+      padding:18px 22px 22px;
+      display:grid;
+      gap:12px;
     }
 
-    .small-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--muted);
+    .small-label{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.2em;
+      color:var(--muted);
     }
 
     .simple-title,
     .standard-title,
-    .mobile-title {
-      font-size: 1.3rem;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-      font-weight: 700;
+    .mobile-title{
+      font-size:1.28rem;
+      line-height:1.08;
+      letter-spacing:-0.04em;
+      font-weight:700;
     }
 
     .simple-copy,
     .standard-copy,
-    .mobile-copy {
-      color: var(--muted);
-      line-height: 1.72;
-      font-size: 0.95rem;
+    .mobile-copy{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:0.95rem;
     }
 
-    .card-link {
-      margin-top: auto;
-      padding-top: 10px;
-      font-weight: 700;
+    .card-link{
+      margin-top:auto;
+      padding-top:10px;
+      font-weight:700;
     }
 
     .preview-pill-row,
-    .standard-box-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 18px;
+    .standard-box-row{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:18px;
     }
 
     .preview-pill,
-    .standard-box {
-      padding: 12px;
-      border-radius: 16px;
-      font-size: 0.86rem;
-      line-height: 1.42;
+    .standard-box{
+      padding:12px;
+      border-radius:16px;
+      font-size:0.86rem;
+      line-height:1.42;
     }
 
-    .theme-simple-cafe {
-      background: #f4eee6;
-      color: #231a15;
+    .theme-simple-cafe{
+      background:#f4eee6;
+      color:#231a15;
     }
 
-    .theme-simple-cafe .simple-inner {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      min-height: 250px;
-      gap: 18px;
+    .theme-simple-cafe .simple-inner{
+      display:grid;
+      grid-template-columns:1.08fr 0.92fr;
+      min-height:250px;
+      gap:18px;
     }
 
-    .theme-simple-cafe .left-pane {
-      padding: 10px 0;
+    .theme-simple-cafe .left-pane{padding:10px 0}
+
+    .theme-simple-cafe .right-pane{
+      border-radius:24px;
+      padding:18px;
+      background:linear-gradient(145deg, #3b2a21, #171412);
+      color:#f8f1e8;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .theme-simple-cafe .right-pane {
-      border-radius: 24px;
-      padding: 18px;
-      background: linear-gradient(145deg, #3b2a21, #171412);
-      color: #f8f1e8;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .theme-simple-cafe .pane-card{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      line-height:1.55;
+      font-size:0.9rem;
     }
 
-    .theme-simple-cafe .pane-card {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      line-height: 1.55;
-      font-size: 0.9rem;
+    .theme-simple-cafe .pane-card + .pane-card{margin-top:12px}
+
+    .theme-simple-cafe .preview-pill{
+      background:rgba(255,255,255,0.8);
+      border:1px solid rgba(21,21,21,0.08);
     }
 
-    .theme-simple-cafe .pane-card + .pane-card {
-      margin-top: 12px;
+    .theme-simple-build{
+      background:#f3f7f7;
+      color:#17302e;
     }
 
-    .theme-simple-cafe .preview-pill {
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(21,21,21,0.08);
-    }
-
-    .theme-simple-build {
-      background: #f3f7f7;
-      color: #17302e;
-    }
-
-    .theme-simple-build .simple-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      min-height: 238px;
+    .theme-simple-build .simple-inner{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      min-height:238px;
     }
 
     .theme-simple-build .build-left,
-    .theme-simple-build .build-right {
-      border-radius: 22px;
-      padding: 18px;
+    .theme-simple-build .build-right{
+      border-radius:22px;
+      padding:18px;
     }
 
-    .theme-simple-build .build-left {
-      background: #ffffff;
-      border: 1px solid rgba(21,21,21,0.08);
+    .theme-simple-build .build-left{
+      background:#ffffff;
+      border:1px solid rgba(21,21,21,0.08);
     }
 
-    .theme-simple-build .build-right {
-      background: linear-gradient(145deg, #083c3a, #0f766e);
-      color: #eefcfb;
+    .theme-simple-build .build-right{
+      background:linear-gradient(145deg,#083c3a,#0f766e);
+      color:#eefcfb;
     }
 
-    .theme-simple-build .build-panel {
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.88rem;
-      line-height: 1.45;
+    .theme-simple-build .build-panel{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.12);
+      font-size:0.88rem;
+      line-height:1.45;
     }
 
-    .theme-simple-build .build-panel + .build-panel {
-      margin-top: 10px;
+    .theme-simple-build .build-panel + .build-panel{margin-top:10px}
+
+    .theme-simple-fitness{
+      background:#f7f0ea;
+      color:#23170f;
     }
 
-    .theme-simple-fitness {
-      background: #f7f0ea;
-      color: #23170f;
+    .theme-simple-fitness .simple-inner{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      min-height:238px;
     }
 
-    .theme-simple-fitness .simple-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      min-height: 238px;
+    .theme-simple-fitness .fit-left{padding:12px 0}
+
+    .theme-simple-fitness .fit-right{
+      border-radius:24px;
+      padding:18px;
+      background:linear-gradient(145deg,#191515,#8a4a07);
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .theme-simple-fitness .fit-left {
-      padding: 12px 0;
+    .theme-simple-fitness .fit-box{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      font-size:0.88rem;
+      line-height:1.45;
     }
 
-    .theme-simple-fitness .fit-right {
-      border-radius: 24px;
-      padding: 18px;
-      background: linear-gradient(145deg, #191515, #8a4a07);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .theme-simple-fitness .fit-box + .fit-box{margin-top:10px}
+
+    .theme-standard-architect{
+      background:linear-gradient(145deg,#eef4f8,#dbe7ef);
+      color:#152636;
     }
 
-    .theme-simple-fitness .fit-box {
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.88rem;
-      line-height: 1.45;
+    .theme-standard-architect .standard-inner{
+      display:grid;
+      grid-template-columns:1.08fr 0.92fr;
+      gap:16px;
+      min-height:280px;
     }
 
-    .theme-simple-fitness .fit-box + .fit-box {
-      margin-top: 10px;
+    .theme-standard-architect .standard-left{padding:10px 0}
+
+    .theme-standard-architect .standard-right{
+      border-radius:24px;
+      padding:18px;
+      background:linear-gradient(145deg,#2f3b52,#151a24);
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .theme-standard-architect {
-      background: linear-gradient(145deg, #eef4f8, #dbe7ef);
-      color: #152636;
+    .theme-standard-architect .right-panel{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      font-size:0.88rem;
+      line-height:1.45;
     }
 
-    .theme-standard-architect .standard-inner {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 16px;
-      min-height: 280px;
+    .theme-standard-architect .right-panel + .right-panel{margin-top:10px}
+
+    .theme-standard-advice{
+      background:linear-gradient(145deg,#eef4f8,#d7e4ef);
+      color:#142635;
     }
 
-    .theme-standard-architect .standard-left {
-      padding: 10px 0;
+    .theme-standard-advice .standard-inner{
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      min-height:280px;
     }
 
-    .theme-standard-architect .standard-right {
-      border-radius: 24px;
-      padding: 18px;
-      background: linear-gradient(145deg, #2f3b52, #151a24);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .theme-standard-travel{
+      background:linear-gradient(145deg,#edf5ef,#d8e9de);
+      color:#1d342a;
     }
 
-    .theme-standard-architect .right-panel {
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.88rem;
-      line-height: 1.45;
+    .theme-standard-travel .standard-inner{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:280px;
     }
 
-    .theme-standard-architect .right-panel + .right-panel {
-      margin-top: 10px;
+    .premium-wrap{
+      display:grid;
+      gap:22px;
     }
 
-    .theme-standard-advice {
-      background: linear-gradient(145deg, #eef4f8, #d7e4ef);
-      color: #142635;
+    .premium-feature{
+      display:grid;
+      grid-template-columns:1.12fr 0.88fr;
+      gap:18px;
+      padding:24px;
+      border-radius:34px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.66);
+      transition:transform .18s ease, background .18s ease;
+      box-shadow:var(--shadow);
     }
 
-    .theme-standard-advice .standard-inner {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      min-height: 280px;
+    .premium-visual{
+      min-height:380px;
+      border-radius:28px;
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .theme-standard-travel {
-      background: linear-gradient(145deg, #edf5ef, #d8e9de);
-      color: #1d342a;
+    .premium-meta{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:18px;
+      padding:8px 6px;
     }
 
-    .theme-standard-travel .standard-inner {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 280px;
+    .premium-topline{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.24em;
+      opacity:0.76;
     }
 
-    .premium-wrap {
-      display: grid;
-      gap: 22px;
+    .premium-headline{
+      margin-top:10px;
+      font-size:clamp(2rem, 3vw, 3rem);
+      line-height:0.98;
+      letter-spacing:-0.06em;
+      max-width:520px;
+      font-weight:700;
     }
 
-    .premium-feature {
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 18px;
-      padding: 24px;
-      border-radius: 34px;
-      border: 1px solid rgba(21,21,21,0.08);
-      background: rgba(255,255,255,0.66);
-      transition: transform .18s ease, background .18s ease;
-      box-shadow: var(--shadow);
+    .premium-subgrid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:20px;
     }
 
-    .premium-visual {
-      min-height: 380px;
-      border-radius: 28px;
-      padding: 28px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .premium-box{
+      padding:14px;
+      border-radius:18px;
+      font-size:0.9rem;
+      line-height:1.52;
     }
 
-    .premium-meta {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 8px 6px;
+    .premium-body-small{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
+      color:var(--muted);
     }
 
-    .premium-topline {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      opacity: 0.76;
+    .premium-title{
+      font-size:clamp(1.6rem, 2vw, 2.25rem);
+      line-height:1.02;
+      letter-spacing:-0.05em;
+      font-weight:700;
     }
 
-    .premium-headline {
-      margin-top: 10px;
-      font-size: clamp(2rem, 3vw, 3rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
-      max-width: 520px;
-      font-weight: 700;
+    .premium-copy{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:1rem;
     }
 
-    .premium-subgrid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 20px;
+    .premium-points{
+      display:grid;
+      gap:10px;
+      color:var(--muted);
+      font-size:0.95rem;
+      line-height:1.7;
     }
 
-    .premium-box {
-      padding: 14px;
-      border-radius: 18px;
-      font-size: 0.9rem;
-      line-height: 1.52;
+    .premium-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+      padding-top:8px;
     }
 
-    .premium-body-small {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--muted);
+    .theme-premium-boutique{
+      background:linear-gradient(145deg,#241914,#6f4a34 58%,#201713);
+      color:#f8efe5;
     }
 
-    .premium-title {
-      font-size: clamp(1.6rem, 2vw, 2.25rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      font-weight: 700;
+    .theme-premium-boutique::after{
+      content:"";
+      position:absolute;
+      right:-10%;
+      bottom:-18%;
+      width:58%;
+      aspect-ratio:1;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.14);
     }
 
-    .premium-copy {
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 1rem;
+    .theme-premium-boutique .premium-box{
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.12);
     }
 
-    .premium-points {
-      display: grid;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .premium-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      padding-top: 8px;
-    }
-
-    .theme-premium-boutique {
-      background: linear-gradient(145deg, #241914, #6f4a34 58%, #201713);
-      color: #f8efe5;
-    }
-
-    .theme-premium-boutique::after {
-      content: "";
-      position: absolute;
-      right: -10%;
-      bottom: -18%;
-      width: 58%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-
-    .theme-premium-boutique .premium-box {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .theme-premium-tech {
+    .theme-premium-tech{
       background:
         radial-gradient(circle at top left, rgba(119,69,255,0.36), transparent 28%),
         radial-gradient(circle at 80% 10%, rgba(32,205,255,0.28), transparent 24%),
-        linear-gradient(145deg, #05070f, #10172b);
-      color: #eef3ff;
+        linear-gradient(145deg,#05070f,#10172b);
+      color:#eef3ff;
     }
 
-    .theme-premium-tech::after {
-      content: "";
-      position: absolute;
-      right: -10%;
-      bottom: -18%;
-      width: 58%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.12);
+    .theme-premium-tech::after{
+      content:"";
+      position:absolute;
+      right:-10%;
+      bottom:-18%;
+      width:58%;
+      aspect-ratio:1;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.12);
     }
 
-    .theme-premium-tech .premium-box {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
+    .theme-premium-tech .premium-box{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(10px);
     }
 
-    .theme-premium-personal {
-      background: linear-gradient(145deg, #f3e7ea, #ead8dd);
-      color: #211612;
+    .theme-premium-personal{
+      background:linear-gradient(145deg,#f3e7ea,#ead8dd);
+      color:#211612;
     }
 
-    .theme-premium-personal::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 6px;
-      background: linear-gradient(90deg, #7a2f3c, #b46a78);
+    .theme-premium-personal::before{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:6px;
+      background:linear-gradient(90deg,#7a2f3c,#b46a78);
     }
 
-    .theme-premium-personal::after {
-      content: "";
-      position: absolute;
-      right: -12%;
-      bottom: -18%;
-      width: 58%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid rgba(122,47,60,0.14);
+    .theme-premium-personal::after{
+      content:"";
+      position:absolute;
+      right:-12%;
+      bottom:-18%;
+      width:58%;
+      aspect-ratio:1;
+      border-radius:50%;
+      border:1px solid rgba(122,47,60,0.14);
     }
 
-    .theme-premium-personal .premium-box {
-      background: rgba(255,255,255,0.78);
-      border: 1px solid rgba(122,47,60,0.14);
-      color: #3a2428;
+    .theme-premium-personal .premium-box{
+      background:rgba(255,255,255,0.78);
+      border:1px solid rgba(122,47,60,0.14);
+      color:#3a2428;
     }
 
-    .theme-premium-personal .premium-topline {
-      color: rgba(122,47,60,0.78);
+    .theme-premium-personal .premium-topline{
+      color:rgba(122,47,60,0.78);
     }
 
-    .theme-premium-personal + .premium-meta .premium-body-small {
-      color: #7a2f3c;
+    .phone-shell{
+      width:100%;
+      max-width:260px;
+      margin:0 auto 18px;
+      border-radius:34px;
+      padding:10px;
+      background:#181818;
+      box-shadow:0 18px 40px rgba(0,0,0,0.18);
     }
 
-    .theme-premium-personal + .premium-meta .premium-copy,
-    .theme-premium-personal + .premium-meta .premium-points {
-      color: #5f5651;
+    .phone-screen{
+      border-radius:26px;
+      overflow:hidden;
+      min-height:440px;
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
 
-    .theme-premium-personal + .premium-meta .premium-link {
-      color: #7a2f3c;
+    .phone-content{
+      padding:18px;
+      display:grid;
+      gap:14px;
     }
 
-    .phone-shell {
-      width: 100%;
-      max-width: 260px;
-      margin: 0 auto 18px;
-      border-radius: 34px;
-      padding: 10px;
-      background: #181818;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    .phone-topline{
+      font-size:0.66rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
+      opacity:0.78;
     }
 
-    .phone-screen {
-      border-radius: 26px;
-      overflow: hidden;
-      min-height: 440px;
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .phone-title{
+      font-size:1.95rem;
+      line-height:0.98;
+      letter-spacing:-0.05em;
+      font-weight:700;
     }
 
-    .phone-content {
-      padding: 18px;
-      display: grid;
-      gap: 14px;
+    .phone-copy{
+      font-size:0.9rem;
+      line-height:1.55;
+      opacity:0.86;
     }
 
-    .phone-topline {
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      opacity: 0.78;
+    .phone-chip-row{
+      display:grid;
+      gap:10px;
     }
 
-    .phone-title {
-      font-size: 1.95rem;
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      font-weight: 700;
+    .phone-chip{
+      padding:12px;
+      border-radius:16px;
+      font-size:0.84rem;
+      line-height:1.42;
     }
 
-    .phone-copy {
-      font-size: 0.9rem;
-      line-height: 1.55;
-      opacity: 0.86;
+    .phone-action{
+      margin-top:8px;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      padding:12px 14px;
+      border-radius:999px;
+      font-size:0.85rem;
+      font-weight:700;
+      width:fit-content;
     }
 
-    .phone-chip-row {
-      display: grid;
-      gap: 10px;
+    .mobile-enkel .phone-screen{
+      background:linear-gradient(180deg,#f7efe6,#eee3d7);
+      color:#241b16;
     }
 
-    .phone-chip {
-      padding: 12px;
-      border-radius: 16px;
-      font-size: 0.84rem;
-      line-height: 1.42;
+    .mobile-enkel .phone-chip{
+      background:rgba(255,255,255,0.74);
+      border:1px solid rgba(21,21,21,0.08);
     }
 
-    .phone-action {
-      margin-top: 8px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 12px 14px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      width: fit-content;
+    .mobile-enkel .phone-action{
+      background:#171717;
+      color:white;
     }
 
-    .mobile-enkel .phone-screen {
-      background: linear-gradient(180deg, #f7efe6, #eee3d7);
-      color: #241b16;
+    .mobile-standard .phone-screen{
+      background:linear-gradient(180deg,#f1f6fa,#dce8f0);
+      color:#162634;
     }
 
-    .mobile-enkel .phone-chip {
-      background: rgba(255,255,255,0.74);
-      border: 1px solid rgba(21,21,21,0.08);
+    .mobile-standard.travel .phone-screen{
+      background:linear-gradient(180deg,#eef6ef,#dce8de);
+      color:#1d342a;
     }
 
-    .mobile-enkel .phone-action {
-      background: #171717;
-      color: white;
+    .mobile-standard .phone-chip{
+      background:rgba(255,255,255,0.8);
+      border:1px solid rgba(21,21,21,0.08);
     }
 
-    .mobile-standard .phone-screen {
-      background: linear-gradient(180deg, #f1f6fa, #dce8f0);
-      color: #162634;
+    .mobile-standard .phone-action{
+      background:#162634;
+      color:white;
     }
 
-    .mobile-standard .phone-chip {
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(21,21,21,0.08);
+    .mobile-standard.travel .phone-action{
+      background:#1d342a;
     }
 
-    .mobile-standard .phone-action {
-      background: #162634;
-      color: white;
-    }
-
-    .mobile-premium .phone-screen {
+    .mobile-premium .phone-screen{
       background:
         radial-gradient(circle at top left, rgba(119,69,255,0.34), transparent 28%),
-        linear-gradient(180deg, #0a0d16, #12182b);
-      color: #eef3ff;
+        linear-gradient(180deg,#0a0d16,#12182b);
+      color:#eef3ff;
     }
 
-    .mobile-premium .phone-chip {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(8px);
+    .mobile-premium.boutique .phone-screen{
+      background:linear-gradient(180deg,#2a1d16,#6b4834 58%,#1d1411);
+      color:#f8efe5;
     }
 
-    .mobile-premium .phone-action {
-      background: white;
-      color: #0a0d16;
+    .mobile-premium .phone-chip{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(8px);
+    }
+
+    .mobile-premium.boutique .phone-chip{
+      background:rgba(255,255,255,0.10);
+    }
+
+    .mobile-premium .phone-action{
+      background:white;
+      color:#0a0d16;
+    }
+
+    .mobile-premium.boutique .phone-action{
+      background:#fff5ea;
+      color:#241914;
     }
 
     .process-wrap,
     .contact-cta,
-    .contact-card {
-      border: 1px solid var(--line);
-      border-radius: 34px;
-      background: rgba(255,255,255,0.46);
-      box-shadow: var(--shadow);
+    .contact-card{
+      border:1px solid var(--line);
+      border-radius:34px;
+      background:rgba(255,255,255,0.46);
+      box-shadow:var(--shadow);
     }
 
-    .process-wrap {
-      padding: 26px;
+    .process-wrap{padding:26px}
+
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
     }
 
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+    .step{
+      padding:24px;
+      border-radius:26px;
+      background:rgba(255,255,255,0.5);
+      border:1px solid rgba(21,21,21,0.08);
+      min-height:250px;
     }
 
-    .step {
-      padding: 24px;
-      border-radius: 26px;
-      background: rgba(255,255,255,0.5);
-      border: 1px solid rgba(21,21,21,0.08);
-      min-height: 250px;
+    .step small{
+      color:var(--muted);
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      font-size:0.75rem;
+      font-weight:700;
     }
 
-    .step small {
-      color: var(--muted);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      font-weight: 700;
+    .step strong{
+      display:block;
+      margin-top:18px;
+      font-size:1.35rem;
+      line-height:1.08;
+      letter-spacing:-0.04em;
     }
 
-    .step strong {
-      display: block;
-      margin-top: 18px;
-      font-size: 1.35rem;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
+    .step p{
+      margin-top:12px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.95rem;
     }
 
-    .step p {
-      margin-top: 12px;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.95rem;
+    .contact-grid{
+      grid-template-columns:1.15fr 0.85fr;
+      padding-bottom:90px;
     }
 
-    .contact-grid {
-      grid-template-columns: 1.15fr 0.85fr;
-      padding-bottom: 90px;
+    .contact-cta{
+      padding:42px;
+      background:linear-gradient(145deg, rgba(255,255,255,0.56), rgba(222,212,199,0.44));
     }
 
-    .contact-cta {
-      padding: 42px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.56), rgba(222,212,199,0.44));
+    .contact-card{
+      padding:34px;
+      display:grid;
+      gap:22px;
+      align-content:start;
     }
 
-    .contact-card {
-      padding: 34px;
-      display: grid;
-      gap: 22px;
-      align-content: start;
+    .contact-item small{
+      display:block;
+      color:var(--muted);
+      font-size:0.85rem;
+      letter-spacing:0.03em;
     }
 
-    .contact-item small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.85rem;
-      letter-spacing: 0.03em;
+    .contact-item strong{
+      display:block;
+      margin-top:8px;
+      font-size:1.1rem;
+      line-height:1.55;
+      letter-spacing:-0.02em;
     }
 
-    .contact-item strong {
-      display: block;
-      margin-top: 8px;
-      font-size: 1.1rem;
-      line-height: 1.55;
-      letter-spacing: -0.02em;
+    footer{
+      padding:0 0 42px;
+      color:var(--muted);
+      font-size:0.92rem;
     }
 
-    footer {
-      padding: 0 0 42px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 1180px) {
+    @media (max-width:1180px){
       .hero-grid,
       .section-head,
       .level-head,
@@ -1122,40 +1129,29 @@
       .theme-simple-cafe .simple-inner,
       .theme-simple-build .simple-inner,
       .theme-simple-fitness .simple-inner,
-      .theme-standard-architect .standard-inner {
-        grid-template-columns: 1fr;
+      .theme-standard-architect .standard-inner{
+        grid-template-columns:1fr;
       }
 
-      .hero-copy {
-        padding: 52px 34px 42px;
-      }
-
-      .premium-visual {
-        min-height: 300px;
-      }
+      .hero-copy{padding:52px 34px 42px}
+      .premium-visual{min-height:300px}
     }
 
-    @media (max-width: 760px) {
-      .container {
-        width: min(var(--max), calc(100% - 20px));
+    @media (max-width:760px){
+      .container{
+        width:min(var(--max), calc(100% - 20px));
       }
 
-      .nav {
-        display: none;
+      .nav{display:none}
+
+      .hero-actions{
+        flex-direction:column;
+        align-items:stretch;
       }
 
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
+      .btn{width:100%}
 
-      .btn {
-        width: 100%;
-      }
-
-      .hero-shell {
-        border-radius: 28px;
-      }
+      .hero-shell{border-radius:28px}
 
       .hero-copy,
       .panel-inner,
@@ -1165,23 +1161,19 @@
       .contact-cta,
       .contact-card,
       .service,
-      .mobile-card {
-        padding: 24px;
+      .mobile-card{
+        padding:24px;
       }
 
-      .hero {
-        padding-top: 20px;
-      }
+      .hero{padding-top:20px}
 
       .premium-subgrid,
       .preview-pill-row,
-      .standard-box-row {
-        grid-template-columns: 1fr;
+      .standard-box-row{
+        grid-template-columns:1fr;
       }
 
-      .phone-shell {
-        max-width: 100%;
-      }
+      .phone-shell{max-width:100%}
     }
   </style>
 </head>
@@ -1211,10 +1203,10 @@
         <div class="hero-grid">
           <div class="hero-copy">
             <div>
-              <div class="eyebrow">Nettløsninger med sterkere inntrykk og høyere opplevd verdi</div>
-              <h1>Nettsider som får deg til å se mer gjennomarbeidet ut.</h1>
+              <div class="eyebrow">Nettsider med sterkere uttrykk, tydeligere struktur og høyere opplevd verdi</div>
+              <h1>Nettsider som får virksomheten din til å se mer gjennomarbeidet ut.</h1>
               <p class="lead">
-                Netrivo utvikler nettsider som løfter hvordan virksomheten din blir oppfattet. Målet er ikke bare at siden skal fungere, men at den skal skape mer tillit, mer tyngde og en tydeligere digital identitet.
+                Netrivo utvikler nettsider som løfter hvordan virksomheten blir oppfattet. Målet er ikke bare at siden skal fungere, men at den skal skape mer tillit, mer tyngde og en tydeligere digital identitet.
               </p>
               <div class="hero-actions">
                 <a class="btn btn-primary" href="#contact">Be om en vurdering</a>
@@ -1233,23 +1225,23 @@
               </div>
               <div class="metric">
                 <strong>Mer særpreg</strong>
-                <span>Nettsider som ikke bare er pene, men som faktisk har retning og identitet.</span>
+                <span>Nettsider som ikke bare er pene, men som faktisk har retning, identitet og kommersiell verdi.</span>
               </div>
             </div>
           </div>
 
           <aside class="hero-panel">
             <div class="panel-inner">
-              <div class="panel-badge">Preview / Netrivo</div>
+              <div class="panel-badge">Netrivo / portefølje</div>
 
               <div>
                 <div class="panel-card">
-                  <div class="panel-title">Fra enkelt og tydelig til mer eksklusivt og mer identitetsdrevet.</div>
-                  <div class="panel-copy">Porteføljen er bygget for å vise nivåforskjeller som faktisk gir mening for kunden – ikke bare tre nesten like varianter.</div>
+                  <div class="panel-title">Tre nivåer. Flere tydelige retninger.</div>
+                  <div class="panel-copy">Porteføljen er bygget for å vise reelle forskjeller i uttrykk, verdi og posisjonering — ikke bare små variasjoner av samme side.</div>
                 </div>
                 <div class="panel-card">
-                  <div class="panel-title">Én retning på desktop. Én tilpasset versjon på mobil.</div>
-                  <div class="panel-copy">Hvert nivå kan vises både som fullversjon og som mobilopplevelse, koblet sammen som en del av samme produkt.</div>
+                  <div class="panel-title">Desktop og mobil som ett produkt.</div>
+                  <div class="panel-copy">Flere av demoene er nå koblet med egne mobilretninger, slik at kunden opplever en mer komplett og mer gjennomarbeidet løsning.</div>
                 </div>
               </div>
             </div>
@@ -1266,7 +1258,7 @@
             <h2>Nettsider for bedrifter som bryr seg om hvordan de blir oppfattet.</h2>
           </div>
           <div class="section-copy">
-            Dette handler ikke bare om å være synlig. Det handler om å se mer relevant, mer pålitelig og mer gjennomarbeidet ut for dem som vurderer deg.
+            Dette handler ikke bare om å være synlig. Det handler om å se mer relevant, mer gjennomarbeidet og mer verdifull ut for dem som vurderer deg.
           </div>
         </div>
 
@@ -1275,28 +1267,31 @@
             <div class="service-index">01 / Posisjonering</div>
             <div>
               <h3>Tydeligere digital identitet</h3>
-              <p>Jeg utvikler et uttrykk som gjør at virksomheten din fremstår skarpere og mer bevisst.</p>
+              <p>Retningen formes slik at virksomheten fremstår skarpere, mer bevisst og mer interessant å velge.</p>
             </div>
           </article>
+
           <article class="service">
             <div class="service-index">02 / Design</div>
             <div>
               <h3>Mer bevisst art direction</h3>
-              <p>Farger, typografi og komposisjon brukes aktivt for å gi siden en tydeligere karakter.</p>
+              <p>Farger, typografi og komposisjon brukes aktivt for å gi siden tydeligere karakter og høyere opplevd kvalitet.</p>
             </div>
           </article>
+
           <article class="service">
-            <div class="service-index">03 / Build</div>
+            <div class="service-index">03 / Opplevelse</div>
             <div>
               <h3>Desktop og mobil som helhet</h3>
-              <p>Fullversjon og mobilversjon kan kobles sammen som én samlet produktopplevelse.</p>
+              <p>Fullversjon og mobilversjon kan kobles sammen som én samlet produktopplevelse, ikke som en ettertanke.</p>
             </div>
           </article>
+
           <article class="service">
-            <div class="service-index">04 / Presence</div>
+            <div class="service-index">04 / Verdi</div>
             <div>
-              <h3>Mer opplevd verdi</h3>
-              <p>Målet er at hele virksomheten din skal fremstå mer verdifull, ikke bare mer synlig.</p>
+              <h3>Mer opplevd kvalitet</h3>
+              <p>Målet er at hele virksomheten skal fremstå mer verdifull, ikke bare mer synlig.</p>
             </div>
           </article>
         </div>
@@ -1315,10 +1310,10 @@
         <div class="section-head">
           <div>
             <div class="kicker">Arbeid</div>
-            <h2>Tre nivåer med tydelig forskjell i uttrykk og verdi.</h2>
+            <h2>Tre nivåer med tydelig forskjell i uttrykk, energi og posisjon.</h2>
           </div>
           <div class="section-copy">
-            Demoene er organisert slik at kunden lettere kan forstå hva som faktisk skiller nivåene – ikke bare visuelt, men i hvor mye tillit og tyngde siden skaper.
+            Hvert nivå er bygget for å ha en tydelig rolle. Enkel skal være rask og lett å velge. Standard skal bygge mer tillit og mer struktur. Premium skal føles mer særegen, mer designet og mer verdifull.
           </div>
         </div>
 
@@ -1326,10 +1321,11 @@
           <div class="level-head">
             <div>
               <div class="level-badge">Enkel</div>
-              <div class="level-title">Varme, tydelige og lettfattelige nettsider for små konsepter og raske valg.</div>
+              <div class="level-title">Tydelige og lettfattelige nettsider for små konsepter, lokale tjenester og raske valg.</div>
+              <div class="level-note">Lav terskel. Klart budskap. Rask kontakt.</div>
             </div>
             <div class="section-copy">
-              Enkel skal være oversiktlig, vennlig og lett å bruke. Fokus er på tydelig budskap, enkel kontakt og lav terskel for handling.
+              Enkel er nivået for bedrifter som trenger noe ryddig, direkte og lett å bruke. Her er målet å gjøre det enkelt å forstå tilbudet og enkelt å ta kontakt.
             </div>
           </div>
 
@@ -1339,7 +1335,7 @@
                 <div class="simple-inner">
                   <div class="left-pane">
                     <div class="small-label">Enkel / lokal kafé</div>
-                    <div class="simple-title" style="font-size:2.35rem; max-width:320px; margin-top:14px;">En lun og innbydende side for en lokal kafé.</div>
+                    <div class="simple-title" style="font-size:2.2rem; max-width:320px; margin-top:14px;">En lun og innbydende side for en lokal kafé.</div>
                     <div class="preview-pill-row">
                       <div class="preview-pill">Varme toner og lav terskel for kontakt</div>
                       <div class="preview-pill">Passer for kafé, bakeri og mindre serveringssted</div>
@@ -1354,7 +1350,7 @@
               <div class="simple-meta">
                 <div class="small-label">Demo 01</div>
                 <div class="simple-title">Kafé / servering</div>
-                <div class="simple-copy">En enkel side som føles hyggelig, varm og lett å velge videre fra.</div>
+                <div class="simple-copy">En varm og vennlig enkel-side som bygger nærhet og gjør det lett å ta kontakt.</div>
                 <div class="card-link">Åpne demo →</div>
               </div>
             </a>
@@ -1364,7 +1360,7 @@
                 <div class="simple-inner">
                   <div class="build-left">
                     <div class="small-label">Enkel / håndverker</div>
-                    <div class="simple-title" style="font-size:2.15rem; margin-top:14px;">En tydelig side som gjør det lett å velge deg.</div>
+                    <div class="simple-title" style="font-size:2.05rem; margin-top:14px;">En tydelig side som gjør det lett å velge deg.</div>
                   </div>
                   <div class="build-right">
                     <div class="build-panel">Rett på sak</div>
@@ -1375,7 +1371,7 @@
               <div class="simple-meta">
                 <div class="small-label">Demo 02</div>
                 <div class="simple-title">Håndverker / service</div>
-                <div class="simple-copy">Mer direkte og mer praktisk, med fokus på raske henvendelser og et tydelig tilbud.</div>
+                <div class="simple-copy">Mer direkte og mer praktisk, bygget for raske henvendelser og enkel vei til kontakt.</div>
                 <div class="card-link">Åpne demo →</div>
               </div>
             </a>
@@ -1385,7 +1381,7 @@
                 <div class="simple-inner">
                   <div class="fit-left">
                     <div class="small-label">Enkel / helse og trening</div>
-                    <div class="simple-title" style="font-size:2.15rem; margin-top:14px;">En energisk side med lav terskel for booking.</div>
+                    <div class="simple-title" style="font-size:2.05rem; margin-top:14px;">En energisk side med lav terskel for booking.</div>
                   </div>
                   <div class="fit-right">
                     <div class="fit-box">Mer driv i uttrykket</div>
@@ -1396,7 +1392,7 @@
               <div class="simple-meta">
                 <div class="small-label">Demo 03</div>
                 <div class="simple-title">PT / studio</div>
-                <div class="simple-copy">En enkel side med mer tempo og mer personlighet enn den klassiske malbaserte varianten.</div>
+                <div class="simple-copy">En mer aktiv enkel-retning for tjenester der personlighet og booking er en viktig del av salget.</div>
                 <div class="card-link">Åpne demo →</div>
               </div>
             </a>
@@ -1407,10 +1403,11 @@
           <div class="level-head">
             <div>
               <div class="level-badge">Standard</div>
-              <div class="level-title">Mer gjennomarbeidede nettsider for kunder som trenger mer struktur, mer troverdighet og mer ro.</div>
+              <div class="level-title">Mer gjennomarbeidede nettsider for kunder som trenger mer tillit, mer struktur og mer ro.</div>
+              <div class="level-note">Mer profesjonelt. Mer etablert. Mer troverdig.</div>
             </div>
             <div class="section-copy">
-              Standard skal oppleves som et tydelig steg opp. Mer profesjonelt, mer etablert og mer egnet for virksomheter som selger kompetanse, tillit og faglig tyngde.
+              Standard er nivået for bedrifter som trenger mer enn enkel. Her skal siden oppleves mer strukturert, mer troverdig og bedre egnet for kunder som velger leverandør ut fra kvalitet og trygghet.
             </div>
           </div>
 
@@ -1420,7 +1417,7 @@
                 <div class="standard-inner">
                   <div class="standard-left">
                     <div class="small-label">Standard / rådgiver og arkitekt</div>
-                    <div class="standard-title" style="font-size:2.25rem; margin-top:14px;">En profesjonell side som faktisk bygger tillit.</div>
+                    <div class="standard-title" style="font-size:2.15rem; margin-top:14px;">En profesjonell side som faktisk bygger tillit.</div>
                     <div class="standard-box-row">
                       <div class="standard-box">Mer struktur og mer autoritet</div>
                       <div class="standard-box">Passer for rådgivere, arkitekter og fagmiljøer</div>
@@ -1435,7 +1432,7 @@
               <div class="standard-meta">
                 <div class="small-label">Demo 04</div>
                 <div class="standard-title">Rådgiver / arkitekt</div>
-                <div class="standard-copy">Et nivå som føles tydelig mer gjennomarbeidet enn enkel, men uten å være like dramatisk som premium.</div>
+                <div class="standard-copy">Et tydelig steg opp fra enkel, for kunder som må se mer profesjonelle og mer gjennomarbeidede ut.</div>
                 <div class="card-link">Åpne demo →</div>
               </div>
             </a>
@@ -1445,7 +1442,7 @@
                 <div class="standard-inner">
                   <div>
                     <div class="small-label">Standard / rådgivning og økonomi</div>
-                    <div class="standard-title" style="font-size:2.1rem; margin-top:14px;">En troverdig side for virksomheter som må virke trygge og presise.</div>
+                    <div class="standard-title" style="font-size:2.02rem; margin-top:14px;">En troverdig side for virksomheter som må virke trygge og presise.</div>
                   </div>
                   <div class="standard-box-row">
                     <div class="standard-box">Formell og autoritetsbasert</div>
@@ -1456,7 +1453,7 @@
               <div class="standard-meta">
                 <div class="small-label">Demo 05</div>
                 <div class="standard-title">Rådgivning / økonomi</div>
-                <div class="standard-copy">En trygg og konservativ retning for virksomheter der tillit og ryddighet er avgjørende.</div>
+                <div class="standard-copy">En mer konservativ og trygg standardretning for virksomheter der tillit og ryddighet er avgjørende.</div>
                 <div class="card-link">Åpne demo →</div>
               </div>
             </a>
@@ -1466,7 +1463,7 @@
                 <div class="standard-inner">
                   <div>
                     <div class="small-label">Standard / opplevelse og reiseliv</div>
-                    <div class="standard-title" style="font-size:2.1rem; margin-top:14px;">En mer levende standardside for opplevelser og aktivitet.</div>
+                    <div class="standard-title" style="font-size:2.02rem; margin-top:14px;">En mer levende standardside for opplevelser og aktivitet.</div>
                   </div>
                   <div class="standard-box-row">
                     <div class="standard-box">Mer stemning og mer tematikk</div>
@@ -1477,7 +1474,7 @@
               <div class="standard-meta">
                 <div class="small-label">Demo 06</div>
                 <div class="standard-title">Opplevelse / reiseliv</div>
-                <div class="standard-copy">Viser at standard også kan være karaktersterkt og mer visuelt levende uten å gå helt premium.</div>
+                <div class="standard-copy">Viser at standard også kan være mer inspirerende og mer tematisk uten å gå helt premium.</div>
                 <div class="card-link">Åpne demo →</div>
               </div>
             </a>
@@ -1488,10 +1485,11 @@
           <div class="level-head">
             <div>
               <div class="level-badge">Premium</div>
-              <div class="level-title">Mer særpreg, mer sceneplass og mye høyere opplevd verdi.</div>
+              <div class="level-title">Mye mer særpreg, mye mer sceneplass og mye høyere opplevd verdi.</div>
+              <div class="level-note">Mer eksklusivt. Mer iscenesatt. Mer identitetsdrevet.</div>
             </div>
             <div class="section-copy">
-              Premium skal oppleves som et tydelig løft. Mer identitet, mer art direction, mer redaksjonell kontroll og en sterkere følelse av at dette er et mer eksklusivt produkt.
+              Premium er nivået for kunder som vil ha mer enn en fin nettside. Her bygges en tydeligere følelse, sterkere art direction og en mer eksklusiv opplevelse som løfter hele merkevaren.
             </div>
           </div>
 
@@ -1513,12 +1511,12 @@
                   <div class="premium-title">Boutique / luksus</div>
                 </div>
                 <div class="premium-copy">
-                  Den varme premiumvarianten. Laget for kunder som vil ha mer pondus, mer ro og en sterkere følelse av kvalitet og eksklusivitet.
+                  Den varme premiumretningen. Laget for kunder som vil ha mer pondus, mer ro og et uttrykk som støtter høyere pris og tydeligere premiumfølelse.
                 </div>
                 <div class="premium-points">
                   <div>Kuraterte flater og mer redaksjonell rytme</div>
-                  <div>Støtter høyere pris og en sterkere premiumfølelse</div>
-                  <div>Tydelig mer eksklusiv enn standard og enkel</div>
+                  <div>Mer eksklusiv enn både standard og enkel</div>
+                  <div>Bygget for premium opplevelse, ikke bare visuell pynt</div>
                 </div>
                 <div class="premium-link">Åpne demo →</div>
               </div>
@@ -1532,7 +1530,7 @@
                 </div>
                 <div class="premium-subgrid">
                   <div class="premium-box">Mørk, glassaktig og mer avansert digital identitet.</div>
-                  <div class="premium-box">Passer for SaaS, AI, programvare, apper og plattformer.</div>
+                  <div class="premium-box">Passer for SaaS, AI, programvare, app og plattform.</div>
                 </div>
               </div>
               <div class="premium-meta">
@@ -1541,12 +1539,12 @@
                   <div class="premium-title">Tech / SaaS</div>
                 </div>
                 <div class="premium-copy">
-                  En helt annen premiumretning enn boutique og luksus. Perfekt når produktet selv skal virke mer avansert og mer påkostet.
+                  En helt annen premiumretning enn boutique og luksus. Perfekt når produktet selv skal virke mer avansert, mer utviklet og mer påkostet.
                 </div>
                 <div class="premium-points">
-                  <div>High-tech premium i stedet for varm luksus</div>
-                  <div>God for dashboards, produktvisning og funksjoner</div>
-                  <div>Bygget for merkevarer som vil se mer utviklet ut enn konkurrentene</div>
+                  <div>Tech-premium i stedet for varm luksus</div>
+                  <div>God for produkter, funksjoner, dashboards og plattform</div>
+                  <div>Bygget for merkevarer som vil se mer moderne og mer modne ut</div>
                 </div>
                 <div class="premium-link">Åpne demo →</div>
               </div>
@@ -1569,12 +1567,12 @@
                   <div class="premium-title">Personlig brand</div>
                 </div>
                 <div class="premium-copy">
-                  En premiumløsning bygget rundt person, autoritet og identitet. Denne retningen er mer menneskelig og mer redaksjonell enn de andre premiumdemoene.
+                  En premiumløsning bygget rundt person, autoritet og identitet. Denne retningen er mer menneskelig og mer redaksjonell enn de andre premium-demoene.
                 </div>
                 <div class="premium-points">
-                  <div>Bygget for ekspertrolle, signatur og en sterkere personlig profil</div>
-                  <div>Oppleves mer redaksjonell enn systemorientert</div>
-                  <div>Tydelig annerledes enn både boutique- og tech-premium</div>
+                  <div>Bygget for ekspertrolle, signatur og sterkere personlig profil</div>
+                  <div>Mer redaksjonell enn systemorientert</div>
+                  <div>Tydelig annerledes enn både boutique og tech-premium</div>
                 </div>
                 <div class="premium-link">Åpne demo →</div>
               </div>
@@ -1589,10 +1587,10 @@
         <div class="section-head">
           <div>
             <div class="kicker">Mobil</div>
-            <h2>Tre mobilretninger som henger sammen med nivåene over.</h2>
+            <h2>Mobil er en del av opplevelsen, ikke bare en krympet versjon.</h2>
           </div>
           <div class="section-copy">
-            Mobil skal ikke bare være en krympet versjon. Disse tre demoene viser hvordan hver retning også kan fungere som en tydelig mobilopplevelse med egen rytme og egen prioritering.
+            Mobilvisningene er bygget for å støtte samme nivåforskjeller som desktop. Det betyr at enkel fortsatt er enkel, standard fortsatt føles mer strukturert, og premium fortsatt oppleves som mer eksklusivt.
           </div>
         </div>
 
@@ -1608,19 +1606,19 @@
                     <div class="phone-chip">Bygget for enkel kontakt</div>
                     <div class="phone-chip">Passer for små konsepter og raske valg</div>
                   </div>
-                  <div class="phone-action">Se mobil demo</div>
+                  <div class="phone-action">Åpne mobilretning</div>
                 </div>
               </div>
             </div>
             <div class="mobile-meta">
-              <div class="small-label">Mobil demo 01</div>
+              <div class="small-label">Mobilnivå 01</div>
               <div class="mobile-title">Mobil Enkel</div>
-              <div class="mobile-copy">Koblet til enkel-nivået og laget for små bedrifter som trenger en ryddig og varm mobilopplevelse.</div>
+              <div class="mobile-copy">Den enkleste mobilretningen: tydelig, varm og bygget for raske valg og lav terskel for kontakt.</div>
               <div class="card-link">Åpne demo →</div>
             </div>
           </a>
 
-          <a class="mobile-card" href="./netrivo-mobil-standard.html">
+          <a class="mobile-card" href="./netrivo-mobil-standard-radgiving.html">
             <div class="phone-shell mobile-standard">
               <div class="phone-screen">
                 <div class="phone-content">
@@ -1631,37 +1629,37 @@
                     <div class="phone-chip">Mer autoritet og mer ro</div>
                     <div class="phone-chip">Passer for rådgivere og fagmiljøer</div>
                   </div>
-                  <div class="phone-action">Se mobil demo</div>
+                  <div class="phone-action">Åpne mobilretning</div>
                 </div>
               </div>
             </div>
             <div class="mobile-meta">
-              <div class="small-label">Mobil demo 02</div>
+              <div class="small-label">Mobilnivå 02</div>
               <div class="mobile-title">Mobil Standard</div>
-              <div class="mobile-copy">Koblet til standard-nivået og laget for virksomheter som trenger mer innhold og mer troverdighet på mobil.</div>
+              <div class="mobile-copy">Et tryggere og mer profesjonelt mobilnivå for virksomheter som trenger mer struktur og mer troverdighet.</div>
               <div class="card-link">Åpne demo →</div>
             </div>
           </a>
 
-          <a class="mobile-card" href="./netrivo-mobil-premium.html">
-            <div class="phone-shell mobile-premium">
+          <a class="mobile-card" href="./netrivo-mobil-premium-boutique.html">
+            <div class="phone-shell mobile-premium boutique">
               <div class="phone-screen">
                 <div class="phone-content">
                   <div class="phone-topline">Mobil premium</div>
-                  <div class="phone-title">Mer identitet, mer sceneplass og mer verdi.</div>
-                  <div class="phone-copy">Sterkere visuell retning og tydelig premiumfølelse også på små skjermer.</div>
+                  <div class="phone-title">Mer ro, mer eksklusivitet og mer verdi.</div>
+                  <div class="phone-copy">Sterkere følelse, tydeligere identitet og mer premiumopplevelse også på små skjermer.</div>
                   <div class="phone-chip-row">
-                    <div class="phone-chip">Mer signatur og mer art direction</div>
-                    <div class="phone-chip">Passer for premium brand og ekspertprofil</div>
+                    <div class="phone-chip">Mer atmosfære og mer smak i uttrykket</div>
+                    <div class="phone-chip">Passer for premium brand og eksklusiv opplevelse</div>
                   </div>
-                  <div class="phone-action">Se mobil demo</div>
+                  <div class="phone-action">Åpne mobilretning</div>
                 </div>
               </div>
             </div>
             <div class="mobile-meta">
-              <div class="small-label">Mobil demo 03</div>
+              <div class="small-label">Mobilnivå 03</div>
               <div class="mobile-title">Mobil Premium</div>
-              <div class="mobile-copy">Koblet til premium-nivået og laget for kunder som vil at mobil også skal føles eksklusiv og tydelig designet.</div>
+              <div class="mobile-copy">Et mer eksklusivt mobilnivå som viser at også små skjermer kan føles kuraterte, designede og tydelig premium.</div>
               <div class="card-link">Åpne demo →</div>
             </div>
           </a>
@@ -1685,22 +1683,22 @@
           <article class="step">
             <small>01</small>
             <strong>Posisjonering</strong>
-            <p>Jeg definerer hvilket inntrykk merkevaren skal gi, og hvilket nivå siden faktisk trenger.</p>
+            <p>Først defineres hvilket inntrykk virksomheten skal gi, og hvilket nivå som faktisk passer best.</p>
           </article>
           <article class="step">
             <small>02</small>
             <strong>Retning</strong>
-            <p>Layout, farger, typografi og komposisjon velges for å skape en tydeligere følelse og mer verdi.</p>
+            <p>Layout, farger, typografi og komposisjon formes for å gi mer verdi, mer tillit og tydeligere identitet.</p>
           </article>
           <article class="step">
             <small>03</small>
-            <strong>Utføring</strong>
-            <p>Retningen bygges ut i en desktopversjon og kan kobles direkte med en mobiltilpasset variant.</p>
+            <strong>Opplevelse</strong>
+            <p>Retningen bygges ut i desktop og kan kobles med en egen mobilversjon som støtter samme nivå og samme følelse.</p>
           </article>
           <article class="step">
             <small>04</small>
-            <strong>Lansering</strong>
-            <p>Resultatet er en side som ikke bare fungerer, men som også styrker hvordan virksomheten blir oppfattet.</p>
+            <strong>Resultat</strong>
+            <p>Du står igjen med en side som ikke bare fungerer, men som også styrker hvordan virksomheten blir oppfattet.</p>
           </article>
         </div>
       </div>
@@ -1722,12 +1720,12 @@
             <strong>post@netrivo.no</strong>
           </div>
           <div class="contact-item">
-            <small>Tilgjengelighet</small>
-            <strong>Åpen for utvalgte prosjekter med høye krav til uttrykk, struktur og kvalitet</strong>
+            <small>Passer for</small>
+            <strong>Småbedrifter, konsulenter, fagmiljøer, opplevelseskonsepter og tjenester som vil ha en sterkere digital fremtoning</strong>
           </div>
           <div class="contact-item">
-            <small>Passer for</small>
-            <strong>Småbedrifter, konsulenter, fagmiljøer og tjenestevirksomheter som vil ha en sterkere digital fremtoning</strong>
+            <small>Leveranse</small>
+            <strong>Konsept, designretning, gjennomført desktop-uttrykk og mobiltilpasset opplevelse</strong>
           </div>
           <a class="btn btn-primary" href="mailto:post@netrivo.no">Send melding</a>
         </div>
