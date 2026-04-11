@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Premium – Boutique og luksus</title>
+  <meta name="description" content="Mobil premiumside for boutique-hoteller, high-end opplevelser, eksklusive tjenester og merkevarer som vil fremstå dyrere og mer gjennomarbeidet." />
+  <style>
+    :root {
+      --ink: #181512;
+      --muted: #6c6259;
+      --line: rgba(24,21,18,0.08);
+      --paper: rgba(255,255,255,0.84);
+      --shadow: 0 24px 70px rgba(31, 22, 16, 0.10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(181,138,90,0.12), transparent 26%),
+        linear-gradient(180deg, #faf6f0 0%, #f2ebe3 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(250,246,240,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(24,21,18,0.06);
+    }
+
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #2d1f18, #8a6140);
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 16px 0 34px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding-top: 6px;
+    }
+
+    .hero-card {
+      padding: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -16%;
+      bottom: -18%;
+      width: 62%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(24,21,18,0.08);
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-size: clamp(2.45rem, 12vw, 4.3rem);
+      line-height: 0.90;
+      letter-spacing: -0.06em;
+      max-width: 340px;
+    }
+
+    .lead {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.98rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #181512;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.88);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-panel {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #241914, #6f4a34 58%, #201713);
+      color: #f8efe5;
+      display: grid;
+      gap: 12px;
+    }
+
+    .panel-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel-box strong {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-box span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(248,239,229,0.82);
+      line-height: 1.56;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 0;
+      font-size: 1.58rem;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 330px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 13px;
+      border-radius: 16px;
+      background: #f4ede5;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .quote-card {
+      padding: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(231,220,209,0.76));
+    }
+
+    .quote-card p {
+      margin: 10px 0 0;
+      color: #5f554d;
+      line-height: 1.74;
+      font-size: 0.98rem;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.98rem;
+      line-height: 1.52;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">MF</div>
+        <div class="brand-copy">
+          <strong>Maison Fjell</strong>
+          <span>Boutique og eksklusiv opplevelse</span>
+        </div>
+      </div>
+      <div class="top-note">Mobil Premium</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / premium boutique</div>
+        <h1>Mer ro, mer eksklusivitet og høyere opplevd verdi.</h1>
+        <p class="lead">
+          Denne mobilversjonen er laget for boutique-hoteller, high-end opplevelser, eksklusive tjenester og merkevarer som vil fremstå mer kuraterte, mer luksuriøse og mer gjennomarbeidede.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Book møte</a>
+          <a class="btn btn-secondary" href="./netrivo-premium-1-boutique.html?view=desktop">Se full versjon</a>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-box">
+            <strong>Varm og eksklusiv retning</strong>
+            <span>Denne premiumvarianten handler om atmosfære, smak og høy opplevd kvalitet.</span>
+          </div>
+          <div class="panel-box">
+            <strong>For kunder som vil se dyrere ut</strong>
+            <span>Passer godt når uttrykket skal støtte pris, kvalitet og en tydeligere premiumposisjon.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="opplevelse">
+      <div class="section-head">
+        <div class="kicker">Opplevelse</div>
+        <h2>Premium også på små skjermer.</h2>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h3>Mer opplevd kvalitet</h3>
+          <p>Denne mobilretningen er bygget for å føles mer kuratert, mer rolig og mer luksuriøs enn vanlige mobiloppsett.</p>
+          <div class="mini-grid">
+            <div class="mini">Mer atmosfære og mer smak i uttrykket</div>
+            <div class="mini">God for boutique-hotell, premium service og eksklusive konsepter</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h3>Bygget for merkevareløft</h3>
+          <p>Mobilopplevelsen skal ikke bare fungere, men også bidra til at hele virksomheten oppleves som mer gjennomarbeidet og mer verdifull.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="card quote-card">
+        <div class="kicker">Retning</div>
+        <p>
+          Premium i denne formen handler ikke om å vise mest mulig. Det handler om å vise akkurat nok, med ro, kvalitet og kontroll. Det er det som gjør at uttrykket føles dyrere.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h2>Bygget for høyere opplevd verdi.</h2>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>Boutique-hotell, high-end opplevelser, eksklusive tjenester og premium brands som vil se mer gjennomarbeidede og dyrere ut.</strong>
+        </div>
+        <div class="contact-item">
+          <small>Kobling</small>
+          <strong>Denne siden er koblet direkte til desktop-versjonen og kan vises automatisk på små skjermer.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isDesktop = window.innerWidth > 768;
+
+      if (forceView !== "mobile" && isDesktop) {
+        window.location.href = "./netrivo-premium-1-boutique.html";
+      }
+    })();
+  </script>
+</body>
+</html>
