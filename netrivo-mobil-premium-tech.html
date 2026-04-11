@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobil Premium – Tech brand</title>
+  <meta name="description" content="Mobil premiumside for tech-brand, SaaS, AI, programvare og moderne digitale produkter." />
+  <style>
+    :root {
+      --bg: #090b12;
+      --ink: #f6f7fb;
+      --muted: #b4b8c8;
+      --line: rgba(255,255,255,0.10);
+      --shadow: 0 24px 70px rgba(0,0,0,0.34);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(98,0,255,0.24), transparent 26%),
+        radial-gradient(circle at 86% 18%, rgba(0,180,255,0.18), transparent 24%),
+        linear-gradient(180deg, #090b12 0%, #11182b 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(9,11,18,0.84);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #6b4bff, #0b1220);
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+      color: white;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: min(460px, calc(100% - 20px));
+      margin: 0 auto;
+      padding: 16px 0 34px;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding-top: 6px;
+    }
+
+    .hero-card {
+      padding: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -16%;
+      bottom: -18%;
+      width: 62%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-size: clamp(2.45rem, 12vw, 4.3rem);
+      line-height: 0.90;
+      letter-spacing: -0.06em;
+      max-width: 340px;
+      color: white;
+    }
+
+    .lead {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.98rem;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #090b12;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+      color: white;
+    }
+
+    .hero-panel {
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .glass-box {
+      padding: 16px;
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .glass-box strong {
+      display: block;
+      font-size: 1.04rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: white;
+    }
+
+    .glass-box span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.56;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 0;
+      font-size: 1.58rem;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      color: white;
+      max-width: 330px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: white;
+    }
+
+    .info-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 13px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #eef3ff;
+    }
+
+    .quote-card {
+      padding: 20px;
+      background:
+        radial-gradient(circle at top left, rgba(98,0,255,0.14), transparent 30%),
+        linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+
+    .quote-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.74;
+      font-size: 0.98rem;
+    }
+
+    .contact-card {
+      padding: 20px;
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.98rem;
+      line-height: 1.52;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">SX</div>
+        <div class="brand-copy">
+          <strong>Syntrix</strong>
+          <span>Tech brand og moderne produkt</span>
+        </div>
+      </div>
+      <div class="top-note">Mobil Premium</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-card">
+        <div class="tag">Mobil demo / premium tech</div>
+        <h1>Mer avansert, mer digital og mer påkostet.</h1>
+        <p class="lead">
+          Denne mobilversjonen er laget for tech-brand, SaaS, AI og moderne produkter som trenger en tydelig premiumfølelse også på små skjermer.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Be om demo</a>
+          <a class="btn btn-secondary" href="./netrivo-premium-2-tech.html?view=desktop">Se full versjon</a>
+        </div>
+
+        <div class="hero-panel">
+          <div class="glass-box">
+            <strong>Premium tech uten å bli generisk</strong>
+            <span>Uttrykket er mørkt, moderne og mer særpreget enn en vanlig startup-mal.</span>
+          </div>
+          <div class="glass-box">
+            <strong>Bygget for digitale produkter</strong>
+            <span>Passer godt når produkt, funksjoner og plattform er en sentral del av salget.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="section-head">
+        <div class="kicker">Retning</div>
+        <h2>Premium også i mobilformat.</h2>
+      </div>
+
+      <div class="stack">
+        <div class="card info-card">
+          <h3>High-tech uttrykk</h3>
+          <p>Denne mobilretningen er bygget for å føles mer avansert, mer moderne og mer produktdrevet enn de andre premium-variantene.</p>
+          <div class="mini-grid">
+            <div class="mini">Mørk base, glassflater og tydelig kontrast</div>
+            <div class="mini">God for SaaS, AI, programvare og plattformer</div>
+          </div>
+        </div>
+
+        <div class="card info-card">
+          <h3>Bygget for produktpresentasjon</h3>
+          <p>Mobilopplevelsen gir plass til å formidle funksjoner, produktlogikk og teknologisk modenhet uten å miste tempo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="retning">
+      <div class="card quote-card">
+        <div class="kicker">Hvorfor denne fungerer</div>
+        <p>
+          Premium i tech-sammenheng handler ikke bare om mørke farger og effekter. Det handler om å skape en tydelig opplevelse av innovasjon, produktkvalitet og teknologisk modenhet.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="section-head">
+        <div class="kicker">Kontakt</div>
+        <h2>Bygget for høyere opplevd verdi.</h2>
+      </div>
+
+      <div class="card contact-card">
+        <div class="contact-item">
+          <small>Passer best til</small>
+          <strong>SaaS, AI, programvare, apper, tech-brand og plattformer som vil ha et mer avansert digitalt uttrykk.</strong>
+        </div>
+        <div class="contact-item">
+          <small>Kobling</small>
+          <strong>Denne siden er koblet direkte til tech premium desktop-versjonen og kan vises automatisk på små skjermer.</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isDesktop = window.innerWidth > 768;
+
+      if (forceView !== "mobile" && isDesktop) {
+        window.location.href = "./netrivo-premium-2-tech.html";
+      }
+    })();
+  </script>
+</body>
+</html>
