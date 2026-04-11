@@ -1,301 +1,597 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Standard – Rådgiver / Arkitekt</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard – Rådgiver / Arkitekt</title>
+  <meta name="description" content="En gjennomarbeidet nettside for rådgivere, arkitekter og fagmiljøer som trenger mer struktur, mer tillit og et tydeligere uttrykk." />
+  <style>
+    :root {
+      --bg: #eef3f7;
+      --paper: #ffffff;
+      --ink: #121316;
+      --muted: #5c6670;
+      --line: rgba(18, 19, 22, 0.08);
+      --accent: #2f3b52;
+      --accent-soft: #e3eaf2;
+      --shadow: 0 30px 80px rgba(20, 25, 40, 0.08);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
 
-<style>
-:root {
-  --bg: #eef3f7;
-  --ink: #121316;
-  --muted: #5c6670;
-  --line: rgba(18,19,22,0.08);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-  --accent: #2f3b52;
-  --accent-soft: #e3eaf2;
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f6f9fb 0%, #e9f0f4 100%);
+    }
 
-  --card: white;
-  --shadow: 0 30px 80px rgba(20,25,40,0.08);
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-body {
-  margin: 0;
-  font-family: Inter, sans-serif;
-  background: linear-gradient(180deg, #f6f9fb 0%, #e9f0f4 100%);
-  color: var(--ink);
-}
+    .container {
+      width: min(1200px, calc(100% - 30px));
+      margin: 0 auto;
+    }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 30px;
-}
+    .topbar {
+      padding: 16px 0 0;
+    }
 
-/* HEADER */
-.topbar {
-  padding: 16px 0;
-}
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
 
-.topbar-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 16px 22px;
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.brand {
-  font-weight: 700;
-}
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.82rem;
+    }
 
-.nav {
-  display: flex;
-  gap: 24px;
-  color: var(--muted);
-}
+    .brand-copy strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
 
-/* HERO */
-.hero {
-  margin-top: 30px;
-}
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
 
-.hero-box {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 24px;
-  padding: 40px;
-  background: white;
-  border-radius: 28px;
-  box-shadow: var(--shadow);
-}
+    .nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
 
-.hero-left h1 {
-  font-size: 3.5rem;
-  line-height: 1;
-  margin: 0;
-}
+    .hero {
+      padding: 26px 0 0;
+    }
 
-.hero-left p {
-  margin-top: 20px;
-  color: var(--muted);
-  line-height: 1.7;
-}
+    .hero-box {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+      padding: 42px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.86);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
 
-.actions {
-  margin-top: 25px;
-  display: flex;
-  gap: 12px;
-}
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.btn {
-  padding: 14px 20px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #f4f8fb;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      width: fit-content;
+    }
 
-.primary {
-  background: var(--ink);
-  color: white;
-}
+    h1 {
+      margin: 20px 0 0;
+      font-size: clamp(3rem, 8vw, 5.8rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      max-width: 680px;
+    }
 
-.secondary {
-  border: 1px solid var(--line);
-}
+    .lead {
+      margin-top: 20px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.05rem;
+      max-width: 620px;
+    }
 
-/* RIGHT PANEL – GJORT MYKJE MEIR VISUELL */
-.hero-right {
-  border-radius: 24px;
-  padding: 24px;
-  background: linear-gradient(145deg, #2f3b52, #151a24);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-.panel {
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.08);
-}
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      transition: transform .18s ease, background .18s ease;
+    }
 
-.panel strong {
-  display: block;
-  font-size: 1.2rem;
-}
+    .btn:hover {
+      transform: translateY(-1px);
+    }
 
-.panel span {
-  display: block;
-  margin-top: 6px;
-  opacity: 0.85;
-}
+    .btn-primary {
+      background: var(--ink);
+      color: white;
+    }
 
-/* NY SEKSJON – GIR LIV */
-.highlight {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+    .btn-secondary {
+      background: white;
+      border-color: var(--line);
+      color: var(--ink);
+    }
 
-.highlight-box {
-  padding: 26px;
-  border-radius: 24px;
-  background: linear-gradient(145deg, #e3eaf2, #d5e0ea);
-}
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 38px;
+    }
 
-.highlight-box strong {
-  display: block;
-  font-size: 1.4rem;
-}
+    .metric {
+      padding-top: 18px;
+      border-top: 1px solid rgba(18,19,22,0.1);
+    }
 
-/* GRID */
-.grid {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+    .metric strong {
+      display: block;
+      font-size: 1.22rem;
+      letter-spacing: -0.04em;
+    }
 
-.card {
-  background: white;
-  padding: 24px;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-}
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.9rem;
+    }
 
-.card h3 {
-  margin: 0;
-}
+    .hero-right {
+      border-radius: 28px;
+      padding: 24px;
+      background: linear-gradient(145deg, #2f3b52, #151a24);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.card p {
-  margin-top: 10px;
-  color: var(--muted);
-}
+    .hero-right::after {
+      content: "";
+      position: absolute;
+      right: -14%;
+      bottom: -18%;
+      width: 70%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
 
-/* CONTACT */
-.contact {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+    .panel {
+      position: relative;
+      z-index: 1;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
 
-@media(max-width: 900px){
-  .hero-box,
-  .highlight,
-  .grid,
-  .contact {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+    .panel strong {
+      display: block;
+      font-size: 1.18rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .panel span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.58;
+      font-size: 0.94rem;
+    }
+
+    .section {
+      padding: 44px 0 0;
+    }
+
+    .highlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .highlight-box {
+      padding: 26px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #e8eff5, #d8e4ee);
+      border: 1px solid rgba(18,19,22,0.06);
+      box-shadow: var(--shadow);
+    }
+
+    .highlight-box strong {
+      display: block;
+      font-size: 1.38rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .highlight-box p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.96rem;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    .section-head h2 {
+      margin: 10px 0 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+      max-width: 720px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.34rem;
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+
+    .card p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .quote-band {
+      padding: 30px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(227,234,242,0.72));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .quote-band p {
+      margin: 10px 0 0;
+      max-width: 860px;
+      color: #56626e;
+      line-height: 1.82;
+      font-size: 1.03rem;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding-bottom: 84px;
+    }
+
+    .contact-card {
+      padding: 28px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-item + .contact-item {
+      margin-top: 16px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 980px) {
+      .hero-box,
+      .hero-metrics,
+      .highlight,
+      .section-head,
+      .grid,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-box,
+      .hero-right,
+      .highlight-box,
+      .card,
+      .quote-band,
+      .contact-card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(1200px, calc(100% - 20px));
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="container">
-
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">Nordic Rådgivning</div>
-      <div class="nav">
-        <span>Tjenester</span>
-        <span>Prosjekter</span>
-        <span>Kontakt</span>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">NR</div>
+        <div class="brand-copy">
+          <strong>Nordic Rådgivning</strong>
+          <span>Rådgiver og fagmiljø</span>
+        </div>
       </div>
+      <nav class="nav">
+        <a href="#tjenester">Tjenester</a>
+        <a href="#hvorfor">Hvorfor dette fungerer</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <section class="hero">
-    <div class="hero-box">
+  <main class="container">
+    <section class="hero">
+      <div class="hero-box">
+        <div class="hero-left">
+          <div>
+            <div class="eyebrow">Standard demo / rådgiver og arkitekt</div>
+            <h1>En profesjonell side som faktisk bygger tillit.</h1>
+            <p class="lead">
+              Denne demoen viser et tydelig steg opp fra enkel-nivået. Mer struktur, mer design og mer autoritet – uten at det blir tungt eller stivt. Den passer for virksomheter som selger kompetanse, tillit og faglig tyngde.
+            </p>
 
-      <div class="hero-left">
-        <h1>Ei profesjonell side som faktisk bygger tillit.</h1>
+            <div class="actions">
+              <a class="btn btn-primary" href="#kontakt">Be om møte</a>
+              <a class="btn btn-secondary" href="./netrivo-mobil-standard.html?view=mobile">Se mobilversjon</a>
+            </div>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric">
+              <strong>Mer struktur</strong>
+              <span>Informasjonen organiseres slik at kunden raskt skjønner hva du tilbyr.</span>
+            </div>
+            <div class="metric">
+              <strong>Mer tillit</strong>
+              <span>Uttrykket føles mer etablert og mer egnet for profesjonelle kunder.</span>
+            </div>
+            <div class="metric">
+              <strong>Mer tyngde</strong>
+              <span>Et tydelig mellomnivå for kunder som trenger mer enn en enkel side.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-right">
+          <div class="panel">
+            <strong>Struktur og klarhet</strong>
+            <span>Informasjonen er organisert for profesjonelle kunder som trenger oversikt og trygghet.</span>
+          </div>
+
+          <div class="panel">
+            <strong>Mer autoritet</strong>
+            <span>Gir et mer etablert og solid inntrykk enn en enklere og mer salgsdrevet side.</span>
+          </div>
+
+          <div class="panel">
+            <strong>Riktig for fagmiljøer</strong>
+            <span>Passer godt for rådgivere, arkitekter, konsulenter og tekniske fagmiljøer.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="highlight">
+        <div class="highlight-box">
+          <strong>Bygget for fagmiljøer</strong>
+          <p>Passer for virksomheter som må fremstå tydelige, profesjonelle og kompetente fra første inntrykk.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Et tydelig steg opp</strong>
+          <p>Mer struktur, bedre inntrykk og høyere opplevd verdi enn enkel-nivået.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tjenester">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Innhold</div>
+          <h2>Mer gjennomarbeidet, men fortsatt lett å forstå.</h2>
+        </div>
+        <div class="section-copy">
+          På dette nivået skal kunden oppleve mer ro, mer struktur og mer profesjonalitet. Målet er å gi virksomheten et mer troverdig uttrykk uten at siden blir tung eller overkomplisert.
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Tjenester</h3>
+          <p>Tydelig presentasjon av hva du tilbyr, hvem du hjelper og hvorfor du er et godt valg.</p>
+        </article>
+
+        <article class="card">
+          <h3>Prosjekter</h3>
+          <p>Viser erfaring, referanser og konkret arbeid på en måte som bygger tillit og tyngde.</p>
+        </article>
+
+        <article class="card">
+          <h3>Kontakt</h3>
+          <p>Gjør det enklere for kunden å ta neste steg med lav friksjon og tydelige veier videre.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="hvorfor">
+      <div class="quote-band">
+        <div class="kicker">Hvorfor denne fungerer</div>
         <p>
-          Denne demoen viser et tydelig steg opp fra enkel nivå. Mer struktur, mer design og mer autoritet – uten at det blir tungt.
+          Standard skal ikke være kjedelig. Det skal være nivået der virksomheten begynner å se mer etablert, mer gjennomarbeidet og mer tillitvekkende ut. Det er dette som gjør at denne typen side kan selge bedre enn både en enkel variant og en generisk mal.
         </p>
+      </div>
+    </section>
 
-        <div class="actions">
-          <a class="btn primary" href="#">Be om møte</a>
-          <a class="btn secondary" href="./netrivo-mobil-standard.html?view=mobile">Se mobilversjon</a>
+    <section class="section" id="kontakt">
+      <div class="contact">
+        <div class="contact-card">
+          <div class="kicker">Standard nivå</div>
+          <h2 style="margin:10px 0 0; font-size:clamp(2rem,4vw,3.2rem); line-height:0.98; letter-spacing:-0.05em;">Mer gjennomarbeidet og mer profesjonelt.</h2>
+          <div class="section-copy">
+            Dette nivået passer godt når kunden trenger noe som oppleves mer seriøst, mer etablert og bedre strukturert enn en enkel nettside.
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-item">
+            <small>Passer for</small>
+            <strong>Rådgivere, arkitekter, konsulenter og tekniske fagmiljøer</strong>
+          </div>
+          <div class="contact-item">
+            <small>Nivå</small>
+            <strong>Standard</strong>
+          </div>
+          <div class="contact-item">
+            <small>Mobilversjon</small>
+            <strong>Koblet til egen mobilside som kan vises automatisk på små skjermer</strong>
+          </div>
+          <a class="btn btn-primary" href="./netrivo-mobil-standard.html?view=mobile">Åpne mobilversjon</a>
         </div>
       </div>
+    </section>
+  </main>
 
-      <div class="hero-right">
-        <div class="panel">
-          <strong>Struktur og klarhet</strong>
-          <span>Informasjon organisert for profesjonelle kunder</span>
-        </div>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const forceView = params.get("view");
+      const isMobile = window.innerWidth <= 768;
 
-        <div class="panel">
-          <strong>Mer autoritet</strong>
-          <span>Gir et mer etablert og solid inntrykk</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- NY SEKSJON SOM GIR LIV -->
-  <section class="highlight">
-    <div class="highlight-box">
-      <strong>Bygget for fagmiljø</strong>
-      <p>Perfekt for rådgivere, arkitekter og konsulenter.</p>
-    </div>
-
-    <div class="highlight-box">
-      <strong>Et tydelig steg opp</strong>
-      <p>Mer struktur, bedre inntrykk og høyere opplevd verdi.</p>
-    </div>
-  </section>
-
-  <section class="grid">
-    <div class="card">
-      <h3>Tjenester</h3>
-      <p>Tydelig presentasjon av hva du tilbyr.</p>
-    </div>
-
-    <div class="card">
-      <h3>Prosjekter</h3>
-      <p>Bygg troverdighet med konkrete referanser.</p>
-    </div>
-
-    <div class="card">
-      <h3>Kontakt</h3>
-      <p>Enklere for kunden å ta neste steg.</p>
-    </div>
-  </section>
-
-  <section class="contact">
-    <div class="card">
-      <h3>Standard nivå</h3>
-      <p>Mer gjennomarbeidet og mer profesjonelt enn enkel.</p>
-    </div>
-
-    <div class="card">
-      <h3>Passer for</h3>
-      <p>Rådgivere, arkitekter og tekniske fag.</p>
-    </div>
-  </section>
-
-</div>
-
-<script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const forceView = params.get("view");
-  const isMobile = window.innerWidth <= 768;
-
-  if (forceView !== "desktop" && isMobile) {
-    window.location.href = "./netrivo-mobil-standard.html";
-  }
-})();
-</script>
-
+      if (forceView !== "desktop" && isMobile) {
+        window.location.href = "./netrivo-mobil-standard.html";
+      }
+    })();
+  </script>
 </body>
 </html>
