@@ -312,6 +312,31 @@
       font-size: 0.96rem;
     }
 
+    .hero-illustration-wrap {
+      position: relative;
+      z-index: 1;
+      margin: 16px 0;
+      padding: 20px;
+      min-height: 208px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-illustration {
+      display: block;
+      width: 100%;
+      max-width: 292px;
+      height: auto;
+      object-fit: contain;
+      opacity: 0.94;
+      filter: drop-shadow(0 18px 30px rgba(15, 23, 42, 0.18));
+    }
+
     .section {
       padding: 78px 0 0;
     }
@@ -425,10 +450,18 @@
       .left, .right, .box {
         padding: 24px;
       }
+
+      .hero-illustration-wrap {
+        min-height: 188px;
+      }
+
+      .hero-illustration {
+        max-width: 256px;
+      }
     }
 
     @media (max-width: 720px) {
-.btns {
+      .btns {
         flex-direction: column;
       }
 
@@ -527,6 +560,10 @@
           <div class="panel">
             <h3>Mer driv i uttrykket.</h3>
             <p>Tydeligere kontrast, mer energi og mer bevegelse enn de andre enkle demoene.</p>
+          </div>
+
+          <div class="hero-illustration-wrap" aria-hidden="true">
+            <img class="hero-illustration" src="./assets/pt-illustrasjon.png" alt="" />
           </div>
 
           <div class="panel">
