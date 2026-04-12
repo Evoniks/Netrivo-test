@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Standard – Opplevelse og reiseliv</title>
-  <meta name="description" content="En levende og gjennomarbeidet nettside for opplevelser, reiseliv, guidede aktiviteter og konsepter som trenger mer stemning og mer tillit." />
+  <meta name="description" content="En levende og gjennomarbeidet nettside med mer stemning, mer tillit og tydeligere tematikk." />
   <style>
     :root {
       --ink: #183126;
@@ -48,16 +48,21 @@
     }
 
     .demo-topbar {
-      display: grid;
-      justify-content: space-between;
+      padding: 18px 0 0;
+    }
+
+    .demo-topbar-inner {
+      display: flex;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 84px;
       padding: 16px 20px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: rgba(255,255,255,0.84);
       box-shadow: var(--shadow);
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      position: relative;
     }
 
     .demo-brand {
@@ -99,7 +104,9 @@
     }
 
     .demo-home-link {
-      justify-self: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -112,7 +119,7 @@
     }
 
     .demo-home-link:hover {
-      transform: translateY(-1px);
+      transform: translateX(-50%) translateY(-1px);
       background: rgba(255,255,255,0.96);
     }
 
@@ -124,10 +131,11 @@
 
     .demo-nav {
       display: flex;
+      align-items: center;
       gap: 24px;
       color: var(--muted);
       font-size: 0.94rem;
-      justify-self: end;
+      margin-left: auto;
       justify-content: flex-end;
       flex-wrap: wrap;
       row-gap: 10px;
@@ -444,12 +452,21 @@
     }
 
     @media (max-width: 900px) {
-      .demo-topbar {
-        grid-template-columns: minmax(0, 1fr) auto;
+      .demo-topbar-inner {
+        flex-wrap: wrap;
       }
       .demo-nav {
-        grid-column: 1 / -1;
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
         padding-top: 4px;
+      }
+      .demo-home-link {
+        position: static;
+        transform: none;
+      }
+      .demo-home-link:hover {
+        transform: translateY(-1px);
       }
     }
 
@@ -462,12 +479,12 @@
     }
 
     @media (max-width: 560px) {
-      .demo-topbar {
-        grid-template-columns: 1fr;
+      .demo-topbar-inner {
+        align-items: flex-start;
       }
       .demo-home-link,
       .demo-nav {
-        justify-self: start;
+        justify-self: auto;
       }
       .demo-home-link img {
         height: 28px;
@@ -504,7 +521,7 @@
             <div class="badge">Standard demo / opplevelse og reiseliv</div>
             <h1>En mer levende standardside for opplevelser og aktivitet.</h1>
             <div class="lead">
-              Denne demoen viser en mer stemningsfull standardretning for virksomheter som selger opplevelser, aktivitet, guiding og reiseliv. Målet er å bygge tillit og struktur, men med mer tematikk og mer visuell energi.
+              Denne demoen viser en mer stemningsfull standardretning. Målet er å bygge tillit og struktur, men med mer tematikk og mer visuell energi.
             </div>
 
             <div class="actions">
@@ -524,7 +541,7 @@
             </div>
             <div class="metric">
               <strong>Mer tematikk</strong>
-              <span>Passer godt for reiseliv, aktivitet, naturbaserte konsepter og guider.</span>
+              <span>Tematikk og rytme får tydeligere plass i opplevelsen.</span>
             </div>
           </div>
         </div>
@@ -537,7 +554,7 @@
 
           <div class="panel">
             <h3>Bygget for opplevelser.</h3>
-            <p>God for guiding, aktiviteter, eventer og konsepter der kunden skal kjenne noe før de bestiller.</p>
+            <p>Bygget for å vekke interesse før valget tas.</p>
           </div>
 
           <div class="panel">
@@ -555,7 +572,7 @@
           <h2>Standard med mer natur, tematikk og opplevelse.</h2>
         </div>
         <div class="copy">
-          Her ser du hvordan standardnivået kan bli mer levende og mer stemningsfullt uten å miste profesjonalitet. Denne passer når innholdet skal oppleves mer inspirerende, men fortsatt være tydelig og lett å forstå.
+          Her ser du hvordan standardnivået kan bli mer levende og mer stemningsfullt uten å miste profesjonalitet. Innholdet kan oppleves mer inspirerende og fortsatt være tydelig og lett å forstå.
         </div>
       </div>
 
@@ -567,7 +584,7 @@
 
         <div class="card item">
           <h3>God for booking</h3>
-          <p>Passer når kunden trenger nok trygghet til å bestille, men også må føle at dette er verdt å velge.</p>
+          <p>Gir nok trygghet til å bestille, men også nok stemning til å føles verdt å velge.</p>
         </div>
 
         <div class="card item">
@@ -592,14 +609,14 @@
           <div class="kicker">Kontakt</div>
           <h2>En mer levende standardretning for opplevelsesbaserte konsepter.</h2>
           <div class="copy">
-            Denne viser hvordan standardnivået kan brukes til å bygge både tillit og stemning, og passer godt for konsepter som lever av opplevelse, guiding og atmosfære.
+            Denne viser hvordan standardnivået kan brukes til å bygge både tillit og stemning, med mer tematikk og mer visuell energi i opplevelsen.
           </div>
         </div>
 
         <div class="card box">
           <div class="contact-item">
-            <small>Passer for</small>
-            <strong>Reiseliv, guiding, aktiviteter, eventer og naturbaserte opplevelser</strong>
+            <small>Uttrykk</small>
+            <strong>Stemningsfullt, tydelig og tillitsvekkende</strong>
           </div>
 
           <div class="contact-item">

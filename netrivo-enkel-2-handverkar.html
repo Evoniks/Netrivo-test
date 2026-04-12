@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enkel – Håndverker / service</title>
-  <meta name="description" content="En enkel og tydelig nettside for håndverkere, servicebedrifter og lokale fagfolk som vil gjøre det lett å ta kontakt." />
+  <meta name="description" content="En enkel og tydelig nettside med lav terskel for kontakt og rask vei til handling." />
   <style>
     :root {
       --bg: #eef4f3;
@@ -48,16 +48,17 @@
     }
 
     .demo-topbar-inner {
-      display: grid;
-      justify-content: space-between;
+      display: flex;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 84px;
       padding: 16px 20px;
       border-radius: 18px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.88);
       box-shadow: var(--shadow);
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      position: relative;
     }
 
     .demo-brand {
@@ -99,7 +100,9 @@
     }
 
     .demo-home-link {
-      justify-self: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -112,7 +115,7 @@
     }
 
     .demo-home-link:hover {
-      transform: translateY(-1px);
+      transform: translateX(-50%) translateY(-1px);
       background: rgba(255,255,255,0.96);
     }
 
@@ -124,10 +127,11 @@
 
     .demo-nav {
       display: flex;
+      align-items: center;
       gap: 22px;
       color: var(--muted);
       font-size: 0.94rem;
-      justify-self: end;
+      margin-left: auto;
       justify-content: flex-end;
       flex-wrap: wrap;
       row-gap: 10px;
@@ -341,8 +345,9 @@
       max-width: 232px;
       height: auto;
       object-fit: contain;
-      opacity: 0.92;
-      filter: drop-shadow(0 16px 28px rgba(18, 53, 48, 0.16));
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      filter: contrast(0.95) brightness(0.98);
     }
 
     .section {
@@ -495,11 +500,20 @@
 
     @media (max-width: 900px) {
       .demo-topbar-inner {
-        grid-template-columns: minmax(0, 1fr) auto;
+        flex-wrap: wrap;
       }
       .demo-nav {
-        grid-column: 1 / -1;
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
         padding-top: 4px;
+      }
+      .demo-home-link {
+        position: static;
+        transform: none;
+      }
+      .demo-home-link:hover {
+        transform: translateY(-1px);
       }
     }
 
@@ -513,11 +527,11 @@
 
     @media (max-width: 560px) {
       .demo-topbar-inner {
-        grid-template-columns: 1fr;
+        align-items: flex-start;
       }
       .demo-home-link,
       .demo-nav {
-        justify-self: start;
+        justify-self: auto;
       }
       .demo-home-link img {
         height: 28px;
@@ -555,7 +569,7 @@
               <div class="eyebrow">Enkel demo / håndverker og service</div>
               <h1>En tydelig side som gjør det lett å velge deg.</h1>
               <p class="lead">
-                Denne demoen er laget for håndverkere, servicebedrifter og lokale fagfolk som trenger en enkel nettside med tydelig budskap, lav terskel for kontakt og rask vei til handling.
+                Denne demoen er laget med tydelig budskap, lav terskel for kontakt og rask vei til handling.
               </p>
 
               <div class="actions">
@@ -575,7 +589,7 @@
               </div>
               <div class="metric">
                 <strong>Lokal tillit</strong>
-                <span>Passer godt for håndverkere og tjenester der nærhet og tydelighet er viktig.</span>
+                <span>Nærhet og tydelighet gjør valget enklere.</span>
               </div>
             </div>
           </div>
@@ -591,8 +605,8 @@
             </div>
 
             <div class="panel">
-              <strong>Passer for lokale fagfolk</strong>
-              <span>Denne retningen fungerer godt for mindre bedrifter som vil se ryddige, profesjonelle og tilgjengelige ut.</span>
+              <strong>Ryddig og tilgjengelig</strong>
+              <span>Denne retningen holder tempoet oppe og veien til kontakt kort.</span>
             </div>
 
             <div class="panel">
@@ -648,14 +662,14 @@
           <div class="kicker">Kontakt</div>
           <h2 style="margin:10px 0 0; font-size:clamp(2rem,4vw,3.2rem); line-height:0.98; letter-spacing:-0.05em;">Enkelt, tydelig og effektivt.</h2>
           <div class="section-copy">
-            Dette er en enkel retning som passer godt når målet er å være lett å forstå, lett å kontakte og enkel å velge.
+            Dette er en enkel retning der målet er å være lett å forstå, lett å kontakte og enkel å velge.
           </div>
         </div>
 
         <div class="contact-card">
           <div class="contact-item">
-            <small>Passer for</small>
-            <strong>Håndverkere, servicebedrifter, montører og lokale fagfolk</strong>
+            <small>Uttrykk</small>
+            <strong>Direkte, ryddig og lett å handle på</strong>
           </div>
           <div class="contact-item">
             <small>Nivå</small>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Standard – Rådgiver / Arkitekt</title>
-  <meta name="description" content="En gjennomarbeidet nettside for rådgivere, arkitekter og fagmiljøer som trenger mer struktur, mer tillit og et tydeligere uttrykk." />
+  <meta name="description" content="En gjennomarbeidet nettside med mer struktur, mer tillit og et tydeligere uttrykk." />
   <style>
     :root {
       --bg: #eef3f7;
@@ -48,16 +48,17 @@
     }
 
     .demo-topbar-inner {
-      display: grid;
-      justify-content: space-between;
+      display: flex;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 84px;
       padding: 16px 22px;
       border-radius: 18px;
       background: rgba(255,255,255,0.9);
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      position: relative;
     }
 
     .demo-brand {
@@ -99,7 +100,9 @@
     }
 
     .demo-home-link {
-      justify-self: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -112,7 +115,7 @@
     }
 
     .demo-home-link:hover {
-      transform: translateY(-1px);
+      transform: translateX(-50%) translateY(-1px);
       background: rgba(255,255,255,0.96);
     }
 
@@ -124,10 +127,11 @@
 
     .demo-nav {
       display: flex;
+      align-items: center;
       gap: 22px;
       color: var(--muted);
       font-size: 0.94rem;
-      justify-self: end;
+      margin-left: auto;
       justify-content: flex-end;
       flex-wrap: wrap;
       row-gap: 10px;
@@ -489,11 +493,20 @@
 
     @media (max-width: 900px) {
       .demo-topbar-inner {
-        grid-template-columns: minmax(0, 1fr) auto;
+        flex-wrap: wrap;
       }
       .demo-nav {
-        grid-column: 1 / -1;
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
         padding-top: 4px;
+      }
+      .demo-home-link {
+        position: static;
+        transform: none;
+      }
+      .demo-home-link:hover {
+        transform: translateY(-1px);
       }
     }
 
@@ -507,11 +520,11 @@
 
     @media (max-width: 560px) {
       .demo-topbar-inner {
-        grid-template-columns: 1fr;
+        align-items: flex-start;
       }
       .demo-home-link,
       .demo-nav {
-        justify-self: start;
+        justify-self: auto;
       }
       .demo-home-link img {
         height: 28px;
@@ -546,10 +559,10 @@
         <div class="hero-left">
           <div>
             <div class="eyebrow">Standard demo / rådgiver og arkitekt</div>
-            <h1>En profesjonell side som faktisk bygger tillit.</h1>
-            <p class="lead">
-              Denne demoen viser et tydelig steg opp fra enkel-nivået. Mer struktur, mer design og mer autoritet – uten at det blir tungt eller stivt. Den passer for virksomheter som selger kompetanse, tillit og faglig tyngde.
-            </p>
+              <h1>En profesjonell side som faktisk bygger tillit.</h1>
+              <p class="lead">
+              Denne demoen viser et tydelig steg opp fra enkel-nivået. Mer struktur, mer design og mer autoritet – uten at det blir tungt eller stivt.
+              </p>
 
             <div class="actions">
               <a class="btn btn-primary" href="#kontakt">Be om møte</a>
@@ -586,7 +599,7 @@
 
           <div class="panel">
             <strong>Riktig for fagmiljøer</strong>
-            <span>Passer godt for rådgivere, arkitekter, konsulenter og tekniske fagmiljøer.</span>
+            <span>Holder uttrykket tydelig, kompetent og balansert fra første inntrykk.</span>
           </div>
         </aside>
       </div>
@@ -595,8 +608,8 @@
     <section class="section">
       <div class="highlight">
         <div class="highlight-box">
-          <strong>Bygget for fagmiljøer</strong>
-          <p>Passer for virksomheter som må fremstå tydelige, profesjonelle og kompetente fra første inntrykk.</p>
+          <strong>Bygget for tyngde</strong>
+          <p>Uttrykket er strammere, roligere og mer profesjonelt fra første inntrykk.</p>
         </div>
 
         <div class="highlight-box">
@@ -650,14 +663,14 @@
           <div class="kicker">Standard nivå</div>
           <h2 style="margin:10px 0 0; font-size:clamp(2rem,4vw,3.2rem); line-height:0.98; letter-spacing:-0.05em;">Mer gjennomarbeidet og mer profesjonelt.</h2>
           <div class="section-copy">
-            Dette nivået passer godt når kunden trenger noe som oppleves mer seriøst, mer etablert og bedre strukturert enn en enkel nettside.
+            Dette nivået fungerer når uttrykket må oppleves mer seriøst, mer etablert og bedre strukturert enn en enkel nettside.
           </div>
         </div>
 
         <div class="contact-card">
           <div class="contact-item">
-            <small>Passer for</small>
-            <strong>Rådgivere, arkitekter, konsulenter og tekniske fagmiljøer</strong>
+            <small>Uttrykk</small>
+            <strong>Strukturert, rolig og autoritetsbærende</strong>
           </div>
           <div class="contact-item">
             <small>Nivå</small>
