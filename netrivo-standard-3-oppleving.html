@@ -44,7 +44,8 @@
       padding: 18px 0 0;
     }
 
-    .topbar {
+    /* Demo Header */
+    .demo-topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -56,13 +57,13 @@
       box-shadow: var(--shadow);
     }
 
-    .brand {
+    .demo-brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .brand-mark {
+    .demo-brand-mark {
       width: 40px;
       height: 40px;
       border-radius: 12px;
@@ -75,20 +76,20 @@
       font-size: 0.82rem;
     }
 
-    .brand-copy strong {
+    .demo-brand-copy strong {
       display: block;
       font-size: 1rem;
       letter-spacing: -0.02em;
     }
 
-    .brand-copy span {
+    .demo-brand-copy span {
       display: block;
       margin-top: 2px;
       color: var(--muted);
       font-size: 0.78rem;
     }
 
-    .nav {
+    .demo-nav {
       display: flex;
       gap: 24px;
       color: var(--muted);
@@ -371,7 +372,7 @@
     }
 
     @media (max-width: 720px) {
-      .nav {
+      .demo-nav {
         display: none;
       }
 
@@ -384,10 +385,11 @@
         text-align: center;
       }
     }
-      .brand-copy {
+      /* Demo Header Responsive */
+    .demo-brand-copy {
       min-width: 0;
     }
-    .demo-home {
+    .demo-home-link {
       justify-self: center;
       display: inline-flex;
       align-items: center;
@@ -399,36 +401,37 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
-    .demo-home:hover {
+    .demo-home-link:hover {
       transform: translateY(-1px);
       background: rgba(255,255,255,0.96);
     }
-    .demo-home img {
+    .demo-home-link img {
       display: block;
       width: auto;
       height: 32px;
     }
-    .topbar {
+    /* Demo Header */
+    .demo-topbar {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
       align-items: center;
       gap: 18px;
     }
-    .brand {
+    .demo-brand {
       justify-self: start;
       min-width: 0;
     }
-    .nav {
+    .demo-nav {
       justify-self: end;
       justify-content: flex-end;
       flex-wrap: wrap;
       row-gap: 10px;
     }
-    .nav a {
+    .demo-nav a {
       position: relative;
       transition: color .18s ease;
     }
-    .nav a::after {
+    .demo-nav a::after {
       content: "";
       position: absolute;
       left: 0;
@@ -441,57 +444,60 @@
       transform-origin: center;
       transition: opacity .18s ease, transform .18s ease;
     }
-    .nav a:hover::after {
+    .demo-nav a:hover::after {
       opacity: 0.45;
       transform: scaleX(1);
     }
     @media (max-width: 900px) {
-      .topbar {
+      /* Demo Header */
+    .demo-topbar {
         grid-template-columns: minmax(0, 1fr) auto;
       }
-      .nav {
+      .demo-nav {
         grid-column: 1 / -1;
         padding-top: 4px;
       }
     }
     @media (max-width: 760px) {
-      .topbar {
+      /* Demo Header */
+    .demo-topbar {
         padding: 14px 16px;
       }
-      .nav {
+      .demo-nav {
         display: flex;
         gap: 12px 16px;
         font-size: 0.88rem;
       }
     }
     @media (max-width: 560px) {
-      .topbar {
+      /* Demo Header */
+    .demo-topbar {
         grid-template-columns: 1fr;
       }
-      .demo-home,
-      .nav {
+      .demo-home-link,
+      .demo-nav {
         justify-self: start;
       }
-      .demo-home img {
+      .demo-home-link img {
         height: 28px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container topbar">
-      <div class="brand">
-        <div class="brand-mark">NL</div>
-        <div class="brand-copy">
+  <header class="demo-topbar">
+    <div class="container demo-topbar-inner">
+      <div class="demo-brand">
+        <div class="demo-brand-mark">NL</div>
+        <div class="demo-brand-copy">
           <strong>Nordlys Opplevelser</strong>
           <span>Opplevelser og reiseliv</span>
         </div>
       </div>
-      <a class="demo-home" href="./index.html" aria-label="Tilbake til Netrivo">
+      <a class="demo-home-link" href="./index.html" aria-label="Tilbake til Netrivo">
         <img src="./assets/netrivo-home-logo.png" alt="Netrivo" />
       </a>
-      <nav class="nav">
+      <nav class="demo-nav">
         <a href="#tilbud">Tilbud</a>
         <a href="#retning">Retning</a>
         <a href="#kontakt">Kontakt</a>
