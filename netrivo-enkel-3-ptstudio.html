@@ -320,30 +320,12 @@
       font-size: 0.96rem;
     }
 
-    .hero-illustration-wrap {
-      position: relative;
-      z-index: 1;
-      margin: 16px 0;
-      padding: 20px;
-      min-height: 208px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-illustration {
-      display: block;
+    .illustration {
       width: 100%;
-      max-width: 292px;
+      max-width: 320px;
       height: auto;
-      object-fit: contain;
-      mix-blend-mode: screen;
-      opacity: 0.85;
-      filter: contrast(0.95) brightness(0.98);
+      display: block;
+      margin: 0 auto;
     }
 
     .section {
@@ -460,13 +442,6 @@
         padding: 24px;
       }
 
-      .hero-illustration-wrap {
-        min-height: 188px;
-      }
-
-      .hero-illustration {
-        max-width: 256px;
-      }
     }
 
     @media (max-width: 720px) {
@@ -580,9 +555,7 @@
             <p>Tydeligere kontrast, mer energi og mer bevegelse enn de andre enkle demoene.</p>
           </div>
 
-          <div class="hero-illustration-wrap" aria-hidden="true">
-            <img class="hero-illustration" src="./assets/pt-illustrasjon.png" alt="" />
-          </div>
+          <img class="illustration" src="./assets/pt-illustrasjon.svg" alt="" />
 
           <div class="panel">
             <h3>God for booking.</h3>
