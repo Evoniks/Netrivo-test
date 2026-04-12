@@ -717,18 +717,19 @@
       display:grid;
       grid-template-columns:1.12fr 0.88fr;
       gap:18px;
-      padding:24px;
+      padding:30px;
       border-radius:34px;
       border:1px solid rgba(21,21,21,0.08);
-      background:rgba(255,255,255,0.66);
+      background:rgba(255,255,255,0.72);
       transition:transform .18s ease, background .18s ease;
       box-shadow:var(--shadow);
+      align-items:stretch;
     }
 
     .premium-visual{
-      min-height:380px;
-      border-radius:28px;
-      padding:28px;
+      min-height:430px;
+      border-radius:32px;
+      padding:34px;
       position:relative;
       overflow:hidden;
       display:flex;
@@ -740,8 +741,8 @@
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      gap:18px;
-      padding:8px 6px;
+      gap:22px;
+      padding:10px 8px 6px;
     }
 
     .premium-topline{
@@ -753,10 +754,10 @@
 
     .premium-headline{
       margin-top:10px;
-      font-size:clamp(2rem, 3vw, 3rem);
-      line-height:0.98;
+      font-size:clamp(2.2rem, 3vw, 3.25rem);
+      line-height:0.94;
       letter-spacing:-0.06em;
-      max-width:520px;
+      max-width:11ch;
       font-weight:700;
     }
 
@@ -768,10 +769,10 @@
     }
 
     .premium-box{
-      padding:14px;
-      border-radius:18px;
-      font-size:0.9rem;
-      line-height:1.52;
+      padding:16px;
+      border-radius:20px;
+      font-size:0.88rem;
+      line-height:1.46;
     }
 
     .premium-body-small{
@@ -782,24 +783,25 @@
     }
 
     .premium-title{
-      font-size:clamp(1.6rem, 2vw, 2.25rem);
-      line-height:1.02;
+      font-size:clamp(1.8rem, 2vw, 2.45rem);
+      line-height:0.98;
       letter-spacing:-0.05em;
       font-weight:700;
     }
 
     .premium-copy{
       color:var(--muted);
-      line-height:1.8;
-      font-size:1rem;
+      line-height:1.74;
+      font-size:1.02rem;
+      max-width:36ch;
     }
 
     .premium-points{
       display:grid;
       gap:10px;
       color:var(--muted);
-      font-size:0.95rem;
-      line-height:1.7;
+      font-size:0.93rem;
+      line-height:1.56;
     }
 
     .premium-link{
@@ -1243,11 +1245,11 @@
               <div>
                 <div class="panel-card">
                   <div class="panel-title">Tre nivåer. Flere tydelige retninger.</div>
-                  <div class="panel-copy">Porteføljen er bygget for å vise reelle forskjeller i uttrykk, verdi og posisjonering — ikke bare små variasjoner av samme side.</div>
+                  <div class="panel-copy">Tre nivåer med tydelig forskjell i tempo, struktur og opplevd verdi.</div>
                 </div>
                 <div class="panel-card">
-                  <div class="panel-title">Desktop og mobil som ett produkt.</div>
-                  <div class="panel-copy">Flere av demoene er nå koblet med egne mobilretninger, slik at kunden opplever en mer komplett og mer gjennomarbeidet løsning.</div>
+                  <div class="panel-title">Merkevareopplevelse på tvers av flater.</div>
+                  <div class="panel-copy">Desktop og mobil er bygget for å henge sammen som én gjennomført helhet.</div>
                 </div>
               </div>
             </div>
@@ -1344,7 +1346,7 @@
                     <div class="simple-title" style="font-size:2.2rem; max-width:320px; margin-top:14px;">En lun og innbydende side for en lokal kafé.</div>
                     <div class="preview-pill-row">
                       <div class="preview-pill">Varme toner og lav terskel for kontakt</div>
-                      <div class="preview-pill">Passer for kafé, bakeri og mindre serveringssted</div>
+                      <div class="preview-pill">Rolig rytme og nærhet i uttrykket</div>
                     </div>
                   </div>
                   <div class="right-pane">
@@ -1424,10 +1426,10 @@
                   <div class="standard-left">
                     <div class="small-label">Standard / rådgiver og arkitekt</div>
                     <div class="standard-title" style="font-size:2.15rem; margin-top:14px;">En profesjonell side som faktisk bygger tillit.</div>
-                    <div class="standard-box-row">
-                      <div class="standard-box">Mer struktur og mer autoritet</div>
-                      <div class="standard-box">Passer for rådgivere, arkitekter og fagmiljøer</div>
-                    </div>
+                  <div class="standard-box-row">
+                    <div class="standard-box">Mer struktur og mer autoritet</div>
+                    <div class="standard-box">Klarere prioritering og mer ro</div>
+                  </div>
                   </div>
                   <div class="standard-right">
                     <div class="right-panel">Struktur og klarhet</div>
@@ -1452,7 +1454,7 @@
                   </div>
                   <div class="standard-box-row">
                     <div class="standard-box">Formell og autoritetsbasert</div>
-                    <div class="standard-box">Passer for regnskap, juridisk og HR</div>
+                    <div class="standard-box">Presis, ryddig og kontrollert</div>
                   </div>
                 </div>
               </div>
@@ -1473,7 +1475,7 @@
                   </div>
                   <div class="standard-box-row">
                     <div class="standard-box">Mer stemning og mer tematikk</div>
-                    <div class="standard-box">Passer for reiseliv, event og guide</div>
+                    <div class="standard-box">Mer flyt og mer fortellende</div>
                   </div>
                 </div>
               </div>
@@ -1495,7 +1497,7 @@
               <div class="level-note">Mer eksklusivt. Mer iscenesatt. Mer identitetsdrevet.</div>
             </div>
             <div class="section-copy">
-              Premium er nivået for kunder som vil ha mer enn en fin nettside. Her bygges en tydeligere følelse, sterkere art direction og en mer eksklusiv opplevelse som løfter hele merkevaren.
+              Premium er nivået der uttrykket får mer sceneplass, mer kontroll og langt høyere opplevd verdi. Det skal kjennes som en merkevareopplevelse, ikke bare en penere bedriftsside.
             </div>
           </div>
 
@@ -1507,8 +1509,8 @@
                   <div class="premium-headline">En side som får merkevaren til å føles dyrere, roligere og mer eksklusiv.</div>
                 </div>
                 <div class="premium-subgrid">
-                  <div class="premium-box">Varm, luksuriøs og kuratert retning med høy opplevd verdi.</div>
-                  <div class="premium-box">Passer for boutique-hotell, high-end opplevelser og premium tjenester.</div>
+                  <div class="premium-box">Varm luksus, kuratert rytme og tydelig prisfølelse.</div>
+                  <div class="premium-box">Mer atmosfære, mer ro og mer smak i alle flater.</div>
                 </div>
               </div>
               <div class="premium-meta">
@@ -1516,13 +1518,11 @@
                   <div class="premium-body-small">Demo 07</div>
                   <div class="premium-title">Boutique / luksus</div>
                 </div>
-                <div class="premium-copy">
-                  Den varme premiumretningen. Laget for kunder som vil ha mer pondus, mer ro og et uttrykk som støtter høyere pris og tydeligere premiumfølelse.
-                </div>
+                <div class="premium-copy">Den varmeste premiumretningen, bygget for å kjennes rolig, dyr og fullstendig kontrollert.</div>
                 <div class="premium-points">
                   <div>Kuraterte flater og mer redaksjonell rytme</div>
-                  <div>Mer eksklusiv enn både standard og enkel</div>
-                  <div>Bygget for premium opplevelse, ikke bare visuell pynt</div>
+                  <div>Mykere tempo og tydeligere premiumro</div>
+                  <div>Mer opplevelse enn forklaring</div>
                 </div>
                 <div class="premium-link">Åpne demo →</div>
               </div>
@@ -1535,8 +1535,8 @@
                   <div class="premium-headline">En premiumside med et mer futuristisk og high-tech uttrykk.</div>
                 </div>
                 <div class="premium-subgrid">
-                  <div class="premium-box">Mørk, glassaktig og mer avansert digital identitet.</div>
-                  <div class="premium-box">Passer for SaaS, AI, programvare, app og plattform.</div>
+                  <div class="premium-box">Mørk, glassaktig og skarp i silhuetten.</div>
+                  <div class="premium-box">Mer produktfølelse, mer dybde og mer presisjon.</div>
                 </div>
               </div>
               <div class="premium-meta">
@@ -1544,13 +1544,11 @@
                   <div class="premium-body-small">Demo 08</div>
                   <div class="premium-title">Tech / SaaS</div>
                 </div>
-                <div class="premium-copy">
-                  En helt annen premiumretning enn boutique og luksus. Perfekt når produktet selv skal virke mer avansert, mer utviklet og mer påkostet.
-                </div>
+                <div class="premium-copy">En digital premiumretning med mer kontrast, mer kontroll og et tydeligere produktnærvær.</div>
                 <div class="premium-points">
-                  <div>Tech-premium i stedet for varm luksus</div>
-                  <div>God for produkter, funksjoner, dashboards og plattform</div>
-                  <div>Bygget for merkevarer som vil se mer moderne og mer modne ut</div>
+                  <div>Kjøligere og mer presis enn de andre premium-retningene</div>
+                  <div>Produktet får mer sceneplass</div>
+                  <div>Mer moden, mer avansert og mer påkostet</div>
                 </div>
                 <div class="premium-link">Åpne demo →</div>
               </div>
@@ -1563,8 +1561,8 @@
                   <div class="premium-headline">En signaturside for personlige brands med høyere ambisjoner.</div>
                 </div>
                 <div class="premium-subgrid">
-                  <div class="premium-box">Mer redaksjonell, personfokusert og signaturpreget.</div>
-                  <div class="premium-box">Passer for eksperter, profiler, foredrag og mentoring.</div>
+                  <div class="premium-box">Mer redaksjonell, personbåren og signaturpreget.</div>
+                  <div class="premium-box">Bygget rundt stemme, perspektiv og tilstedeværelse.</div>
                 </div>
               </div>
               <div class="premium-meta">
@@ -1572,13 +1570,11 @@
                   <div class="premium-body-small">Demo 09</div>
                   <div class="premium-title">Personlig brand</div>
                 </div>
-                <div class="premium-copy">
-                  En premiumløsning bygget rundt person, autoritet og identitet. Denne retningen er mer menneskelig og mer redaksjonell enn de andre premium-demoene.
-                </div>
+                <div class="premium-copy">En premiumretning der identitet, stemme og personlig tyngde bærer hele opplevelsen.</div>
                 <div class="premium-points">
-                  <div>Bygget for ekspertrolle, signatur og sterkere personlig profil</div>
-                  <div>Mer redaksjonell enn systemorientert</div>
-                  <div>Tydelig annerledes enn både boutique og tech-premium</div>
+                  <div>Mer signatur enn system</div>
+                  <div>Mer menneskelig enn de andre premium-retningene</div>
+                  <div>Tydelig kuratert rundt personen</div>
                 </div>
                 <div class="premium-link">Åpne demo →</div>
               </div>
@@ -1633,7 +1629,7 @@
                   <div class="phone-copy">Mer struktur, mer tillit og bedre flyt mellom seksjonene.</div>
                   <div class="phone-chip-row">
                     <div class="phone-chip">Mer autoritet og mer ro</div>
-                    <div class="phone-chip">Passer for rådgivere og fagmiljøer</div>
+                    <div class="phone-chip">Strammere flyt og tydeligere prioritering</div>
                   </div>
                   <div class="phone-action">Åpne mobilretning</div>
                 </div>
@@ -1656,7 +1652,7 @@
                   <div class="phone-copy">Sterkere følelse, tydeligere identitet og mer premiumopplevelse også på små skjermer.</div>
                   <div class="phone-chip-row">
                     <div class="phone-chip">Mer atmosfære og mer smak i uttrykket</div>
-                    <div class="phone-chip">Passer for premium brand og eksklusiv opplevelse</div>
+                    <div class="phone-chip">Mer ro og mer eksklusiv sceneplass</div>
                   </div>
                   <div class="phone-action">Åpne mobilretning</div>
                 </div>
