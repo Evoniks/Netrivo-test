@@ -52,9 +52,10 @@
     }
 
     .demo-topbar-inner {
-      display: grid;
+      display: flex;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 24px;
       min-height: 84px;
       padding: 16px 22px;
       border-radius: 22px;
@@ -62,7 +63,7 @@
       background: rgba(255,255,255,0.04);
       backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      position: relative;
     }
 
     .demo-brand {
@@ -104,7 +105,9 @@
     }
 
     .demo-home-link {
-      justify-self: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -117,7 +120,7 @@
     }
 
     .demo-home-link:hover {
-      transform: translateY(-1px);
+      transform: translateX(-50%) translateY(-1px);
       background: rgba(255,255,255,0.10);
     }
 
@@ -133,7 +136,7 @@
       gap: 22px;
       color: var(--muted);
       font-size: 0.94rem;
-      justify-self: end;
+      margin-left: auto;
       justify-content: flex-end;
       flex-wrap: wrap;
       row-gap: 10px;
@@ -566,11 +569,20 @@
 
     @media (max-width: 920px) {
       .demo-topbar-inner {
-        grid-template-columns: minmax(0, 1fr) auto;
+        flex-wrap: wrap;
       }
       .demo-nav {
-        grid-column: 1 / -1;
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
         padding-top: 4px;
+      }
+      .demo-home-link {
+        position: static;
+        transform: none;
+      }
+      .demo-home-link:hover {
+        transform: translateY(-1px);
       }
     }
 
@@ -584,11 +596,11 @@
 
     @media (max-width: 560px) {
       .demo-topbar-inner {
-        grid-template-columns: 1fr;
+        align-items: flex-start;
       }
       .demo-home-link,
       .demo-nav {
-        justify-self: start;
+        justify-self: auto;
       }
       .demo-home-link img {
         height: 28px;
@@ -725,7 +737,7 @@
       <div class="contact-grid">
         <div class="contact-box">
           <div class="kicker">Kontakt</div>
-          <h2>Dette er premium-varianten for personlige brands og ekspertprofiler.</h2>
+          <h2>Dette er premium-varianten med tydelig signatur og personlig tyngde.</h2>
           <div class="section-copy">
             En premiumretning for navn og profiler som skal kjennes tydelige, kuraterte og minneverdige.
           </div>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Standard – Rådgivning og økonomi</title>
-  <meta name="description" content="En troverdig og gjennomarbeidet nettside for rådgivning, økonomi, HR, regnskap og andre virksomheter som må fremstå trygge og presise." />
+  <meta name="description" content="En troverdig og gjennomarbeidet nettside som fremstår trygg, presis og kontrollert." />
   <style>
     :root {
       --ink: #101316;
@@ -47,16 +47,21 @@
     }
 
     .demo-topbar {
-      display: grid;
-      justify-content: space-between;
+      padding: 18px 0 0;
+    }
+
+    .demo-topbar-inner {
+      display: flex;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 84px;
       padding: 16px 20px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: rgba(255,255,255,0.82);
       box-shadow: var(--shadow);
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      position: relative;
     }
 
     .demo-brand {
@@ -98,7 +103,9 @@
     }
 
     .demo-home-link {
-      justify-self: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -111,7 +118,7 @@
     }
 
     .demo-home-link:hover {
-      transform: translateY(-1px);
+      transform: translateX(-50%) translateY(-1px);
       background: rgba(255,255,255,0.96);
     }
 
@@ -123,10 +130,11 @@
 
     .demo-nav {
       display: flex;
+      align-items: center;
       gap: 24px;
       color: var(--muted);
       font-size: 0.94rem;
-      justify-self: end;
+      margin-left: auto;
       justify-content: flex-end;
       flex-wrap: wrap;
       row-gap: 10px;
@@ -443,12 +451,21 @@
     }
 
     @media (max-width: 900px) {
-      .demo-topbar {
-        grid-template-columns: minmax(0, 1fr) auto;
+      .demo-topbar-inner {
+        flex-wrap: wrap;
       }
       .demo-nav {
-        grid-column: 1 / -1;
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
         padding-top: 4px;
+      }
+      .demo-home-link {
+        position: static;
+        transform: none;
+      }
+      .demo-home-link:hover {
+        transform: translateY(-1px);
       }
     }
 
@@ -461,12 +478,12 @@
     }
 
     @media (max-width: 560px) {
-      .demo-topbar {
-        grid-template-columns: 1fr;
+      .demo-topbar-inner {
+        align-items: flex-start;
       }
       .demo-home-link,
       .demo-nav {
-        justify-self: start;
+        justify-self: auto;
       }
       .demo-home-link img {
         height: 28px;
@@ -503,7 +520,7 @@
             <div class="badge">Standard demo / rådgivning og økonomi</div>
             <h1>En troverdig side for virksomheter som må virke trygge og presise.</h1>
             <div class="lead">
-              Laget for regnskap, juridiske tjenester, HR, rådgivning og andre kompetansevirksomheter der kunden må kjenne tillit med én gang. Dette er en mer formell og mer autoritetsbasert standardretning.
+              Dette er en mer formell og mer autoritetsbasert standardretning, bygget for å virke trygg, presis og gjennomarbeidet med én gang.
             </div>
 
             <div class="actions">
@@ -523,7 +540,7 @@
             </div>
             <div class="metric">
               <strong>Salgsbar</strong>
-              <span>Passer godt når kunden velger leverandør ut fra troverdighet og trygghet.</span>
+              <span>Føles tydelig, trygg og enkel å stole på.</span>
             </div>
           </div>
         </div>
@@ -541,7 +558,7 @@
 
           <div class="panel">
             <h3>God for kompetansevirksomheter.</h3>
-            <p>Passer særlig godt når du selger rådgivning, økonomi, HR, juridiske tjenester eller annen faglig støtte.</p>
+            <p>Gir plass til mer innhold, tydeligere prioritering og en roligere salgsflate.</p>
           </div>
         </div>
       </div>
@@ -565,7 +582,7 @@
         </div>
 
         <div class="card item">
-          <h3>Passer for flere tjenester</h3>
+          <h3>Mer innhold og mer kontroll</h3>
           <p>God plass til fagområder, prosess, team og innhold som bygger tillit over tid.</p>
         </div>
 
@@ -597,8 +614,8 @@
 
         <div class="card box">
           <div class="contact-item">
-            <small>Passer for</small>
-            <strong>Regnskap, juridisk, HR, økonomi og rådgivning</strong>
+            <small>Uttrykk</small>
+            <strong>Presist, rolig og tillitsbærende</strong>
           </div>
 
           <div class="contact-item">
