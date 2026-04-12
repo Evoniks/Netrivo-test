@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" fill="none">
-  <g stroke="#E8C7AC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
     <ellipse cx="400" cy="290" rx="105" ry="22"/>
     <path d="M400 312V435"/>
     <path d="M350 435h100"/>
