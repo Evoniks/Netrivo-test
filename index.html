@@ -446,7 +446,6 @@
     }
 
     .simple-card,
-    .standard-card,
     .mobile-card{
       display:flex;
       flex-direction:column;
@@ -463,27 +462,23 @@
     }
 
     .simple-card:hover,
-    .standard-card:hover,
     .premium-feature:hover,
     .mobile-card:hover{
       transform:translateY(-2px);
       background:rgba(255,255,255,0.84);
     }
 
-    .simple-preview,
-    .standard-preview{
+    .simple-preview{
       border-bottom:1px solid rgba(21,21,21,0.08);
       position:relative;
       overflow:hidden;
     }
 
-    .simple-inner,
-    .standard-inner{
+    .simple-inner{
       padding:22px;
     }
 
     .simple-meta,
-    .standard-meta,
     .mobile-meta{
       padding:18px 22px 22px;
       display:grid;
@@ -498,7 +493,6 @@
     }
 
     .simple-title,
-    .standard-title,
     .mobile-title{
       font-size:1.28rem;
       line-height:1.08;
@@ -507,7 +501,6 @@
     }
 
     .simple-copy,
-    .standard-copy,
     .mobile-copy{
       color:var(--muted);
       line-height:1.72;
@@ -520,16 +513,14 @@
       font-weight:700;
     }
 
-    .preview-pill-row,
-    .standard-box-row{
+    .preview-pill-row{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:10px;
       margin-top:18px;
     }
 
-    .preview-pill,
-    .standard-box{
+    .preview-pill{
       padding:12px;
       border-radius:16px;
       font-size:0.86rem;
@@ -650,62 +641,140 @@
 
     .theme-simple-fitness .fit-box + .fit-box{margin-top:10px}
 
-    .theme-standard-architect{
-      background:linear-gradient(145deg,#eef4f8,#dbe7ef);
-      color:#152636;
+    .standard-card{
+      display:flex;
+      flex-direction:column;
+      border-radius:28px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:#f7f7f7;
+      overflow:hidden;
+      text-decoration:none;
+      color:inherit;
+      box-shadow:0 18px 54px rgba(20,32,44,0.08);
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
 
-    .theme-standard-architect .standard-inner{
-      display:grid;
-      grid-template-columns:1.08fr 0.92fr;
-      gap:16px;
-      min-height:280px;
+    .standard-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 24px 62px rgba(20,32,44,0.14);
+      border-color:rgba(21,21,21,0.12);
     }
 
-    .theme-standard-architect .standard-left{padding:10px 0}
+    .standard-card__scene{
+      position:relative;
+      height:180px;
+      overflow:hidden;
+      border-bottom:1px solid rgba(21,21,21,0.08);
+    }
 
-    .theme-standard-architect .standard-right{
+    .standard-card__scene::before,
+    .standard-card__scene::after{
+      content:"";
+      position:absolute;
+      pointer-events:none;
+    }
+
+    .standard-card__scene::before{
+      inset:0;
+      background:
+        linear-gradient(rgba(0,0,0,0.04), rgba(0,0,0,0.12)),
+        radial-gradient(circle at top right, rgba(255,255,255,0.5), transparent 58%);
+      z-index:1;
+    }
+
+    .standard-card__scene::after{
+      inset:24px;
+      border:1px solid rgba(255,255,255,0.26);
       border-radius:24px;
-      padding:18px;
-      background:linear-gradient(145deg,#2f3b52,#151a24);
-      color:white;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+      opacity:0.7;
+      z-index:1;
     }
 
-    .theme-standard-architect .right-panel{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.12);
-      font-size:0.88rem;
-      line-height:1.45;
+    .standard-card--arkitekt .standard-card__scene{
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.16) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.14) 1px, transparent 1px),
+        linear-gradient(135deg,#cfd9e2,#93a8ba 58%,#66798c);
+      background-size:28px 28px,28px 28px,auto;
     }
 
-    .theme-standard-architect .right-panel + .right-panel{margin-top:10px}
-
-    .theme-standard-advice{
-      background:linear-gradient(145deg,#eef4f8,#d7e4ef);
-      color:#142635;
+    .standard-card--radgiving .standard-card__scene{
+      background:
+        radial-gradient(circle at 28% 20%, rgba(255,255,255,0.42), transparent 34%),
+        linear-gradient(135deg,#d7e2ec,#9fb2c3 58%,#71859a);
     }
 
-    .theme-standard-advice .standard-inner{
+    .standard-card--oppleving .standard-card__scene{
+      background:
+        radial-gradient(circle at 18% 28%, rgba(255,255,255,0.42), transparent 32%),
+        radial-gradient(circle at 82% 20%, rgba(191,224,175,0.46), transparent 38%),
+        linear-gradient(135deg,#d8eadc,#8bb79a 58%,#466f57);
+    }
+
+    .scene-overlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.18), transparent 46%),
+        linear-gradient(0deg, rgba(18,28,38,0.14), transparent 62%);
+      z-index:1;
+    }
+
+    .scene-content{
+      position:relative;
+      z-index:2;
+      padding:20px;
+    }
+
+    .scene-tag{
+      display:inline-flex;
+      align-items:center;
+      width:fit-content;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(17,31,43,0.24);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.22);
+      font-size:0.78rem;
+      letter-spacing:0.02em;
+      font-weight:700;
+      backdrop-filter:blur(10px);
+    }
+
+    .standard-card__body{
+      padding:24px;
       display:grid;
-      grid-template-rows:auto 1fr auto;
-      min-height:280px;
+      gap:12px;
+      flex:1;
     }
 
-    .theme-standard-travel{
-      background:linear-gradient(145deg,#edf5ef,#d8e9de);
-      color:#1d342a;
+    .standard-card__body h3{
+      margin:0;
+      font-size:1.28rem;
+      line-height:1.08;
+      letter-spacing:-0.04em;
     }
 
-    .theme-standard-travel .standard-inner{
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      min-height:280px;
+    .standard-card__body p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.72;
+      font-size:0.95rem;
+    }
+
+    .demo-label{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.2em;
+      color:var(--muted);
+    }
+
+    .demo-link{
+      margin-top:auto;
+      padding-top:10px;
+      color:inherit;
+      font-weight:700;
+      text-decoration:none;
     }
 
     .premium-wrap{
@@ -1136,8 +1205,7 @@
       .premium-feature,
       .theme-simple-cafe .simple-inner,
       .theme-simple-build .simple-inner,
-      .theme-simple-fitness .simple-inner,
-      .theme-standard-architect .standard-inner{
+      .theme-simple-fitness .simple-inner{
         grid-template-columns:1fr;
       }
 
@@ -1176,9 +1244,12 @@
       .hero{padding-top:20px}
 
       .premium-subgrid,
-      .preview-pill-row,
-      .standard-box-row{
+      .preview-pill-row{
         grid-template-columns:1fr;
+      }
+
+      .standard-card__scene{
+        height:160px;
       }
 
       .phone-shell{max-width:100%}
@@ -1420,70 +1491,48 @@
           </div>
 
           <div class="standard-grid">
-            <a class="standard-card" href="./netrivo-standard-1-arkitekt.html">
-              <div class="standard-preview theme-standard-architect">
-                <div class="standard-inner">
-                  <div class="standard-left">
-                    <div class="small-label">Standard / rådgiver og arkitekt</div>
-                    <div class="standard-title" style="font-size:2.15rem; margin-top:14px;">En profesjonell side som faktisk bygger tillit.</div>
-                  <div class="standard-box-row">
-                    <div class="standard-box">Mer struktur og mer autoritet</div>
-                    <div class="standard-box">Klarere prioritering og mer ro</div>
-                  </div>
-                  </div>
-                  <div class="standard-right">
-                    <div class="right-panel">Struktur og klarhet</div>
-                    <div class="right-panel">Mer etablert uttrykk</div>
-                  </div>
+            <a class="standard-card standard-card--arkitekt" href="./netrivo-standard-1-arkitekt.html">
+              <div class="standard-card__scene">
+                <div class="scene-overlay"></div>
+                <div class="scene-content">
+                  <span class="scene-tag">Struktur og klarhet</span>
                 </div>
               </div>
-              <div class="standard-meta">
-                <div class="small-label">Demo 04</div>
-                <div class="standard-title">Rådgiver / arkitekt</div>
-                <div class="standard-copy">Et tydelig steg opp fra enkel, for kunder som må se mer profesjonelle og mer gjennomarbeidede ut.</div>
-                <div class="card-link">Åpne demo →</div>
+              <div class="standard-card__body">
+                <span class="demo-label">Demo 04</span>
+                <h3>Rådgiver / arkitekt</h3>
+                <p>Et tydelig steg opp fra enkel, for kunder som må se mer profesjonelle og mer gjennomarbeidede ut.</p>
+                <span class="demo-link">Åpne demo →</span>
               </div>
             </a>
 
-            <a class="standard-card" href="./netrivo-standard-2-radgiving.html?view=desktop">
-              <div class="standard-preview theme-standard-advice">
-                <div class="standard-inner">
-                  <div>
-                    <div class="small-label">Standard / rådgivning og økonomi</div>
-                    <div class="standard-title" style="font-size:2.02rem; margin-top:14px;">En troverdig side for virksomheter som må virke trygge og presise.</div>
-                  </div>
-                  <div class="standard-box-row">
-                    <div class="standard-box">Formell og autoritetsbasert</div>
-                    <div class="standard-box">Presis, ryddig og kontrollert</div>
-                  </div>
+            <a class="standard-card standard-card--radgiving" href="./netrivo-standard-2-radgiving.html?view=desktop">
+              <div class="standard-card__scene">
+                <div class="scene-overlay"></div>
+                <div class="scene-content">
+                  <span class="scene-tag">Presisjon og ro</span>
                 </div>
               </div>
-              <div class="standard-meta">
-                <div class="small-label">Demo 05</div>
-                <div class="standard-title">Rådgivning / økonomi</div>
-                <div class="standard-copy">En mer konservativ og trygg standardretning for virksomheter der tillit og ryddighet er avgjørende.</div>
-                <div class="card-link">Åpne demo →</div>
+              <div class="standard-card__body">
+                <span class="demo-label">Demo 05</span>
+                <h3>Rådgivning / økonomi</h3>
+                <p>En mer konservativ og trygg standardretning for virksomheter der tillit og ryddighet er avgjørende.</p>
+                <span class="demo-link">Åpne demo →</span>
               </div>
             </a>
 
-            <a class="standard-card" href="./netrivo-standard-3-oppleving.html?view=desktop">
-              <div class="standard-preview theme-standard-travel">
-                <div class="standard-inner">
-                  <div>
-                    <div class="small-label">Standard / ro og stemning</div>
-                    <div class="standard-title" style="font-size:2.02rem; margin-top:14px;">En mer levende standardside for opplevelser og aktivitet.</div>
-                  </div>
-                  <div class="standard-box-row">
-                    <div class="standard-box">Mer stemning og mer tematikk</div>
-                    <div class="standard-box">Mer flyt og mer fortellende</div>
-                  </div>
+            <a class="standard-card standard-card--oppleving" href="./netrivo-standard-3-oppleving.html?view=desktop">
+              <div class="standard-card__scene">
+                <div class="scene-overlay"></div>
+                <div class="scene-content">
+                  <span class="scene-tag">Stemning med struktur</span>
                 </div>
               </div>
-              <div class="standard-meta">
-                <div class="small-label">Demo 06</div>
-                <div class="standard-title">Stemning med struktur</div>
-                <div class="standard-copy">Viser at standard også kan være mer inspirerende og mer tematisk uten å gå helt premium.</div>
-                <div class="card-link">Åpne demo →</div>
+              <div class="standard-card__body">
+                <span class="demo-label">Demo 06</span>
+                <h3>Stemning med struktur</h3>
+                <p>Viser at standard også kan være mer inspirerende og mer tematisk uten å gå helt premium.</p>
+                <span class="demo-link">Åpne demo →</span>
               </div>
             </a>
           </div>
