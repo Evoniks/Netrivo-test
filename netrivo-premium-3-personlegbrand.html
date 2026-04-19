@@ -56,11 +56,11 @@
       pointer-events: none;
       opacity: 0;
       transform: translate3d(-50%, -50%, 0);
-      background: #a7f7ff;
+      background: #f0a4b8;
       box-shadow:
-        0 0 12px rgba(167,247,255,0.95),
-        0 0 28px rgba(123,104,255,0.62),
-        0 0 44px rgba(140,59,76,0.38);
+        0 0 12px rgba(240,164,184,0.95),
+        0 0 28px rgba(140,59,76,0.72),
+        0 0 44px rgba(123,104,255,0.42);
       transition: opacity .18s ease;
     }
 
@@ -73,17 +73,86 @@
       0%, 100% {
         transform: translate3d(-50%, -50%, 0) scale(0.76);
         box-shadow:
-          0 0 10px rgba(167,247,255,0.9),
-          0 0 24px rgba(123,104,255,0.5),
-          0 0 38px rgba(140,59,76,0.28);
+          0 0 10px rgba(240,164,184,0.86),
+          0 0 24px rgba(140,59,76,0.52),
+          0 0 38px rgba(123,104,255,0.28);
       }
       50% {
         transform: translate3d(-50%, -50%, 0) scale(1.22);
         box-shadow:
-          0 0 16px rgba(167,247,255,1),
-          0 0 38px rgba(123,104,255,0.72),
-          0 0 58px rgba(140,59,76,0.44);
+          0 0 16px rgba(240,164,184,1),
+          0 0 38px rgba(140,59,76,0.78),
+          0 0 58px rgba(123,104,255,0.46);
       }
+    }
+
+    .tron-toggle {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 10000;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(240,164,184,0.34);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 28%, rgba(240,164,184,0.26), transparent 42%),
+        linear-gradient(145deg, rgba(140,59,76,0.42), rgba(20,14,24,0.82));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 16px 40px rgba(0,0,0,0.34),
+        0 0 26px rgba(140,59,76,0.36);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform .18s ease, opacity .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .tron-toggle:hover {
+      transform: translateY(-2px);
+      border-color: rgba(240,164,184,0.7);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05) inset,
+        0 18px 44px rgba(0,0,0,0.38),
+        0 0 34px rgba(140,59,76,0.56);
+    }
+
+    .tron-toggle::before {
+      content: "";
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      border: 2px solid rgba(240,164,184,0.9);
+      box-shadow:
+        0 0 12px rgba(240,164,184,0.72),
+        0 0 22px rgba(123,104,255,0.34);
+    }
+
+    .tron-toggle::after {
+      content: "";
+      position: absolute;
+      width: 23px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(240,164,184,0), rgba(240,164,184,0.95), rgba(123,104,255,0.45));
+      transform: translate(-8px, 9px) rotate(-28deg);
+      box-shadow: 0 0 12px rgba(240,164,184,0.82);
+    }
+
+    .tron-toggle.is-off {
+      opacity: 0.52;
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+    }
+
+    .tron-toggle.is-off::before {
+      border-color: rgba(255,255,255,0.38);
+      box-shadow: none;
+    }
+
+    .tron-toggle.is-off::after {
+      background: rgba(255,255,255,0.46);
+      box-shadow: none;
     }
 
     a {
@@ -832,6 +901,7 @@
 
       const canvas = document.createElement("canvas");
       const dot = document.createElement("div");
+      const toggle = document.createElement("button");
       const ctx = canvas.getContext("2d");
       const points = [];
       const trailLife = 1450;
@@ -840,10 +910,29 @@
       let dpr = 1;
       let lastPoint = null;
       let running = false;
+      let enabled = localStorage.getItem("elinVardeTronTrail") !== "off";
 
       canvas.className = "tron-trail-canvas";
       dot.className = "tron-cursor-dot";
-      document.body.append(canvas, dot);
+      toggle.className = "tron-toggle";
+      toggle.type = "button";
+      toggle.setAttribute("aria-label", "Slå museeffekt av eller på");
+      toggle.setAttribute("aria-pressed", String(enabled));
+      document.body.append(canvas, dot, toggle);
+
+      function syncToggle() {
+        canvas.style.display = enabled ? "block" : "none";
+        dot.style.display = enabled ? "block" : "none";
+        toggle.classList.toggle("is-off", !enabled);
+        toggle.setAttribute("aria-pressed", String(enabled));
+
+        if (!enabled) {
+          points.length = 0;
+          lastPoint = null;
+          dot.classList.remove("is-visible");
+          ctx.clearRect(0, 0, width, height);
+        }
+      }
 
       function resizeCanvas() {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -857,6 +946,8 @@
       }
 
       function addPoint(event) {
+        if (!enabled) return;
+
         const point = {
           x: event.clientX,
           y: event.clientY,
@@ -888,20 +979,25 @@
         for (let i = 1; i < points.length; i += 1) {
           const previous = points[i - 1];
           const current = points[i];
+          const next = points[i + 1] || current;
           const age = now - current.time;
           const opacity = Math.max(0, 1 - age / trailLife);
+          const controlX = previous.x;
+          const controlY = previous.y;
+          const endX = (current.x + next.x) / 2;
+          const endY = (current.y + next.y) / 2;
 
           if (Math.hypot(current.x - previous.x, current.y - previous.y) > 90) continue;
 
           ctx.beginPath();
           ctx.moveTo(previous.x, previous.y);
-          ctx.lineTo(current.x, current.y);
+          ctx.quadraticCurveTo(controlX, controlY, endX, endY);
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
-          ctx.lineWidth = 2.4 + opacity * 2.2;
+          ctx.lineWidth = 2.2 + opacity * 2;
           ctx.shadowBlur = 18 + opacity * 18;
-          ctx.shadowColor = "rgba(167,247,255,0.9)";
-          ctx.strokeStyle = "rgba(167,247,255," + (opacity * 0.72) + ")";
+          ctx.shadowColor = "rgba(240,164,184,0.88)";
+          ctx.strokeStyle = "rgba(240,164,184," + (opacity * 0.7) + ")";
           ctx.stroke();
 
           ctx.lineWidth = 0.9;
@@ -919,10 +1015,16 @@
       }
 
       resizeCanvas();
+      syncToggle();
       window.addEventListener("resize", resizeCanvas);
       window.addEventListener("pointermove", addPoint, { passive: true });
       window.addEventListener("pointerleave", function () {
         dot.classList.remove("is-visible");
+      });
+      toggle.addEventListener("click", function () {
+        enabled = !enabled;
+        localStorage.setItem("elinVardeTronTrail", enabled ? "on" : "off");
+        syncToggle();
       });
     })();
   </script>
