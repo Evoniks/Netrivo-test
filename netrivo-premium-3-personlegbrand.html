@@ -905,6 +905,9 @@
       const ctx = canvas.getContext("2d");
       const points = [];
       const trailLife = 1450;
+      const minPointDistance = 3;
+      const interpolationStep = 7;
+      const maxBridgeDistance = 1400;
       let width = 0;
       let height = 0;
       let dpr = 1;
@@ -945,22 +948,54 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
-      function addPoint(event) {
-        if (!enabled) return;
-
-        const point = {
-          x: event.clientX,
-          y: event.clientY,
-          time: performance.now()
-        };
+      function addTrailPoint(x, y, time) {
+        const point = { x, y, time };
 
         dot.style.left = point.x + "px";
         dot.style.top = point.y + "px";
         dot.classList.add("is-visible");
 
-        if (!lastPoint || Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y) > 4) {
+        if (!lastPoint) {
           points.push(point);
           lastPoint = point;
+          return;
+        }
+
+        const distance = Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y);
+
+        if (distance < minPointDistance) return;
+
+        if (distance > maxBridgeDistance) {
+          points.push(point);
+          lastPoint = point;
+          return;
+        }
+
+        const steps = Math.min(160, Math.max(1, Math.floor(distance / interpolationStep)));
+
+        for (let step = 1; step <= steps; step += 1) {
+          const progress = step / steps;
+
+          points.push({
+            x: lastPoint.x + (point.x - lastPoint.x) * progress,
+            y: lastPoint.y + (point.y - lastPoint.y) * progress,
+            time: lastPoint.time + (time - lastPoint.time) * progress
+          });
+        }
+
+        lastPoint = point;
+      }
+
+      function addPoint(event) {
+        if (!enabled) return;
+
+        const samples = typeof event.getCoalescedEvents === "function"
+          ? event.getCoalescedEvents()
+          : [event];
+        const now = performance.now();
+
+        for (const sample of samples) {
+          addTrailPoint(sample.clientX, sample.clientY, now);
         }
 
         if (!running) {
@@ -986,8 +1021,6 @@
           const controlY = previous.y;
           const endX = (current.x + next.x) / 2;
           const endY = (current.y + next.y) / 2;
-
-          if (Math.hypot(current.x - previous.x, current.y - previous.y) > 90) continue;
 
           ctx.beginPath();
           ctx.moveTo(previous.x, previous.y);
@@ -1017,7 +1050,7 @@
       resizeCanvas();
       syncToggle();
       window.addEventListener("resize", resizeCanvas);
-      window.addEventListener("pointermove", addPoint, { passive: true });
+      window.addEventListener("onpointerrawupdate" in window ? "pointerrawupdate" : "pointermove", addPoint, { passive: true });
       window.addEventListener("pointerleave", function () {
         dot.classList.remove("is-visible");
       });
