@@ -139,6 +139,11 @@
       box-shadow: 0 0 12px rgba(240,164,184,0.82);
     }
 
+    .tron-toggle.is-dot-only::after {
+      opacity: 0;
+      transform: translate(-8px, 9px) rotate(-28deg) scaleX(0.2);
+    }
+
     .tron-toggle.is-off {
       opacity: 0.52;
       border-color: rgba(255,255,255,0.12);
@@ -913,27 +918,45 @@
       let dpr = 1;
       let lastPoint = null;
       let running = false;
-      let enabled = localStorage.getItem("elinVardeTronTrail") !== "off";
+      let trailMode = localStorage.getItem("elinVardeTronTrailMode") || localStorage.getItem("elinVardeTronTrail") || "trail";
+
+      if (!["trail", "dot", "off"].includes(trailMode)) {
+        trailMode = trailMode === "off" ? "off" : "trail";
+      }
 
       canvas.className = "tron-trail-canvas";
       dot.className = "tron-cursor-dot";
       toggle.className = "tron-toggle";
       toggle.type = "button";
-      toggle.setAttribute("aria-label", "Slå museeffekt av eller på");
-      toggle.setAttribute("aria-pressed", String(enabled));
+      toggle.setAttribute("aria-label", "Bytt museeffekt");
       document.body.append(canvas, dot, toggle);
 
       function syncToggle() {
-        canvas.style.display = enabled ? "block" : "none";
-        dot.style.display = enabled ? "block" : "none";
-        toggle.classList.toggle("is-off", !enabled);
-        toggle.setAttribute("aria-pressed", String(enabled));
+        const hasTrail = trailMode === "trail";
+        const hasDot = trailMode !== "off";
 
-        if (!enabled) {
+        canvas.style.display = hasTrail ? "block" : "none";
+        dot.style.display = hasDot ? "block" : "none";
+        toggle.classList.toggle("is-dot-only", trailMode === "dot");
+        toggle.classList.toggle("is-off", trailMode === "off");
+        toggle.setAttribute("aria-pressed", trailMode !== "off" ? "true" : "false");
+        toggle.setAttribute(
+          "aria-label",
+          trailMode === "trail"
+            ? "Museeffekt: prikk og hale"
+            : trailMode === "dot"
+              ? "Museeffekt: bare prikk"
+              : "Museeffekt: av"
+        );
+
+        if (!hasTrail) {
           points.length = 0;
           lastPoint = null;
-          dot.classList.remove("is-visible");
           ctx.clearRect(0, 0, width, height);
+        }
+
+        if (!hasDot) {
+          dot.classList.remove("is-visible");
         }
       }
 
@@ -987,12 +1010,19 @@
       }
 
       function addPoint(event) {
-        if (!enabled) return;
+        if (trailMode === "off") return;
 
         const samples = typeof event.getCoalescedEvents === "function"
           ? event.getCoalescedEvents()
           : [event];
         const now = performance.now();
+        const lastSample = samples[samples.length - 1] || event;
+
+        dot.style.left = lastSample.clientX + "px";
+        dot.style.top = lastSample.clientY + "px";
+        dot.classList.add("is-visible");
+
+        if (trailMode !== "trail") return;
 
         for (const sample of samples) {
           addTrailPoint(sample.clientX, sample.clientY, now);
@@ -1055,8 +1085,14 @@
         dot.classList.remove("is-visible");
       });
       toggle.addEventListener("click", function () {
-        enabled = !enabled;
-        localStorage.setItem("elinVardeTronTrail", enabled ? "on" : "off");
+        trailMode = trailMode === "trail"
+          ? "dot"
+          : trailMode === "dot"
+            ? "off"
+            : "trail";
+
+        localStorage.setItem("elinVardeTronTrailMode", trailMode);
+        localStorage.setItem("elinVardeTronTrail", trailMode === "off" ? "off" : "on");
         syncToggle();
       });
     })();
