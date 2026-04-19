@@ -198,7 +198,6 @@
       gap: 14px;
       position: relative;
       overflow: hidden;
-      isolation: isolate;
     }
 
     .right::after {
@@ -300,7 +299,7 @@
 
     .panel {
       position: relative;
-      z-index: 2;
+      z-index: 1;
       padding: 22px;
       border-radius: 22px;
       background: rgba(255,255,255,0.08);
@@ -322,29 +321,12 @@
     }
 
     .hero-illustration {
-      width: 100%;
-      max-width: none;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    .hero-illustration-stage {
-      position: absolute;
-      z-index: 0;
-      inset: 98px -12px 92px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .hero-illustration-stage .hero-illustration {
-      width: 138%;
+      width: calc(100% + 22px);
+      max-width: 470px;
       height: auto;
-      min-height: 100%;
-      object-position: center 52%;
+      display: block;
+      margin: -4px -11px -2px;
+      align-self: center;
     }
 
     .section {
@@ -574,9 +556,7 @@
             <p>Tydeligere kontrast, mer energi og mer bevegelse enn de andre enkle demoene.</p>
           </div>
 
-          <div class="hero-illustration-stage" aria-hidden="true">
-            <img src="./assets/trening.png" alt="Illustrasjon av treningsrom" class="hero-illustration" />
-          </div>
+          <img src="./assets/trening.png" alt="Illustrasjon av treningsrom" class="hero-illustration" />
 
           <div class="panel">
             <h3>God for booking.</h3>
