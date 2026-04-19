@@ -942,38 +942,49 @@
     }
 
     .theme-premium-personal{
-      background:linear-gradient(145deg,#f3e7ea,#ead8dd);
-      color:#211612;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(123,104,255,0.16), transparent 28%),
+        radial-gradient(circle at 86% 30%, rgba(140,59,76,0.26), transparent 30%),
+        linear-gradient(145deg,#151924,#24131a 62%,#7a3242);
+      color:#f3edf2;
+      border:1px solid rgba(255,255,255,0.08);
     }
 
     .theme-premium-personal::before{
       content:"";
       position:absolute;
-      inset:0 auto auto 0;
-      width:100%;
-      height:6px;
-      background:linear-gradient(90deg,#7a2f3c,#b46a78);
+      inset:30px auto auto 34px;
+      width:min(270px, 42%);
+      height:min(260px, 58%);
+      border-radius:28px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        radial-gradient(circle at 50% 30%, rgba(240,164,184,0.18), transparent 28%);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03);
     }
 
     .theme-premium-personal::after{
       content:"";
       position:absolute;
-      right:-12%;
-      bottom:-18%;
-      width:58%;
+      right:-10%;
+      bottom:-22%;
+      width:52%;
       aspect-ratio:1;
       border-radius:50%;
-      border:1px solid rgba(122,47,60,0.14);
+      border:1px solid rgba(240,164,184,0.16);
+      box-shadow:0 0 60px rgba(140,59,76,0.16);
     }
 
     .theme-premium-personal .premium-box{
-      background:rgba(255,255,255,0.78);
-      border:1px solid rgba(122,47,60,0.14);
-      color:#3a2428;
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.10);
+      color:rgba(243,237,242,0.84);
+      backdrop-filter:blur(10px);
     }
 
     .theme-premium-personal .premium-topline{
-      color:rgba(122,47,60,0.78);
+      color:rgba(240,164,184,0.78);
     }
 
     .phone-shell{
