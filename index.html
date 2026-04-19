@@ -987,6 +987,25 @@
       color:rgba(240,164,184,0.78);
     }
 
+    .premium-hover-trail{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:0;
+      transition:opacity .18s ease;
+    }
+
+    .theme-premium-personal.is-drawing .premium-hover-trail{
+      opacity:1;
+    }
+
+    .theme-premium-personal > :not(.premium-hover-trail){
+      position:relative;
+      z-index:2;
+    }
+
     .phone-shell{
       width:100%;
       max-width:260px;
@@ -1812,5 +1831,137 @@
   <footer>
     <div class="container">Netrivo — nettsider med tydeligere identitet, mer struktur og høyere opplevd verdi.</div>
   </footer>
+  <script>
+    (function () {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+      const cards = document.querySelectorAll(".theme-premium-personal");
+
+      if (prefersReducedMotion || !hasFinePointer || !cards.length) return;
+
+      cards.forEach(function (card) {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        const points = [];
+        const trailLife = 1200;
+        const interpolationStep = 7;
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let lastPoint = null;
+        let running = false;
+
+        canvas.className = "premium-hover-trail";
+        card.appendChild(canvas);
+
+        function resizeCanvas() {
+          const rect = card.getBoundingClientRect();
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = rect.width;
+          height = rect.height;
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          canvas.style.width = width + "px";
+          canvas.style.height = height + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function addTrailPoint(x, y, time) {
+          const point = { x, y, time };
+
+          if (!lastPoint) {
+            points.push(point);
+            lastPoint = point;
+            return;
+          }
+
+          const distance = Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y);
+          if (distance < 3) return;
+
+          const steps = Math.min(120, Math.max(1, Math.floor(distance / interpolationStep)));
+
+          for (let step = 1; step <= steps; step += 1) {
+            const progress = step / steps;
+            points.push({
+              x: lastPoint.x + (point.x - lastPoint.x) * progress,
+              y: lastPoint.y + (point.y - lastPoint.y) * progress,
+              time: lastPoint.time + (time - lastPoint.time) * progress
+            });
+          }
+
+          lastPoint = point;
+        }
+
+        function drawTrail(now) {
+          ctx.clearRect(0, 0, width, height);
+
+          while (points.length && now - points[0].time > trailLife) {
+            points.shift();
+          }
+
+          for (let i = 1; i < points.length; i += 1) {
+            const previous = points[i - 1];
+            const current = points[i];
+            const next = points[i + 1] || current;
+            const age = now - current.time;
+            const opacity = Math.max(0, 1 - age / trailLife);
+            const endX = (current.x + next.x) / 2;
+            const endY = (current.y + next.y) / 2;
+
+            ctx.beginPath();
+            ctx.moveTo(previous.x, previous.y);
+            ctx.quadraticCurveTo(previous.x, previous.y, endX, endY);
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.lineWidth = 2 + opacity * 1.9;
+            ctx.shadowBlur = 14 + opacity * 18;
+            ctx.shadowColor = "rgba(240,164,184,0.88)";
+            ctx.strokeStyle = "rgba(240,164,184," + (opacity * 0.62) + ")";
+            ctx.stroke();
+
+            ctx.lineWidth = 0.8;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = "rgba(123,104,255,0.72)";
+            ctx.strokeStyle = "rgba(123,104,255," + (opacity * 0.42) + ")";
+            ctx.stroke();
+          }
+
+          if (points.length) {
+            requestAnimationFrame(drawTrail);
+          } else {
+            running = false;
+            card.classList.remove("is-drawing");
+          }
+        }
+
+        function handlePointerMove(event) {
+          const samples = typeof event.getCoalescedEvents === "function"
+            ? event.getCoalescedEvents()
+            : [event];
+          const rect = card.getBoundingClientRect();
+          const now = performance.now();
+
+          for (const sample of samples) {
+            addTrailPoint(sample.clientX - rect.left, sample.clientY - rect.top, now);
+          }
+
+          card.classList.add("is-drawing");
+
+          if (!running) {
+            running = true;
+            requestAnimationFrame(drawTrail);
+          }
+        }
+
+        resizeCanvas();
+        card.addEventListener("pointerenter", resizeCanvas);
+        card.addEventListener("pointermove", handlePointerMove, { passive: true });
+        card.addEventListener("pointerleave", function () {
+          lastPoint = null;
+        });
+        window.addEventListener("resize", resizeCanvas);
+      });
+    })();
+  </script>
 </body>
 </html>
