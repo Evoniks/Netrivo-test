@@ -217,6 +217,8 @@
         radial-gradient(circle at 68% 18%, rgba(236,216,189,0.16), transparent 26%),
         radial-gradient(circle at 18% 62%, rgba(181,138,90,0.18), transparent 30%),
         linear-gradient(145deg, #1b100d 0%, #43291f 48%, #7a5135 72%, #1a100d 100%);
+      background-size: 120% 120%, 130% 130%, 100% 100%;
+      animation: boutique-panel-drift 34s ease-in-out infinite alternate;
       color: #f8efe5;
       padding: 54px;
       display: flex;
@@ -233,6 +235,7 @@
       aspect-ratio: 1;
       border-radius: 50%;
       border: 1px solid rgba(236,216,189,0.16);
+      animation: boutique-orbit-deep 42s ease-in-out infinite alternate;
     }
 
     .hero-right::after {
@@ -245,6 +248,49 @@
       border-radius: 50%;
       background: radial-gradient(circle, rgba(236,216,189,0.16), transparent 62%);
       filter: blur(14px);
+      animation: boutique-orbit-light 38s ease-in-out infinite alternate;
+    }
+
+    @keyframes boutique-panel-drift {
+      0% {
+        background-position: 46% 18%, 16% 64%, center;
+      }
+      45% {
+        background-position: 62% 26%, 28% 52%, center;
+      }
+      100% {
+        background-position: 54% 34%, 10% 72%, center;
+      }
+    }
+
+    @keyframes boutique-orbit-light {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.78;
+      }
+      50% {
+        transform: translate3d(12%, 9%, 0) scale(1.08);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translate3d(4%, 18%, 0) scale(0.96);
+        opacity: 0.70;
+      }
+    }
+
+    @keyframes boutique-orbit-deep {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.9;
+      }
+      55% {
+        transform: translate3d(-7%, -5%, 0) scale(1.06);
+        opacity: 0.72;
+      }
+      100% {
+        transform: translate3d(-2%, -11%, 0) scale(0.98);
+        opacity: 0.86;
+      }
     }
 
     .tag {
@@ -393,6 +439,7 @@
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.05),
         inset 0 -80px 120px rgba(12,7,5,0.26);
+      animation: boutique-scene-drift 48s ease-in-out infinite alternate;
     }
 
     .boutique-scene::before {
@@ -409,6 +456,7 @@
       background:
         radial-gradient(circle at 50% 22%, rgba(236,216,189,0.13), transparent 30%),
         linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      animation: boutique-arch-breathe 36s ease-in-out infinite alternate;
     }
 
     .boutique-scene::after {
@@ -419,6 +467,49 @@
       bottom: 54px;
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(236,216,189,0.34), transparent);
+      animation: boutique-light-sweep 32s ease-in-out infinite alternate;
+    }
+
+    @keyframes boutique-scene-drift {
+      0% {
+        background-position: 0 0, 0 0, 44% 42%, center;
+      }
+      50% {
+        background-position: 10px 14px, -12px 8px, 58% 50%, center;
+      }
+      100% {
+        background-position: -8px 20px, 14px -10px, 48% 58%, center;
+      }
+    }
+
+    @keyframes boutique-arch-breathe {
+      0% {
+        transform: translateX(-50%) translateY(0) scale(1);
+        opacity: 0.82;
+      }
+      50% {
+        transform: translateX(-50%) translateY(10px) scale(1.025);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) translateY(4px) scale(0.99);
+        opacity: 0.76;
+      }
+    }
+
+    @keyframes boutique-light-sweep {
+      0% {
+        transform: translateX(-8%);
+        opacity: 0.55;
+      }
+      50% {
+        transform: translateX(8%);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateX(2%);
+        opacity: 0.62;
+      }
     }
 
     .scene-monogram {
@@ -673,6 +764,17 @@
       .material-strip {
         left: 18px;
         right: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-right,
+      .hero-right::before,
+      .hero-right::after,
+      .boutique-scene,
+      .boutique-scene::before,
+      .boutique-scene::after {
+        animation: none;
       }
     }
 
