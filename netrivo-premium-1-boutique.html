@@ -7,13 +7,16 @@
   <meta name="description" content="En eksklusiv nettside med roligere tempo, sterkere atmosfære og høyere opplevd verdi." />
   <style>
     :root {
-      --bg: #f6f0e8;
+      --bg: #f4ede3;
       --paper: #fffaf4;
-      --ink: #181512;
-      --muted: #6c6259;
+      --ink: #17110d;
+      --muted: #675a50;
       --line: rgba(24,21,18,0.08);
       --gold: #b58a5a;
-      --shadow: 0 30px 80px rgba(31, 22, 16, 0.08);
+      --deep: #1f130f;
+      --velvet: #5b3828;
+      --champagne: #ecd8bd;
+      --shadow: 0 34px 90px rgba(31, 22, 16, 0.11);
       --radius-xl: 42px;
       --radius-lg: 30px;
       --radius-md: 22px;
@@ -25,11 +28,12 @@
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Aptos", "Segoe UI", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(181,138,90,0.12), transparent 24%),
-        linear-gradient(180deg, #faf6f0 0%, #f2ebe3 100%);
+        radial-gradient(circle at 10% 0%, rgba(181,138,90,0.18), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(74,42,28,0.08), transparent 28%),
+        linear-gradient(180deg, #fbf7f0 0%, #f1e8dd 58%, #e9ded2 100%);
     }
 
     a {
@@ -57,9 +61,10 @@
       padding: 16px 22px;
       border-radius: 22px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.62);
+      background: rgba(255,250,244,0.70);
       box-shadow: var(--shadow);
       position: relative;
+      backdrop-filter: blur(18px);
     }
 
     .demo-brand {
@@ -163,39 +168,57 @@
     }
 
     .hero {
-      padding: 26px 0 0;
+      padding: 34px 0 0;
     }
 
     .hero-shell {
       border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
+      border-radius: 52px;
       overflow: hidden;
-      background: rgba(255,255,255,0.42);
-      box-shadow: var(--shadow);
+      background:
+        linear-gradient(135deg, rgba(255,250,244,0.84), rgba(244,232,218,0.56)),
+        rgba(255,255,255,0.42);
+      box-shadow: 0 44px 120px rgba(31,22,16,0.14);
+      position: relative;
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(181,138,90,0.16);
+      border-radius: 40px;
+      pointer-events: none;
+      z-index: 3;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      min-height: 830px;
+      grid-template-columns: 1fr 1fr;
+      min-height: 880px;
     }
 
     .hero-left {
-      padding: 86px 68px 64px;
+      padding: 96px 76px 70px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12));
+        radial-gradient(circle at 22% 16%, rgba(181,138,90,0.13), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.14));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-right {
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(145deg, #241914, #6f4a34 58%, #201713);
+        radial-gradient(circle at 68% 18%, rgba(236,216,189,0.16), transparent 26%),
+        radial-gradient(circle at 18% 62%, rgba(181,138,90,0.18), transparent 30%),
+        linear-gradient(145deg, #1b100d 0%, #43291f 48%, #7a5135 72%, #1a100d 100%);
       color: #f8efe5;
-      padding: 42px;
+      padding: 54px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -204,24 +227,24 @@
     .hero-right::before {
       content: "";
       position: absolute;
-      right: -12%;
-      bottom: -16%;
-      width: 72%;
+      right: -10%;
+      bottom: -12%;
+      width: 82%;
       aspect-ratio: 1;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(236,216,189,0.16);
     }
 
     .hero-right::after {
       content: "";
       position: absolute;
-      left: -10%;
-      top: 8%;
-      width: 50%;
+      left: -18%;
+      top: -8%;
+      width: 66%;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 62%);
-      filter: blur(10px);
+      background: radial-gradient(circle, rgba(236,216,189,0.16), transparent 62%);
+      filter: blur(14px);
     }
 
     .tag {
@@ -239,10 +262,12 @@
 
     h1 {
       margin: 24px 0 0;
-      font-size: clamp(3.3rem, 8vw, 7rem);
-      line-height: 0.92;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.7rem, 8vw, 7.8rem);
+      line-height: 0.88;
       letter-spacing: -0.07em;
       max-width: 760px;
+      font-weight: 500;
     }
 
     .lead {
@@ -269,7 +294,7 @@
       border-radius: 999px;
       font-weight: 700;
       border: 1px solid transparent;
-      transition: transform .18s ease, background .18s ease;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
 
     .btn:hover {
@@ -277,8 +302,9 @@
     }
 
     .btn-primary {
-      background: var(--ink);
+      background: linear-gradient(135deg, #18110d, #4b3024);
       color: #fff;
+      box-shadow: 0 18px 38px rgba(43,26,18,0.18);
     }
 
     .btn-secondary {
@@ -314,12 +340,15 @@
 
     .glass {
       position: relative;
-      z-index: 1;
-      padding: 26px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
+      z-index: 2;
+      padding: 28px;
+      border-radius: 32px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)),
+        rgba(43,26,18,0.18);
+      border: 1px solid rgba(236,216,189,0.18);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 70px rgba(16,10,7,0.18);
     }
 
     .glass + .glass {
@@ -347,6 +376,108 @@
       line-height: 1.74;
     }
 
+    .boutique-scene {
+      position: relative;
+      z-index: 1;
+      min-height: 440px;
+      margin: 28px 0;
+      border-radius: 42px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(236,216,189,0.07) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(236,216,189,0.06) 1px, transparent 1px),
+        radial-gradient(circle at 52% 44%, rgba(236,216,189,0.16), transparent 34%),
+        linear-gradient(145deg, rgba(33,19,14,0.08), rgba(255,255,255,0.03));
+      background-size: 44px 44px, 44px 44px, auto, auto;
+      border: 1px solid rgba(236,216,189,0.13);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        inset 0 -80px 120px rgba(12,7,5,0.26);
+    }
+
+    .boutique-scene::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 42px;
+      width: min(58%, 340px);
+      height: 78%;
+      transform: translateX(-50%);
+      border: 1px solid rgba(236,216,189,0.22);
+      border-bottom: 0;
+      border-radius: 999px 999px 0 0;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(236,216,189,0.13), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    }
+
+    .boutique-scene::after {
+      content: "";
+      position: absolute;
+      left: 13%;
+      right: 13%;
+      bottom: 54px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(236,216,189,0.34), transparent);
+    }
+
+    .scene-monogram {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(5.6rem, 12vw, 9.5rem);
+      letter-spacing: -0.12em;
+      color: rgba(236,216,189,0.14);
+      transform: translateY(-22px);
+    }
+
+    .scene-plinth {
+      position: absolute;
+      left: 50%;
+      bottom: 82px;
+      width: min(58%, 320px);
+      height: 86px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center, rgba(236,216,189,0.24), rgba(181,138,90,0.08) 42%, transparent 72%);
+      filter: blur(1px);
+    }
+
+    .material-strip {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .material-strip span {
+      min-height: 58px;
+      border-radius: 18px;
+      border: 1px solid rgba(236,216,189,0.14);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+    }
+
+    .material-strip span:nth-child(2) {
+      background:
+        linear-gradient(145deg, rgba(181,138,90,0.22), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.04);
+    }
+
+    .material-strip span:nth-child(3) {
+      background:
+        linear-gradient(145deg, rgba(255,250,244,0.14), rgba(91,56,40,0.08)),
+        rgba(255,255,255,0.04);
+    }
+
     .section {
       padding: 92px 0 0;
     }
@@ -368,9 +499,11 @@
 
     h2 {
       margin: 12px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(2.2rem, 4vw, 4.1rem);
-      line-height: 0.98;
+      line-height: 0.94;
       letter-spacing: -0.05em;
+      font-weight: 500;
     }
 
     .section-copy {
@@ -389,8 +522,17 @@
       padding: 28px;
       border-radius: 30px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.62);
+      background:
+        linear-gradient(145deg, rgba(255,250,244,0.82), rgba(241,229,216,0.48)),
+        rgba(255,255,255,0.62);
       box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(181,138,90,0.18);
+      box-shadow: 0 34px 88px rgba(31,22,16,0.13);
     }
 
     .card small {
@@ -415,19 +557,37 @@
     }
 
     .quote {
-      padding: 38px;
-      border-radius: 34px;
+      padding: 48px;
+      border-radius: 42px;
       border: 1px solid var(--line);
-      background: linear-gradient(145deg, rgba(255,255,255,0.74), rgba(231,220,209,0.56));
-      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 84% 22%, rgba(181,138,90,0.14), transparent 30%),
+        linear-gradient(145deg, rgba(255,250,244,0.84), rgba(231,220,209,0.62));
+      box-shadow: 0 34px 92px rgba(31,22,16,0.11);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote::after {
+      content: "";
+      position: absolute;
+      right: -8%;
+      bottom: -42%;
+      width: 44%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(181,138,90,0.18);
+      border-radius: 50%;
     }
 
     .quote p {
       margin: 12px 0 0;
-      font-size: 1.18rem;
-      line-height: 1.82;
+      position: relative;
+      z-index: 1;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.48;
       max-width: 880px;
-      color: #5f554d;
+      color: #4d4038;
     }
 
     .contact {
@@ -481,12 +641,39 @@
       .contact-card {
         padding: 24px;
       }
+
+      .hero-grid {
+        min-height: auto;
+      }
+
+      .boutique-scene {
+        min-height: 360px;
+        margin: 22px 0;
+      }
     }
 
     @media (max-width: 760px) {
       .actions { flex-direction: column; }
       .btn { width: 100%; }
       .container { width: min(1240px, calc(100% - 20px)); }
+      .hero-shell {
+        border-radius: 34px;
+      }
+      .hero-shell::before {
+        inset: 10px;
+        border-radius: 26px;
+      }
+      .metrics {
+        gap: 12px;
+      }
+      .boutique-scene {
+        min-height: 320px;
+        border-radius: 30px;
+      }
+      .material-strip {
+        left: 18px;
+        right: 18px;
+      }
     }
 
     @media (max-width: 960px) {
@@ -587,13 +774,23 @@
 
           <div class="hero-right">
             <div class="glass">
-              <small>Luxury direction</small>
+              <small>Signaturretning</small>
               <h3>Varm, rolig og gjennomført.</h3>
               <p>Atmosfære, eleganse og visuell selvtillit får bære opplevelsen.</p>
             </div>
 
+            <div class="boutique-scene" aria-hidden="true">
+              <div class="scene-monogram">MF</div>
+              <div class="scene-plinth"></div>
+              <div class="material-strip">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
             <div class="glass">
-              <small>Perception</small>
+              <small>Opplevd verdi</small>
               <h3>Når uttrykket senker tempoet, stiger verdien.</h3>
               <p>Mer ro, mer luft og mer kontroll gir hele merkevaren en høyere klasse.</p>
             </div>
