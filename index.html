@@ -1296,11 +1296,11 @@
 
     .premium-tech-reflection{
       background:
-        radial-gradient(ellipse at 78% 60%, transparent 0 22%, rgba(88,191,255,0.13) 29%, transparent 43%),
-        radial-gradient(ellipse at 86% 70%, transparent 0 18%, rgba(119,69,255,0.11) 27%, transparent 44%),
-        linear-gradient(115deg, transparent 8%, rgba(255,255,255,0.10) 24%, transparent 42%),
-        linear-gradient(20deg, transparent 46%, rgba(32,205,255,0.12) 51%, transparent 58%);
-      opacity:0.58;
+        radial-gradient(ellipse at 74% 58%, rgba(88,191,255,0.13), rgba(88,191,255,0.05) 34%, transparent 62%),
+        radial-gradient(ellipse at 88% 72%, rgba(119,69,255,0.10), rgba(119,69,255,0.04) 36%, transparent 66%),
+        radial-gradient(ellipse at 54% 32%, rgba(32,205,255,0.10), rgba(32,205,255,0.035) 38%, transparent 68%);
+      opacity:0.62;
+      filter:blur(18px);
       mix-blend-mode:screen;
       animation:premium-tech-reflection 14s ease-in-out infinite alternate;
     }
@@ -1438,9 +1438,9 @@
     }
 
     @keyframes premium-tech-reflection{
-      0%{transform:translateX(-28%) skewX(-8deg);opacity:0.24}
-      45%{transform:translateX(8%) skewX(-8deg);opacity:0.56}
-      100%{transform:translateX(34%) skewX(-8deg);opacity:0.34}
+      0%{transform:translate3d(-8%,-4%,0) scale(1);opacity:0.36}
+      45%{transform:translate3d(6%,3%,0) scale(1.08);opacity:0.64}
+      100%{transform:translate3d(14%,8%,0) scale(1.02);opacity:0.42}
     }
 
     @keyframes premium-tech-planet-glow{
