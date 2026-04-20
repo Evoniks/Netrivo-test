@@ -1244,10 +1244,12 @@
 
     .theme-premium-tech{
       background:
-        radial-gradient(circle at top left, rgba(119,69,255,0.36), transparent 28%),
-        radial-gradient(circle at 80% 10%, rgba(32,205,255,0.28), transparent 24%),
-        linear-gradient(145deg,#05070f,#10172b);
+        radial-gradient(circle at 16% 18%, rgba(119,69,255,0.34), transparent 28%),
+        radial-gradient(circle at 80% 12%, rgba(32,205,255,0.30), transparent 24%),
+        linear-gradient(145deg,#03050b,#0a1020 48%,#101a30);
       color:#eef3ff;
+      isolation:isolate;
+      border:1px solid rgba(162,188,255,0.10);
     }
 
     .theme-premium-tech::after{
@@ -1259,6 +1261,87 @@
       aspect-ratio:1;
       border-radius:50%;
       border:1px solid rgba(255,255,255,0.12);
+      z-index:0;
+      box-shadow:0 0 70px rgba(32,205,255,0.10);
+    }
+
+    .premium-tech-rain,
+    .premium-tech-reflection,
+    .premium-tech-depth{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      will-change:transform, opacity, background-position;
+    }
+
+    .premium-tech-depth{
+      background:
+        radial-gradient(circle at 18% 20%, rgba(119,69,255,0.28), transparent 28%),
+        radial-gradient(circle at 78% 30%, rgba(32,205,255,0.22), transparent 24%),
+        radial-gradient(circle at 58% 78%, rgba(5,9,18,0.72), transparent 46%);
+      filter:blur(8px);
+      mix-blend-mode:screen;
+      opacity:0.82;
+      animation:premium-tech-depth 18s ease-in-out infinite alternate;
+    }
+
+    .premium-tech-reflection{
+      background:
+        linear-gradient(115deg, transparent 8%, rgba(255,255,255,0.10) 24%, transparent 42%),
+        linear-gradient(20deg, transparent 46%, rgba(32,205,255,0.10) 51%, transparent 58%);
+      opacity:0.48;
+      mix-blend-mode:screen;
+      animation:premium-tech-reflection 14s ease-in-out infinite alternate;
+    }
+
+    .premium-tech-rain{
+      background-image:
+        repeating-linear-gradient(102deg,
+          transparent 0 16px,
+          rgba(224,238,255,0.18) 17px,
+          transparent 19px,
+          transparent 42px),
+        repeating-linear-gradient(96deg,
+          transparent 0 24px,
+          rgba(88,191,255,0.14) 25px,
+          transparent 27px,
+          transparent 64px);
+      background-size:170px 240px, 230px 310px;
+      opacity:0.62;
+      filter:blur(0.2px);
+      mask-image:linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      animation:premium-tech-rain 1.9s linear infinite;
+    }
+
+    .premium-tech-rain--slow{
+      opacity:0.38;
+      filter:blur(1.2px);
+      background-size:260px 360px, 310px 420px;
+      animation-duration:3.8s;
+      transform:scale(1.08);
+    }
+
+    .theme-premium-tech > :not(.premium-tech-rain):not(.premium-tech-reflection):not(.premium-tech-depth){
+      position:relative;
+      z-index:3;
+    }
+
+    @keyframes premium-tech-rain{
+      0%{background-position:0 -260px, 40px -340px}
+      100%{background-position:-80px 260px, -30px 340px}
+    }
+
+    @keyframes premium-tech-depth{
+      0%{transform:translate3d(-4%,-3%,0) scale(1);opacity:0.74}
+      50%{transform:translate3d(5%,4%,0) scale(1.08);opacity:0.96}
+      100%{transform:translate3d(2%,8%,0) scale(1.03);opacity:0.80}
+    }
+
+    @keyframes premium-tech-reflection{
+      0%{transform:translateX(-28%) skewX(-8deg);opacity:0.24}
+      45%{transform:translateX(8%) skewX(-8deg);opacity:0.56}
+      100%{transform:translateX(34%) skewX(-8deg);opacity:0.34}
     }
 
     .theme-premium-tech .premium-box{
@@ -1635,7 +1718,10 @@
 
     @media (prefers-reduced-motion: reduce){
       .premium-boutique-ambient,
-      .premium-boutique-aurora{
+      .premium-boutique-aurora,
+      .premium-tech-rain,
+      .premium-tech-reflection,
+      .premium-tech-depth{
         animation:none;
       }
     }
@@ -1986,6 +2072,10 @@
 
             <a class="premium-feature" href="./netrivo-premium-2-tech.html?view=desktop">
               <div class="premium-visual theme-premium-tech">
+                <span class="premium-tech-depth" aria-hidden="true"></span>
+                <span class="premium-tech-reflection" aria-hidden="true"></span>
+                <span class="premium-tech-rain premium-tech-rain--slow" aria-hidden="true"></span>
+                <span class="premium-tech-rain" aria-hidden="true"></span>
                 <div>
                     <div class="premium-topline">Premium / mørk og produktdrevet</div>
                   <div class="premium-headline">En premiumside med et mer futuristisk og high-tech uttrykk.</div>
