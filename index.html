@@ -1266,6 +1266,7 @@
     }
 
     .premium-tech-stars,
+    .premium-tech-meteor,
     .premium-tech-twinkle,
     .premium-tech-reflection,
     .premium-tech-depth{
@@ -1299,13 +1300,15 @@
     .premium-tech-stars{
       background:
         radial-gradient(circle at 12% 18%, rgba(238,248,255,0.72) 0 1px, transparent 2.6px),
-        radial-gradient(circle at 24% 62%, rgba(136,207,255,0.48) 0 1px, transparent 2.8px),
+        radial-gradient(circle at 18% 56%, rgba(136,207,255,0.48) 0 1px, transparent 2.8px),
         radial-gradient(circle at 36% 28%, rgba(238,248,255,0.62) 0 1.2px, transparent 3px),
-        radial-gradient(circle at 48% 76%, rgba(162,188,255,0.52) 0 1px, transparent 2.8px),
+        radial-gradient(circle at 44% 14%, rgba(162,188,255,0.52) 0 1px, transparent 2.8px),
         radial-gradient(circle at 62% 22%, rgba(238,248,255,0.68) 0 1px, transparent 2.7px),
-        radial-gradient(circle at 72% 52%, rgba(88,191,255,0.52) 0 1.2px, transparent 3px),
+        radial-gradient(circle at 72% 16%, rgba(88,191,255,0.52) 0 1.2px, transparent 3px),
         radial-gradient(circle at 88% 30%, rgba(238,248,255,0.72) 0 1px, transparent 2.8px),
-        radial-gradient(circle at 84% 82%, rgba(162,188,255,0.44) 0 1px, transparent 2.8px);
+        radial-gradient(circle at 28% 82%, rgba(162,188,255,0.44) 0 1px, transparent 2.8px),
+        radial-gradient(circle at 6% 74%, rgba(238,248,255,0.44) 0 1px, transparent 2.8px),
+        radial-gradient(circle at 94% 14%, rgba(136,207,255,0.46) 0 1px, transparent 2.8px);
       filter:drop-shadow(0 0 7px rgba(88,191,255,0.20));
       opacity:0.72;
       animation:premium-tech-stars-a 9.7s ease-in-out infinite alternate;
@@ -1316,10 +1319,11 @@
         radial-gradient(circle at 18% 42%, rgba(238,248,255,0.30) 0 1px, transparent 3px),
         radial-gradient(circle at 31% 14%, rgba(88,191,255,0.34) 0 1.1px, transparent 3px),
         radial-gradient(circle at 44% 54%, rgba(238,248,255,0.32) 0 1px, transparent 3px),
-        radial-gradient(circle at 59% 84%, rgba(88,191,255,0.30) 0 1px, transparent 3px),
+        radial-gradient(circle at 38% 84%, rgba(88,191,255,0.30) 0 1px, transparent 3px),
         radial-gradient(circle at 68% 10%, rgba(238,248,255,0.34) 0 1px, transparent 3px),
-        radial-gradient(circle at 79% 68%, rgba(162,188,255,0.34) 0 1px, transparent 3px),
-        radial-gradient(circle at 93% 46%, rgba(238,248,255,0.32) 0 1px, transparent 3px);
+        radial-gradient(circle at 82% 24%, rgba(162,188,255,0.34) 0 1px, transparent 3px),
+        radial-gradient(circle at 93% 36%, rgba(238,248,255,0.32) 0 1px, transparent 3px),
+        radial-gradient(circle at 10% 86%, rgba(88,191,255,0.28) 0 1px, transparent 3px);
       opacity:0.48;
       filter:blur(0.2px) drop-shadow(0 0 9px rgba(119,69,255,0.20));
       animation:premium-tech-stars-b 13.3s ease-in-out infinite alternate-reverse;
@@ -1329,13 +1333,47 @@
       background:
         radial-gradient(circle at 22% 34%, rgba(255,255,255,0.90) 0 1.4px, rgba(88,191,255,0.34) 2px, transparent 5px),
         radial-gradient(circle at 56% 18%, rgba(255,255,255,0.78) 0 1.2px, rgba(119,69,255,0.28) 2px, transparent 5px),
-        radial-gradient(circle at 74% 72%, rgba(255,255,255,0.86) 0 1.3px, rgba(88,191,255,0.32) 2px, transparent 5px);
+        radial-gradient(circle at 86% 24%, rgba(255,255,255,0.86) 0 1.3px, rgba(88,191,255,0.32) 2px, transparent 5px);
       opacity:0.28;
       filter:drop-shadow(0 0 11px rgba(180,225,255,0.38));
       animation:premium-tech-twinkle 5.6s ease-in-out infinite;
     }
 
-    .theme-premium-tech > :not(.premium-tech-stars):not(.premium-tech-twinkle):not(.premium-tech-reflection):not(.premium-tech-depth){
+    .premium-tech-meteor{
+      width:120px;
+      height:1px;
+      inset:auto;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, rgba(195,232,255,0.88), rgba(105,195,255,0.42), transparent);
+      filter:drop-shadow(0 0 10px rgba(132,207,255,0.48));
+      opacity:0;
+      transform:rotate(-18deg) translate3d(-20px,0,0);
+    }
+
+    .premium-tech-meteor--one{
+      left:56%;
+      top:18%;
+      animation:premium-tech-meteor-one 9.4s ease-in-out infinite;
+      animation-delay:-3.1s;
+    }
+
+    .premium-tech-meteor--two{
+      left:12%;
+      top:72%;
+      width:88px;
+      animation:premium-tech-meteor-two 12.7s ease-in-out infinite;
+      animation-delay:-7.6s;
+    }
+
+    .premium-tech-meteor--three{
+      left:74%;
+      top:34%;
+      width:78px;
+      animation:premium-tech-meteor-three 15.8s ease-in-out infinite;
+      animation-delay:-11.2s;
+    }
+
+    .theme-premium-tech > :not(.premium-tech-stars):not(.premium-tech-twinkle):not(.premium-tech-meteor):not(.premium-tech-reflection):not(.premium-tech-depth){
       position:relative;
       z-index:3;
     }
@@ -1360,6 +1398,24 @@
       41%{opacity:0.24;filter:drop-shadow(0 0 8px rgba(119,69,255,0.28))}
       67%{opacity:0.88;filter:drop-shadow(0 0 18px rgba(180,225,255,0.58))}
       84%{opacity:0.30;filter:drop-shadow(0 0 9px rgba(88,191,255,0.26))}
+    }
+
+    @keyframes premium-tech-meteor-one{
+      0%,68%,100%{opacity:0;transform:rotate(-18deg) translate3d(-28px,0,0)}
+      72%{opacity:0.9}
+      78%{opacity:0;transform:rotate(-18deg) translate3d(46px,0,0)}
+    }
+
+    @keyframes premium-tech-meteor-two{
+      0%,58%,100%{opacity:0;transform:rotate(-14deg) translate3d(-24px,0,0)}
+      62%{opacity:0.72}
+      68%{opacity:0;transform:rotate(-14deg) translate3d(38px,0,0)}
+    }
+
+    @keyframes premium-tech-meteor-three{
+      0%,76%,100%{opacity:0;transform:rotate(-22deg) translate3d(-18px,0,0)}
+      80%{opacity:0.78}
+      85%{opacity:0;transform:rotate(-22deg) translate3d(34px,0,0)}
     }
 
     @keyframes premium-tech-depth{
@@ -1750,6 +1806,7 @@
       .premium-boutique-ambient,
       .premium-boutique-aurora,
       .premium-tech-stars,
+      .premium-tech-meteor,
       .premium-tech-twinkle,
       .premium-tech-reflection,
       .premium-tech-depth{
@@ -2108,6 +2165,9 @@
                 <span class="premium-tech-stars" aria-hidden="true"></span>
                 <span class="premium-tech-stars premium-tech-stars--soft" aria-hidden="true"></span>
                 <span class="premium-tech-twinkle" aria-hidden="true"></span>
+                <span class="premium-tech-meteor premium-tech-meteor--one" aria-hidden="true"></span>
+                <span class="premium-tech-meteor premium-tech-meteor--two" aria-hidden="true"></span>
+                <span class="premium-tech-meteor premium-tech-meteor--three" aria-hidden="true"></span>
                 <div>
                     <div class="premium-topline">Premium / mørk og produktdrevet</div>
                   <div class="premium-headline">En premiumside med et mer futuristisk og high-tech uttrykk.</div>
