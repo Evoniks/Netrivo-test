@@ -1122,8 +1122,12 @@
     }
 
     .theme-premium-boutique{
-      background:linear-gradient(145deg,#241914,#6f4a34 58%,#201713);
+      background:
+        radial-gradient(circle at 70% 18%, rgba(236,216,189,0.15), transparent 28%),
+        radial-gradient(circle at 20% 64%, rgba(181,138,90,0.16), transparent 32%),
+        linear-gradient(145deg,#241914,#6f4a34 58%,#201713);
       color:#f8efe5;
+      isolation:isolate;
     }
 
     .theme-premium-boutique::after{
@@ -1135,6 +1139,102 @@
       aspect-ratio:1;
       border-radius:50%;
       border:1px solid rgba(255,255,255,0.14);
+      z-index:0;
+    }
+
+    .premium-boutique-ambient,
+    .premium-boutique-aurora{
+      position:absolute;
+      pointer-events:none;
+      z-index:1;
+      will-change:transform, opacity;
+    }
+
+    .premium-boutique-ambient{
+      border-radius:999px;
+      filter:blur(26px);
+      mix-blend-mode:screen;
+    }
+
+    .premium-boutique-ambient--warm{
+      width:68%;
+      height:42%;
+      left:-10%;
+      top:16%;
+      background:radial-gradient(ellipse at center, rgba(250,224,190,0.44), rgba(181,138,90,0.18) 42%, transparent 72%);
+      animation:premium-boutique-warm 15s ease-in-out infinite alternate;
+    }
+
+    .premium-boutique-ambient--gold{
+      width:58%;
+      height:36%;
+      right:-12%;
+      bottom:8%;
+      background:radial-gradient(ellipse at center, rgba(225,158,88,0.38), rgba(122,81,53,0.18) 44%, transparent 74%);
+      animation:premium-boutique-gold 18s ease-in-out infinite alternate;
+    }
+
+    .premium-boutique-ambient--shadow{
+      width:70%;
+      height:46%;
+      right:-18%;
+      top:28%;
+      border-radius:999px;
+      background:radial-gradient(ellipse at center, rgba(13,8,6,0.58), rgba(13,8,6,0.28) 48%, transparent 74%);
+      mix-blend-mode:multiply;
+      filter:blur(34px);
+      animation:premium-boutique-shadow 22s ease-in-out infinite alternate;
+    }
+
+    .premium-boutique-aurora{
+      left:-42%;
+      top:-24%;
+      width:184%;
+      height:148%;
+      border-radius:48%;
+      background:
+        conic-gradient(from 214deg at 50% 50%,
+          transparent 0deg,
+          rgba(255,225,185,0.00) 38deg,
+          rgba(255,218,172,0.22) 78deg,
+          rgba(176,103,55,0.12) 116deg,
+          transparent 164deg,
+          rgba(255,240,214,0.17) 232deg,
+          transparent 318deg),
+        radial-gradient(ellipse at 46% 55%, rgba(255,232,198,0.18), transparent 48%);
+      filter:blur(32px);
+      opacity:0.82;
+      mix-blend-mode:screen;
+      animation:premium-boutique-aurora 21s ease-in-out infinite alternate;
+    }
+
+    .theme-premium-boutique > :not(.premium-boutique-ambient):not(.premium-boutique-aurora){
+      position:relative;
+      z-index:3;
+    }
+
+    @keyframes premium-boutique-warm{
+      0%{transform:translate3d(-18%,-10%,0) scale(0.96);opacity:0.48}
+      45%{transform:translate3d(28%,24%,0) scale(1.18);opacity:0.88}
+      100%{transform:translate3d(8%,42%,0) scale(1.04);opacity:0.62}
+    }
+
+    @keyframes premium-boutique-gold{
+      0%{transform:translate3d(18%,24%,0) scale(1);opacity:0.42}
+      50%{transform:translate3d(-36%,-14%,0) scale(1.2);opacity:0.84}
+      100%{transform:translate3d(-18%,-38%,0) scale(0.98);opacity:0.54}
+    }
+
+    @keyframes premium-boutique-shadow{
+      0%{transform:translate3d(8%,-18%,0) scale(1);opacity:0.46}
+      50%{transform:translate3d(-42%,10%,0) scale(1.14);opacity:0.74}
+      100%{transform:translate3d(-16%,38%,0) scale(1);opacity:0.52}
+    }
+
+    @keyframes premium-boutique-aurora{
+      0%{transform:translate3d(-9%,-4%,0) rotate(-10deg) scale(1.02);opacity:0.48}
+      45%{transform:translate3d(6%,3%,0) rotate(8deg) scale(1.1);opacity:0.86}
+      100%{transform:translate3d(13%,8%,0) rotate(-4deg) scale(1.04);opacity:0.58}
     }
 
     .theme-premium-boutique .premium-box{
@@ -1532,6 +1632,13 @@
 
       .phone-shell{max-width:100%}
     }
+
+    @media (prefers-reduced-motion: reduce){
+      .premium-boutique-ambient,
+      .premium-boutique-aurora{
+        animation:none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1849,6 +1956,10 @@
           <div class="premium-wrap">
             <a class="premium-feature" href="./netrivo-premium-1-boutique.html?view=desktop">
               <div class="premium-visual theme-premium-boutique">
+                <span class="premium-boutique-ambient premium-boutique-ambient--warm" aria-hidden="true"></span>
+                <span class="premium-boutique-ambient premium-boutique-ambient--gold" aria-hidden="true"></span>
+                <span class="premium-boutique-ambient premium-boutique-ambient--shadow" aria-hidden="true"></span>
+                <span class="premium-boutique-aurora" aria-hidden="true"></span>
                 <div>
                   <div class="premium-topline">Premium / boutique og luksus</div>
                   <div class="premium-headline">En side som får merkevaren til å føles dyrere, roligere og mer eksklusiv.</div>
