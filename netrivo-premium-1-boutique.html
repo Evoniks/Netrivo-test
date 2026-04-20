@@ -251,6 +251,45 @@
       animation: boutique-orbit-light 38s ease-in-out infinite alternate;
     }
 
+    .ambient-orb {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 999px;
+      filter: blur(34px);
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+    }
+
+    .ambient-orb--warm {
+      width: 52%;
+      height: 34%;
+      left: 8%;
+      top: 28%;
+      background: radial-gradient(ellipse at center, rgba(236,216,189,0.24), rgba(181,138,90,0.08) 42%, transparent 72%);
+      animation: ambient-warm-drift 22s ease-in-out infinite alternate;
+    }
+
+    .ambient-orb--gold {
+      width: 46%;
+      height: 28%;
+      right: 4%;
+      bottom: 22%;
+      background: radial-gradient(ellipse at center, rgba(206,145,84,0.22), rgba(122,81,53,0.10) 44%, transparent 74%);
+      animation: ambient-gold-drift 27s ease-in-out infinite alternate;
+    }
+
+    .ambient-orb--shadow {
+      width: 58%;
+      height: 38%;
+      right: -18%;
+      top: 36%;
+      background: radial-gradient(ellipse at center, rgba(13,8,6,0.54), rgba(13,8,6,0.22) 46%, transparent 72%);
+      mix-blend-mode: multiply;
+      filter: blur(42px);
+      animation: ambient-shadow-drift 30s ease-in-out infinite alternate;
+    }
+
     @keyframes boutique-panel-drift {
       0% {
         background-position: 46% 18%, 16% 64%, center;
@@ -290,6 +329,51 @@
       100% {
         transform: translate3d(-2%, -11%, 0) scale(0.98);
         opacity: 0.86;
+      }
+    }
+
+    @keyframes ambient-warm-drift {
+      0% {
+        transform: translate3d(-8%, -4%, 0) scale(0.95);
+        opacity: 0.38;
+      }
+      45% {
+        transform: translate3d(18%, 18%, 0) scale(1.16);
+        opacity: 0.74;
+      }
+      100% {
+        transform: translate3d(4%, 34%, 0) scale(1.02);
+        opacity: 0.52;
+      }
+    }
+
+    @keyframes ambient-gold-drift {
+      0% {
+        transform: translate3d(8%, 18%, 0) scale(1);
+        opacity: 0.32;
+      }
+      50% {
+        transform: translate3d(-28%, -8%, 0) scale(1.18);
+        opacity: 0.68;
+      }
+      100% {
+        transform: translate3d(-12%, -30%, 0) scale(0.96);
+        opacity: 0.44;
+      }
+    }
+
+    @keyframes ambient-shadow-drift {
+      0% {
+        transform: translate3d(0, -12%, 0) scale(1);
+        opacity: 0.38;
+      }
+      50% {
+        transform: translate3d(-34%, 8%, 0) scale(1.12);
+        opacity: 0.64;
+      }
+      100% {
+        transform: translate3d(-10%, 30%, 0) scale(0.98);
+        opacity: 0.46;
       }
     }
 
@@ -771,6 +855,7 @@
       .hero-right,
       .hero-right::before,
       .hero-right::after,
+      .ambient-orb,
       .boutique-scene,
       .boutique-scene::before,
       .boutique-scene::after {
@@ -875,6 +960,10 @@
           </div>
 
           <div class="hero-right">
+            <div class="ambient-orb ambient-orb--warm" aria-hidden="true"></div>
+            <div class="ambient-orb ambient-orb--gold" aria-hidden="true"></div>
+            <div class="ambient-orb ambient-orb--shadow" aria-hidden="true"></div>
+
             <div class="glass">
               <small>Signaturretning</small>
               <h3>Varm, rolig og gjennomført.</h3>
