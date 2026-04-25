@@ -634,6 +634,13 @@
       background:rgba(255,255,255,0.12);
       overflow:hidden;
       box-shadow:inset 0 0 0 1px rgba(255,255,255,0.24);
+      --sketch-ink: rgba(62,45,32,0.18);
+      --sketch-ink-strong: rgba(62,45,32,0.24);
+      --sketch-ink-soft: rgba(62,45,32,0.7);
+      --sketch-ink-faint: rgba(62,45,32,0.12);
+      --sketch-card: rgba(255,255,255,0.12);
+      --sketch-card-soft: rgba(255,255,255,0.46);
+      --sketch-button: rgba(255,255,255,0.16);
     }
 
     .generated-brief{
@@ -662,12 +669,20 @@
       color:#7a6b5b;
     }
 
+    .generated-entity{
+      margin-top:8px;
+      font-size:0.92rem;
+      color:#8a7868;
+      line-height:1.4;
+    }
+
     .generated-title{
       margin:8px 0 0;
       font-size:clamp(1.7rem, 2.8vw, 2.55rem);
       line-height:0.96;
       letter-spacing:-0.05em;
-      max-width:13ch;
+      max-width:11ch;
+      text-wrap:balance;
     }
 
     .generated-copy{
@@ -752,6 +767,56 @@
         radial-gradient(circle at 18% 14%, rgba(238,210,224,0.42), transparent 28%);
     }
 
+    .sketch-surface[data-scene="boutique"]{
+      --sketch-ink: rgba(110,68,52,0.2);
+      --sketch-ink-strong: rgba(110,68,52,0.28);
+      --sketch-ink-soft: rgba(106,72,58,0.72);
+      --sketch-ink-faint: rgba(110,68,52,0.12);
+      --sketch-card: rgba(255,248,241,0.18);
+      --sketch-card-soft: rgba(255,246,238,0.42);
+      --sketch-button: rgba(255,244,236,0.16);
+    }
+
+    .sketch-surface[data-scene="tech"]{
+      --sketch-ink: rgba(222,235,255,0.22);
+      --sketch-ink-strong: rgba(238,245,255,0.34);
+      --sketch-ink-soft: rgba(220,233,250,0.78);
+      --sketch-ink-faint: rgba(214,230,250,0.14);
+      --sketch-card: rgba(18,31,48,0.28);
+      --sketch-card-soft: rgba(28,47,70,0.34);
+      --sketch-button: rgba(33,55,79,0.28);
+    }
+
+    .sketch-surface[data-scene="editorial"]{
+      --sketch-ink: rgba(116,74,105,0.22);
+      --sketch-ink-strong: rgba(125,78,111,0.32);
+      --sketch-ink-soft: rgba(116,74,105,0.74);
+      --sketch-ink-faint: rgba(125,78,111,0.13);
+      --sketch-card: rgba(255,246,252,0.18);
+      --sketch-card-soft: rgba(252,239,247,0.34);
+      --sketch-button: rgba(243,221,233,0.2);
+    }
+
+    .sketch-surface[data-scene="practical"]{
+      --sketch-ink: rgba(63,93,73,0.2);
+      --sketch-ink-strong: rgba(63,93,73,0.28);
+      --sketch-ink-soft: rgba(63,93,73,0.74);
+      --sketch-ink-faint: rgba(63,93,73,0.12);
+      --sketch-card: rgba(247,252,247,0.18);
+      --sketch-card-soft: rgba(240,248,240,0.38);
+      --sketch-button: rgba(225,239,227,0.22);
+    }
+
+    .sketch-surface[data-scene="energetic"]{
+      --sketch-ink: rgba(123,70,51,0.22);
+      --sketch-ink-strong: rgba(123,70,51,0.3);
+      --sketch-ink-soft: rgba(123,70,51,0.76);
+      --sketch-ink-faint: rgba(123,70,51,0.13);
+      --sketch-card: rgba(255,244,238,0.18);
+      --sketch-card-soft: rgba(252,233,222,0.36);
+      --sketch-button: rgba(233,192,166,0.24);
+    }
+
     .sketch-head{
       position:relative;
       z-index:2;
@@ -760,25 +825,25 @@
       justify-content:space-between;
       gap:12px;
       padding:18px 22px;
-      border-bottom:1px solid rgba(62,45,32,0.14);
+      border-bottom:1px solid var(--sketch-ink-faint);
     }
 
     .sketch-topline{
       font-size:0.74rem;
       text-transform:uppercase;
       letter-spacing:0.22em;
-      color:rgba(62,45,32,0.7);
+      color:var(--sketch-ink-soft);
     }
 
     .sketch-chip{
       padding:8px 12px;
       border-radius:999px;
-      border:1px solid rgba(62,45,32,0.14);
-      background:rgba(255,255,255,0.3);
+      border:1px solid var(--sketch-ink-faint);
+      background:var(--sketch-card-soft);
       font-size:0.72rem;
       text-transform:uppercase;
       letter-spacing:0.18em;
-      color:rgba(62,45,32,0.62);
+      color:var(--sketch-ink-soft);
     }
 
     .sketch-layout{
@@ -798,8 +863,8 @@
       gap:16px;
       padding:22px;
       border-radius:24px;
-      border:1.5px solid rgba(62,45,32,0.18);
-      background:linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.2));
+      border:1.5px solid var(--sketch-ink);
+      background:linear-gradient(180deg, var(--sketch-card-soft), rgba(255,255,255,0.12));
     }
 
     .sketch-hero::before{
@@ -819,7 +884,7 @@
       width:160px;
       height:16px;
       border-radius:999px;
-      background:rgba(62,45,32,0.12);
+      background:var(--sketch-ink-faint);
       filter:blur(0.8px);
     }
 
@@ -832,13 +897,13 @@
     .sketch-title-line{
       height:18px;
       border-radius:999px;
-      background:rgba(62,45,32,0.18);
+      background:var(--sketch-ink);
       filter:blur(0.8px);
     }
 
     .sketch-title-line--heavy{
       height:30px;
-      background:rgba(62,45,32,0.24);
+      background:var(--sketch-ink-strong);
       filter:blur(0.5px);
     }
 
@@ -851,7 +916,7 @@
     .sketch-body-line{
       height:10px;
       border-radius:999px;
-      background:rgba(62,45,32,0.12);
+      background:var(--sketch-ink-faint);
       filter:blur(2.8px);
     }
 
@@ -866,12 +931,12 @@
       width:144px;
       height:40px;
       border-radius:999px;
-      border:1.5px solid rgba(62,45,32,0.16);
-      background:rgba(255,255,255,0.16);
+      border:1.5px solid var(--sketch-ink);
+      background:var(--sketch-button);
     }
 
     .sketch-button--solid{
-      background:rgba(62,45,32,0.18);
+      background:var(--sketch-ink);
     }
 
     .sketch-rail{
@@ -884,8 +949,8 @@
       position:relative;
       padding:18px;
       border-radius:22px;
-      border:1.5px solid rgba(62,45,32,0.16);
-      background:linear-gradient(180deg, rgba(255,255,255,0.48), rgba(255,255,255,0.26));
+      border:1.5px solid var(--sketch-ink);
+      background:linear-gradient(180deg, var(--sketch-card-soft), rgba(255,255,255,0.16));
       display:grid;
       gap:10px;
     }
@@ -894,7 +959,7 @@
       width:50%;
       height:14px;
       border-radius:999px;
-      background:rgba(62,45,32,0.18);
+      background:var(--sketch-ink);
       filter:blur(0.5px);
     }
 
@@ -906,7 +971,7 @@
     .sketch-note-line{
       height:9px;
       border-radius:999px;
-      background:rgba(62,45,32,0.12);
+      background:var(--sketch-ink-faint);
       filter:blur(2px);
     }
 
@@ -923,8 +988,8 @@
       padding:16px;
       min-height:90px;
       border-radius:20px;
-      border:1.5px solid rgba(62,45,32,0.16);
-      background:rgba(255,255,255,0.12);
+      border:1.5px solid var(--sketch-ink);
+      background:var(--sketch-card);
       display:grid;
       gap:10px;
       align-content:start;
@@ -1057,7 +1122,7 @@
       width:62%;
       height:12px;
       border-radius:999px;
-      background:rgba(62,45,32,0.18);
+      background:var(--sketch-ink);
       filter:blur(0.45px);
     }
 
@@ -1069,7 +1134,7 @@
     .sketch-line{
       height:8px;
       border-radius:999px;
-      background:rgba(62,45,32,0.12);
+      background:var(--sketch-ink-faint);
       filter:blur(2px);
     }
 
@@ -1277,10 +1342,11 @@
                 <div class="sketch-surface" id="sketch-surface">
                   <div class="generated-brief">
                     <div class="generated-brief-top">
-                      <div>
-                        <div class="generated-kicker">Generert retning</div>
-                        <h3 class="generated-title" id="generated-brief-title">Standard med rolig struktur og tydelig retning.</h3>
-                      </div>
+                    <div>
+                      <div class="generated-kicker">Generert retning</div>
+                      <div class="generated-entity" id="generated-entity-name">Navn eller bransje vises her</div>
+                      <h3 class="generated-title" id="generated-brief-title">Standard med rolig struktur og tydelig retning.</h3>
+                    </div>
                       <div class="generated-palette" id="generated-palette">
                         <span class="palette-chip"><span class="palette-dot" style="background:#d7c9bb;"></span> Base</span>
                         <span class="palette-chip"><span class="palette-dot" style="background:#aebed0;"></span> Scene</span>
@@ -1496,6 +1562,16 @@
                 </div>
 
                 <div class="brief-field brief-field--full">
+                  <div class="brief-legend">Ønskede effekter</div>
+                  <div class="brief-choice-grid">
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" />Interaktiv lyslinje ved musepeker</label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bakgrunn" />Atmosfærisk bevegelse i bakgrunn</label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Glow og glass" />Glow, glass og lysflater</label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Helt rolig uttrykk" />Helt rolig uttrykk uten effekter</label>
+                  </div>
+                </div>
+
+                <div class="brief-field brief-field--full">
                   <label for="brief-notes">Kort om ønsket retning</label>
                   <textarea id="brief-notes" name="notes" placeholder="For eksempel: Skal virke mer etablert, få flere bookinghenvendelser, føles mer eksklusiv eller gjøre tilbudet lettere å forstå."></textarea>
                 </div>
@@ -1532,6 +1608,7 @@
       const wireframeTitleBlock = document.getElementById("wireframe-title-block");
       const wireframeCopyBlock = document.getElementById("wireframe-copy-block");
       const wireframeSections = document.getElementById("wireframe-sections");
+      const generatedEntityName = document.getElementById("generated-entity-name");
       const generatedBriefTitle = document.getElementById("generated-brief-title");
       const generatedBriefCopy = document.getElementById("generated-brief-copy");
       const generatedPalette = document.getElementById("generated-palette");
@@ -1627,6 +1704,33 @@
         energi: { palette: "warm", glow: 0.32, tilt: "-0.8deg" }
       };
 
+      const sceneProfiles = {
+        boutique: {
+          board: "linear-gradient(180deg, rgba(251,244,238,0.98), rgba(237,223,212,0.96))",
+          surface: "linear-gradient(180deg, rgba(255,248,243,0.94), rgba(243,229,219,0.86)), radial-gradient(circle at 82% 16%, rgba(201,147,120,0.24), transparent 24%)"
+        },
+        tech: {
+          board: "linear-gradient(180deg, rgba(14,22,38,0.98), rgba(10,17,31,0.96))",
+          surface: "linear-gradient(180deg, rgba(18,31,53,0.92), rgba(13,22,42,0.88)), radial-gradient(circle at 82% 16%, rgba(78,156,222,0.22), transparent 28%)"
+        },
+        editorial: {
+          board: "linear-gradient(180deg, rgba(249,240,246,0.98), rgba(236,223,232,0.96))",
+          surface: "linear-gradient(180deg, rgba(255,247,252,0.92), rgba(241,227,236,0.86)), radial-gradient(circle at 82% 16%, rgba(184,132,171,0.2), transparent 26%)"
+        },
+        practical: {
+          board: "linear-gradient(180deg, rgba(239,246,239,0.98), rgba(227,237,228,0.96))",
+          surface: "linear-gradient(180deg, rgba(246,251,246,0.94), rgba(232,241,233,0.86)), radial-gradient(circle at 82% 16%, rgba(110,154,117,0.18), transparent 24%)"
+        },
+        energetic: {
+          board: "linear-gradient(180deg, rgba(248,235,227,0.98), rgba(236,216,205,0.96))",
+          surface: "linear-gradient(180deg, rgba(255,245,238,0.94), rgba(242,222,210,0.86)), radial-gradient(circle at 82% 16%, rgba(204,131,93,0.22), transparent 24%)"
+        },
+        calm: {
+          board: "linear-gradient(180deg, rgba(243,247,251,0.98), rgba(231,239,245,0.96))",
+          surface: "linear-gradient(180deg, rgba(248,252,255,0.94), rgba(235,242,248,0.86)), radial-gradient(circle at 82% 16%, rgba(142,170,194,0.18), transparent 24%)"
+        }
+      };
+
       function hashString(value) {
         return value.split("").reduce(function (acc, char) {
           return (acc * 31 + char.charCodeAt(0)) % 2147483647;
@@ -1662,6 +1766,29 @@
         };
       }
 
+      function buildDisplayTitle(state, level) {
+        if (level === "premium" && state.style === "moderne") return "Mørk premiumretning med mer dybde og produktfølelse.";
+        if (level === "premium" && state.style === "eksklusiv") return "Boutique-retning med mer sceneplass og kuratert ro.";
+        if (level === "premium") return "Premium med tydelig identitet og høyere opplevd verdi.";
+        if (level === "standard" && state.style === "tillit") return "Standard med mer struktur, ro og troverdighet.";
+        if (level === "standard" && state.style === "moderne") return "Standard med skarpere kontrast og mer kontroll.";
+        if (level === "enkel" && state.style === "energi") return "Enkel retning med mer driv og raskere handling.";
+        if (level === "enkel") return "Enkel retning med tydelige valg og lav terskel.";
+        return "Standard med tydelig retning og mer gjennomarbeidet struktur.";
+      }
+
+      function pickScene(state, level) {
+        if (level === "premium" && state.style === "eksklusiv") return "boutique";
+        if (level === "premium" && state.style === "moderne") return "tech";
+        if (level === "premium" && state.industry === "Personlig brand") return "editorial";
+        if (state.industry === "HÃ¥ndverk og service") return "practical";
+        if (state.industry === "Helse og trening" || state.style === "energi") return "energetic";
+        if (state.industry === "Kafe og servering" || state.industry === "Butikk og livsstil") return "boutique";
+        if (state.industry === "Tech og SaaS") return "tech";
+        if (state.industry === "Personlig brand") return "editorial";
+        return "calm";
+      }
+
       function renderPalette(name) {
         const set = paletteSets[name] || paletteSets.cool;
         generatedPalette.innerHTML = set.map(function (item) {
@@ -1673,13 +1800,17 @@
         const industryTheme = industryThemes[state.industry] || industryThemes.Annet;
         const styleTheme = styleAdjustments[state.style] || styleAdjustments.tillit;
         const paletteSet = paletteSets[palette] || paletteSets.cool;
+        const scene = pickScene(state, level);
+        const sceneProfile = sceneProfiles[scene] || sceneProfiles.calm;
 
         sketchBoard.style.background =
-          "linear-gradient(180deg, rgba(254,251,246,0.98), rgba(244,236,227,0.96)), radial-gradient(circle at 14% 12%, " + industryTheme.board + "99, transparent 24%), radial-gradient(circle at 86% 78%, " + paletteSet[1].color + "26, transparent 24%)";
+          sceneProfile.board + ", radial-gradient(circle at 14% 12%, " + industryTheme.board + "88, transparent 24%), radial-gradient(circle at 86% 78%, " + paletteSet[1].color + "26, transparent 24%)";
+        sketchSurface.style.background = sceneProfile.surface;
         sketchSurface.style.setProperty("--sketch-tint", paletteSet[1].color + "2e");
         sketchSurface.style.setProperty("--sketch-glow-a", paletteSet[0].color + "66");
         sketchSurface.style.setProperty("--sketch-glow-b", paletteSet[1].color + "4d");
         sketchSurface.style.borderColor = industryTheme.contrast + "30";
+        sketchSurface.dataset.scene = scene;
         wireframeChip.style.background = paletteSet[0].color + "55";
         wireframeChip.style.borderColor = paletteSet[1].color + "33";
         wireframeChip.style.color = industryTheme.contrast;
@@ -1702,6 +1833,9 @@
           pagesLabel: form.pages.options[form.pages.selectedIndex].text,
           notes: form.notes.value.trim(),
           features: Array.from(form.querySelectorAll('input[name="feature"]:checked')).map(function (input) {
+            return input.value;
+          }),
+          effects: Array.from(form.querySelectorAll('input[name="effect"]:checked')).map(function (input) {
             return input.value;
           })
         };
@@ -1804,7 +1938,8 @@
           "Ønsket stil: " + state.styleLabel,
           "Omfang: " + state.pagesLabel,
           "Innhold: " + state.contentLabel,
-          "Viktige funksjoner: " + (state.features.join(", ") || "Ingen valgt")
+          "Viktige funksjoner: " + (state.features.join(", ") || "Ingen valgt"),
+          "Ønskede effekter: " + (state.effects.join(", ") || "Ingen valgt")
         ];
       }
 
@@ -1842,6 +1977,7 @@
           "Innholdsmengde: " + state.contentLabel,
           "Omfang: " + state.pagesLabel,
           "Funksjoner: " + (state.features.join(", ") || "-"),
+          "Effekter: " + (state.effects.join(", ") || "-"),
           "Notater: " + (state.notes || "-"),
           "",
           "Oppsummert forslag:",
@@ -1856,15 +1992,14 @@
         const sections = buildSections(state);
         const summaryLines = buildSummary(state, recommendation);
         const palette = pickPalette(state, level);
-        const title = state.company
-          ? state.company + (level === "premium" ? " med mer sceneplass og tydeligere verdi." : level === "enkel" ? " gjort tydelig, lett og salgsbar." : " med mer struktur, ro og tillit.")
-          : (industryOpeners[state.industry] || industryOpeners.Annet);
+        const title = buildDisplayTitle(state, level);
         const generated = buildGeneratedBrief(state, recommendation, title);
 
         badge.textContent = (recommendation.mode === "manual" ? "Valgt nivå / " : "Anbefalt nivå / ") + level.charAt(0).toUpperCase() + level.slice(1);
         score.textContent = recommendation.confidence + " - " + recommendation.reason;
         recommendationTitle.textContent = levelCopy[level].title;
         recommendationCopy.textContent = levelCopy[level].copy;
+        generatedEntityName.textContent = state.company || state.industry;
         generatedBriefTitle.textContent = generated.title;
         generatedBriefCopy.textContent = generated.copy;
         wireframeTopline.textContent = levelCopy[level].top;
