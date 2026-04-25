@@ -1323,17 +1323,14 @@
         radial-gradient(circle at 44% 10%, rgba(255,255,255,0.74) 0 0.7px, transparent 1.75px),
         radial-gradient(circle at 48% 28%, rgba(248,251,255,0.86) 0 0.85px, transparent 1.9px),
         radial-gradient(circle at 56% 16%, rgba(255,255,255,0.96) 0 0.95px, transparent 2px),
-        radial-gradient(circle at 60% 34%, rgba(244,249,255,0.78) 0 0.75px, transparent 1.8px),
         radial-gradient(circle at 68% 12%, rgba(255,255,255,0.98) 0 1px, transparent 2.05px),
         radial-gradient(circle at 72% 28%, rgba(242,248,255,0.72) 0 0.75px, transparent 1.8px),
         radial-gradient(circle at 78% 16%, rgba(255,255,255,0.90) 0 0.9px, transparent 1.95px),
         radial-gradient(circle at 84% 26%, rgba(246,250,255,0.72) 0 0.7px, transparent 1.75px),
         radial-gradient(circle at 88% 12%, rgba(255,255,255,0.96) 0 0.95px, transparent 2px),
         radial-gradient(circle at 94% 30%, rgba(244,249,255,0.76) 0 0.75px, transparent 1.8px),
-        radial-gradient(circle at 92% 78%, rgba(248,251,255,0.58) 0 0.7px, transparent 1.7px),
         radial-gradient(circle at 8% 84%, rgba(239,245,255,0.56) 0 0.7px, transparent 1.7px),
-        radial-gradient(circle at 22% 90%, rgba(255,255,255,0.48) 0 0.65px, transparent 1.65px),
-        radial-gradient(circle at 74% 88%, rgba(240,247,255,0.46) 0 0.65px, transparent 1.65px);
+        radial-gradient(circle at 22% 90%, rgba(255,255,255,0.48) 0 0.65px, transparent 1.65px);
       filter:drop-shadow(0 0 3px rgba(214,232,255,0.10));
       opacity:0.98;
       animation:premium-tech-stars-a 9.7s ease-in-out infinite alternate;
@@ -1348,17 +1345,11 @@
         radial-gradient(circle at 30% 82%, rgba(255,255,255,0.28) 0 0.55px, transparent 1.5px),
         radial-gradient(circle at 38% 40%, rgba(236,244,255,0.28) 0 0.55px, transparent 1.5px),
         radial-gradient(circle at 46% 14%, rgba(255,255,255,0.30) 0 0.6px, transparent 1.55px),
-        radial-gradient(circle at 52% 58%, rgba(233,241,255,0.26) 0 0.55px, transparent 1.5px),
         radial-gradient(circle at 58% 8%, rgba(255,255,255,0.28) 0 0.55px, transparent 1.5px),
-        radial-gradient(circle at 64% 72%, rgba(255,255,255,0.24) 0 0.55px, transparent 1.5px),
         radial-gradient(circle at 72% 24%, rgba(232,240,255,0.28) 0 0.55px, transparent 1.5px),
-        radial-gradient(circle at 78% 62%, rgba(229,238,255,0.22) 0 0.55px, transparent 1.5px),
         radial-gradient(circle at 86% 10%, rgba(255,255,255,0.30) 0 0.6px, transparent 1.55px),
-        radial-gradient(circle at 92% 46%, rgba(233,241,255,0.22) 0 0.55px, transparent 1.5px),
-        radial-gradient(circle at 96% 78%, rgba(255,255,255,0.20) 0 0.55px, transparent 1.5px),
         radial-gradient(circle at 16% 92%, rgba(255,255,255,0.18) 0 0.5px, transparent 1.45px),
-        radial-gradient(circle at 54% 88%, rgba(237,243,255,0.18) 0 0.5px, transparent 1.45px),
-        radial-gradient(circle at 82% 86%, rgba(229,238,255,0.18) 0 0.5px, transparent 1.45px);
+        radial-gradient(circle at 54% 88%, rgba(237,243,255,0.18) 0 0.5px, transparent 1.45px);
       opacity:0.82;
       filter:drop-shadow(0 0 2px rgba(214,229,255,0.06));
       animation:premium-tech-stars-b 13.3s ease-in-out infinite alternate-reverse;
@@ -1700,6 +1691,7 @@
       color:#241914;
     }
 
+    .brief-panel,
     .process-wrap,
     .contact-cta,
     .contact-card{
@@ -1710,6 +1702,339 @@
     }
 
     .process-wrap{padding:26px}
+
+    .brief-grid{
+      display:grid;
+      grid-template-columns:1.02fr 0.98fr;
+      gap:18px;
+      margin-bottom:26px;
+    }
+
+    .brief-panel{
+      padding:28px;
+    }
+
+    .brief-form{
+      display:grid;
+      gap:22px;
+    }
+
+    .brief-form-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .brief-field{
+      display:grid;
+      gap:8px;
+    }
+
+    .brief-field--full{
+      grid-column:1 / -1;
+    }
+
+    .brief-field label,
+    .brief-legend{
+      font-size:0.86rem;
+      font-weight:700;
+      letter-spacing:-0.01em;
+    }
+
+    .brief-field input,
+    .brief-field select,
+    .brief-field textarea{
+      width:100%;
+      border:1px solid rgba(21,21,21,0.1);
+      border-radius:18px;
+      background:rgba(255,255,255,0.82);
+      padding:14px 16px;
+      font:inherit;
+      color:var(--ink);
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .brief-field textarea{
+      min-height:108px;
+      resize:vertical;
+    }
+
+    .brief-field input:focus,
+    .brief-field select:focus,
+    .brief-field textarea:focus{
+      border-color:rgba(95,55,39,0.32);
+      box-shadow:0 0 0 4px rgba(95,55,39,0.08);
+      background:white;
+    }
+
+    .brief-choice-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px;
+    }
+
+    .brief-choice{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.72);
+      color:var(--ink);
+      line-height:1.45;
+      font-size:0.94rem;
+    }
+
+    .brief-choice input{
+      margin-top:2px;
+      accent-color:#2a1d16;
+    }
+
+    .brief-output{
+      display:grid;
+      gap:18px;
+      align-content:start;
+    }
+
+    .brief-output-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brief-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.8);
+      font-size:0.78rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .brief-score{
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    .brief-recommendation{
+      padding:20px 22px;
+      border-radius:24px;
+      background:linear-gradient(145deg, rgba(255,255,255,0.86), rgba(235,227,217,0.76));
+      border:1px solid rgba(21,21,21,0.08);
+    }
+
+    .brief-recommendation strong{
+      display:block;
+      font-size:1.5rem;
+      line-height:1.02;
+      letter-spacing:-0.05em;
+    }
+
+    .brief-recommendation p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:0.95rem;
+    }
+
+    .brief-wireframe{
+      position:relative;
+      overflow:hidden;
+      min-height:420px;
+      padding:26px;
+      border-radius:30px;
+      border:1px solid rgba(21,21,21,0.08);
+      display:grid;
+      gap:18px;
+      align-content:start;
+      box-shadow:var(--shadow);
+    }
+
+    .brief-wireframe::before{
+      content:"";
+      position:absolute;
+      inset:auto -10% -22% auto;
+      width:58%;
+      aspect-ratio:1;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.14);
+      opacity:0.5;
+    }
+
+    .brief-wireframe--enkel{
+      background:linear-gradient(145deg, #3d2a21, #1a1411);
+      color:#f8efe5;
+    }
+
+    .brief-wireframe--standard{
+      background:linear-gradient(145deg, #d9e5ef, #b9cad9 58%, #9eb3c4);
+      color:#162634;
+    }
+
+    .brief-wireframe--premium{
+      background:
+        radial-gradient(circle at 18% 18%, rgba(145,96,255,0.28), transparent 24%),
+        radial-gradient(circle at 82% 12%, rgba(85,208,255,0.24), transparent 22%),
+        linear-gradient(145deg, #040711, #0f1830 56%, #16233d);
+      color:#eef3ff;
+    }
+
+    .brief-wireframe__topline{
+      position:relative;
+      z-index:1;
+      font-size:0.74rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
+      opacity:0.74;
+    }
+
+    .brief-wireframe__hero{
+      position:relative;
+      z-index:1;
+      padding:22px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(10px);
+      display:grid;
+      gap:14px;
+    }
+
+    .brief-wireframe--standard .brief-wireframe__hero{
+      background:rgba(255,255,255,0.42);
+      border-color:rgba(22,38,52,0.08);
+    }
+
+    .brief-wireframe__eyebrow{
+      font-size:0.76rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      opacity:0.72;
+    }
+
+    .brief-wireframe__title{
+      font-size:clamp(1.9rem, 3vw, 3rem);
+      line-height:0.94;
+      letter-spacing:-0.06em;
+      max-width:11ch;
+      font-weight:700;
+    }
+
+    .brief-wireframe__copy{
+      max-width:42ch;
+      line-height:1.65;
+      font-size:0.95rem;
+      opacity:0.84;
+    }
+
+    .brief-wireframe__actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .brief-wireframe__action{
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.1);
+      font-size:0.84rem;
+      font-weight:700;
+    }
+
+    .brief-wireframe--standard .brief-wireframe__action{
+      background:rgba(255,255,255,0.58);
+      border-color:rgba(22,38,52,0.08);
+    }
+
+    .brief-wireframe__sections{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+
+    .brief-wireframe__section{
+      padding:16px;
+      min-height:76px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.08);
+      display:grid;
+      align-content:start;
+      gap:6px;
+    }
+
+    .brief-wireframe--standard .brief-wireframe__section{
+      background:rgba(255,255,255,0.5);
+      border-color:rgba(22,38,52,0.08);
+    }
+
+    .brief-wireframe__section strong{
+      font-size:0.96rem;
+      letter-spacing:-0.02em;
+    }
+
+    .brief-wireframe__section span{
+      font-size:0.82rem;
+      line-height:1.45;
+      opacity:0.74;
+    }
+
+    .brief-summary{
+      padding:22px;
+      border-radius:24px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.72);
+      display:grid;
+      gap:12px;
+    }
+
+    .brief-summary h3{
+      margin:0;
+      font-size:1.22rem;
+      letter-spacing:-0.04em;
+    }
+
+    .brief-summary p,
+    .brief-summary ul{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.95rem;
+    }
+
+    .brief-summary ul{
+      padding-left:18px;
+      display:grid;
+      gap:6px;
+    }
+
+    .brief-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brief-actions .btn{
+      flex:1 1 220px;
+    }
+
+    .brief-note{
+      color:var(--muted);
+      font-size:0.84rem;
+      line-height:1.65;
+    }
 
     .process-grid{
       display:grid;
@@ -1794,6 +2119,7 @@
       .simple-grid,
       .standard-grid,
       .mobile-grid,
+      .brief-grid,
       .process-grid,
       .contact-grid,
       .hero-bottom,
@@ -1825,6 +2151,7 @@
       .hero-shell{border-radius:28px}
 
       .hero-copy,
+      .brief-panel,
       .panel-inner,
       .level-section,
       .premium-feature,
@@ -1839,7 +2166,10 @@
       .hero{padding-top:20px}
 
       .premium-subgrid,
-      .preview-pill-row{
+      .preview-pill-row,
+      .brief-form-grid,
+      .brief-choice-grid,
+      .brief-wireframe__sections{
         grid-template-columns:1fr;
       }
 
@@ -1886,6 +2216,7 @@
         <a href="#services">Tjenester</a>
         <a href="#work">Arbeid</a>
         <a href="#mobile">Mobil</a>
+        <a href="#brief">Prosjektstarter</a>
         <a href="#process">Prosess</a>
         <a href="#contact">Kontakt</a>
       </nav>
@@ -1904,7 +2235,7 @@
                 Netrivo utvikler nettsider som løfter hvordan virksomheten blir oppfattet. Målet er ikke bare at siden skal fungere, men at den skal skape mer tillit, mer tyngde og en tydeligere digital identitet.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#contact">Be om en vurdering</a>
+                <a class="btn btn-primary" href="#brief">Start prosjektstarter</a>
                 <a class="btn btn-secondary" href="#work">Se demoer</a>
               </div>
             </div>
@@ -2401,6 +2732,153 @@
       </div>
     </section>
 
+    <section class="section" id="brief">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Prosjektstarter</div>
+            <h2>La kunden beskrive behovet sitt, så får du retning på minutter.</h2>
+          </div>
+          <div class="section-copy">
+            Denne flyten gjør det lettere å starte en god dialog: Kunden fyller inn behov, får en anbefalt retning og ser en enkel førsteskisse med en gang. Resultatet kan sendes videre til deg som en strukturert brief.
+          </div>
+        </div>
+
+        <div class="brief-grid">
+          <div class="brief-panel">
+            <form class="brief-form" id="project-brief-form">
+              <div class="brief-form-grid">
+                <div class="brief-field">
+                  <label for="brief-company">Navn på virksomhet</label>
+                  <input id="brief-company" name="company" type="text" placeholder="Fjord & Form" />
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-industry">Bransje</label>
+                  <select id="brief-industry" name="industry">
+                    <option value="Rådgivning og tjenester">Rådgivning og tjenester</option>
+                    <option value="Kafe og servering">Kafe og servering</option>
+                    <option value="Håndverk og service">Håndverk og service</option>
+                    <option value="Helse og trening">Helse og trening</option>
+                    <option value="Opplevelse og reiseliv">Opplevelse og reiseliv</option>
+                    <option value="Butikk og livsstil">Butikk og livsstil</option>
+                    <option value="Tech og SaaS">Tech og SaaS</option>
+                    <option value="Personlig brand">Personlig brand</option>
+                    <option value="Annet">Annet</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-style">Ønsket stil</label>
+                  <select id="brief-style" name="style">
+                    <option value="varm">Varm og nær</option>
+                    <option value="tillit" selected>Rolig og tillitsvekkende</option>
+                    <option value="direkte">Direkte og salgsdrevet</option>
+                    <option value="moderne">Mørk og moderne</option>
+                    <option value="eksklusiv">Eksklusiv og kuratert</option>
+                    <option value="energi">Energisk og fremoverlent</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-level">Ønsket nivå</label>
+                  <select id="brief-level" name="level">
+                    <option value="auto" selected>Vet ikke – foreslå for meg</option>
+                    <option value="enkel">Enkel</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-content">Innholdsmengde</label>
+                  <select id="brief-content" name="content">
+                    <option value="kort">Kort og direkte</option>
+                    <option value="balansert" selected>Balansert med tydelig struktur</option>
+                    <option value="rik">Mer innhold, flere seksjoner og mer tyngde</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-pages">Omfang</label>
+                  <select id="brief-pages" name="pages">
+                    <option value="1">1 side / enkel landing page</option>
+                    <option value="4" selected>3 til 5 sider</option>
+                    <option value="8">6 sider eller mer</option>
+                  </select>
+                </div>
+
+                <div class="brief-field brief-field--full">
+                  <div class="brief-legend">Hva er viktig på siden?</div>
+                  <div class="brief-choice-grid">
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked />Tydelig kontakt og raske henvendelser</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" />Booking eller timebestilling</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" />Bestilling, kjøp eller forespørsler</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" />Cases, prosjekter eller referanser</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" />Bilder, galleri eller menyvisning</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" />Om oss, team eller faglig tyngde</label>
+                  </div>
+                </div>
+
+                <div class="brief-field brief-field--full">
+                  <label for="brief-notes">Kort om ønsket retning</label>
+                  <textarea id="brief-notes" name="notes" placeholder="For eksempel: Skal virke mer etablert, få flere bookinghenvendelser, føles mer eksklusiv eller gjøre tilbudet lettere å forstå."></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="brief-output">
+            <div class="brief-panel">
+              <div class="brief-output-top">
+                <div class="brief-badge" id="brief-badge">Anbefalt nivå / Standard</div>
+                <div class="brief-score" id="brief-score">Basert på behov, stil og omfang</div>
+              </div>
+
+              <div class="brief-recommendation">
+                <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
+                <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
+              </div>
+
+              <div class="brief-wireframe brief-wireframe--standard" id="brief-wireframe">
+                <div class="brief-wireframe__topline" id="wireframe-topline">Førsteskisse / Standard</div>
+                <div class="brief-wireframe__hero">
+                  <div class="brief-wireframe__eyebrow" id="wireframe-eyebrow">Rådgivning og tjenester</div>
+                  <div class="brief-wireframe__title" id="wireframe-title">En tydelig side som bygger tillit raskt.</div>
+                  <div class="brief-wireframe__copy" id="wireframe-copy">Stram hero, klar prioritering og seksjoner som gjør det lett å forstå tilbudet og ta neste steg.</div>
+                  <div class="brief-wireframe__actions">
+                    <div class="brief-wireframe__action" id="wireframe-primary">Be om møte</div>
+                    <div class="brief-wireframe__action" id="wireframe-secondary">Se tjenester</div>
+                  </div>
+                </div>
+                <div class="brief-wireframe__sections" id="wireframe-sections">
+                  <div class="brief-wireframe__section"><strong>Hero</strong><span>Tydelig intro og hovedhandling</span></div>
+                  <div class="brief-wireframe__section"><strong>Tjenester</strong><span>Strukturert oversikt</span></div>
+                  <div class="brief-wireframe__section"><strong>Tillit</strong><span>Referanser, prosess eller faglig tyngde</span></div>
+                  <div class="brief-wireframe__section"><strong>Kontakt</strong><span>Lav friksjon og tydelig CTA</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="brief-summary">
+              <h3>Klar brief til deg</h3>
+              <p id="brief-summary-copy">Systemet oppsummerer behov, foreslår nivå og lager en enkel første retning som kan brukes som utgangspunkt for videre dialog.</p>
+              <ul id="brief-summary-list">
+                <li>Foreslått nivå: Standard</li>
+                <li>Primært mål: mer tillit og tydeligere struktur</li>
+                <li>Viktige elementer: kontakt, tjenester og sosialt bevis</li>
+              </ul>
+              <div class="brief-actions">
+                <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
+                <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
+              </div>
+              <div class="brief-note">Dette er første steg. Når du vil, kan vi koble dette videre til ekte AI-generering og automatisk innsending til deg med backend/serverless.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="contact">
       <div class="container contact-grid">
         <div class="contact-cta">
@@ -2563,6 +3041,312 @@
         });
         window.addEventListener("resize", resizeCanvas);
       });
+    })();
+
+    (function () {
+      const form = document.getElementById("project-brief-form");
+      if (!form) return;
+
+      const badge = document.getElementById("brief-badge");
+      const score = document.getElementById("brief-score");
+      const recommendationTitle = document.getElementById("brief-recommendation-title");
+      const recommendationCopy = document.getElementById("brief-recommendation-copy");
+      const summaryCopy = document.getElementById("brief-summary-copy");
+      const summaryList = document.getElementById("brief-summary-list");
+      const emailLink = document.getElementById("brief-email-link");
+      const copyButton = document.getElementById("brief-copy-button");
+      const wireframe = document.getElementById("brief-wireframe");
+      const wireframeTopline = document.getElementById("wireframe-topline");
+      const wireframeEyebrow = document.getElementById("wireframe-eyebrow");
+      const wireframeTitle = document.getElementById("wireframe-title");
+      const wireframeCopy = document.getElementById("wireframe-copy");
+      const wireframePrimary = document.getElementById("wireframe-primary");
+      const wireframeSecondary = document.getElementById("wireframe-secondary");
+      const wireframeSections = document.getElementById("wireframe-sections");
+
+      const levelCopy = {
+        enkel: {
+          badge: "Anbefalt nivå / Enkel",
+          title: "Enkel ser riktig ut for denne retningen.",
+          copy: "Behovet peker mot en side med lav friksjon, tydelig budskap og rask vei til kontakt eller handling.",
+          top: "Forsteskisse / Enkel"
+        },
+        standard: {
+          badge: "Anbefalt nivå / Standard",
+          title: "Standard ser riktig ut for denne retningen.",
+          copy: "Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.",
+          top: "Forsteskisse / Standard"
+        },
+        premium: {
+          badge: "Anbefalt nivå / Premium",
+          title: "Premium ser riktig ut for denne retningen.",
+          copy: "Behovet peker mot en mer iscenesatt løsning med tydelig identitet, mer sceneplass og høyere opplevd verdi.",
+          top: "Forsteskisse / Premium"
+        }
+      };
+
+      const industryOpeners = {
+        "Kafe og servering": "En varm side som gjør det lett å besøke deg.",
+        "Håndverk og service": "En tydelig side som gjør det lett å velge deg.",
+        "Helse og trening": "En energisk side med lav terskel for booking.",
+        "Opplevelse og reiseliv": "En stemningsfull side som bygger lyst til å oppleve mer.",
+        "Butikk og livsstil": "En kuratert side som løfter uttrykket og valgene.",
+        "Tech og SaaS": "En skarp side som gjør produktet enklere å forstå.",
+        "Personlig brand": "En signaturside som bygger tydeligere tilstedeværelse.",
+        "Rådgivning og tjenester": "En rolig side som bygger tillit raskt.",
+        "Annet": "En tydelig side som gjør det lett å forstå tilbudet."
+      };
+
+      const featureSections = {
+        Kontaktinformasjon: { title: "Kontakt", copy: "Lav friksjon og tydelig CTA" },
+        Booking: { title: "Booking", copy: "Tidspunkter, flyt og klar handling" },
+        Bestilling: { title: "Bestilling", copy: "Produkter, forespørsel eller kjøp" },
+        Cases: { title: "Prosjekter", copy: "Arbeid, resultater og referanser" },
+        Galleri: { title: "Galleri", copy: "Bilder, meny eller visuelle høydepunkt" },
+        "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet" }
+      };
+
+      function getState() {
+        const featureValues = Array.from(form.querySelectorAll('input[name="feature"]:checked')).map(function (input) {
+          return input.value;
+        });
+
+        return {
+          company: form.company.value.trim(),
+          industry: form.industry.value,
+          style: form.style.value,
+          level: form.level.value,
+          content: form.content.value,
+          pages: Number(form.pages.value),
+          notes: form.notes.value.trim(),
+          features: featureValues
+        };
+      }
+
+      function recommendLevel(state) {
+        if (state.level !== "auto") {
+          return {
+            level: state.level,
+            mode: "manual",
+            reason: "Kunden har valgt nivå selv.",
+            confidence: "Valgt manuelt"
+          };
+        }
+
+        const scores = { enkel: 0, standard: 0, premium: 0 };
+
+        if (state.pages <= 1) scores.enkel += 3;
+        if (state.pages >= 4) scores.standard += 2;
+        if (state.pages >= 8) {
+          scores.premium += 3;
+          scores.standard += 1;
+        }
+
+        if (state.content === "kort") scores.enkel += 2;
+        if (state.content === "balansert") scores.standard += 2;
+        if (state.content === "rik") {
+          scores.standard += 2;
+          scores.premium += 2;
+        }
+
+        if (state.style === "varm" || state.style === "direkte" || state.style === "energi") scores.enkel += 1;
+        if (state.style === "tillit") scores.standard += 2;
+        if (state.style === "moderne") {
+          scores.standard += 1;
+          scores.premium += 2;
+        }
+        if (state.style === "eksklusiv") scores.premium += 3;
+
+        state.features.forEach(function (feature) {
+          if (feature === "Kontaktinformasjon") {
+            scores.enkel += 1;
+            scores.standard += 1;
+          }
+          if (feature === "Booking" || feature === "Bestilling") {
+            scores.enkel += 1;
+            scores.standard += 2;
+            scores.premium += 1;
+          }
+          if (feature === "Cases" || feature === "Om oss") {
+            scores.standard += 2;
+            scores.premium += 1;
+          }
+          if (feature === "Galleri") {
+            scores.enkel += 1;
+            scores.standard += 1;
+            scores.premium += 1;
+          }
+        });
+
+        if (state.features.length >= 4) {
+          scores.standard += 2;
+          scores.premium += 2;
+        }
+
+        if (/eksklusiv|premium|signatur|kuratert/i.test(state.notes)) scores.premium += 2;
+        if (/trygg|tillit|seriøs|struktur/i.test(state.notes)) scores.standard += 2;
+        if (/rask|enkel|lav terskel|direkte/i.test(state.notes)) scores.enkel += 2;
+
+        let level = "standard";
+        if (scores.enkel > scores.standard && scores.enkel >= scores.premium) level = "enkel";
+        if (scores.premium > scores.standard && scores.premium > scores.enkel) level = "premium";
+
+        return {
+          level: level,
+          mode: "auto",
+          reason: "Forslaget er basert på omfang, ønsket stil og funksjonene kunden trenger.",
+          confidence: state.features.length + " valgte behov / " + state.pages + " side(r)"
+        };
+      }
+
+      function getPrimaryAction(state, level) {
+        if (state.features.indexOf("Booking") !== -1) return "Bestill time";
+        if (state.features.indexOf("Bestilling") !== -1) return "Send foresporsel";
+        if (level === "premium") return "Be om konsept";
+        return "Ta kontakt";
+      }
+
+      function getSecondaryAction(state) {
+        if (state.features.indexOf("Cases") !== -1) return "Se prosjekter";
+        if (state.features.indexOf("Galleri") !== -1) return "Se galleri";
+        if (state.features.indexOf("Om oss") !== -1) return "Les mer";
+        return "Se tjenester";
+      }
+
+      function buildSections(state) {
+        const sections = [{ title: "Hero", copy: "Tydelig intro og hovedhandling" }];
+
+        state.features.forEach(function (feature) {
+          const section = featureSections[feature];
+          if (section) sections.push(section);
+        });
+
+        if (sections.length < 4) {
+          sections.push({ title: "Tjenester", copy: "Oversikt over det viktigste tilbudet" });
+        }
+
+        if (sections.length < 4) {
+          sections.push({ title: "Tillit", copy: "Grunner til å velge deg" });
+        }
+
+        return sections.slice(0, 4);
+      }
+
+      function getWireCopy(state, level) {
+        if (level === "enkel") {
+          return "Kort hero, tydelig struktur og rask vei til handling. God for lav terskel, kontakt og enkel oversikt.";
+        }
+        if (level === "premium") {
+          return "Mer sceneplass, tydeligere identitet og mer kuratert rytme mellom seksjonene. Bygget for sterkere opplevd verdi.";
+        }
+        return "Stram hero, klar prioritering og seksjoner som gjør det lett å forstå tilbudet og ta neste steg.";
+      }
+
+      function getWireTitle(state, level) {
+        const fallback = industryOpeners[state.industry] || industryOpeners.Annet;
+
+        if (state.company) {
+          if (level === "premium") return state.company + " med mer sceneplass og tydeligere verdi.";
+          if (level === "enkel") return state.company + " gjort tydelig, lett og salgsbar.";
+          return state.company + " med mer struktur, ro og tillit.";
+        }
+
+        return fallback;
+      }
+
+      function buildSummary(state, recommendation) {
+        const sections = buildSections(state);
+        const lines = [
+          "Foreslatt niva: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Bransje: " + state.industry,
+          "Onsket stil: " + form.style.options[form.style.selectedIndex].text,
+          "Omfang: " + form.pages.options[form.pages.selectedIndex].text
+        ];
+
+        if (state.features.length) {
+          lines.push("Viktige funksjoner: " + state.features.join(", "));
+        }
+
+        lines.push("Foreslatt struktur: " + sections.map(function (section) { return section.title; }).join(", "));
+
+        return lines;
+      }
+
+      function buildEmailBody(state, recommendation, summaryLines) {
+        return [
+          "Ny prosjektbrief fra Netrivo",
+          "",
+          "Anbefalt niva: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Navn pa virksomhet: " + (state.company || "-"),
+          "Bransje: " + state.industry,
+          "Onsket stil: " + form.style.options[form.style.selectedIndex].text,
+          "Onsket niva: " + form.level.options[form.level.selectedIndex].text,
+          "Innholdsmengde: " + form.content.options[form.content.selectedIndex].text,
+          "Omfang: " + form.pages.options[form.pages.selectedIndex].text,
+          "Funksjoner: " + (state.features.join(", ") || "-"),
+          "Notater: " + (state.notes || "-"),
+          "",
+          "Oppsummert forslag:",
+          summaryLines.join("\n")
+        ].join("\n");
+      }
+
+      function update() {
+        const state = getState();
+        const recommendation = recommendLevel(state);
+        const level = recommendation.level;
+        const sections = buildSections(state);
+        const title = getWireTitle(state, level);
+        const summaryLines = buildSummary(state, recommendation);
+        const primaryAction = getPrimaryAction(state, level);
+        const secondaryAction = getSecondaryAction(state);
+
+        badge.textContent = (recommendation.mode === "manual" ? "Valgt nivå / " : "Anbefalt nivå / ") +
+          level.charAt(0).toUpperCase() + level.slice(1);
+        score.textContent = recommendation.confidence + " - " + recommendation.reason;
+        recommendationTitle.textContent = levelCopy[level].title;
+        recommendationCopy.textContent = levelCopy[level].copy;
+
+        wireframe.classList.remove("brief-wireframe--enkel", "brief-wireframe--standard", "brief-wireframe--premium");
+        wireframe.classList.add("brief-wireframe--" + level);
+        wireframeTopline.textContent = levelCopy[level].top;
+        wireframeEyebrow.textContent = state.industry;
+        wireframeTitle.textContent = title;
+        wireframeCopy.textContent = getWireCopy(state, level);
+        wireframePrimary.textContent = primaryAction;
+        wireframeSecondary.textContent = secondaryAction;
+        wireframeSections.innerHTML = sections.map(function (section) {
+          return '<div class="brief-wireframe__section"><strong>' + section.title + "</strong><span>" + section.copy + "</span></div>";
+        }).join("");
+
+        summaryCopy.textContent = "Kunden far et tydelig forslag til retning, niva og struktur som kan brukes som utgangspunkt for rask videreutvikling.";
+        summaryList.innerHTML = summaryLines.map(function (line) {
+          return "<li>" + line + "</li>";
+        }).join("");
+
+        const subject = encodeURIComponent("Prosjektbrief - " + (state.company || state.industry));
+        const body = encodeURIComponent(buildEmailBody(state, recommendation, summaryLines));
+        emailLink.href = "mailto:post@netrivo.no?subject=" + subject + "&body=" + body;
+        copyButton.dataset.brief = buildEmailBody(state, recommendation, summaryLines);
+      }
+
+      form.addEventListener("input", update);
+      form.addEventListener("change", update);
+
+      copyButton.addEventListener("click", function () {
+        const text = copyButton.dataset.brief || "";
+        if (!navigator.clipboard || !text) return;
+
+        navigator.clipboard.writeText(text).then(function () {
+          const original = copyButton.textContent;
+          copyButton.textContent = "Brief kopiert";
+          window.setTimeout(function () {
+            copyButton.textContent = original;
+          }, 1600);
+        });
+      });
+
+      update();
     })();
   </script>
 </body>
