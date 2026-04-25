@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Netrivo Prosjektstarter</title>
-  <meta name="description" content="Prosjektstarter fra Netrivo. Beskriv behovet, få anbefalt nivå og se en første skisseretning for nettsiden." />
+  <title>Netrivo Skisse</title>
+  <meta name="description" content="Skisse fra Netrivo. Beskriv behovet, få anbefalt nivå og se en første skisseretning for nettsiden." />
   <style>
     :root{
       --bg:#f5f1ea;
@@ -1524,6 +1524,81 @@
       transform:rotate(var(--sketch-tilt, 0deg));
     }
 
+    .sketch-hero,
+    .sketch-note,
+    .sketch-section{
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .sketch-box-overlay{
+      position:absolute;
+      inset:-28%;
+      border-radius:inherit;
+      opacity:0;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      transition:opacity .24s ease;
+      animation:sketchBoxPulse 8.5s ease-in-out infinite alternate;
+      z-index:0;
+    }
+
+    .sketch-box-trace{
+      position:absolute;
+      left:-24%;
+      top:50%;
+      width:148%;
+      height:2px;
+      border-radius:999px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-50%) rotate(var(--trace-angle, -6deg));
+      transform-origin:center;
+      transition:opacity .22s ease;
+      animation:sketchTraceSweep var(--trace-duration, 4.6s) linear infinite;
+      z-index:1;
+    }
+
+    .sketch-box-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .sketch-surface.effect-atmosphere-on .sketch-box-overlay{
+      opacity:0.44;
+    }
+
+    .sketch-surface.effect-trace-on .sketch-box-trace{
+      opacity:0.82;
+    }
+
+    .sketch-surface.effect-glass-on .sketch-hero,
+    .sketch-surface.effect-glass-on .sketch-note,
+    .sketch-surface.effect-glass-on .sketch-section{
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.24),
+        0 16px 34px rgba(12,18,26,0.22);
+      backdrop-filter:blur(12px) saturate(1.08);
+    }
+
+    @keyframes sketchBoxPulse{
+      0%{
+        transform:translate3d(-10px, 8px, 0) scale(0.96);
+      }
+      100%{
+        transform:translate3d(14px, -9px, 0) scale(1.06);
+      }
+    }
+
+    @keyframes sketchTraceSweep{
+      0%{
+        transform:translate3d(-14%, -50%, 0) rotate(var(--trace-angle, -6deg));
+      }
+      100%{
+        transform:translate3d(14%, -50%, 0) rotate(var(--trace-angle, -6deg));
+      }
+    }
+
     .sketch-section-label{
       font-size:0.68rem;
       text-transform:uppercase;
@@ -1934,12 +2009,12 @@
         <div class="brand-mark">N</div>
         <div class="brand-copy">
           <strong>Netrivo</strong>
-          <span>Prosjektstarter for raskere avklaringer og sterkere retning</span>
+          <span>Skisse for raskere avklaringer og sterkere retning</span>
         </div>
       </a>
       <nav class="nav">
         <a href="./index.html">Forside</a>
-        <a href="#starter">Prosjektstarter</a>
+        <a href="#starter">Skisse</a>
         <a href="#resultat">Skisse</a>
         <a href="mailto:post@netrivo.no">Kontakt</a>
       </nav>
@@ -1952,7 +2027,7 @@
         <div class="hero-grid">
           <div class="hero-copy">
             <div>
-              <div class="eyebrow">Netrivo / prosjektstarter</div>
+              <div class="eyebrow">Netrivo / skisse</div>
               <h1>Få en første skisseretning før du tar neste steg.</h1>
               <p class="lead">
                 Kunden fyller inn behov, stil og funksjoner. Systemet foreslår nivå, lager en halv-generert skisse og bygger en brief som gjør det lettere å starte en god dialog raskt.
@@ -2175,7 +2250,7 @@
                       <div class="live-option-label">Ønskede effekter</div>
                       <div class="live-option-grid" id="live-effect-options">
                         <button class="live-option" data-type="effect" data-value="Lyslinje ved musepeker" type="button">Interaktiv lyslinje ved musepeker</button>
-                        <button class="live-option" data-type="effect" data-value="Atmosfærisk bakgrunn" type="button">Atmosfærisk bevegelse i bakgrunn</button>
+                        <button class="live-option" data-type="effect" data-value="Atmosfærisk bevegelse i bakgrunn" type="button">Atmosfærisk bevegelse i bakgrunn</button>
                         <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
                       </div>
                     </div>
@@ -2196,7 +2271,7 @@
                 <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
                 <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
               </div>
-              <div class="summary-note">Dette er en mer kuratert prosjektstarter. Når du vil, kan neste steg være ekte AI-generering, automatisk innsending og lagring i backend.</div>
+              <div class="summary-note">Dette er en mer kuratert skisse. Når du vil, kan neste steg være ekte AI-generering, automatisk innsending og lagring i backend.</div>
             </div>
           </div>
         </div>
@@ -2265,7 +2340,7 @@
                   <div class="brief-legend">Ønskede effekter</div>
                   <div class="brief-choice-grid">
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" /><span class="brief-choice-text">Interaktiv lyslinje ved musepeker</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bakgrunn" /><span class="brief-choice-text">Atmosfærisk bevegelse i bakgrunn</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bevegelse i bakgrunn" /><span class="brief-choice-text">Atmosfærisk bevegelse i bakgrunn</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Glow og glass" /><span class="brief-choice-text">Glow, glass og lysflater</span></label>
                   </div>
                 </div>
@@ -2700,7 +2775,7 @@
         const softColor = paletteSet[1].color;
         const warmColor = paletteSet[0].color;
         const hasTrace = state.effects.indexOf("Lyslinje ved musepeker") !== -1;
-        const hasAtmosphere = state.effects.indexOf("Atmosfærisk bakgrunn") !== -1;
+        const hasAtmosphere = state.effects.indexOf("Atmosfærisk bevegelse i bakgrunn") !== -1;
         const hasGlass = state.effects.indexOf("Glow og glass") !== -1;
         const scene = sketchSurface.dataset.scene || "calm";
         const isSolarEclipse = state.styleKey === "solar-eclipse";
@@ -2708,6 +2783,9 @@
         const boost = uiState.tone === "contrast" ? 1.58 : uiState.tone === "scene" ? 1.34 : 1;
 
         sketchSurface.classList.toggle("has-glass-effect", hasGlass);
+        sketchSurface.classList.toggle("effect-atmosphere-on", hasAtmosphere || hasGlass);
+        sketchSurface.classList.toggle("effect-trace-on", hasTrace);
+        sketchSurface.classList.toggle("effect-glass-on", hasGlass);
 
         if (!sketchEffects) return;
 
@@ -2715,24 +2793,25 @@
 
         if (hasAtmosphere) {
           pieces.push(
-            '<span class="sketch-effect-atmosphere" style="left:-16%; top:-2%; width:' + (58 * boost) + '%; height:' + (42 * boost) + '%; --effect-color:' + softColor + 'e2; --drift-x:48px; --drift-y:-18px; --scale-end:1.18; --duration:14s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="right:-18%; bottom:-2%; width:' + (62 * boost) + '%; height:' + (44 * boost) + '%; --effect-color:' + warmColor + 'ce; --drift-x:-36px; --drift-y:22px; --scale-end:1.2; --duration:16s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="left:22%; top:24%; width:' + (46 * boost) + '%; height:' + (28 * boost) + '%; --effect-color:' + traceColor + 'a8; --drift-x:16px; --drift-y:12px; --scale-end:1.1; --duration:12s;"></span>'
+            '<span class="sketch-effect-atmosphere" style="left:-16%; top:-2%; width:' + (58 * boost) + '%; height:' + (42 * boost) + '%; --effect-color:' + softColor + 'e8; --drift-x:48px; --drift-y:-18px; --scale-end:1.2; --duration:14s;"></span>',
+            '<span class="sketch-effect-atmosphere" style="right:-18%; bottom:-2%; width:' + (62 * boost) + '%; height:' + (44 * boost) + '%; --effect-color:' + warmColor + 'd6; --drift-x:-36px; --drift-y:22px; --scale-end:1.22; --duration:16s;"></span>',
+            '<span class="sketch-effect-atmosphere" style="left:22%; top:24%; width:' + (46 * boost) + '%; height:' + (28 * boost) + '%; --effect-color:' + traceColor + 'b8; --drift-x:16px; --drift-y:12px; --scale-end:1.14; --duration:12s;"></span>'
           );
         }
 
         if (hasTrace) {
           pieces.push(
-            '<span class="sketch-effect-trace" style="left:8%; top:26%; width:' + (34 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88; --angle:-14deg; --duration:7s;"></span>',
-            '<span class="sketch-effect-trace" style="right:12%; top:52%; width:' + (28 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '66; --angle:11deg; --duration:9s;"></span>'
+            '<span class="sketch-effect-trace" style="left:6%; top:22%; width:' + (42 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + 'aa; --angle:-12deg; --duration:6s;"></span>',
+            '<span class="sketch-effect-trace" style="right:8%; top:54%; width:' + (36 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88; --angle:9deg; --duration:7.5s;"></span>',
+            '<span class="sketch-effect-trace" style="left:20%; bottom:18%; width:' + (34 * boost) + '%; --effect-color:' + softColor + '; --effect-glow:' + softColor + '88; --angle:-4deg; --duration:8.2s;"></span>'
           );
         }
 
         if (hasGlass) {
           pieces.push(
-            '<span class="sketch-effect-glow" style="left:8%; top:10%; width:' + (36 * boost) + '%; height:' + (26 * boost) + '%; --effect-color:' + warmColor + 'ec; --drift-x:14px; --drift-y:-10px; --scale-end:1.1; --duration:10s;"></span>',
-            '<span class="sketch-effect-glow" style="right:4%; top:6%; width:' + (42 * boost) + '%; height:' + (30 * boost) + '%; --effect-color:' + softColor + 'dc; --drift-x:-18px; --drift-y:16px; --scale-end:1.12; --duration:12s;"></span>',
-            '<span class="sketch-effect-glow" style="left:18%; bottom:14%; width:' + (30 * boost) + '%; height:' + (20 * boost) + '%; --effect-color:' + traceColor + 'b8; --drift-x:10px; --drift-y:8px; --scale-end:1.08; --duration:11s;"></span>'
+            '<span class="sketch-effect-glow" style="left:6%; top:8%; width:' + (40 * boost) + '%; height:' + (28 * boost) + '%; --effect-color:' + warmColor + 'f2; --drift-x:18px; --drift-y:-12px; --scale-end:1.14; --duration:10s;"></span>',
+            '<span class="sketch-effect-glow" style="right:2%; top:6%; width:' + (46 * boost) + '%; height:' + (32 * boost) + '%; --effect-color:' + softColor + 'ea; --drift-x:-20px; --drift-y:16px; --scale-end:1.16; --duration:12s;"></span>',
+            '<span class="sketch-effect-glow" style="left:16%; bottom:12%; width:' + (34 * boost) + '%; height:' + (22 * boost) + '%; --effect-color:' + traceColor + 'c8; --drift-x:12px; --drift-y:8px; --scale-end:1.12; --duration:11s;"></span>'
           );
         }
 
@@ -2747,6 +2826,47 @@
         }
 
         sketchEffects.innerHTML = pieces.join("");
+
+        const boxes = Array.from(sketchSurface.querySelectorAll(".sketch-hero, .sketch-note, .sketch-section"));
+        boxes.forEach(function (box, index) {
+          let content = null;
+          const first = box.firstElementChild;
+          if (first && first.classList.contains("sketch-box-content")) {
+            content = first;
+          } else {
+            content = document.createElement("div");
+            content.className = "sketch-box-content";
+            while (box.firstChild) {
+              content.appendChild(box.firstChild);
+            }
+            box.appendChild(content);
+          }
+
+          Array.from(box.querySelectorAll(".sketch-box-overlay, .sketch-box-trace")).forEach(function (node) {
+            node.remove();
+          });
+
+          if (hasAtmosphere || hasGlass) {
+            const overlay = document.createElement("span");
+            overlay.className = "sketch-box-overlay";
+            const stopA = 28 + (index % 4) * 8;
+            const stopB = 70 + (index % 3) * 6;
+            overlay.style.background =
+              "radial-gradient(circle at " + (26 + (index * 11) % 52) + "% " + (24 + (index * 7) % 46) + "%, " + softColor + "80 0%, " + warmColor + "44 " + stopA + "%, transparent " + stopB + "%)";
+            box.appendChild(overlay);
+          }
+
+          if (hasTrace) {
+            const trace = document.createElement("span");
+            trace.className = "sketch-box-trace";
+            trace.style.setProperty("--trace-angle", ((index % 2 === 0 ? -1 : 1) * (4 + index % 5)) + "deg");
+            trace.style.setProperty("--trace-duration", (4.2 + (index % 4) * 0.75) + "s");
+            trace.style.background = "linear-gradient(90deg, transparent, " + traceColor + "22 18%, " + traceColor + "cc 48%, " + traceColor + "22 82%, transparent)";
+            trace.style.boxShadow = "0 0 16px " + traceColor + "66";
+            box.appendChild(trace);
+          }
+        });
+
         traceEnabled = hasTrace;
       }
 
@@ -2953,7 +3073,6 @@
         sketchSurface.dataset.palette = palette;
         renderPalette(palette);
         applyTheme(state, level, palette);
-        renderEffects(state, palette);
 
         if (sketchSurface.dataset.scene === "editorial") {
           wireframeTitleBlock.innerHTML =
@@ -2976,6 +3095,7 @@
           wireframeCopyBlock.innerHTML = makeSketchLines(level === "premium" ? 4 : 3, 100, 22, "sketch-body-line");
         }
         renderSections(sections);
+        renderEffects(state, palette);
 
         summaryCopy.textContent = "Kunden får et tydelig forslag til retning, nivå og struktur som kan brukes som utgangspunkt for rask videreutvikling.";
         summaryList.innerHTML = summaryLines.map(function (line) {
