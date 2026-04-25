@@ -2216,7 +2216,7 @@
         <a href="#services">Tjenester</a>
         <a href="#work">Arbeid</a>
         <a href="#mobile">Mobil</a>
-        <a href="#brief">Prosjektstarter</a>
+        <a href="./prosjektstarter.html">Prosjektstarter</a>
         <a href="#process">Prosess</a>
         <a href="#contact">Kontakt</a>
       </nav>
@@ -2235,7 +2235,7 @@
                 Netrivo utvikler nettsider som løfter hvordan virksomheten blir oppfattet. Målet er ikke bare at siden skal fungere, men at den skal skape mer tillit, mer tyngde og en tydeligere digital identitet.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#brief">Start prosjektstarter</a>
+                <a class="btn btn-primary" href="./prosjektstarter.html">Start prosjektstarter</a>
                 <a class="btn btn-secondary" href="#work">Se demoer</a>
               </div>
             </div>
@@ -2734,146 +2734,14 @@
 
     <section class="section" id="brief">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Prosjektstarter</div>
-            <h2>La kunden beskrive behovet sitt, så får du retning på minutter.</h2>
-          </div>
-          <div class="section-copy">
-            Denne flyten gjør det lettere å starte en god dialog: Kunden fyller inn behov, får en anbefalt retning og ser en enkel førsteskisse med en gang. Resultatet kan sendes videre til deg som en strukturert brief.
-          </div>
-        </div>
-
-        <div class="brief-grid">
-          <div class="brief-panel">
-            <form class="brief-form" id="project-brief-form">
-              <div class="brief-form-grid">
-                <div class="brief-field">
-                  <label for="brief-company">Navn på virksomhet</label>
-                  <input id="brief-company" name="company" type="text" placeholder="Fjord & Form" />
-                </div>
-
-                <div class="brief-field">
-                  <label for="brief-industry">Bransje</label>
-                  <select id="brief-industry" name="industry">
-                    <option value="Rådgivning og tjenester">Rådgivning og tjenester</option>
-                    <option value="Kafe og servering">Kafe og servering</option>
-                    <option value="Håndverk og service">Håndverk og service</option>
-                    <option value="Helse og trening">Helse og trening</option>
-                    <option value="Opplevelse og reiseliv">Opplevelse og reiseliv</option>
-                    <option value="Butikk og livsstil">Butikk og livsstil</option>
-                    <option value="Tech og SaaS">Tech og SaaS</option>
-                    <option value="Personlig brand">Personlig brand</option>
-                    <option value="Annet">Annet</option>
-                  </select>
-                </div>
-
-                <div class="brief-field">
-                  <label for="brief-style">Ønsket stil</label>
-                  <select id="brief-style" name="style">
-                    <option value="varm">Varm og nær</option>
-                    <option value="tillit" selected>Rolig og tillitsvekkende</option>
-                    <option value="direkte">Direkte og salgsdrevet</option>
-                    <option value="moderne">Mørk og moderne</option>
-                    <option value="eksklusiv">Eksklusiv og kuratert</option>
-                    <option value="energi">Energisk og fremoverlent</option>
-                  </select>
-                </div>
-
-                <div class="brief-field">
-                  <label for="brief-level">Ønsket nivå</label>
-                  <select id="brief-level" name="level">
-                    <option value="auto" selected>Vet ikke – foreslå for meg</option>
-                    <option value="enkel">Enkel</option>
-                    <option value="standard">Standard</option>
-                    <option value="premium">Premium</option>
-                  </select>
-                </div>
-
-                <div class="brief-field">
-                  <label for="brief-content">Innholdsmengde</label>
-                  <select id="brief-content" name="content">
-                    <option value="kort">Kort og direkte</option>
-                    <option value="balansert" selected>Balansert med tydelig struktur</option>
-                    <option value="rik">Mer innhold, flere seksjoner og mer tyngde</option>
-                  </select>
-                </div>
-
-                <div class="brief-field">
-                  <label for="brief-pages">Omfang</label>
-                  <select id="brief-pages" name="pages">
-                    <option value="1">1 side / enkel landing page</option>
-                    <option value="4" selected>3 til 5 sider</option>
-                    <option value="8">6 sider eller mer</option>
-                  </select>
-                </div>
-
-                <div class="brief-field brief-field--full">
-                  <div class="brief-legend">Hva er viktig på siden?</div>
-                  <div class="brief-choice-grid">
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked />Tydelig kontakt og raske henvendelser</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" />Booking eller timebestilling</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" />Bestilling, kjøp eller forespørsler</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" />Cases, prosjekter eller referanser</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" />Bilder, galleri eller menyvisning</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" />Om oss, team eller faglig tyngde</label>
-                  </div>
-                </div>
-
-                <div class="brief-field brief-field--full">
-                  <label for="brief-notes">Kort om ønsket retning</label>
-                  <textarea id="brief-notes" name="notes" placeholder="For eksempel: Skal virke mer etablert, få flere bookinghenvendelser, føles mer eksklusiv eller gjøre tilbudet lettere å forstå."></textarea>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="brief-output">
-            <div class="brief-panel">
-              <div class="brief-output-top">
-                <div class="brief-badge" id="brief-badge">Anbefalt nivå / Standard</div>
-                <div class="brief-score" id="brief-score">Basert på behov, stil og omfang</div>
-              </div>
-
-              <div class="brief-recommendation">
-                <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
-                <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
-              </div>
-
-              <div class="brief-wireframe brief-wireframe--standard" id="brief-wireframe">
-                <div class="brief-wireframe__topline" id="wireframe-topline">Førsteskisse / Standard</div>
-                <div class="brief-wireframe__hero">
-                  <div class="brief-wireframe__eyebrow" id="wireframe-eyebrow">Rådgivning og tjenester</div>
-                  <div class="brief-wireframe__title" id="wireframe-title">En tydelig side som bygger tillit raskt.</div>
-                  <div class="brief-wireframe__copy" id="wireframe-copy">Stram hero, klar prioritering og seksjoner som gjør det lett å forstå tilbudet og ta neste steg.</div>
-                  <div class="brief-wireframe__actions">
-                    <div class="brief-wireframe__action" id="wireframe-primary">Be om møte</div>
-                    <div class="brief-wireframe__action" id="wireframe-secondary">Se tjenester</div>
-                  </div>
-                </div>
-                <div class="brief-wireframe__sections" id="wireframe-sections">
-                  <div class="brief-wireframe__section"><strong>Hero</strong><span>Tydelig intro og hovedhandling</span></div>
-                  <div class="brief-wireframe__section"><strong>Tjenester</strong><span>Strukturert oversikt</span></div>
-                  <div class="brief-wireframe__section"><strong>Tillit</strong><span>Referanser, prosess eller faglig tyngde</span></div>
-                  <div class="brief-wireframe__section"><strong>Kontakt</strong><span>Lav friksjon og tydelig CTA</span></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="brief-summary">
-              <h3>Klar brief til deg</h3>
-              <p id="brief-summary-copy">Systemet oppsummerer behov, foreslår nivå og lager en enkel første retning som kan brukes som utgangspunkt for videre dialog.</p>
-              <ul id="brief-summary-list">
-                <li>Foreslått nivå: Standard</li>
-                <li>Primært mål: mer tillit og tydeligere struktur</li>
-                <li>Viktige elementer: kontakt, tjenester og sosialt bevis</li>
-              </ul>
-              <div class="brief-actions">
-                <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
-                <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
-              </div>
-              <div class="brief-note">Dette er første steg. Når du vil, kan vi koble dette videre til ekte AI-generering og automatisk innsending til deg med backend/serverless.</div>
-            </div>
+        <div class="offer-band">
+          <div class="kicker">Prosjektstarter</div>
+          <p>
+            La kunden fylle inn behov, stil og funksjoner på en egen side, få et anbefalt nivå og se en halv-generert skisseretning med en gang.
+          </p>
+          <div class="hero-actions" style="margin-top:22px;">
+            <a class="btn btn-primary" href="./prosjektstarter.html">Åpne prosjektstarter</a>
+            <a class="btn btn-secondary" href="#contact">Snakk med meg først</a>
           </div>
         </div>
       </div>
