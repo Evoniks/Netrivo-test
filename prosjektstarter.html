@@ -500,20 +500,48 @@
 
     .brief-choice{
       display:flex;
-      align-items:flex-start;
-      gap:10px;
-      padding:14px 16px;
+      align-items:center;
+      justify-content:center;
+      min-height:92px;
+      padding:16px 18px;
       border-radius:18px;
       border:1px solid rgba(21,21,21,0.08);
       background:rgba(255,255,255,0.74);
       color:var(--ink);
       line-height:1.45;
       font-size:0.94rem;
+      text-align:center;
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
     }
 
     .brief-choice input{
-      margin-top:2px;
-      accent-color:#2a1d16;
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+      width:0;
+      height:0;
+    }
+
+    .brief-choice-text{
+      display:block;
+      max-width:18ch;
+      font-weight:700;
+      letter-spacing:-0.02em;
+    }
+
+    .brief-choice:hover{
+      transform:translateY(-1px);
+      border-color:rgba(21,21,21,0.14);
+      background:rgba(255,255,255,0.92);
+      box-shadow:0 12px 26px rgba(40,30,22,0.06);
+    }
+
+    .brief-choice.is-selected{
+      border-color:rgba(42,29,22,0.24);
+      background:linear-gradient(180deg, rgba(42,29,22,0.12), rgba(42,29,22,0.06));
+      box-shadow:0 16px 30px rgba(42,29,22,0.08);
+      color:#2a1d16;
     }
 
     .brief-choice.is-disabled{
@@ -521,6 +549,7 @@
       background:rgba(244,239,233,0.72);
       border-color:rgba(21,21,21,0.05);
       pointer-events:none;
+      box-shadow:none;
     }
 
     .output-top{
@@ -1559,22 +1588,22 @@
                 <div class="brief-field brief-field--full">
                   <div class="brief-legend">Hva er viktig på siden?</div>
                   <div class="brief-choice-grid">
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked />Tydelig kontakt og raske henvendelser</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" />Booking eller timebestilling</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" />Bestilling, kjøp eller forespørsler</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" />Cases, prosjekter eller referanser</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" />Bilder, galleri eller menyvisning</label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" />Om oss, team eller faglig tyngde</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked /><span class="brief-choice-text">Tydelig kontakt og raske henvendelser</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" /><span class="brief-choice-text">Booking eller timebestilling</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" /><span class="brief-choice-text">Bestilling, kjøp eller forespørsler</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" /><span class="brief-choice-text">Cases, prosjekter eller referanser</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" /><span class="brief-choice-text">Bilder, galleri eller menyvisning</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" /><span class="brief-choice-text">Om oss, team eller faglig tyngde</span></label>
                   </div>
                 </div>
 
                 <div class="brief-field brief-field--full">
                   <div class="brief-legend">Ønskede effekter</div>
                   <div class="brief-choice-grid">
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" />Interaktiv lyslinje ved musepeker</label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bakgrunn" />Atmosfærisk bevegelse i bakgrunn</label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Glow og glass" />Glow, glass og lysflater</label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Helt rolig uttrykk" />Helt rolig uttrykk uten effekter</label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" /><span class="brief-choice-text">Interaktiv lyslinje ved musepeker</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bakgrunn" /><span class="brief-choice-text">Atmosfærisk bevegelse i bakgrunn</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Glow og glass" /><span class="brief-choice-text">Glow, glass og lysflater</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Helt rolig uttrykk" /><span class="brief-choice-text">Helt rolig uttrykk uten effekter</span></label>
                   </div>
                 </div>
 
@@ -1785,6 +1814,14 @@
           input.disabled = !effectsEnabled;
           if (!effectsEnabled) input.checked = false;
           if (label) label.classList.toggle("is-disabled", !effectsEnabled);
+        });
+      }
+
+      function refreshChoiceStates() {
+        Array.from(form.querySelectorAll(".brief-choice")).forEach(function (choice) {
+          const input = choice.querySelector("input");
+          if (!input) return;
+          choice.classList.toggle("is-selected", !!input.checked && !input.disabled);
         });
       }
 
@@ -2042,6 +2079,7 @@
 
       function update() {
         syncOptionAccess();
+        refreshChoiceStates();
         const state = getState();
         const recommendation = recommendLevel(state);
         const level = recommendation.level;
