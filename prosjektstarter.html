@@ -957,6 +957,19 @@
       height:34px;
     }
 
+    .sketch-surface[data-scene="editorial"] .sketch-sections{
+      gap:10px;
+    }
+
+    .sketch-surface[data-scene="editorial"] .sketch-line-stack{
+      display:none;
+    }
+
+    .sketch-surface[data-scene="editorial"] .sketch-section{
+      min-height:74px;
+      align-content:center;
+    }
+
     .sketch-surface[data-layout="split-right"] .sketch-layout{
       grid-template-columns:0.88fr 1.12fr;
     }
@@ -1166,6 +1179,8 @@
       background:rgba(255,255,255,0.52);
       backdrop-filter:blur(18px);
       box-shadow:0 18px 34px rgba(63,43,25,0.08);
+      margin-top:160px;
+      align-self:end;
     }
 
     .sketch-controls h4{
@@ -1496,6 +1511,10 @@
       .sketch-stage{
         grid-template-columns:1fr;
       }
+
+      .sketch-controls{
+        margin-top:0;
+      }
     }
 
     @media (max-width:760px){
@@ -1821,12 +1840,12 @@
                 <div class="brief-field brief-field--full">
                   <div class="brief-legend">Hva er viktig på siden?</div>
                   <div class="brief-choice-grid">
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked /><span class="brief-choice-text">Tydelig kontakt og raske henvendelser</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked /><span class="brief-choice-text">Kontakt, henvendelser og forespørsler</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" /><span class="brief-choice-text">Booking eller timebestilling</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" /><span class="brief-choice-text">Bestilling, kjøp eller forespørsler</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" /><span class="brief-choice-text">Cases, prosjekter eller referanser</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" /><span class="brief-choice-text">Bilder, galleri eller menyvisning</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" /><span class="brief-choice-text">Om oss, team eller faglig tyngde</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" /><span class="brief-choice-text">Bilder og galleri</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" /><span class="brief-choice-text">Om oss, åpningstider</span></label>
                   </div>
                 </div>
 
@@ -2017,9 +2036,15 @@
       };
 
       const levelFeatureAccess = {
-        enkel: ["Kontaktinformasjon", "Booking", "Bestilling", "Galleri"],
+        enkel: ["Kontaktinformasjon", "Om oss"],
         standard: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"],
         premium: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"]
+      };
+
+      const contentFeatureAccess = {
+        kort: ["Kontaktinformasjon", "Om oss"],
+        balansert: ["Kontaktinformasjon", "Booking", "Bestilling", "Galleri", "Om oss"],
+        rik: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"]
       };
 
       function hashString(value) {
@@ -2068,7 +2093,11 @@
       function syncOptionAccess() {
         const selectedProfile = contentProfiles[form.content.value] || contentProfiles.balansert;
         const selectedLevel = selectedProfile.level;
-        const allowedFeatures = levelFeatureAccess[selectedLevel];
+        const levelAllowed = levelFeatureAccess[selectedLevel] || [];
+        const contentAllowed = contentFeatureAccess[form.content.value] || [];
+        const allowedFeatures = levelAllowed.filter(function (feature) {
+          return contentAllowed.indexOf(feature) !== -1;
+        });
         const effectsEnabled = selectedLevel === "premium";
 
         featureInputs.forEach(function (input) {

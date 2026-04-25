@@ -201,8 +201,8 @@
     .hero-left {
       padding: 96px 76px 70px;
       background:
-        radial-gradient(circle at 22% 16%, rgba(181,138,90,0.13), transparent 26%),
-        linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.14));
+        radial-gradient(circle at 22% 16%, rgba(181,138,90,0.22), transparent 30%),
+        linear-gradient(180deg, rgba(255,248,238,0.58), rgba(241,227,211,0.34));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -214,9 +214,10 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(circle at 68% 18%, rgba(236,216,189,0.16), transparent 26%),
-        radial-gradient(circle at 18% 62%, rgba(181,138,90,0.18), transparent 30%),
-        linear-gradient(145deg, #1b100d 0%, #43291f 48%, #7a5135 72%, #1a100d 100%);
+        radial-gradient(circle at 68% 18%, rgba(236,216,189,0.24), transparent 30%),
+        radial-gradient(circle at 18% 62%, rgba(181,138,90,0.28), transparent 34%),
+        radial-gradient(circle at 52% 58%, rgba(214,145,91,0.22), transparent 36%),
+        linear-gradient(145deg, #1a100d 0%, #3d271e 44%, #84563a 74%, #160e0c 100%);
       background-size: 120% 120%, 130% 130%, 100% 100%;
       animation: boutique-panel-drift 34s ease-in-out infinite alternate;
       color: #f8efe5;
@@ -518,11 +519,11 @@
       padding: 28px;
       border-radius: 32px;
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)),
-        rgba(43,26,18,0.18);
-      border: 1px solid rgba(236,216,189,0.18);
+        linear-gradient(145deg, rgba(255,235,210,0.2), rgba(255,255,255,0.03)),
+        rgba(56,34,24,0.28);
+      border: 1px solid rgba(236,216,189,0.28);
       backdrop-filter: blur(16px);
-      box-shadow: 0 24px 70px rgba(16,10,7,0.18);
+      box-shadow: 0 24px 70px rgba(16,10,7,0.26);
     }
 
     .glass + .glass {
@@ -558,12 +559,13 @@
       border-radius: 42px;
       overflow: hidden;
       background:
-        linear-gradient(90deg, rgba(236,216,189,0.07) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(236,216,189,0.06) 1px, transparent 1px),
-        radial-gradient(circle at 52% 44%, rgba(236,216,189,0.16), transparent 34%),
-        linear-gradient(145deg, rgba(33,19,14,0.08), rgba(255,255,255,0.03));
-      background-size: 44px 44px, 44px 44px, auto, auto;
-      border: 1px solid rgba(236,216,189,0.13);
+        linear-gradient(90deg, rgba(236,216,189,0.09) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(236,216,189,0.08) 1px, transparent 1px),
+        radial-gradient(circle at 52% 44%, rgba(236,216,189,0.24), transparent 34%),
+        radial-gradient(circle at 24% 72%, rgba(198,129,78,0.28), transparent 36%),
+        linear-gradient(145deg, rgba(33,19,14,0.22), rgba(255,255,255,0.02));
+      background-size: 44px 44px, 44px 44px, auto, auto, auto;
+      border: 1px solid rgba(236,216,189,0.2);
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.05),
         inset 0 -80px 120px rgba(12,7,5,0.26);
@@ -656,15 +658,16 @@
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(4.8rem, 10vw, 7.2rem);
       line-height: 0.9;
-      letter-spacing: 0.08em;
-      text-shadow: 0 8px 24px rgba(10,6,4,0.28);
+      letter-spacing: 0.14em;
+      color: rgba(241,220,193,0.3);
+      text-shadow: 0 10px 28px rgba(10,6,4,0.38);
     }
 
     .scene-monogram-sub {
       display: block;
       font-size: 0.8rem;
-      letter-spacing: 0.34em;
-      color: rgba(236,216,189,0.42);
+      letter-spacing: 0.38em;
+      color: rgba(236,216,189,0.56);
     }
 
     .scene-plinth {
@@ -836,7 +839,7 @@
       padding: 36px;
       border-radius: 34px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.58);
+      background: linear-gradient(145deg, rgba(255,248,238,0.82), rgba(236,220,202,0.62));
       box-shadow: var(--shadow);
     }
 
@@ -1032,7 +1035,7 @@
             </div>
 
             <div class="boutique-scene" aria-hidden="true">
-              <div class="scene-monogram"><span class="scene-monogram-main">M · F</span><span class="scene-monogram-sub">MAISON FJELL</span></div>
+              <div class="scene-monogram"><span class="scene-monogram-main">M&nbsp;F</span><span class="scene-monogram-sub">MAISON FJELL</span></div>
               <div class="scene-plinth"></div>
               <div class="material-strip">
                 <span></span>
