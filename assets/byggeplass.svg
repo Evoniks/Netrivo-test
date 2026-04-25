@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" role="img" aria-label="Illustrasjon av byggeplass">
+  <rect width="720" height="520" rx="40" fill="#f5efe6"/>
+  <rect x="70" y="360" width="580" height="42" rx="21" fill="#d8b26f"/>
+  <rect x="130" y="155" width="290" height="205" rx="24" fill="#fff8ec" stroke="#171717" stroke-width="10"/>
+  <path d="M155 155l120-75 120 75" fill="none" stroke="#171717" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="180" y="220" width="72" height="92" rx="10" fill="#e0a33a"/>
+  <rect x="292" y="220" width="82" height="64" rx="10" fill="#dbe7ef"/>
+  <path d="M465 360V120h42v240" fill="#171717"/>
+  <path d="M442 120h210" fill="none" stroke="#171717" stroke-width="18" stroke-linecap="round"/>
+  <path d="M628 120v118" fill="none" stroke="#171717" stroke-width="10" stroke-linecap="round"/>
+  <path d="M603 238h50l-12 58h-26z" fill="#e0a33a" stroke="#171717" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M97 402h526" fill="none" stroke="#171717" stroke-width="8" stroke-linecap="round" opacity=".18"/>
+</svg>
