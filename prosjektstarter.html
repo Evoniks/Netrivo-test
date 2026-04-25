@@ -413,6 +413,14 @@
       align-items:start;
     }
 
+    #starter-form{
+      order:1;
+    }
+
+    #resultat{
+      order:2;
+    }
+
     .panel{
       border:1px solid var(--line);
       border-radius:34px;
@@ -1518,7 +1526,7 @@
           </div>
         </div>
 
-        <div class="panel">
+        <div class="panel" id="starter-form">
           <div class="panel-inner">
             <h2>Beskriv prosjektet</h2>
             <p class="panel-copy">Velg bransje, stil og behov. Du kan velge nivå selv, eller la systemet foreslå om dette bør være Enkel, Standard eller Premium.</p>
@@ -1527,7 +1535,7 @@
               <div class="brief-form-grid">
                 <div class="brief-field">
                   <label for="brief-company">Navn på virksomhet</label>
-                  <input id="brief-company" name="company" type="text" placeholder="Fjord & Form" />
+                  <input id="brief-company" name="company" type="text" placeholder="Eksempel: Fjord & Form" />
                 </div>
 
                 <div class="brief-field">
