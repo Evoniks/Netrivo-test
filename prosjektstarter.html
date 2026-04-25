@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netrivo Prosjektstarter</title>
+  <meta name="description" content="Prosjektstarter fra Netrivo. Beskriv behovet, få anbefalt nivå og se en første skisseretning for nettsiden." />
+  <style>
+    :root{
+      --bg:#f5f1ea;
+      --paper:#fbf8f3;
+      --ink:#151515;
+      --muted:#615b55;
+      --line:rgba(21,21,21,0.1);
+      --softline:rgba(21,21,21,0.06);
+      --shadow:0 30px 80px rgba(40,27,17,0.08);
+      --radius-xl:40px;
+      --radius-lg:30px;
+      --radius-md:22px;
+      --max:1280px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(138,90,68,0.08), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(95,55,39,0.05), transparent 28%),
+        linear-gradient(180deg,#f7f3ed 0%,#f2ede5 100%);
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{
+      width:min(var(--max), calc(100% - 36px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(247,243,237,0.78);
+      border-bottom:1px solid rgba(21,21,21,0.06);
+    }
+
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:18px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:var(--ink);
+      color:#f7f3ed;
+      font-weight:700;
+      letter-spacing:0.18em;
+      font-size:0.88rem;
+      box-shadow:var(--shadow);
+      flex-shrink:0;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:1.05rem;
+      letter-spacing:-0.02em;
+    }
+
+    .brand-copy span{
+      display:block;
+      color:var(--muted);
+      font-size:0.78rem;
+      margin-top:3px;
+    }
+
+    .nav{
+      display:flex;
+      gap:28px;
+      font-size:0.95rem;
+      color:var(--muted);
+    }
+
+    .nav a:hover{color:var(--ink)}
+
+    .hero{
+      padding:40px 0 24px;
+    }
+
+    .hero-shell{
+      border:1px solid var(--line);
+      border-radius:44px;
+      background:rgba(255,255,255,0.48);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:0.92fr 1.08fr;
+      min-height:500px;
+    }
+
+    .hero-copy{
+      padding:58px 54px 46px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.38), rgba(255,255,255,0.16));
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .hero-preview{
+      position:relative;
+      padding:32px;
+      background:linear-gradient(145deg, rgba(50,34,28,0.94), rgba(20,20,24,0.98));
+      color:#f4eee7;
+      overflow:hidden;
+    }
+
+    .hero-preview::before{
+      content:"";
+      position:absolute;
+      inset:auto -8% -12% auto;
+      width:52%;
+      aspect-ratio:1;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(21,21,21,0.1);
+      background:rgba(255,255,255,0.56);
+      font-size:0.78rem;
+      color:var(--muted);
+      width:fit-content;
+    }
+
+    h1{
+      margin:20px 0 0;
+      font-size:clamp(3rem, 7vw, 5.8rem);
+      line-height:0.95;
+      letter-spacing:-0.06em;
+      max-width:12ch;
+    }
+
+    .lead{
+      margin-top:24px;
+      max-width:58ch;
+      color:var(--muted);
+      font-size:1.06rem;
+      line-height:1.82;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:30px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 24px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:0.95rem;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:var(--ink);
+      color:#f6f1ea;
+      box-shadow:var(--shadow);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--ink);
+      border-color:rgba(21,21,21,0.12);
+    }
+
+    .hero-notes{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px;
+    }
+
+    .hero-note{
+      padding-top:18px;
+      border-top:1px solid rgba(21,21,21,0.12);
+    }
+
+    .hero-note strong{
+      display:block;
+      font-size:1.15rem;
+      letter-spacing:-0.04em;
+    }
+
+    .hero-note span{
+      display:block;
+      margin-top:8px;
+      color:var(--muted);
+      line-height:1.58;
+      font-size:0.9rem;
+    }
+
+    .preview-card{
+      position:relative;
+      z-index:1;
+      max-width:680px;
+      margin-left:auto;
+      min-height:100%;
+      display:grid;
+      gap:18px;
+      align-content:space-between;
+    }
+
+    .preview-intro{
+      max-width:420px;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(12px);
+    }
+
+    .preview-kicker{
+      color:rgba(244,238,231,0.72);
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
+    }
+
+    .preview-intro h2{
+      margin:16px 0 0;
+      font-size:clamp(2rem, 3vw, 3.3rem);
+      line-height:0.95;
+      letter-spacing:-0.05em;
+      max-width:10ch;
+    }
+
+    .preview-intro p{
+      margin:14px 0 0;
+      line-height:1.7;
+      color:rgba(244,238,231,0.72);
+    }
+
+    .preview-paper{
+      position:relative;
+      min-height:360px;
+      margin:14px 0 0 auto;
+      width:min(100%, 620px);
+      border-radius:34px;
+      background:
+        linear-gradient(180deg, rgba(255,252,246,0.96), rgba(243,235,226,0.92)),
+        radial-gradient(circle at 20% 18%, rgba(255,255,255,0.72), transparent 28%);
+      box-shadow:0 24px 50px rgba(10,7,5,0.24);
+      border:1px solid rgba(255,255,255,0.2);
+      overflow:hidden;
+      transform:rotate(-1.2deg);
+    }
+
+    .preview-paper::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(75,54,37,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(75,54,37,0.06) 1px, transparent 1px);
+      background-size:34px 34px;
+      opacity:0.34;
+      mix-blend-mode:multiply;
+    }
+
+    .preview-paper::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(123,98,73,0.16), transparent 24%),
+        radial-gradient(circle at 84% 72%, rgba(123,98,73,0.12), transparent 24%);
+      filter:blur(26px);
+      opacity:0.8;
+    }
+
+    .preview-browser{
+      position:absolute;
+      inset:22px;
+      border-radius:26px;
+      border:1.5px solid rgba(62,45,32,0.28);
+      background:rgba(255,255,255,0.22);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.24);
+      overflow:hidden;
+    }
+
+    .preview-browser-top{
+      height:42px;
+      border-bottom:1px solid rgba(62,45,32,0.18);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:0 16px;
+    }
+
+    .preview-browser-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:rgba(62,45,32,0.3);
+    }
+
+    .preview-browser-body{
+      position:relative;
+      height:calc(100% - 42px);
+      padding:22px;
+      display:grid;
+      grid-template-columns:1.04fr 0.96fr;
+      gap:18px;
+    }
+
+    .preview-drawn{
+      position:relative;
+      border-radius:26px;
+      border:1.5px solid rgba(62,45,32,0.22);
+      background:rgba(255,255,255,0.08);
+      overflow:hidden;
+    }
+
+    .preview-drawn::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:22px;
+      border:1.5px dashed rgba(62,45,32,0.18);
+    }
+
+    .preview-drawn::after{
+      content:"";
+      position:absolute;
+      left:26px;
+      right:26px;
+      bottom:24px;
+      height:74px;
+      border-radius:20px;
+      border:1.5px solid rgba(62,45,32,0.18);
+      background:rgba(255,255,255,0.08);
+      filter:blur(0.2px);
+    }
+
+    .preview-scribble{
+      position:absolute;
+      pointer-events:none;
+      border-radius:999px;
+      border:1px solid rgba(62,45,32,0.12);
+      opacity:0.6;
+      mix-blend-mode:multiply;
+    }
+
+    .preview-scribble--one{
+      width:46%;
+      height:18%;
+      right:-8%;
+      top:18%;
+      transform:rotate(8deg);
+    }
+
+    .preview-scribble--two{
+      width:52%;
+      height:26%;
+      left:18%;
+      bottom:-4%;
+      transform:rotate(-18deg);
+    }
+
+    .workspace{
+      padding:8px 0 96px;
+    }
+
+    .workspace-grid{
+      display:grid;
+      grid-template-columns:0.98fr 1.02fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:34px;
+      background:rgba(255,255,255,0.48);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-inner{
+      padding:28px;
+    }
+
+    .panel h2,
+    .panel h3{
+      margin:0;
+      letter-spacing:-0.04em;
+    }
+
+    .panel-copy{
+      margin-top:12px;
+      color:var(--muted);
+      line-height:1.72;
+      font-size:0.96rem;
+    }
+
+    .brief-form{
+      display:grid;
+      gap:22px;
+    }
+
+    .brief-form-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .brief-field{
+      display:grid;
+      gap:8px;
+    }
+
+    .brief-field--full{
+      grid-column:1 / -1;
+    }
+
+    .brief-field label,
+    .brief-legend{
+      font-size:0.86rem;
+      font-weight:700;
+      letter-spacing:-0.01em;
+    }
+
+    .brief-field input,
+    .brief-field select,
+    .brief-field textarea{
+      width:100%;
+      border:1px solid rgba(21,21,21,0.1);
+      border-radius:18px;
+      background:rgba(255,255,255,0.84);
+      padding:14px 16px;
+      font:inherit;
+      color:var(--ink);
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .brief-field textarea{
+      min-height:112px;
+      resize:vertical;
+    }
+
+    .brief-field input:focus,
+    .brief-field select:focus,
+    .brief-field textarea:focus{
+      border-color:rgba(95,55,39,0.32);
+      box-shadow:0 0 0 4px rgba(95,55,39,0.08);
+      background:white;
+    }
+
+    .brief-choice-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px;
+    }
+
+    .brief-choice{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.74);
+      color:var(--ink);
+      line-height:1.45;
+      font-size:0.94rem;
+    }
+
+    .brief-choice input{
+      margin-top:2px;
+      accent-color:#2a1d16;
+    }
+
+    .output-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.8);
+      font-size:0.78rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .score{
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    .recommendation{
+      padding:20px 22px;
+      border-radius:24px;
+      background:linear-gradient(145deg, rgba(255,255,255,0.88), rgba(235,227,217,0.78));
+      border:1px solid rgba(21,21,21,0.08);
+      margin-bottom:18px;
+    }
+
+    .recommendation strong{
+      display:block;
+      font-size:1.52rem;
+      line-height:1.02;
+      letter-spacing:-0.05em;
+    }
+
+    .recommendation p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:0.95rem;
+    }
+
+    .sketch-board{
+      position:relative;
+      overflow:hidden;
+      min-height:560px;
+      padding:22px;
+      border-radius:32px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:
+        linear-gradient(180deg, rgba(254,251,246,0.98), rgba(244,236,227,0.96)),
+        radial-gradient(circle at 14% 12%, rgba(255,255,255,0.76), transparent 22%);
+      box-shadow:var(--shadow);
+    }
+
+    .sketch-board::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(98,74,53,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(98,74,53,0.05) 1px, transparent 1px);
+      background-size:30px 30px;
+      opacity:0.42;
+      mix-blend-mode:multiply;
+    }
+
+    .sketch-board::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(126,98,73,0.12), transparent 22%),
+        radial-gradient(circle at 84% 74%, rgba(126,98,73,0.1), transparent 24%);
+      filter:blur(28px);
+    }
+
+    .sketch-surface{
+      position:relative;
+      z-index:1;
+      min-height:516px;
+      border-radius:26px;
+      border:1.5px solid rgba(62,45,32,0.22);
+      background:rgba(255,255,255,0.12);
+      overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.24);
+    }
+
+    .sketch-surface::before{
+      content:"";
+      position:absolute;
+      inset:16px;
+      border-radius:22px;
+      border:1.5px dashed rgba(62,45,32,0.16);
+      pointer-events:none;
+    }
+
+    .sketch-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(62,45,32,0.14);
+    }
+
+    .sketch-topline{
+      font-size:0.74rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
+      color:rgba(62,45,32,0.7);
+    }
+
+    .sketch-chip{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(62,45,32,0.14);
+      background:rgba(255,255,255,0.3);
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      color:rgba(62,45,32,0.62);
+    }
+
+    .sketch-layout{
+      display:grid;
+      grid-template-columns:1.04fr 0.96fr;
+      gap:18px;
+      padding:18px;
+      min-height:440px;
+    }
+
+    .sketch-hero{
+      display:grid;
+      align-content:start;
+      gap:16px;
+      padding:22px;
+      border-radius:24px;
+      border:1.5px solid rgba(62,45,32,0.18);
+      background:rgba(255,255,255,0.08);
+    }
+
+    .sketch-hero-brow{
+      width:160px;
+      height:16px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.12);
+      filter:blur(0.8px);
+    }
+
+    .sketch-title{
+      display:grid;
+      gap:10px;
+      max-width:92%;
+    }
+
+    .sketch-title-line{
+      height:18px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.18);
+      filter:blur(0.8px);
+    }
+
+    .sketch-title-line--heavy{
+      height:30px;
+      background:rgba(62,45,32,0.24);
+      filter:blur(0.5px);
+    }
+
+    .sketch-body{
+      display:grid;
+      gap:9px;
+      max-width:88%;
+    }
+
+    .sketch-body-line{
+      height:10px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.12);
+      filter:blur(2.8px);
+    }
+
+    .sketch-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .sketch-button{
+      width:144px;
+      height:40px;
+      border-radius:999px;
+      border:1.5px solid rgba(62,45,32,0.16);
+      background:rgba(255,255,255,0.16);
+    }
+
+    .sketch-button--solid{
+      background:rgba(62,45,32,0.18);
+    }
+
+    .sketch-rail{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+
+    .sketch-note{
+      padding:18px;
+      border-radius:22px;
+      border:1.5px solid rgba(62,45,32,0.16);
+      background:rgba(255,255,255,0.12);
+      display:grid;
+      gap:10px;
+    }
+
+    .sketch-note-title{
+      width:50%;
+      height:14px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.18);
+      filter:blur(0.5px);
+    }
+
+    .sketch-note-lines{
+      display:grid;
+      gap:8px;
+    }
+
+    .sketch-note-line{
+      height:9px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.12);
+      filter:blur(2px);
+    }
+
+    .sketch-sections{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+      padding:0 18px 18px;
+    }
+
+    .sketch-section{
+      padding:16px;
+      min-height:90px;
+      border-radius:20px;
+      border:1.5px solid rgba(62,45,32,0.16);
+      background:rgba(255,255,255,0.12);
+      display:grid;
+      gap:10px;
+      align-content:start;
+      transform:rotate(var(--sketch-tilt, 0deg));
+    }
+
+    .sketch-section-title{
+      width:62%;
+      height:12px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.18);
+      filter:blur(0.45px);
+    }
+
+    .sketch-line-stack{
+      display:grid;
+      gap:7px;
+    }
+
+    .sketch-line{
+      height:8px;
+      border-radius:999px;
+      background:rgba(62,45,32,0.12);
+      filter:blur(2px);
+    }
+
+    .summary{
+      margin-top:18px;
+      padding:22px;
+      border-radius:24px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:rgba(255,255,255,0.72);
+      display:grid;
+      gap:12px;
+    }
+
+    .summary h3{
+      margin:0;
+      font-size:1.22rem;
+      letter-spacing:-0.04em;
+    }
+
+    .summary p,
+    .summary ul{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.95rem;
+    }
+
+    .summary ul{
+      padding-left:18px;
+      display:grid;
+      gap:6px;
+    }
+
+    .summary-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .summary-actions .btn{
+      flex:1 1 220px;
+    }
+
+    .summary-note{
+      font-size:0.84rem;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    footer{
+      padding:0 0 42px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    @media (max-width:1180px){
+      .hero-grid,
+      .workspace-grid,
+      .brief-form-grid,
+      .brief-choice-grid,
+      .sketch-layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:760px){
+      .container{
+        width:min(var(--max), calc(100% - 20px));
+      }
+
+      .nav{display:none}
+
+      .hero-copy,
+      .hero-preview,
+      .panel-inner{
+        padding:24px;
+      }
+
+      .hero-actions,
+      .summary-actions{
+        flex-direction:column;
+      }
+
+      .btn{width:100%}
+
+      .hero-notes,
+      .sketch-sections{
+        grid-template-columns:1fr;
+      }
+
+      .hero{padding-top:20px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="./index.html">
+        <div class="brand-mark">N</div>
+        <div class="brand-copy">
+          <strong>Netrivo</strong>
+          <span>Prosjektstarter for raskere avklaringer og sterkere retning</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="./index.html">Forside</a>
+        <a href="#starter">Prosjektstarter</a>
+        <a href="#resultat">Skisse</a>
+        <a href="mailto:post@netrivo.no">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div>
+              <div class="eyebrow">Netrivo / prosjektstarter</div>
+              <h1>Få en første skisseretning før du tar neste steg.</h1>
+              <p class="lead">
+                Kunden fyller inn behov, stil og funksjoner. Systemet foreslår nivå, lager en halv-generert skisse og bygger en brief som gjør det lettere å starte en god dialog raskt.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#starter">Start prosjektstarter</a>
+                <a class="btn btn-secondary" href="./index.html">Tilbake til forsiden</a>
+              </div>
+            </div>
+
+            <div class="hero-notes">
+              <div class="hero-note">
+                <strong>Mer presist</strong>
+                <span>Du får et tydeligere utgangspunkt enn en vanlig kontaktskjema-henvendelse.</span>
+              </div>
+              <div class="hero-note">
+                <strong>Mer salgbart</strong>
+                <span>Kunden ser retning og nivå med en gang, uten at alt føles ferdig.</span>
+              </div>
+              <div class="hero-note">
+                <strong>Mer brukbart</strong>
+                <span>Briefen kan kopieres eller sendes videre til deg som arbeidsgrunnlag.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-preview">
+            <div class="preview-card">
+              <div class="preview-intro">
+                <div class="preview-kicker">Førsteskisse / AI-retning</div>
+                <h2>Et inntrykk av hvordan siden kan bygges opp.</h2>
+                <p>Ikke ferdig design. Ikke full løsning. Bare nok til at kunden ser retningen og vil ta den videre.</p>
+              </div>
+
+              <div class="preview-paper">
+                <div class="preview-browser">
+                  <div class="preview-browser-top">
+                    <span class="preview-browser-dot"></span>
+                    <span class="preview-browser-dot"></span>
+                    <span class="preview-browser-dot"></span>
+                  </div>
+                  <div class="preview-browser-body">
+                    <div class="preview-drawn">
+                      <span class="preview-scribble preview-scribble--one"></span>
+                      <span class="preview-scribble preview-scribble--two"></span>
+                    </div>
+                    <div class="preview-drawn" style="transform:rotate(1.2deg);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="starter">
+      <div class="container workspace-grid">
+        <div class="panel">
+          <div class="panel-inner">
+            <h2>Beskriv prosjektet</h2>
+            <p class="panel-copy">Velg bransje, stil og behov. Du kan velge nivå selv, eller la systemet foreslå om dette bør være Enkel, Standard eller Premium.</p>
+
+            <form class="brief-form" id="project-brief-form">
+              <div class="brief-form-grid">
+                <div class="brief-field">
+                  <label for="brief-company">Navn på virksomhet</label>
+                  <input id="brief-company" name="company" type="text" placeholder="Fjord & Form" />
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-industry">Bransje</label>
+                  <select id="brief-industry" name="industry">
+                    <option value="Rådgivning og tjenester">Rådgivning og tjenester</option>
+                    <option value="Kafe og servering">Kafe og servering</option>
+                    <option value="Håndverk og service">Håndverk og service</option>
+                    <option value="Helse og trening">Helse og trening</option>
+                    <option value="Opplevelse og reiseliv">Opplevelse og reiseliv</option>
+                    <option value="Butikk og livsstil">Butikk og livsstil</option>
+                    <option value="Tech og SaaS">Tech og SaaS</option>
+                    <option value="Personlig brand">Personlig brand</option>
+                    <option value="Annet">Annet</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-style">Ønsket stil</label>
+                  <select id="brief-style" name="style">
+                    <option value="varm">Varm og nær</option>
+                    <option value="tillit" selected>Rolig og tillitsvekkende</option>
+                    <option value="direkte">Direkte og salgsdrevet</option>
+                    <option value="moderne">Mørk og moderne</option>
+                    <option value="eksklusiv">Eksklusiv og kuratert</option>
+                    <option value="energi">Energisk og fremoverlent</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-level">Ønsket nivå</label>
+                  <select id="brief-level" name="level">
+                    <option value="auto" selected>Vet ikke – foreslå for meg</option>
+                    <option value="enkel">Enkel</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-content">Innholdsmengde</label>
+                  <select id="brief-content" name="content">
+                    <option value="kort">Kort og direkte</option>
+                    <option value="balansert" selected>Balansert med tydelig struktur</option>
+                    <option value="rik">Mer innhold, flere seksjoner og mer tyngde</option>
+                  </select>
+                </div>
+
+                <div class="brief-field">
+                  <label for="brief-pages">Omfang</label>
+                  <select id="brief-pages" name="pages">
+                    <option value="1">1 side / enkel landing page</option>
+                    <option value="4" selected>3 til 5 sider</option>
+                    <option value="8">6 sider eller mer</option>
+                  </select>
+                </div>
+
+                <div class="brief-field brief-field--full">
+                  <div class="brief-legend">Hva er viktig på siden?</div>
+                  <div class="brief-choice-grid">
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked />Tydelig kontakt og raske henvendelser</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" />Booking eller timebestilling</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" />Bestilling, kjøp eller forespørsler</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" />Cases, prosjekter eller referanser</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" />Bilder, galleri eller menyvisning</label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" />Om oss, team eller faglig tyngde</label>
+                  </div>
+                </div>
+
+                <div class="brief-field brief-field--full">
+                  <label for="brief-notes">Kort om ønsket retning</label>
+                  <textarea id="brief-notes" name="notes" placeholder="For eksempel: Skal virke mer etablert, få flere bookinghenvendelser, føles mer eksklusiv eller gjøre tilbudet lettere å forstå."></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="panel" id="resultat">
+          <div class="panel-inner">
+            <div class="output-top">
+              <div class="badge" id="brief-badge">Anbefalt nivå / Standard</div>
+              <div class="score" id="brief-score">Basert på behov, stil og omfang</div>
+            </div>
+
+            <div class="recommendation">
+              <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
+              <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
+            </div>
+
+            <div class="sketch-board">
+              <div class="sketch-surface" id="sketch-surface">
+                <div class="sketch-head">
+                  <div class="sketch-topline" id="wireframe-topline">Førsteskisse / Standard</div>
+                  <div class="sketch-chip" id="wireframe-chip">Retning</div>
+                </div>
+
+                <div class="sketch-layout">
+                  <div class="sketch-hero">
+                    <div class="sketch-hero-brow"></div>
+                    <div class="sketch-title" id="wireframe-title-block">
+                      <div class="sketch-title-line sketch-title-line--heavy" style="width:94%;"></div>
+                      <div class="sketch-title-line sketch-title-line--heavy" style="width:82%;"></div>
+                      <div class="sketch-title-line sketch-title-line--heavy" style="width:74%;"></div>
+                    </div>
+                    <div class="sketch-body" id="wireframe-copy-block">
+                      <div class="sketch-body-line" style="width:100%;"></div>
+                      <div class="sketch-body-line" style="width:92%;"></div>
+                      <div class="sketch-body-line" style="width:78%;"></div>
+                    </div>
+                    <div class="sketch-actions">
+                      <div class="sketch-button sketch-button--solid"></div>
+                      <div class="sketch-button"></div>
+                    </div>
+                  </div>
+
+                  <div class="sketch-rail">
+                    <div class="sketch-note">
+                      <div class="sketch-note-title"></div>
+                      <div class="sketch-note-lines">
+                        <div class="sketch-note-line" style="width:100%;"></div>
+                        <div class="sketch-note-line" style="width:84%;"></div>
+                        <div class="sketch-note-line" style="width:66%;"></div>
+                      </div>
+                    </div>
+                    <div class="sketch-note" style="transform:rotate(1deg);">
+                      <div class="sketch-note-title" style="width:44%;"></div>
+                      <div class="sketch-note-lines">
+                        <div class="sketch-note-line" style="width:100%;"></div>
+                        <div class="sketch-note-line" style="width:74%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sketch-sections" id="wireframe-sections">
+                  <div class="sketch-section" style="--sketch-tilt:-1.2deg;">
+                    <div class="sketch-section-title"></div>
+                    <div class="sketch-line-stack">
+                      <div class="sketch-line" style="width:96%;"></div>
+                      <div class="sketch-line" style="width:72%;"></div>
+                    </div>
+                  </div>
+                  <div class="sketch-section" style="--sketch-tilt:1deg;">
+                    <div class="sketch-section-title" style="width:56%;"></div>
+                    <div class="sketch-line-stack">
+                      <div class="sketch-line" style="width:92%;"></div>
+                      <div class="sketch-line" style="width:68%;"></div>
+                    </div>
+                  </div>
+                  <div class="sketch-section" style="--sketch-tilt:-0.8deg;">
+                    <div class="sketch-section-title" style="width:52%;"></div>
+                    <div class="sketch-line-stack">
+                      <div class="sketch-line" style="width:94%;"></div>
+                      <div class="sketch-line" style="width:62%;"></div>
+                    </div>
+                  </div>
+                  <div class="sketch-section" style="--sketch-tilt:1.4deg;">
+                    <div class="sketch-section-title" style="width:48%;"></div>
+                    <div class="sketch-line-stack">
+                      <div class="sketch-line" style="width:90%;"></div>
+                      <div class="sketch-line" style="width:74%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <h3>Klar brief til deg</h3>
+              <p id="brief-summary-copy">Systemet oppsummerer behov, foreslår nivå og lager en enkel første retning som kan brukes som utgangspunkt for videre dialog.</p>
+              <ul id="brief-summary-list">
+                <li>Foreslått nivå: Standard</li>
+                <li>Primært mål: mer tillit og tydeligere struktur</li>
+                <li>Viktige elementer: kontakt, tjenester og sosialt bevis</li>
+              </ul>
+              <div class="summary-actions">
+                <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
+                <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
+              </div>
+              <div class="summary-note">Dette er en mer kuratert prosjektstarter. Når du vil, kan neste steg være ekte AI-generering, automatisk innsending og lagring i backend.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Netrivo — tydeligere retning, raskere oppstart og bedre grunnlag for gode nettsider.</div>
+  </footer>
+
+  <script>
+    (function () {
+      const form = document.getElementById("project-brief-form");
+      if (!form) return;
+
+      const badge = document.getElementById("brief-badge");
+      const score = document.getElementById("brief-score");
+      const recommendationTitle = document.getElementById("brief-recommendation-title");
+      const recommendationCopy = document.getElementById("brief-recommendation-copy");
+      const summaryCopy = document.getElementById("brief-summary-copy");
+      const summaryList = document.getElementById("brief-summary-list");
+      const emailLink = document.getElementById("brief-email-link");
+      const copyButton = document.getElementById("brief-copy-button");
+      const sketchSurface = document.getElementById("sketch-surface");
+      const wireframeTopline = document.getElementById("wireframe-topline");
+      const wireframeChip = document.getElementById("wireframe-chip");
+      const wireframeTitleBlock = document.getElementById("wireframe-title-block");
+      const wireframeCopyBlock = document.getElementById("wireframe-copy-block");
+      const wireframeSections = document.getElementById("wireframe-sections");
+
+      const levelCopy = {
+        enkel: {
+          badge: "Anbefalt nivå / Enkel",
+          title: "Enkel ser riktig ut for denne retningen.",
+          copy: "Behovet peker mot en side med lav friksjon, tydelig budskap og rask vei til kontakt eller handling.",
+          top: "Førsteskisse / Enkel"
+        },
+        standard: {
+          badge: "Anbefalt nivå / Standard",
+          title: "Standard ser riktig ut for denne retningen.",
+          copy: "Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.",
+          top: "Førsteskisse / Standard"
+        },
+        premium: {
+          badge: "Anbefalt nivå / Premium",
+          title: "Premium ser riktig ut for denne retningen.",
+          copy: "Behovet peker mot en mer iscenesatt løsning med tydelig identitet, mer sceneplass og høyere opplevd verdi.",
+          top: "Førsteskisse / Premium"
+        }
+      };
+
+      const industryOpeners = {
+        "Kafe og servering": "Varm rytme, tydelige valg og lav terskel.",
+        "Håndverk og service": "Klar struktur, direkte budskap og enkel kontakt.",
+        "Helse og trening": "Mer driv, bookingfokus og rask handling.",
+        "Opplevelse og reiseliv": "Stemning, flyt og lyst til å oppleve mer.",
+        "Butikk og livsstil": "Mer smak, mer uttrykk og tydeligere retning.",
+        "Tech og SaaS": "Presis struktur, mer produkt og tydelig verdi.",
+        "Personlig brand": "Mer signatur, stemme og personlig tyngde.",
+        "Rådgivning og tjenester": "Ro, struktur og mer tillit fra første blikk.",
+        "Annet": "En side med tydelig retning og enklere valg."
+      };
+
+      const featureSections = {
+        Kontaktinformasjon: { title: "Kontakt", copy: "Lav friksjon og tydelig CTA" },
+        Booking: { title: "Booking", copy: "Tidspunkter, flyt og klar handling" },
+        Bestilling: { title: "Bestilling", copy: "Produkter, forespørsel eller kjøp" },
+        Cases: { title: "Prosjekter", copy: "Arbeid, resultater og referanser" },
+        Galleri: { title: "Galleri", copy: "Bilder, meny eller visuelle høydepunkt" },
+        "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet" }
+      };
+
+      function getState() {
+        return {
+          company: form.company.value.trim(),
+          industry: form.industry.value,
+          style: form.style.value,
+          styleLabel: form.style.options[form.style.selectedIndex].text,
+          level: form.level.value,
+          levelLabel: form.level.options[form.level.selectedIndex].text,
+          content: form.content.value,
+          contentLabel: form.content.options[form.content.selectedIndex].text,
+          pages: Number(form.pages.value),
+          pagesLabel: form.pages.options[form.pages.selectedIndex].text,
+          notes: form.notes.value.trim(),
+          features: Array.from(form.querySelectorAll('input[name="feature"]:checked')).map(function (input) {
+            return input.value;
+          })
+        };
+      }
+
+      function recommendLevel(state) {
+        if (state.level !== "auto") {
+          return {
+            level: state.level,
+            mode: "manual",
+            reason: "Kunden har valgt nivå selv.",
+            confidence: "Valgt manuelt"
+          };
+        }
+
+        const scores = { enkel: 0, standard: 0, premium: 0 };
+
+        if (state.pages <= 1) scores.enkel += 3;
+        if (state.pages >= 4) scores.standard += 2;
+        if (state.pages >= 8) {
+          scores.premium += 3;
+          scores.standard += 1;
+        }
+
+        if (state.content === "kort") scores.enkel += 2;
+        if (state.content === "balansert") scores.standard += 2;
+        if (state.content === "rik") {
+          scores.standard += 2;
+          scores.premium += 2;
+        }
+
+        if (state.style === "varm" || state.style === "direkte" || state.style === "energi") scores.enkel += 1;
+        if (state.style === "tillit") scores.standard += 2;
+        if (state.style === "moderne") {
+          scores.standard += 1;
+          scores.premium += 2;
+        }
+        if (state.style === "eksklusiv") scores.premium += 3;
+
+        state.features.forEach(function (feature) {
+          if (feature === "Kontaktinformasjon") {
+            scores.enkel += 1;
+            scores.standard += 1;
+          }
+          if (feature === "Booking" || feature === "Bestilling") {
+            scores.enkel += 1;
+            scores.standard += 2;
+            scores.premium += 1;
+          }
+          if (feature === "Cases" || feature === "Om oss") {
+            scores.standard += 2;
+            scores.premium += 1;
+          }
+          if (feature === "Galleri") {
+            scores.enkel += 1;
+            scores.standard += 1;
+            scores.premium += 1;
+          }
+        });
+
+        if (state.features.length >= 4) {
+          scores.standard += 2;
+          scores.premium += 2;
+        }
+
+        if (/eksklusiv|premium|signatur|kuratert/i.test(state.notes)) scores.premium += 2;
+        if (/trygg|tillit|seriøs|struktur/i.test(state.notes)) scores.standard += 2;
+        if (/rask|enkel|lav terskel|direkte/i.test(state.notes)) scores.enkel += 2;
+
+        let level = "standard";
+        if (scores.enkel > scores.standard && scores.enkel >= scores.premium) level = "enkel";
+        if (scores.premium > scores.standard && scores.premium > scores.enkel) level = "premium";
+
+        return {
+          level: level,
+          mode: "auto",
+          reason: "Forslaget er basert på omfang, ønsket stil og funksjonene kunden trenger.",
+          confidence: state.features.length + " valgte behov / " + state.pages + " side(r)"
+        };
+      }
+
+      function buildSections(state) {
+        const sections = [{ title: "Hero", copy: "Retning og tydelig førsteinntrykk" }];
+
+        state.features.forEach(function (feature) {
+          const section = featureSections[feature];
+          if (section) sections.push(section);
+        });
+
+        if (sections.length < 4) sections.push({ title: "Tjenester", copy: "Oversikt over det viktigste tilbudet" });
+        if (sections.length < 4) sections.push({ title: "Tillit", copy: "Grunner til å velge deg" });
+
+        return sections.slice(0, 4);
+      }
+
+      function buildSummary(state, recommendation) {
+        return [
+          "Foreslått nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Bransje: " + state.industry,
+          "Ønsket stil: " + state.styleLabel,
+          "Omfang: " + state.pagesLabel,
+          "Innhold: " + state.contentLabel,
+          "Viktige funksjoner: " + (state.features.join(", ") || "Ingen valgt")
+        ];
+      }
+
+      function makeSketchLines(count, baseWidth, variance, className) {
+        let html = "";
+        for (let i = 0; i < count; i += 1) {
+          const width = Math.max(34, Math.min(100, baseWidth - i * 7 + ((i * 11) % variance)));
+          html += '<div class="' + className + '" style="width:' + width + '%;"></div>';
+        }
+        return html;
+      }
+
+      function renderSections(sections) {
+        wireframeSections.innerHTML = sections.map(function (section, index) {
+          const tilt = [-1.2, 0.9, -0.7, 1.3][index] || 0;
+          return '' +
+            '<div class="sketch-section" style="--sketch-tilt:' + tilt + 'deg;">' +
+              '<div class="sketch-section-title" style="width:' + (42 + index * 6) + '%;"></div>' +
+              '<div class="sketch-line-stack">' +
+                makeSketchLines(2, 94 - index * 4, 20, "sketch-line") +
+              '</div>' +
+            '</div>';
+        }).join("");
+      }
+
+      function buildEmailBody(state, recommendation, summaryLines) {
+        return [
+          "Ny prosjektbrief fra Netrivo",
+          "",
+          "Anbefalt nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Navn på virksomhet: " + (state.company || "-"),
+          "Bransje: " + state.industry,
+          "Ønsket stil: " + state.styleLabel,
+          "Ønsket nivå: " + state.levelLabel,
+          "Innholdsmengde: " + state.contentLabel,
+          "Omfang: " + state.pagesLabel,
+          "Funksjoner: " + (state.features.join(", ") || "-"),
+          "Notater: " + (state.notes || "-"),
+          "",
+          "Oppsummert forslag:",
+          summaryLines.join("\n")
+        ].join("\n");
+      }
+
+      function update() {
+        const state = getState();
+        const recommendation = recommendLevel(state);
+        const level = recommendation.level;
+        const sections = buildSections(state);
+        const summaryLines = buildSummary(state, recommendation);
+        const title = state.company
+          ? state.company + (level === "premium" ? " med mer sceneplass og tydeligere verdi." : level === "enkel" ? " gjort tydelig, lett og salgsbar." : " med mer struktur, ro og tillit.")
+          : (industryOpeners[state.industry] || industryOpeners.Annet);
+
+        badge.textContent = (recommendation.mode === "manual" ? "Valgt nivå / " : "Anbefalt nivå / ") + level.charAt(0).toUpperCase() + level.slice(1);
+        score.textContent = recommendation.confidence + " - " + recommendation.reason;
+        recommendationTitle.textContent = levelCopy[level].title;
+        recommendationCopy.textContent = levelCopy[level].copy;
+        wireframeTopline.textContent = levelCopy[level].top;
+        wireframeChip.textContent = state.styleLabel;
+
+        sketchSurface.classList.remove("is-enkel", "is-standard", "is-premium");
+        sketchSurface.classList.add("is-" + level);
+
+        wireframeTitleBlock.innerHTML =
+          '<div class="sketch-title-line sketch-title-line--heavy" style="width:96%;"></div>' +
+          '<div class="sketch-title-line sketch-title-line--heavy" style="width:82%;"></div>' +
+          '<div class="sketch-title-line sketch-title-line--heavy" style="width:' + (level === "premium" ? 68 : 74) + '%;"></div>';
+
+        wireframeCopyBlock.innerHTML = makeSketchLines(level === "premium" ? 4 : 3, 100, 22, "sketch-body-line");
+        renderSections(sections);
+
+        summaryCopy.textContent = "Kunden får et tydelig forslag til retning, nivå og struktur som kan brukes som utgangspunkt for rask videreutvikling.";
+        summaryList.innerHTML = summaryLines.map(function (line) {
+          return "<li>" + line + "</li>";
+        }).join("");
+
+        const subject = encodeURIComponent("Prosjektbrief - " + (state.company || state.industry));
+        const body = encodeURIComponent(buildEmailBody(state, recommendation, summaryLines));
+        emailLink.href = "mailto:post@netrivo.no?subject=" + subject + "&body=" + body;
+        copyButton.dataset.brief = buildEmailBody(state, recommendation, summaryLines);
+        copyButton.dataset.title = title;
+      }
+
+      form.addEventListener("input", update);
+      form.addEventListener("change", update);
+
+      copyButton.addEventListener("click", function () {
+        const text = copyButton.dataset.brief || "";
+        if (!navigator.clipboard || !text) return;
+
+        navigator.clipboard.writeText(text).then(function () {
+          const original = copyButton.textContent;
+          copyButton.textContent = "Brief kopiert";
+          window.setTimeout(function () {
+            copyButton.textContent = original;
+          }, 1600);
+        });
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
