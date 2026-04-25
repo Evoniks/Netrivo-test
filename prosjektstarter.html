@@ -895,6 +895,46 @@
       animation:sketchTraceFloat var(--duration, 8s) ease-in-out infinite;
     }
 
+    .sketch-effect-star{
+      position:absolute;
+      width:3px;
+      height:3px;
+      border-radius:50%;
+      background:var(--star-color, rgba(255,255,255,0.9));
+      box-shadow:0 0 10px var(--star-glow, rgba(190,220,255,0.9));
+      opacity:0.4;
+      pointer-events:none;
+      animation:sketchStarTwinkle var(--duration, 4.8s) ease-in-out infinite;
+      animation-delay:var(--delay, 0s);
+    }
+
+    .sketch-effect-meteor{
+      position:absolute;
+      width:24%;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, var(--meteor-color, rgba(200,230,255,0.9)));
+      box-shadow:0 0 16px var(--meteor-glow, rgba(170,215,255,0.8));
+      opacity:0;
+      pointer-events:none;
+      transform:rotate(var(--angle, -16deg));
+      animation:sketchMeteorFall var(--duration, 5.8s) linear infinite;
+      animation-delay:var(--delay, 0s);
+    }
+
+    .sketch-effect-lightning{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:0;
+      background:
+        linear-gradient(112deg, transparent 42%, rgba(215,236,255,0.68) 48%, rgba(255,255,255,0.95) 50%, rgba(193,221,255,0.6) 53%, transparent 59%),
+        radial-gradient(circle at 64% 22%, rgba(190,225,255,0.5), transparent 42%);
+      mix-blend-mode:screen;
+      animation:sketchLightningFlash var(--duration, 7.6s) ease-in-out infinite;
+      animation-delay:var(--delay, 0s);
+    }
+
     .sketch-effect-cursor{
       position:absolute;
       left:var(--cursor-x, 50%);
@@ -1586,45 +1626,6 @@
       isolation:isolate;
     }
 
-    .sketch-box-overlay{
-      position:absolute;
-      inset:-28%;
-      border-radius:inherit;
-      opacity:0;
-      pointer-events:none;
-      mix-blend-mode:screen;
-      transition:opacity .24s ease;
-      animation:sketchBoxPulse 8.5s ease-in-out infinite alternate;
-      z-index:0;
-    }
-
-    .sketch-box-content{
-      position:relative;
-      z-index:2;
-    }
-
-    .sketch-surface.effect-atmosphere-on .sketch-box-overlay{
-      opacity:0.44;
-    }
-
-    .sketch-surface.effect-glass-on .sketch-hero,
-    .sketch-surface.effect-glass-on .sketch-note,
-    .sketch-surface.effect-glass-on .sketch-section{
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.34),
-        0 20px 42px rgba(12,18,26,0.26);
-      backdrop-filter:blur(18px) saturate(1.2);
-    }
-
-    @keyframes sketchBoxPulse{
-      0%{
-        transform:translate3d(-10px, 8px, 0) scale(0.96);
-      }
-      100%{
-        transform:translate3d(14px, -9px, 0) scale(1.06);
-      }
-    }
-
     .sketch-section-label{
       font-size:0.68rem;
       text-transform:uppercase;
@@ -1899,6 +1900,32 @@
         opacity:0.82;
         transform:translate3d(14px, -10px, 0) rotate(calc(var(--angle, -12deg) + 1deg));
       }
+    }
+
+    @keyframes sketchStarTwinkle{
+      0%, 100%{ opacity:0.2; transform:scale(0.85); }
+      50%{ opacity:0.92; transform:scale(1.25); }
+    }
+
+    @keyframes sketchMeteorFall{
+      0%{
+        opacity:0;
+        transform:translate3d(0, 0, 0) rotate(var(--angle, -16deg));
+      }
+      12%{ opacity:0.95; }
+      64%{ opacity:0.55; }
+      100%{
+        opacity:0;
+        transform:translate3d(-210px, 190px, 0) rotate(var(--angle, -16deg));
+      }
+    }
+
+    @keyframes sketchLightningFlash{
+      0%, 76%, 100%{ opacity:0; }
+      78%{ opacity:0.82; }
+      80%{ opacity:0.18; }
+      82%{ opacity:0.94; }
+      84%{ opacity:0; }
     }
 
     .sketch-section-title{
@@ -2273,11 +2300,12 @@
                       </div>
                     </div>
                     <div class="live-option-group">
-                      <div class="live-option-label">Ønskede effekter</div>
+                      <div class="live-option-label">Effekter</div>
                       <div class="live-option-grid" id="live-effect-options">
-                        <button class="live-option" data-type="effect" data-value="Lyslinje ved musepeker" type="button">Interaktiv lyslinje ved musepeker</button>
-                        <button class="live-option" data-type="effect" data-value="Atmosfærisk bevegelse i bakgrunn" type="button">Atmosfærisk bevegelse i bakgrunn</button>
-                        <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
+                        <button class="live-option" data-type="effect" data-value="Interaktiv lyslinje" type="button">Interaktiv lyslinje</button>
+                        <button class="live-option" data-type="effect" data-value="Meteorregn" type="button">Meteorregn</button>
+                        <button class="live-option" data-type="effect" data-value="Stjernehimmel" type="button">Stjernehimmel</button>
+                        <button class="live-option" data-type="effect" data-value="Lynglimt" type="button">Lynglimt</button>
                       </div>
                     </div>
                     <div class="style-demo-cta">
@@ -2367,11 +2395,12 @@
                 </div>
 
                 <div class="brief-field brief-field--full legacy-choice-fields">
-                  <div class="brief-legend">Ønskede effekter</div>
+                  <div class="brief-legend">Effekter</div>
                   <div class="brief-choice-grid">
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" /><span class="brief-choice-text">Interaktiv lyslinje ved musepeker</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bevegelse i bakgrunn" /><span class="brief-choice-text">Atmosfærisk bevegelse i bakgrunn</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Glow og glass" /><span class="brief-choice-text">Glow, glass og lysflater</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Interaktiv lyslinje" /><span class="brief-choice-text">Interaktiv lyslinje</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Meteorregn" /><span class="brief-choice-text">Meteorregn</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Stjernehimmel" /><span class="brief-choice-text">Stjernehimmel</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Lynglimt" /><span class="brief-choice-text">Lynglimt</span></label>
                   </div>
                 </div>
 
@@ -2816,27 +2845,26 @@
         const traceColor = paletteSet[2].color;
         const softColor = paletteSet[1].color;
         const warmColor = paletteSet[0].color;
-        const hasTrace = state.effects.indexOf("Lyslinje ved musepeker") !== -1;
-        const hasAtmosphere = state.effects.indexOf("Atmosfærisk bevegelse i bakgrunn") !== -1;
-        const hasGlass = state.effects.indexOf("Glow og glass") !== -1;
+        const hasTrace = state.effects.indexOf("Interaktiv lyslinje") !== -1 || state.effects.indexOf("Lyslinje ved musepeker") !== -1;
+        const hasMeteors = state.effects.indexOf("Meteorregn") !== -1;
+        const hasStars = state.effects.indexOf("Stjernehimmel") !== -1;
+        const hasLightning = state.effects.indexOf("Lynglimt") !== -1;
         const scene = sketchSurface.dataset.scene || "calm";
         const isSolarEclipse = state.styleKey === "solar-eclipse";
-        const isMaison = state.styleKey === "maison-fjell";
         const boost = uiState.tone === "contrast" ? 1.58 : uiState.tone === "scene" ? 1.34 : 1;
 
-        sketchSurface.classList.toggle("has-glass-effect", hasGlass);
-        sketchSurface.classList.toggle("effect-atmosphere-on", hasAtmosphere || hasGlass);
-        sketchSurface.classList.toggle("effect-glass-on", hasGlass);
+        sketchSurface.classList.remove("has-glass-effect", "effect-atmosphere-on", "effect-glass-on");
 
         if (!sketchEffects) return;
 
         const pieces = [];
 
-        if (hasAtmosphere) {
+        if (hasMeteors) {
           pieces.push(
-            '<span class="sketch-effect-atmosphere" style="left:-16%; top:-2%; width:' + (58 * boost) + '%; height:' + (42 * boost) + '%; --effect-color:' + softColor + 'e8; --drift-x:48px; --drift-y:-18px; --scale-end:1.2; --duration:14s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="right:-18%; bottom:-2%; width:' + (62 * boost) + '%; height:' + (44 * boost) + '%; --effect-color:' + warmColor + 'd6; --drift-x:-36px; --drift-y:22px; --scale-end:1.22; --duration:16s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="left:22%; top:24%; width:' + (46 * boost) + '%; height:' + (28 * boost) + '%; --effect-color:' + traceColor + 'b8; --drift-x:16px; --drift-y:12px; --scale-end:1.14; --duration:12s;"></span>'
+            '<span class="sketch-effect-meteor" style="left:72%; top:14%; --meteor-color:' + softColor + '; --meteor-glow:' + softColor + 'aa; --angle:-18deg; --duration:4.8s; --delay:0.2s;"></span>',
+            '<span class="sketch-effect-meteor" style="left:84%; top:24%; --meteor-color:' + warmColor + '; --meteor-glow:' + warmColor + '88; --angle:-14deg; --duration:6.2s; --delay:1.4s;"></span>',
+            '<span class="sketch-effect-meteor" style="left:68%; top:36%; --meteor-color:' + traceColor + '; --meteor-glow:' + traceColor + '99; --angle:-20deg; --duration:5.6s; --delay:2.2s;"></span>',
+            '<span class="sketch-effect-meteor" style="left:88%; top:10%; --meteor-color:#ffffff; --meteor-glow:' + softColor + 'aa; --angle:-17deg; --duration:7.4s; --delay:3.1s;"></span>'
           );
         }
 
@@ -2848,56 +2876,35 @@
           );
         }
 
-        if (hasGlass) {
+        if (hasStars) {
           pieces.push(
-            '<span class="sketch-effect-glow" style="left:6%; top:8%; width:' + (40 * boost) + '%; height:' + (28 * boost) + '%; --effect-color:' + warmColor + 'f2; --drift-x:18px; --drift-y:-12px; --scale-end:1.14; --duration:10s;"></span>',
-            '<span class="sketch-effect-glow" style="right:2%; top:6%; width:' + (46 * boost) + '%; height:' + (32 * boost) + '%; --effect-color:' + softColor + 'ea; --drift-x:-20px; --drift-y:16px; --scale-end:1.16; --duration:12s;"></span>',
-            '<span class="sketch-effect-glow" style="left:16%; bottom:12%; width:' + (34 * boost) + '%; height:' + (22 * boost) + '%; --effect-color:' + traceColor + 'c8; --drift-x:12px; --drift-y:8px; --scale-end:1.12; --duration:11s;"></span>'
+            '<span class="sketch-effect-atmosphere" style="left:-10%; top:-8%; width:' + (48 * boost) + '%; height:' + (38 * boost) + '%; --effect-color:' + softColor + 'a6; --drift-x:22px; --drift-y:-10px; --scale-end:1.08; --duration:14s;"></span>',
+            '<span class="sketch-effect-atmosphere" style="right:-14%; top:2%; width:' + (44 * boost) + '%; height:' + (34 * boost) + '%; --effect-color:' + traceColor + '96; --drift-x:-18px; --drift-y:12px; --scale-end:1.08; --duration:16s;"></span>'
+          );
+          for (let i = 0; i < 18; i += 1) {
+            const x = 8 + (i * 5.2) % 84;
+            const y = 12 + (i * 7.4) % 62;
+            const size = (i % 4) + 2;
+            const delay = (i * 0.23).toFixed(2);
+            const duration = (3.8 + (i % 5) * 0.7).toFixed(2);
+            pieces.push(
+              '<span class="sketch-effect-star" style="left:' + x + '%; top:' + y + '%; width:' + size + 'px; height:' + size + 'px; --star-color:' + softColor + '; --star-glow:' + traceColor + 'aa; --delay:' + delay + 's; --duration:' + duration + 's;"></span>'
+            );
+          }
+        }
+
+        if (hasLightning) {
+          pieces.push(
+            '<span class="sketch-effect-lightning" style="--duration:6.8s; --delay:0.8s;"></span>',
+            '<span class="sketch-effect-lightning" style="--duration:9.2s; --delay:2.1s;"></span>'
           );
         }
 
-        if (isMaison && hasAtmosphere) {
-          pieces.push(
-            '<span class="sketch-effect-atmosphere" style="left:-10%; top:18%; width:' + (66 * boost) + '%; height:' + (42 * boost) + '%; --effect-color:' + warmColor + 'd8; --drift-x:30px; --drift-y:-12px; --scale-end:1.16; --duration:11s;"></span>'
-          );
-        }
-
-        if (isSolarEclipse || (scene === "tech" && (hasAtmosphere || hasTrace))) {
+        if (isSolarEclipse || (scene === "tech" && (hasMeteors || hasTrace || hasStars))) {
           pieces.push('<span class="sketch-effect-eclipse"></span>');
         }
 
         sketchEffects.innerHTML = pieces.join("");
-
-        const boxes = Array.from(sketchSurface.querySelectorAll(".sketch-hero, .sketch-note, .sketch-section"));
-        boxes.forEach(function (box, index) {
-          let content = null;
-          const first = box.firstElementChild;
-          if (first && first.classList.contains("sketch-box-content")) {
-            content = first;
-          } else {
-            content = document.createElement("div");
-            content.className = "sketch-box-content";
-            while (box.firstChild) {
-              content.appendChild(box.firstChild);
-            }
-            box.appendChild(content);
-          }
-
-          Array.from(box.querySelectorAll(".sketch-box-overlay")).forEach(function (node) {
-            node.remove();
-          });
-
-          if (hasAtmosphere || hasGlass) {
-            const overlay = document.createElement("span");
-            overlay.className = "sketch-box-overlay";
-            const stopA = 28 + (index % 4) * 8;
-            const stopB = 70 + (index % 3) * 6;
-            overlay.style.background =
-              "radial-gradient(circle at " + (26 + (index * 11) % 52) + "% " + (24 + (index * 7) % 46) + "%, " + softColor + "80 0%, " + warmColor + "44 " + stopA + "%, transparent " + stopB + "%)";
-            box.appendChild(overlay);
-          }
-
-        });
 
         traceEnabled = hasTrace;
       }
