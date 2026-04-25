@@ -750,6 +750,10 @@
       cursor:not-allowed;
     }
 
+    .legacy-choice-fields{
+      display:none;
+    }
+
     .sketch-surface{
       position:relative;
       z-index:1;
@@ -814,6 +818,58 @@
       transform:rotate(var(--angle, -12deg));
       transform-origin:center;
       animation:sketchTraceFloat var(--duration, 8s) ease-in-out infinite;
+    }
+
+    .sketch-effect-cursor{
+      position:absolute;
+      left:var(--cursor-x, 50%);
+      top:var(--cursor-y, 50%);
+      width:240px;
+      height:6px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, var(--effect-color, rgba(255,255,255,0.86)) 26%, rgba(255,255,255,0.95) 54%, transparent);
+      filter:blur(1.6px);
+      box-shadow:0 0 22px var(--effect-glow, rgba(255,255,255,0.4));
+      opacity:0;
+      transform:translate(-50%, -50%) rotate(var(--cursor-angle, -8deg));
+      transform-origin:center;
+      transition:opacity .18s ease;
+      pointer-events:none;
+    }
+
+    .sketch-effects[data-pointer-active="true"] .sketch-effect-cursor{
+      opacity:0.92;
+    }
+
+    .sketch-effect-eclipse{
+      position:absolute;
+      right:-8%;
+      bottom:-6%;
+      width:44%;
+      aspect-ratio:1;
+      border-radius:50%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 44% 48%, rgba(10,15,30,0.95) 0 56%, rgba(11,18,34,0.98) 70%),
+        conic-gradient(from 196deg at 44% 50%, rgba(255,236,194,0.9) 0deg 36deg, rgba(255,179,78,0.66) 36deg 60deg, transparent 60deg 360deg);
+      box-shadow:-20px -6px 56px rgba(255,178,74,0.36), 0 0 22px rgba(255,220,149,0.16);
+      opacity:0.8;
+      animation:sketchEclipsePulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes sketchEclipsePulse{
+      0%{
+        transform:translate3d(-2px, 2px, 0) scale(0.98);
+        opacity:0.68;
+      }
+      50%{
+        transform:translate3d(2px, -2px, 0) scale(1.04);
+        opacity:0.9;
+      }
+      100%{
+        transform:translate3d(0, 3px, 0) scale(1);
+        opacity:0.78;
+      }
     }
 
     .sketch-surface.has-glass-effect .sketch-hero,
@@ -1209,6 +1265,7 @@
       background:linear-gradient(180deg, var(--sketch-card-soft), rgba(255,255,255,0.16));
       display:grid;
       gap:10px;
+      transform:rotate(0deg);
     }
 
     .sketch-note-title{
@@ -1346,6 +1403,12 @@
       padding:7px 10px;
       font-size:0.72rem;
       letter-spacing:0.04em;
+    }
+
+    .content-amount{
+      display:grid;
+      gap:8px;
+      margin-bottom:4px;
     }
 
     .sketch-surface[data-density="airy"] .sketch-layout,
@@ -1821,7 +1884,7 @@
                           <div class="sketch-note-line" style="width:66%;"></div>
                         </div>
                       </div>
-                      <div class="sketch-note" style="transform:rotate(1deg);">
+                      <div class="sketch-note">
                         <div class="sketch-note-title" style="width:44%;"></div>
                         <div class="sketch-note-lines">
                           <div class="sketch-note-line" style="width:100%;"></div>
@@ -1832,28 +1895,28 @@
                   </div>
 
                   <div class="sketch-sections" id="wireframe-sections">
-                    <div class="sketch-section" style="--sketch-tilt:-1.2deg;">
+                    <div class="sketch-section" style="--sketch-tilt:-0.25deg;">
                       <div class="sketch-section-title"></div>
                       <div class="sketch-line-stack">
                         <div class="sketch-line" style="width:96%;"></div>
                         <div class="sketch-line" style="width:72%;"></div>
                       </div>
                     </div>
-                    <div class="sketch-section" style="--sketch-tilt:1deg;">
+                    <div class="sketch-section" style="--sketch-tilt:0.2deg;">
                       <div class="sketch-section-title" style="width:56%;"></div>
                       <div class="sketch-line-stack">
                         <div class="sketch-line" style="width:92%;"></div>
                         <div class="sketch-line" style="width:68%;"></div>
                       </div>
                     </div>
-                    <div class="sketch-section" style="--sketch-tilt:-0.8deg;">
+                    <div class="sketch-section" style="--sketch-tilt:-0.15deg;">
                       <div class="sketch-section-title" style="width:52%;"></div>
                       <div class="sketch-line-stack">
                         <div class="sketch-line" style="width:94%;"></div>
                         <div class="sketch-line" style="width:62%;"></div>
                       </div>
                     </div>
-                    <div class="sketch-section" style="--sketch-tilt:1.4deg;">
+                    <div class="sketch-section" style="--sketch-tilt:0.22deg;">
                       <div class="sketch-section-title" style="width:48%;"></div>
                       <div class="sketch-line-stack">
                         <div class="sketch-line" style="width:90%;"></div>
@@ -1868,6 +1931,14 @@
                     <div class="control-group">
                       <h4>Live-valg for skisse</h4>
                       <p>Trykk her for å se endringer i skissa med en gang.</p>
+                    </div>
+                    <div class="content-amount">
+                      <div class="live-option-label">Innholdsmengde</div>
+                      <div class="live-option-grid" id="live-content-options">
+                        <button class="live-option" data-type="content" data-value="kort" type="button">Kort og direkte</button>
+                        <button class="live-option is-active" data-type="content" data-value="balansert" type="button">Balansert med tydelig struktur</button>
+                        <button class="live-option" data-type="content" data-value="rik" type="button">Mer innhold, flere seksjoner og mer tyngde</button>
+                      </div>
                     </div>
                     <div class="live-option-group">
                       <div class="live-option-label">Hva er viktig på siden?</div>
@@ -1965,7 +2036,7 @@
                   </select>
                 </div>
 
-                <div class="brief-field">
+                <div class="brief-field legacy-choice-fields">
                   <label for="brief-content">Innholdsmengde</label>
                   <select id="brief-content" name="content">
                     <option value="kort">Kort og direkte</option>
@@ -1974,7 +2045,7 @@
                   </select>
                 </div>
 
-                <div class="brief-field brief-field--full">
+                <div class="brief-field brief-field--full legacy-choice-fields">
                   <div class="brief-legend">Hva er viktig på siden?</div>
                   <div class="brief-choice-grid">
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked /><span class="brief-choice-text">Kontakt, henvendelser og forespørsler</span></label>
@@ -1986,7 +2057,7 @@
                   </div>
                 </div>
 
-                <div class="brief-field brief-field--full">
+                <div class="brief-field brief-field--full legacy-choice-fields">
                   <div class="brief-legend">Ønskede effekter</div>
                   <div class="brief-choice-grid">
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" /><span class="brief-choice-text">Interaktiv lyslinje ved musepeker</span></label>
@@ -2040,6 +2111,7 @@
       const densityControls = document.getElementById("density-controls");
       const contrastControls = document.getElementById("contrast-controls");
       const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
+      const contentSelect = document.getElementById("brief-content");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
       const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
       const contentProfiles = {
@@ -2153,7 +2225,7 @@
         },
         tech: {
           board: "linear-gradient(180deg, rgba(10,17,31,0.98), rgba(7,12,24,0.96))",
-          surface: "linear-gradient(180deg, rgba(13,25,45,0.94), rgba(9,17,34,0.9)), radial-gradient(circle at 82% 16%, rgba(255,166,64,0.22), transparent 22%), radial-gradient(circle at 24% 18%, rgba(118,98,255,0.24), transparent 26%)"
+          surface: "linear-gradient(180deg, rgba(11,22,40,0.95), rgba(8,15,30,0.92)), radial-gradient(circle at 86% 74%, rgba(255,166,72,0.26), transparent 22%), radial-gradient(circle at 84% 74%, rgba(8,14,28,0.94) 0 9%, transparent 10%), radial-gradient(circle at 24% 18%, rgba(118,98,255,0.24), transparent 26%)"
         },
         editorial: {
           board: "linear-gradient(180deg, rgba(24,14,30,0.98), rgba(16,10,22,0.96))",
@@ -2236,7 +2308,7 @@
         const allowedFeatures = levelAllowed.filter(function (feature) {
           return contentAllowed.indexOf(feature) !== -1;
         });
-        const effectsEnabled = selectedLevel === "premium";
+        const effectsEnabled = true;
 
         featureInputs.forEach(function (input) {
           const label = input.closest(".brief-choice");
@@ -2265,6 +2337,11 @@
           const type = button.dataset.type;
           const value = button.dataset.value;
           if (!type || !value) return;
+          if (type === "content") {
+            button.classList.toggle("is-active", form.content.value === value);
+            button.classList.remove("is-disabled");
+            return;
+          }
           const input = form.querySelector('input[name="' + type + '"][value="' + value + '"]');
           if (!input) return;
           button.classList.toggle("is-active", !!input.checked && !input.disabled);
@@ -2355,6 +2432,7 @@
         const hasTrace = state.effects.indexOf("Lyslinje ved musepeker") !== -1 || uiState.tone === "contrast";
         const hasAtmosphere = state.effects.indexOf("Atmosfærisk bakgrunn") !== -1 || uiState.tone !== "base";
         const hasGlass = state.effects.indexOf("Glow og glass") !== -1 || uiState.tone === "contrast";
+        const scene = sketchSurface.dataset.scene || "calm";
         const boost = uiState.tone === "contrast" ? 1.35 : uiState.tone === "scene" ? 1.15 : 1;
 
         sketchSurface.classList.toggle("has-glass-effect", hasGlass);
@@ -2373,7 +2451,8 @@
         if (hasTrace) {
           pieces.push(
             '<span class="sketch-effect-trace" style="left:8%; top:26%; width:' + (34 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88; --angle:-14deg; --duration:7s;"></span>',
-            '<span class="sketch-effect-trace" style="right:12%; top:52%; width:' + (28 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '66; --angle:11deg; --duration:9s;"></span>'
+            '<span class="sketch-effect-trace" style="right:12%; top:52%; width:' + (28 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '66; --angle:11deg; --duration:9s;"></span>',
+            '<span class="sketch-effect-cursor" style="--effect-color:' + softColor + '; --effect-glow:' + traceColor + '99;"></span>'
           );
         }
 
@@ -2382,6 +2461,10 @@
             '<span class="sketch-effect-glow" style="left:16%; top:18%; width:' + (22 * boost) + '%; height:' + (16 * boost) + '%; --effect-color:' + warmColor + '8a; --drift-x:12px; --drift-y:-10px; --scale-end:1.08; --duration:12s;"></span>',
             '<span class="sketch-effect-glow" style="right:10%; top:12%; width:' + (26 * boost) + '%; height:' + (18 * boost) + '%; --effect-color:' + softColor + '78; --drift-x:-16px; --drift-y:14px; --scale-end:1.1; --duration:14s;"></span>'
           );
+        }
+
+        if (scene === "tech" && (hasAtmosphere || hasTrace || uiState.tone !== "base")) {
+          pieces.push('<span class="sketch-effect-eclipse"></span>');
         }
 
         sketchEffects.innerHTML = pieces.join("");
@@ -2414,7 +2497,8 @@
         scores[selectedProfile.level] += 6;
 
         if (state.effects.length > 0) {
-          scores.premium += 6;
+          scores.premium += 2;
+          scores.standard += 1;
         }
 
         if (state.pages <= 1) scores.enkel += 3;
@@ -2481,10 +2565,6 @@
         if (scores.enkel > scores.standard && scores.enkel >= scores.premium) level = "enkel";
         if (scores.premium > scores.standard && scores.premium > scores.enkel) level = "premium";
 
-        if (state.effects.length > 0) {
-          level = "premium";
-        }
-
         return {
           level: level,
           mode: "auto",
@@ -2531,7 +2611,7 @@
 
       function renderSections(sections) {
         wireframeSections.innerHTML = sections.map(function (section, index) {
-          const tiltSet = uiState.layout === "editorial-split" ? [-2.2, 1.8, -1.6, 2.1] : [-1.2, 0.9, -0.7, 1.3];
+          const tiltSet = uiState.layout === "editorial-split" ? [-0.5, 0.45, -0.35, 0.5] : [-0.25, 0.2, -0.15, 0.22];
           const tilt = tiltSet[index] || 0;
           return '' +
             '<div class="sketch-section" style="--sketch-tilt:' + tilt + 'deg;">' +
@@ -2677,11 +2757,33 @@
           const type = button.dataset.type;
           const value = button.dataset.value;
           if (!type || !value) return;
+          if (type === "content") {
+            if (contentSelect) contentSelect.value = value;
+            update();
+            return;
+          }
           const input = form.querySelector('input[name="' + type + '"][value="' + value + '"]');
           if (!input || input.disabled) return;
           input.checked = !input.checked;
           update();
         });
+      });
+
+      sketchSurface.addEventListener("mousemove", function (event) {
+        if (!sketchEffects || !sketchEffects.querySelector(".sketch-effect-cursor")) return;
+        const rect = sketchSurface.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        const angle = -18 + (x / 100) * 34;
+        sketchEffects.style.setProperty("--cursor-x", x.toFixed(2) + "%");
+        sketchEffects.style.setProperty("--cursor-y", y.toFixed(2) + "%");
+        sketchEffects.style.setProperty("--cursor-angle", angle.toFixed(2) + "deg");
+        sketchEffects.dataset.pointerActive = "true";
+      });
+
+      sketchSurface.addEventListener("mouseleave", function () {
+        if (!sketchEffects) return;
+        sketchEffects.dataset.pointerActive = "false";
       });
 
       update();
