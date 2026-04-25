@@ -566,6 +566,22 @@
       font-size:0.95rem;
     }
 
+    .generator-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .generator-note{
+      color:var(--muted);
+      font-size:0.9rem;
+      line-height:1.6;
+      max-width:48ch;
+    }
+
     .sketch-board{
       position:relative;
       overflow:hidden;
@@ -612,6 +628,74 @@
       box-shadow:inset 0 0 0 1px rgba(255,255,255,0.24);
     }
 
+    .generated-brief{
+      position:relative;
+      z-index:2;
+      display:grid;
+      gap:14px;
+      padding:24px 24px 18px;
+      border-bottom:1px solid rgba(97,77,54,0.12);
+      background:linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,252,246,0.34));
+      backdrop-filter:blur(16px);
+    }
+
+    .generated-brief-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .generated-kicker{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.2em;
+      color:#7a6b5b;
+    }
+
+    .generated-title{
+      margin:8px 0 0;
+      font-size:clamp(1.7rem, 2.8vw, 2.55rem);
+      line-height:0.96;
+      letter-spacing:-0.05em;
+      max-width:13ch;
+    }
+
+    .generated-copy{
+      margin:0;
+      max-width:64ch;
+      color:#66584c;
+      line-height:1.72;
+    }
+
+    .generated-palette{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .palette-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:rgba(255,255,255,0.56);
+      color:#6c5d4f;
+      font-size:0.82rem;
+      white-space:nowrap;
+    }
+
+    .palette-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.45);
+    }
+
     .sketch-surface::before{
       content:"";
       position:absolute;
@@ -621,7 +705,48 @@
       pointer-events:none;
     }
 
+    .sketch-surface::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 18%, var(--sketch-glow-a, rgba(196,180,160,0.24)), transparent 24%),
+        radial-gradient(circle at 82% 22%, var(--sketch-glow-b, rgba(210,194,176,0.18)), transparent 28%),
+        linear-gradient(135deg, rgba(255,255,255,0.16), transparent 44%);
+      opacity:0.88;
+      pointer-events:none;
+    }
+
+    .sketch-surface.is-enkel{
+      --sketch-tint: rgba(181,129,86,0.14);
+      --sketch-glow-a: rgba(220,165,118,0.24);
+      --sketch-glow-b: rgba(179,120,85,0.18);
+      background:
+        linear-gradient(180deg, rgba(255,250,244,0.96), rgba(247,238,227,0.84)),
+        radial-gradient(circle at 18% 14%, rgba(233,199,164,0.32), transparent 26%);
+    }
+
+    .sketch-surface.is-standard{
+      --sketch-tint: rgba(120,150,182,0.14);
+      --sketch-glow-a: rgba(186,206,223,0.28);
+      --sketch-glow-b: rgba(126,159,190,0.18);
+      background:
+        linear-gradient(180deg, rgba(249,252,255,0.96), rgba(236,242,248,0.84)),
+        radial-gradient(circle at 18% 14%, rgba(214,230,244,0.42), transparent 28%);
+    }
+
+    .sketch-surface.is-premium{
+      --sketch-tint: rgba(123,95,118,0.16);
+      --sketch-glow-a: rgba(205,170,192,0.24);
+      --sketch-glow-b: rgba(158,120,149,0.18);
+      background:
+        linear-gradient(180deg, rgba(255,250,253,0.94), rgba(243,232,240,0.82)),
+        radial-gradient(circle at 18% 14%, rgba(238,210,224,0.42), transparent 28%);
+    }
+
     .sketch-head{
+      position:relative;
+      z-index:2;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -649,6 +774,8 @@
     }
 
     .sketch-layout{
+      position:relative;
+      z-index:2;
       display:grid;
       grid-template-columns:1.04fr 0.96fr;
       gap:18px;
@@ -657,13 +784,27 @@
     }
 
     .sketch-hero{
+      position:relative;
       display:grid;
       align-content:start;
       gap:16px;
       padding:22px;
       border-radius:24px;
       border:1.5px solid rgba(62,45,32,0.18);
-      background:rgba(255,255,255,0.08);
+      background:linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.2));
+    }
+
+    .sketch-hero::before{
+      content:"";
+      position:absolute;
+      inset:18px 16px auto auto;
+      width:44%;
+      height:34%;
+      border-radius:28px;
+      background:linear-gradient(145deg, var(--sketch-tint, rgba(196,180,160,0.16)), transparent 70%);
+      filter:blur(8px);
+      opacity:0.86;
+      pointer-events:none;
     }
 
     .sketch-hero-brow{
@@ -732,10 +873,11 @@
     }
 
     .sketch-note{
+      position:relative;
       padding:18px;
       border-radius:22px;
       border:1.5px solid rgba(62,45,32,0.16);
-      background:rgba(255,255,255,0.12);
+      background:linear-gradient(180deg, rgba(255,255,255,0.48), rgba(255,255,255,0.26));
       display:grid;
       gap:10px;
     }
@@ -761,6 +903,8 @@
     }
 
     .sketch-sections{
+      position:relative;
+      z-index:2;
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:12px;
@@ -777,6 +921,130 @@
       gap:10px;
       align-content:start;
       transform:rotate(var(--sketch-tilt, 0deg));
+    }
+
+    .sketch-controls{
+      position:absolute;
+      top:24px;
+      right:24px;
+      z-index:3;
+      width:min(228px, calc(100% - 48px));
+      display:grid;
+      gap:12px;
+      padding:16px;
+      border-radius:24px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:rgba(255,255,255,0.52);
+      backdrop-filter:blur(18px);
+      box-shadow:0 18px 34px rgba(63,43,25,0.08);
+    }
+
+    .sketch-controls h4{
+      margin:0;
+      font-size:0.94rem;
+      letter-spacing:-0.03em;
+    }
+
+    .sketch-controls p{
+      margin:0;
+      color:#6c5d4f;
+      font-size:0.84rem;
+      line-height:1.5;
+    }
+
+    .control-group{
+      display:grid;
+      gap:8px;
+    }
+
+    .control-label{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      color:#7e7062;
+    }
+
+    .control-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .control-chip{
+      border:1px solid rgba(97,77,54,0.12);
+      background:rgba(255,255,255,0.5);
+      color:#54483e;
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:0.82rem;
+      line-height:1;
+      cursor:pointer;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      font-family:inherit;
+    }
+
+    .control-chip:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,0.72);
+    }
+
+    .control-chip.is-active{
+      background:var(--ink);
+      color:#fff8f0;
+      border-color:transparent;
+    }
+
+    .control-footnote{
+      color:#7e7062;
+      font-size:0.78rem;
+      line-height:1.5;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-layout,
+    .sketch-surface[data-density="airy"] .sketch-sections{
+      gap:18px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-hero,
+    .sketch-surface[data-density="airy"] .sketch-note,
+    .sketch-surface[data-density="airy"] .sketch-section{
+      padding:22px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-layout,
+    .sketch-surface[data-density="compact"] .sketch-sections{
+      gap:10px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-hero,
+    .sketch-surface[data-density="compact"] .sketch-note,
+    .sketch-surface[data-density="compact"] .sketch-section{
+      padding:14px;
+    }
+
+    .sketch-surface[data-contrast="high"] .sketch-hero,
+    .sketch-surface[data-contrast="high"] .sketch-note,
+    .sketch-surface[data-contrast="high"] .sketch-section{
+      border-color:rgba(78,61,44,0.18);
+      box-shadow:0 14px 28px rgba(72,53,36,0.08);
+    }
+
+    .sketch-surface[data-palette="cool"]{
+      --sketch-tint: rgba(118,151,192,0.18);
+      --sketch-glow-a: rgba(200,218,236,0.28);
+      --sketch-glow-b: rgba(126,159,190,0.2);
+    }
+
+    .sketch-surface[data-palette="warm"]{
+      --sketch-tint: rgba(191,141,94,0.18);
+      --sketch-glow-a: rgba(230,185,132,0.28);
+      --sketch-glow-b: rgba(172,115,82,0.2);
+    }
+
+    .sketch-surface[data-palette="editorial"]{
+      --sketch-tint: rgba(150,112,145,0.18);
+      --sketch-glow-a: rgba(214,182,205,0.28);
+      --sketch-glow-b: rgba(145,106,137,0.2);
     }
 
     .sketch-section-title{
@@ -859,6 +1127,14 @@
       .sketch-layout{
         grid-template-columns:1fr;
       }
+
+      .sketch-controls{
+        position:relative;
+        top:auto;
+        right:auto;
+        width:100%;
+        margin:16px 18px 18px;
+      }
     }
 
     @media (max-width:760px){
@@ -876,6 +1152,10 @@
 
       .hero-actions,
       .summary-actions{
+        flex-direction:column;
+      }
+
+      .generated-brief-top{
         flex-direction:column;
       }
 
@@ -1074,8 +1354,28 @@
               <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
             </div>
 
+            <div class="generator-toolbar">
+              <div class="generator-note">Beskrivelsen styrer retningen, og kunden får en halvåpen skisse med fargeforslag, scene og struktur som kan justeres litt før neste runde.</div>
+              <button class="btn btn-secondary" id="random-brief-button" type="button">Ny variant</button>
+            </div>
+
             <div class="sketch-board">
               <div class="sketch-surface" id="sketch-surface">
+                <div class="generated-brief">
+                  <div class="generated-brief-top">
+                    <div>
+                      <div class="generated-kicker">Generert retning</div>
+                      <h3 class="generated-title" id="generated-brief-title">Standard med rolig struktur og tydelig retning.</h3>
+                    </div>
+                    <div class="generated-palette" id="generated-palette">
+                      <span class="palette-chip"><span class="palette-dot" style="background:#d7c9bb;"></span> Base</span>
+                      <span class="palette-chip"><span class="palette-dot" style="background:#aebed0;"></span> Scene</span>
+                      <span class="palette-chip"><span class="palette-dot" style="background:#566f86;"></span> Kontrast</span>
+                    </div>
+                  </div>
+                  <p class="generated-copy" id="generated-brief-copy">Her kommer en kort oppsummering over skissen, slik at kunden forstår hvorfor akkurat denne retningen ble generert.</p>
+                </div>
+
                 <div class="sketch-head">
                   <div class="sketch-topline" id="wireframe-topline">Førsteskisse / Standard</div>
                   <div class="sketch-chip" id="wireframe-chip">Retning</div>
@@ -1149,6 +1449,38 @@
                     </div>
                   </div>
                 </div>
+
+                <aside class="sketch-controls">
+                  <div class="control-group">
+                    <h4>Små justeringer</h4>
+                    <p>Dette er lette UI-grep. Større endringer i retning eller innhold bør løses med ny generering.</p>
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label">Tetthet</div>
+                    <div class="control-row" id="density-controls">
+                      <button class="control-chip is-active" data-density="balanced" type="button">Balansert</button>
+                      <button class="control-chip" data-density="airy" type="button">Mer luft</button>
+                      <button class="control-chip" data-density="compact" type="button">Tettere</button>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label">Kontrast</div>
+                    <div class="control-row" id="contrast-controls">
+                      <button class="control-chip is-active" data-contrast="soft" type="button">Myk</button>
+                      <button class="control-chip" data-contrast="high" type="button">Tydeligere</button>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label">Palette</div>
+                    <div class="control-row" id="palette-controls">
+                      <button class="control-chip is-active" data-palette="auto" type="button">Auto</button>
+                      <button class="control-chip" data-palette="warm" type="button">Varm</button>
+                      <button class="control-chip" data-palette="cool" type="button">Kald</button>
+                      <button class="control-chip" data-palette="editorial" type="button">Signatur</button>
+                    </div>
+                  </div>
+                  <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
+                </aside>
               </div>
             </div>
 
@@ -1189,12 +1521,26 @@
       const summaryList = document.getElementById("brief-summary-list");
       const emailLink = document.getElementById("brief-email-link");
       const copyButton = document.getElementById("brief-copy-button");
+      const randomButton = document.getElementById("random-brief-button");
       const sketchSurface = document.getElementById("sketch-surface");
       const wireframeTopline = document.getElementById("wireframe-topline");
       const wireframeChip = document.getElementById("wireframe-chip");
       const wireframeTitleBlock = document.getElementById("wireframe-title-block");
       const wireframeCopyBlock = document.getElementById("wireframe-copy-block");
       const wireframeSections = document.getElementById("wireframe-sections");
+      const generatedBriefTitle = document.getElementById("generated-brief-title");
+      const generatedBriefCopy = document.getElementById("generated-brief-copy");
+      const generatedPalette = document.getElementById("generated-palette");
+      const densityControls = document.getElementById("density-controls");
+      const contrastControls = document.getElementById("contrast-controls");
+      const paletteControls = document.getElementById("palette-controls");
+
+      const uiState = {
+        density: "balanced",
+        contrast: "soft",
+        palette: "auto",
+        variant: 0
+      };
 
       const levelCopy = {
         enkel: {
@@ -1237,6 +1583,65 @@
         Galleri: { title: "Galleri", copy: "Bilder, meny eller visuelle høydepunkt" },
         "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet" }
       };
+
+      const paletteSets = {
+        warm: [
+          { label: "Base", color: "#f0dcc7" },
+          { label: "Scene", color: "#bd7f4f" },
+          { label: "Kontrast", color: "#6d4330" }
+        ],
+        cool: [
+          { label: "Base", color: "#dce8f3" },
+          { label: "Scene", color: "#8eaac2" },
+          { label: "Kontrast", color: "#41566c" }
+        ],
+        editorial: [
+          { label: "Base", color: "#eddce7" },
+          { label: "Scene", color: "#bc8faa" },
+          { label: "Kontrast", color: "#70485f" }
+        ]
+      };
+
+      function hashString(value) {
+        return value.split("").reduce(function (acc, char) {
+          return (acc * 31 + char.charCodeAt(0)) % 2147483647;
+        }, 7);
+      }
+
+      function pickPalette(state, level) {
+        if (uiState.palette !== "auto") return uiState.palette;
+        if (state.style === "eksklusiv" || state.style === "moderne" || level === "premium") return uiState.variant % 2 === 0 ? "editorial" : "warm";
+        if (state.style === "tillit" || level === "standard") return uiState.variant % 3 === 0 ? "cool" : "warm";
+        if (state.style === "varm" || state.style === "direkte") return "warm";
+        return "cool";
+      }
+
+      function setActiveChip(container, value, attr) {
+        Array.from(container.querySelectorAll(".control-chip")).forEach(function (chip) {
+          chip.classList.toggle("is-active", chip.getAttribute(attr) === value);
+        });
+      }
+
+      function buildGeneratedBrief(state, recommendation, title) {
+        const featureText = state.features.length
+          ? state.features.slice(0, 3).join(", ").toLowerCase()
+          : "tydelig kontakt og enkel flyt";
+        const notesText = state.notes
+          ? state.notes.charAt(0).toLowerCase() + state.notes.slice(1)
+          : "uttrykk, struktur og handling";
+
+        return {
+          title: title,
+          copy: "Basert på " + (state.company || state.industry.toLowerCase()) + " trekkes dette ut til en " + recommendation.level + "-retning med fokus på " + featureText + ". Skissen peker på fargegrep, scene og prioritering, mens større endringer i " + notesText + " bør tas i en ny generering."
+        };
+      }
+
+      function renderPalette(name) {
+        const set = paletteSets[name] || paletteSets.cool;
+        generatedPalette.innerHTML = set.map(function (item) {
+          return '<span class="palette-chip"><span class="palette-dot" style="background:' + item.color + ';"></span>' + item.label + "</span>";
+        }).join("");
+      }
 
       function getState() {
         return {
@@ -1405,19 +1810,27 @@
         const level = recommendation.level;
         const sections = buildSections(state);
         const summaryLines = buildSummary(state, recommendation);
+        const palette = pickPalette(state, level);
         const title = state.company
           ? state.company + (level === "premium" ? " med mer sceneplass og tydeligere verdi." : level === "enkel" ? " gjort tydelig, lett og salgsbar." : " med mer struktur, ro og tillit.")
           : (industryOpeners[state.industry] || industryOpeners.Annet);
+        const generated = buildGeneratedBrief(state, recommendation, title);
 
         badge.textContent = (recommendation.mode === "manual" ? "Valgt nivå / " : "Anbefalt nivå / ") + level.charAt(0).toUpperCase() + level.slice(1);
         score.textContent = recommendation.confidence + " - " + recommendation.reason;
         recommendationTitle.textContent = levelCopy[level].title;
         recommendationCopy.textContent = levelCopy[level].copy;
+        generatedBriefTitle.textContent = generated.title;
+        generatedBriefCopy.textContent = generated.copy;
         wireframeTopline.textContent = levelCopy[level].top;
         wireframeChip.textContent = state.styleLabel;
 
         sketchSurface.classList.remove("is-enkel", "is-standard", "is-premium");
         sketchSurface.classList.add("is-" + level);
+        sketchSurface.dataset.density = uiState.density;
+        sketchSurface.dataset.contrast = uiState.contrast;
+        sketchSurface.dataset.palette = palette;
+        renderPalette(palette);
 
         wireframeTitleBlock.innerHTML =
           '<div class="sketch-title-line sketch-title-line--heavy" style="width:96%;"></div>' +
@@ -1453,6 +1866,40 @@
             copyButton.textContent = original;
           }, 1600);
         });
+      });
+
+      densityControls.addEventListener("click", function (event) {
+        const chip = event.target.closest("[data-density]");
+        if (!chip) return;
+        uiState.density = chip.getAttribute("data-density");
+        setActiveChip(densityControls, uiState.density, "data-density");
+        update();
+      });
+
+      contrastControls.addEventListener("click", function (event) {
+        const chip = event.target.closest("[data-contrast]");
+        if (!chip) return;
+        uiState.contrast = chip.getAttribute("data-contrast");
+        setActiveChip(contrastControls, uiState.contrast, "data-contrast");
+        update();
+      });
+
+      paletteControls.addEventListener("click", function (event) {
+        const chip = event.target.closest("[data-palette]");
+        if (!chip) return;
+        uiState.palette = chip.getAttribute("data-palette");
+        setActiveChip(paletteControls, uiState.palette, "data-palette");
+        update();
+      });
+
+      randomButton.addEventListener("click", function () {
+        const state = getState();
+        const seed = hashString([state.company, state.industry, state.style, state.notes, Date.now()].join("|"));
+        uiState.variant = seed % 7;
+        if (uiState.palette === "auto") {
+          setActiveChip(paletteControls, "auto", "data-palette");
+        }
+        update();
       });
 
       update();
