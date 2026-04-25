@@ -174,19 +174,39 @@
 
     .hero-panel {
       margin-top: 14px;
-      padding: 14px;
+      padding: 16px;
       border-radius: 22px;
-      background: linear-gradient(145deg, #2f3b52, #151a24);
-      color: white;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(255,255,255,0.36), transparent 26%),
+        linear-gradient(145deg, #eff7fc 0%, #cfe1ee 54%, #91aabd 100%);
+      color: #172838;
       display: grid;
       gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(42,77,104,0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(42,77,104,0.08) 1px, transparent 1px),
+        linear-gradient(135deg, transparent 56%, rgba(255,255,255,0.26) 60%, transparent 64%);
+      background-size: 36px 36px, 36px 36px, 100% 100%;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.72), rgba(0,0,0,0.18));
+      pointer-events: none;
     }
 
     .panel-box {
+      position: relative;
+      z-index: 1;
       padding: 16px;
       border-radius: 18px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(69,104,132,0.18);
+      box-shadow: 0 14px 36px rgba(77,103,124,0.12);
     }
 
     .panel-box strong {
@@ -199,7 +219,7 @@
     .panel-box span {
       display: block;
       margin-top: 8px;
-      color: rgba(255,255,255,0.78);
+      color: #4f6375;
       line-height: 1.56;
       font-size: 0.9rem;
     }
@@ -335,7 +355,7 @@
       <div class="brand">
         <div class="brand-mark">NR</div>
         <div class="brand-copy">
-          <strong>Nordic Rådgivning</strong>
+          <strong>Nordic</strong>
           <span>Rådgiver og fagmiljø</span>
         </div>
       </div>
