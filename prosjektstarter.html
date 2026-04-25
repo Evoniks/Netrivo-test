@@ -516,6 +516,13 @@
       accent-color:#2a1d16;
     }
 
+    .brief-choice.is-disabled{
+      opacity:0.44;
+      background:rgba(244,239,233,0.72);
+      border-color:rgba(21,21,21,0.05);
+      pointer-events:none;
+    }
+
     .output-top{
       display:flex;
       align-items:center;
@@ -1615,6 +1622,8 @@
       const densityControls = document.getElementById("density-controls");
       const contrastControls = document.getElementById("contrast-controls");
       const paletteControls = document.getElementById("palette-controls");
+      const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
+      const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
 
       const uiState = {
         density: "balanced",
@@ -1731,6 +1740,12 @@
         }
       };
 
+      const levelFeatureAccess = {
+        enkel: ["Kontaktinformasjon", "Booking", "Bestilling", "Galleri"],
+        standard: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"],
+        premium: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"]
+      };
+
       function hashString(value) {
         return value.split("").reduce(function (acc, char) {
           return (acc * 31 + char.charCodeAt(0)) % 2147483647;
@@ -1749,6 +1764,27 @@
       function setActiveChip(container, value, attr) {
         Array.from(container.querySelectorAll(".control-chip")).forEach(function (chip) {
           chip.classList.toggle("is-active", chip.getAttribute(attr) === value);
+        });
+      }
+
+      function syncOptionAccess() {
+        const selectedLevel = form.level.value;
+        const allowedFeatures = selectedLevel === "auto" ? null : levelFeatureAccess[selectedLevel];
+        const effectsEnabled = selectedLevel === "auto" || selectedLevel === "premium";
+
+        featureInputs.forEach(function (input) {
+          const label = input.closest(".brief-choice");
+          const isAllowed = !allowedFeatures || allowedFeatures.indexOf(input.value) !== -1;
+          input.disabled = !isAllowed;
+          if (!isAllowed) input.checked = false;
+          if (label) label.classList.toggle("is-disabled", !isAllowed);
+        });
+
+        effectInputs.forEach(function (input) {
+          const label = input.closest(".brief-choice");
+          input.disabled = !effectsEnabled;
+          if (!effectsEnabled) input.checked = false;
+          if (label) label.classList.toggle("is-disabled", !effectsEnabled);
         });
       }
 
@@ -1781,7 +1817,7 @@
         if (level === "premium" && state.style === "eksklusiv") return "boutique";
         if (level === "premium" && state.style === "moderne") return "tech";
         if (level === "premium" && state.industry === "Personlig brand") return "editorial";
-        if (state.industry === "HÃ¥ndverk og service") return "practical";
+        if (/ndverk/i.test(state.industry)) return "practical";
         if (state.industry === "Helse og trening" || state.style === "energi") return "energetic";
         if (state.industry === "Kafe og servering" || state.industry === "Butikk og livsstil") return "boutique";
         if (state.industry === "Tech og SaaS") return "tech";
@@ -1853,6 +1889,10 @@
 
         const scores = { enkel: 0, standard: 0, premium: 0 };
 
+        if (state.effects.length > 0) {
+          scores.premium += 6;
+        }
+
         if (state.pages <= 1) scores.enkel += 3;
         if (state.pages >= 4) scores.standard += 2;
         if (state.pages >= 8) {
@@ -1901,6 +1941,14 @@
           scores.premium += 2;
         }
 
+        if (state.features.length >= 5) {
+          scores.premium += 2;
+        }
+
+        if (state.features.length <= 2) {
+          scores.enkel += 1;
+        }
+
         if (/eksklusiv|premium|signatur|kuratert/i.test(state.notes)) scores.premium += 2;
         if (/trygg|tillit|seriøs|struktur/i.test(state.notes)) scores.standard += 2;
         if (/rask|enkel|lav terskel|direkte/i.test(state.notes)) scores.enkel += 2;
@@ -1909,15 +1957,21 @@
         if (scores.enkel > scores.standard && scores.enkel >= scores.premium) level = "enkel";
         if (scores.premium > scores.standard && scores.premium > scores.enkel) level = "premium";
 
+        if (state.effects.length > 0) {
+          level = "premium";
+        }
+
         return {
           level: level,
           mode: "auto",
-          reason: "Forslaget er basert på omfang, ønsket stil og funksjonene kunden trenger.",
+          reason: state.effects.length > 0
+            ? "Effekter og ønsket uttrykk peker mot premium-nivå."
+            : "Forslaget er basert på omfang, ønsket stil og funksjonene kunden trenger.",
           confidence: state.features.length + " valgte behov / " + state.pages + " side(r)"
         };
       }
 
-      function buildSections(state) {
+      function buildSections(state, level) {
         const sections = [{ title: "Hero", copy: "Retning og tydelig førsteinntrykk" }];
 
         state.features.forEach(function (feature) {
@@ -1926,9 +1980,10 @@
         });
 
         if (sections.length < 4) sections.push({ title: "Tjenester", copy: "Oversikt over det viktigste tilbudet" });
-        if (sections.length < 4) sections.push({ title: "Tillit", copy: "Grunner til å velge deg" });
+        if (sections.length < 5) sections.push({ title: "Tillit", copy: "Grunner til å velge deg" });
 
-        return sections.slice(0, 4);
+        const sectionLimit = level === "premium" ? 6 : level === "standard" ? 5 : 3;
+        return sections.slice(0, sectionLimit);
       }
 
       function buildSummary(state, recommendation) {
@@ -1986,10 +2041,11 @@
       }
 
       function update() {
+        syncOptionAccess();
         const state = getState();
         const recommendation = recommendLevel(state);
         const level = recommendation.level;
-        const sections = buildSections(state);
+        const sections = buildSections(state, level);
         const summaryLines = buildSummary(state, recommendation);
         const palette = pickPalette(state, level);
         const title = buildDisplayTitle(state, level);
