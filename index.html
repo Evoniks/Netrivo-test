@@ -3125,9 +3125,9 @@
       function buildSummary(state, recommendation) {
         const sections = buildSections(state);
         const lines = [
-          "Foreslatt niva: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Foreslått nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
           "Bransje: " + state.industry,
-          "Onsket stil: " + form.style.options[form.style.selectedIndex].text,
+          "Ønsket stil: " + form.style.options[form.style.selectedIndex].text,
           "Omfang: " + form.pages.options[form.pages.selectedIndex].text
         ];
 
@@ -3135,7 +3135,7 @@
           lines.push("Viktige funksjoner: " + state.features.join(", "));
         }
 
-        lines.push("Foreslatt struktur: " + sections.map(function (section) { return section.title; }).join(", "));
+        lines.push("Foreslått struktur: " + sections.map(function (section) { return section.title; }).join(", "));
 
         return lines;
       }
@@ -3144,11 +3144,11 @@
         return [
           "Ny prosjektbrief fra Netrivo",
           "",
-          "Anbefalt niva: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
-          "Navn pa virksomhet: " + (state.company || "-"),
+          "Anbefalt nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Navn på virksomhet: " + (state.company || "-"),
           "Bransje: " + state.industry,
-          "Onsket stil: " + form.style.options[form.style.selectedIndex].text,
-          "Onsket niva: " + form.level.options[form.level.selectedIndex].text,
+          "Ønsket stil: " + form.style.options[form.style.selectedIndex].text,
+          "Ønsket nivå: " + form.level.options[form.level.selectedIndex].text,
           "Innholdsmengde: " + form.content.options[form.content.selectedIndex].text,
           "Omfang: " + form.pages.options[form.pages.selectedIndex].text,
           "Funksjoner: " + (state.features.join(", ") || "-"),
@@ -3187,7 +3187,7 @@
           return '<div class="brief-wireframe__section"><strong>' + section.title + "</strong><span>" + section.copy + "</span></div>";
         }).join("");
 
-        summaryCopy.textContent = "Kunden far et tydelig forslag til retning, niva og struktur som kan brukes som utgangspunkt for rask videreutvikling.";
+        summaryCopy.textContent = "Kunden får et tydelig forslag til retning, nivå og struktur som kan brukes som utgangspunkt for rask videreutvikling.";
         summaryList.innerHTML = summaryLines.map(function (line) {
           return "<li>" + line + "</li>";
         }).join("");
