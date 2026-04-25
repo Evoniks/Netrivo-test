@@ -1178,24 +1178,106 @@
 
     .sketch-surface[data-density="airy"] .sketch-layout,
     .sketch-surface[data-density="airy"] .sketch-sections{
-      gap:18px;
+      gap:28px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-layout{
+      padding:28px;
+      min-height:520px;
     }
 
     .sketch-surface[data-density="airy"] .sketch-hero,
     .sketch-surface[data-density="airy"] .sketch-note,
     .sketch-surface[data-density="airy"] .sketch-section{
-      padding:22px;
+      padding:28px;
+      border-radius:26px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-title{
+      gap:14px;
+      max-width:84%;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-body{
+      gap:12px;
+      max-width:78%;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-actions{
+      margin-top:14px;
+      gap:14px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-button{
+      width:156px;
+      height:44px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-rail{
+      gap:20px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-sections{
+      padding:0 28px 28px;
+    }
+
+    .sketch-surface[data-density="airy"] .sketch-section{
+      min-height:118px;
+      gap:14px;
     }
 
     .sketch-surface[data-density="compact"] .sketch-layout,
     .sketch-surface[data-density="compact"] .sketch-sections{
-      gap:10px;
+      gap:8px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-layout{
+      padding:12px;
+      min-height:372px;
     }
 
     .sketch-surface[data-density="compact"] .sketch-hero,
     .sketch-surface[data-density="compact"] .sketch-note,
     .sketch-surface[data-density="compact"] .sketch-section{
-      padding:14px;
+      padding:12px;
+      border-radius:16px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-title{
+      gap:7px;
+      max-width:98%;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-title-line--heavy{
+      height:24px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-body{
+      gap:6px;
+      max-width:96%;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-actions{
+      margin-top:2px;
+      gap:8px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-button{
+      width:118px;
+      height:34px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-rail{
+      gap:10px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-sections{
+      padding:0 12px 12px;
+    }
+
+    .sketch-surface[data-density="compact"] .sketch-section{
+      min-height:74px;
+      gap:8px;
     }
 
     .sketch-surface[data-contrast="high"] .sketch-hero,
@@ -1578,15 +1660,6 @@
                       <button class="control-chip" data-contrast="high" type="button">Tydeligere</button>
                     </div>
                   </div>
-                  <div class="control-group">
-                    <div class="control-label">Palette</div>
-                    <div class="control-row" id="palette-controls">
-                      <button class="control-chip is-active" data-palette="auto" type="button">Auto</button>
-                      <button class="control-chip" data-palette="warm" type="button">Varm</button>
-                      <button class="control-chip" data-palette="cool" type="button">Kald</button>
-                      <button class="control-chip" data-palette="editorial" type="button">Signatur</button>
-                    </div>
-                  </div>
                   <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
                 </aside>
               </div>
@@ -1741,7 +1814,6 @@
       const generatedPalette = document.getElementById("generated-palette");
       const densityControls = document.getElementById("density-controls");
       const contrastControls = document.getElementById("contrast-controls");
-      const paletteControls = document.getElementById("palette-controls");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
       const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
 
@@ -1874,11 +1946,27 @@
 
       function pickPalette(state, level) {
         if (uiState.palette !== "auto") return uiState.palette;
-        const stylePalette = styleAdjustments[state.style] ? styleAdjustments[state.style].palette : null;
-        if (stylePalette === "editorial") return uiState.variant % 2 === 0 ? "editorial" : "warm";
-        if (stylePalette === "warm") return uiState.variant % 3 === 0 && level === "standard" ? "cool" : "warm";
-        if (stylePalette === "cool") return uiState.variant % 4 === 0 && level === "premium" ? "editorial" : "cool";
-        return level === "premium" ? "editorial" : "cool";
+        const industryPalettes = {
+          "Rådgivning og tjenester": "cool",
+          "Tech og SaaS": "cool",
+          "Kafe og servering": "warm",
+          "Håndverk og service": "warm",
+          "Helse og trening": "warm",
+          "Opplevelse og reiseliv": "warm",
+          "Butikk og livsstil": level === "premium" ? "editorial" : "warm",
+          "Personlig brand": "editorial",
+          "Annet": level === "premium" ? "editorial" : "cool"
+        };
+
+        const basePalette = industryPalettes[state.industry] || "cool";
+
+        if (state.style === "eksklusiv") return "editorial";
+        if (state.style === "moderne" && state.industry !== "Butikk og livsstil" && state.industry !== "Personlig brand") return "cool";
+        if (state.style === "energi" && basePalette === "cool") return uiState.variant % 2 === 0 ? "warm" : "cool";
+        if (basePalette === "editorial" && uiState.variant % 3 === 0 && level !== "premium") return "warm";
+        if (basePalette === "warm" && state.style === "tillit" && uiState.variant % 4 === 0) return "cool";
+
+        return basePalette;
       }
 
       function setActiveChip(container, value, attr) {
@@ -2290,21 +2378,10 @@
         update();
       });
 
-      paletteControls.addEventListener("click", function (event) {
-        const chip = event.target.closest("[data-palette]");
-        if (!chip) return;
-        uiState.palette = chip.getAttribute("data-palette");
-        setActiveChip(paletteControls, uiState.palette, "data-palette");
-        update();
-      });
-
       randomButton.addEventListener("click", function () {
         const state = getState();
         const seed = hashString([state.company, state.industry, state.style, state.notes, Date.now()].join("|"));
         uiState.variant = seed % 7;
-        if (uiState.palette === "auto") {
-          setActiveChip(paletteControls, "auto", "data-palette");
-        }
         update();
       });
 
