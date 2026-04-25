@@ -660,9 +660,86 @@
       position:relative;
       z-index:1;
       display:grid;
-      grid-template-columns:minmax(0, 1fr) 244px;
+      grid-template-columns:270px minmax(0, 1fr) 244px;
       gap:18px;
-      align-items:start;
+      align-items:stretch;
+    }
+
+    .sketch-live-options{
+      position:relative;
+      z-index:2;
+      display:grid;
+      align-content:start;
+      gap:14px;
+      padding:16px;
+      border-radius:24px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:rgba(255,255,255,0.56);
+      backdrop-filter:blur(14px);
+      box-shadow:0 16px 30px rgba(63,43,25,0.08);
+      min-height:516px;
+    }
+
+    .sketch-live-options h4{
+      margin:0;
+      font-size:0.94rem;
+      letter-spacing:-0.03em;
+    }
+
+    .sketch-live-options p{
+      margin:0;
+      color:#6c5d4f;
+      font-size:0.82rem;
+      line-height:1.45;
+    }
+
+    .live-option-group{
+      display:grid;
+      gap:8px;
+    }
+
+    .live-option-label{
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      color:#7e7062;
+    }
+
+    .live-option-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+
+    .live-option{
+      border:1px solid rgba(97,77,54,0.12);
+      background:rgba(255,255,255,0.5);
+      color:#54483e;
+      border-radius:14px;
+      padding:10px 11px;
+      font-size:0.8rem;
+      line-height:1.35;
+      text-align:left;
+      cursor:pointer;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, opacity .18s ease;
+      font-family:inherit;
+      min-height:44px;
+    }
+
+    .live-option:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,0.72);
+    }
+
+    .live-option.is-active{
+      background:var(--ink);
+      color:#fff8f0;
+      border-color:transparent;
+    }
+
+    .live-option.is-disabled{
+      opacity:0.45;
+      cursor:not-allowed;
     }
 
     .sketch-surface{
@@ -1179,8 +1256,10 @@
       background:rgba(255,255,255,0.52);
       backdrop-filter:blur(18px);
       box-shadow:0 18px 34px rgba(63,43,25,0.08);
-      margin-top:160px;
-      align-self:end;
+      margin-top:0;
+      align-self:start;
+      transform:translateY(160px);
+      min-height:206px;
     }
 
     .sketch-controls h4{
@@ -1512,8 +1591,11 @@
         grid-template-columns:1fr;
       }
 
+      .sketch-live-options,
       .sketch-controls{
         margin-top:0;
+        min-height:0;
+        transform:none;
       }
     }
 
@@ -1652,6 +1734,32 @@
 
             <div class="sketch-board">
               <div class="sketch-stage">
+                <aside class="sketch-live-options" aria-label="Live valg for skisse">
+                  <div class="control-group">
+                    <h4>Live-valg for skisse</h4>
+                    <p>Trykk her for å se endringer i skissa med en gang.</p>
+                  </div>
+                  <div class="live-option-group">
+                    <div class="live-option-label">Hva er viktig på siden?</div>
+                    <div class="live-option-grid" id="live-feature-options">
+                      <button class="live-option is-active" data-type="feature" data-value="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler</button>
+                      <button class="live-option" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
+                      <button class="live-option" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
+                      <button class="live-option" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
+                      <button class="live-option" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
+                      <button class="live-option" data-type="feature" data-value="Om oss" type="button">Om oss, åpningstider</button>
+                    </div>
+                  </div>
+                  <div class="live-option-group">
+                    <div class="live-option-label">Ønskede effekter</div>
+                    <div class="live-option-grid" id="live-effect-options">
+                      <button class="live-option" data-type="effect" data-value="Lyslinje ved musepeker" type="button">Interaktiv lyslinje ved musepeker</button>
+                      <button class="live-option" data-type="effect" data-value="Atmosfærisk bakgrunn" type="button">Atmosfærisk bevegelse i bakgrunn</button>
+                      <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
+                    </div>
+                  </div>
+                </aside>
+
                 <div class="sketch-surface" id="sketch-surface">
                   <div class="generated-brief">
                     <div class="generated-brief-top">
@@ -1902,6 +2010,7 @@
       const generatedPalette = document.getElementById("generated-palette");
       const densityControls = document.getElementById("density-controls");
       const contrastControls = document.getElementById("contrast-controls");
+      const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
       const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
       const contentProfiles = {
@@ -2121,6 +2230,16 @@
           const input = choice.querySelector("input");
           if (!input) return;
           choice.classList.toggle("is-selected", !!input.checked && !input.disabled);
+        });
+
+        liveOptionButtons.forEach(function (button) {
+          const type = button.dataset.type;
+          const value = button.dataset.value;
+          if (!type || !value) return;
+          const input = form.querySelector('input[name="' + type + '"][value="' + value + '"]');
+          if (!input) return;
+          button.classList.toggle("is-active", !!input.checked && !input.disabled);
+          button.classList.toggle("is-disabled", !!input.disabled);
         });
       }
 
@@ -2522,6 +2641,18 @@
         setActiveChip(densityControls, uiState.density, "data-density");
         setActiveChip(contrastControls, uiState.tone, "data-tone");
         update();
+      });
+
+      liveOptionButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          const type = button.dataset.type;
+          const value = button.dataset.value;
+          if (!type || !value) return;
+          const input = form.querySelector('input[name="' + type + '"][value="' + value + '"]');
+          if (!input || input.disabled) return;
+          input.checked = !input.checked;
+          update();
+        });
       });
 
       update();
