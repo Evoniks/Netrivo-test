@@ -1158,6 +1158,192 @@
       display:grid;
     }
 
+    /* Live-skisse: stilpresets som speiler desktop-demoene tettere */
+    .sketch-surface[data-style-preset="arctic"]{
+      background:linear-gradient(180deg, #f7fafc 0%, #ffffff 100%) !important;
+    }
+
+    .sketch-surface[data-style-preset="arctic"]::after{
+      opacity:0.42;
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief{
+      background:linear-gradient(180deg, #152a3d, #1e3a52 72%, #274a62) !important;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(12px);
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .generated-kicker,
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .generated-entity{
+      color:rgba(226,236,245,0.72) !important;
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .generated-title{
+      color:#f4f8fc !important;
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .generated-copy{
+      color:rgba(230,240,248,0.9) !important;
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .palette-chip{
+      border-color:rgba(255,255,255,0.2);
+      background:rgba(255,255,255,0.1);
+      color:rgba(240,247,252,0.88);
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .control-chip{
+      border-color:rgba(255,255,255,0.22);
+      background:rgba(255,255,255,0.12);
+      color:rgba(240,247,252,0.92);
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .generated-brief .control-chip.is-active{
+      background:#f4f8fc;
+      color:#152a3d;
+      border-color:transparent;
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .sketch-head{
+      background:rgba(255,255,255,0.96);
+      border-bottom:1px solid rgba(23,54,79,0.1);
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .sketch-layout{
+      background:linear-gradient(180deg, rgba(248,251,253,0.95), #ffffff);
+      border-radius:20px;
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .sketch-hero{
+      background:linear-gradient(180deg, #ffffff, rgba(245,249,252,0.96));
+      border-color:rgba(23,54,79,0.12);
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .sketch-rail{
+      --sketch-ink:rgba(255,255,255,0.22);
+      --sketch-ink-strong:rgba(255,255,255,0.32);
+      --sketch-ink-faint:rgba(255,255,255,0.14);
+      --sketch-ink-soft:rgba(226,236,245,0.82);
+    }
+
+    .sketch-surface[data-style-preset="arctic"] .sketch-rail .sketch-note{
+      background:linear-gradient(160deg, rgba(36,58,82,0.92), rgba(22,38,56,0.96));
+      border-color:rgba(255,255,255,0.12);
+    }
+
+    .sketch-surface[data-style-preset="sol-bonner"]{
+      background:linear-gradient(180deg, rgba(255,252,247,0.98), rgba(245,236,224,0.94)) !important;
+    }
+
+    .sketch-surface[data-style-preset="sol-bonner"] .sketch-layout{
+      background:linear-gradient(90deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.2) 48%, rgba(62,42,32,0.08) 48%, rgba(52,36,28,0.14) 100%);
+      border-radius:22px;
+    }
+
+    .sketch-surface[data-style-preset="sol-bonner"] .sketch-hero{
+      background:linear-gradient(180deg, #ffffff, rgba(255,252,248,0.92));
+      border-color:rgba(42,32,26,0.12);
+    }
+
+    .sketch-surface[data-style-preset="sol-bonner"] .sketch-rail{
+      --sketch-ink:rgba(255,255,255,0.22);
+      --sketch-ink-strong:rgba(255,255,255,0.34);
+      --sketch-ink-faint:rgba(255,255,255,0.14);
+      --sketch-ink-soft:rgba(255,246,236,0.82);
+    }
+
+    .sketch-surface[data-style-preset="sol-bonner"] .sketch-rail .sketch-note{
+      background:linear-gradient(165deg, rgba(58,40,32,0.96), rgba(38,26,20,0.98));
+      border-color:rgba(255,255,255,0.1);
+    }
+
+    .sketch-surface[data-style-preset="studio"]{
+      background:linear-gradient(180deg, rgba(255,250,246,0.98), rgba(240,232,226,0.92)) !important;
+    }
+
+    .sketch-surface[data-style-preset="studio"] .sketch-layout{
+      background:linear-gradient(90deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.18) 48%, rgba(32,22,18,0.12) 48%, rgba(28,18,14,0.2) 100%);
+      border-radius:22px;
+    }
+
+    .sketch-surface[data-style-preset="studio"] .sketch-hero{
+      background:linear-gradient(180deg, #ffffff, rgba(255,252,250,0.94));
+      border-color:rgba(30,22,18,0.12);
+    }
+
+    .sketch-surface[data-style-preset="studio"] .sketch-rail{
+      --sketch-ink:rgba(255,255,255,0.22);
+      --sketch-ink-strong:rgba(255,255,255,0.34);
+      --sketch-ink-faint:rgba(255,255,255,0.14);
+      --sketch-ink-soft:rgba(255,244,236,0.86);
+    }
+
+    .sketch-surface[data-style-preset="studio"] .sketch-rail .sketch-note{
+      background:linear-gradient(145deg, rgba(42,28,24,0.96), rgba(110,52,12,0.55), rgba(24,16,14,0.98));
+      border-color:rgba(255,200,140,0.16);
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"]{
+      background:linear-gradient(180deg, #f2faf6, #e4f2ea) !important;
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"]::after{
+      opacity:0.55;
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"] .sketch-layout{
+      background:linear-gradient(125deg, rgba(255,255,255,0.5), rgba(220,240,230,0.35));
+      border-radius:22px;
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"] .sketch-hero{
+      background:linear-gradient(180deg, #ffffff, rgba(240,249,244,0.95));
+      border-color:rgba(30,72,52,0.14);
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"] .sketch-rail{
+      --sketch-ink:rgba(255,255,255,0.2);
+      --sketch-ink-strong:rgba(255,255,255,0.32);
+      --sketch-ink-faint:rgba(255,255,255,0.12);
+      --sketch-ink-soft:rgba(236,248,242,0.88);
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"] .sketch-rail .sketch-note{
+      background:linear-gradient(165deg, rgba(72,120,92,0.95), rgba(28,62,44,0.98));
+      border-color:rgba(255,255,255,0.14);
+    }
+
+    .sketch-surface[data-style-preset="maison-fjell"]{
+      background:linear-gradient(180deg, rgba(255,251,245,0.98), rgba(236,224,210,0.9)) !important;
+    }
+
+    .sketch-surface[data-style-preset="maison-fjell"] .sketch-layout{
+      background:linear-gradient(90deg, rgba(255,252,246,0.75) 0%, rgba(250,244,236,0.4) 46%, rgba(48,32,26,0.12) 46%, rgba(42,28,22,0.16) 100%);
+      border-radius:24px;
+    }
+
+    .sketch-surface[data-style-preset="maison-fjell"] .sketch-hero{
+      background:linear-gradient(180deg, #fdf9f3, rgba(250,243,232,0.94));
+      border-color:rgba(72,48,40,0.14);
+    }
+
+    .sketch-surface[data-style-preset="maison-fjell"] .sketch-rail{
+      padding:14px;
+      border-radius:22px;
+      background:linear-gradient(180deg, #4a342c, #2c1e18);
+      --sketch-ink:rgba(255,255,255,0.22);
+      --sketch-ink-strong:rgba(255,255,255,0.34);
+      --sketch-ink-faint:rgba(255,255,255,0.14);
+      --sketch-ink-soft:rgba(255,244,236,0.88);
+    }
+
+    .sketch-surface[data-style-preset="maison-fjell"] .sketch-rail .sketch-note{
+      background:linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+      border-color:rgba(255,255,255,0.22);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12), 0 12px 32px rgba(0,0,0,0.2);
+      backdrop-filter:blur(14px);
+    }
+
     .sketch-head{
       position:relative;
       z-index:2;
@@ -1554,6 +1740,22 @@
         linear-gradient(180deg, rgba(62,38,27,0.92), rgba(40,24,18,0.9));
     }
 
+    .sketch-surface[data-style-preset="sol-bonner"][data-tone="contrast"]{
+      background:linear-gradient(180deg, rgba(255,252,247,0.98), rgba(245,236,224,0.94)) !important;
+    }
+
+    .sketch-surface[data-style-preset="studio"][data-tone="contrast"]{
+      background:linear-gradient(180deg, rgba(255,250,246,0.98), rgba(240,232,226,0.92)) !important;
+    }
+
+    .sketch-surface[data-style-preset="maison-fjell"][data-tone="contrast"]{
+      background:linear-gradient(180deg, rgba(255,251,245,0.98), rgba(236,224,210,0.9)) !important;
+    }
+
+    .sketch-surface[data-style-preset="glacial-lake"][data-tone="contrast"]{
+      background:linear-gradient(180deg, #f2faf6, #e4f2ea) !important;
+    }
+
     .sketch-surface[data-palette="cool"]{
       --sketch-tint: rgba(118,151,192,0.18);
       --sketch-glow-a: rgba(200,218,236,0.28);
@@ -1570,6 +1772,12 @@
       --sketch-tint: rgba(150,112,145,0.18);
       --sketch-glow-a: rgba(214,182,205,0.28);
       --sketch-glow-b: rgba(145,106,137,0.2);
+    }
+
+    .sketch-surface[data-palette="glacial"]{
+      --sketch-tint: rgba(92,154,120,0.22);
+      --sketch-glow-a: rgba(188,232,208,0.34);
+      --sketch-glow-b: rgba(74,140,108,0.24);
     }
 
     @keyframes sketchAtmosphereDrift{
@@ -2207,6 +2415,11 @@
           { label: "Base", color: "#f5dec4" },
           { label: "Scene", color: "#e0a35f" },
           { label: "Kontrast", color: "#1f2d42" }
+        ],
+        glacial: [
+          { label: "Base", color: "#e8f4ef" },
+          { label: "Scene", color: "#5c9a78" },
+          { label: "Kontrast", color: "#1a3d2e" }
         ]
       };
 
@@ -2287,6 +2500,7 @@
 
       function pickPalette(state, level) {
         if (state.styleKey === "solar-eclipse") return "eclipse";
+        if (state.styleKey === "glacial-lake") return "glacial";
         if (state.styleKey === "maison-fjell") return "warm";
         if (state.styleKey === "elin-varde") return "editorial";
         if (uiState.palette !== "auto") return uiState.palette;
@@ -2420,8 +2634,10 @@
         if (state.styleKey === "solar-eclipse") return "tech";
         if (state.styleKey === "maison-fjell") return "boutique";
         if (state.styleKey === "elin-varde") return "editorial";
-        if (state.styleKey === "glacial-lake") return "energetic";
-        if (state.styleKey === "arctic") return "tech";
+        if (state.styleKey === "glacial-lake") return "practical";
+        if (state.styleKey === "arctic") return "calm";
+        if (state.styleKey === "sol-bonner") return "boutique";
+        if (state.styleKey === "studio") return "boutique";
         if (state.styleKey === "nordic") return "calm";
         if (level === "premium" && state.style === "eksklusiv") return "boutique";
         if (level === "premium" && state.style === "moderne") return "tech";
@@ -2463,6 +2679,7 @@
         sketchSurface.style.borderColor = industryTheme.contrast + "30";
         sketchSurface.dataset.scene = scene;
         sketchSurface.dataset.layout = layout;
+        sketchSurface.dataset.stylePreset = state.styleKey || "";
         wireframeChip.style.background = paletteSet[0].color + "55";
         wireframeChip.style.borderColor = paletteSet[1].color + "33";
         wireframeChip.style.color = industryTheme.contrast;
