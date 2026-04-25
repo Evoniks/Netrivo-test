@@ -687,6 +687,67 @@
       --sketch-button: rgba(255,255,255,0.16);
     }
 
+    /* Sketch effects */
+    .sketch-effects{
+      position:absolute;
+      inset:150px 18px 18px;
+      z-index:1;
+      overflow:hidden;
+      border-radius:24px;
+      pointer-events:none;
+    }
+
+    .sketch-effect-atmosphere,
+    .sketch-effect-glow{
+      position:absolute;
+      border-radius:999px;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+
+    .sketch-effect-atmosphere{
+      background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.34)) 0%, rgba(255,255,255,0.12) 36%, transparent 74%);
+      filter:blur(30px);
+      opacity:0.34;
+      animation:sketchAtmosphereDrift var(--duration, 18s) ease-in-out infinite alternate;
+    }
+
+    .sketch-effect-glow{
+      background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, var(--effect-color, rgba(255,255,255,0.18)) 38%, transparent 72%);
+      filter:blur(18px);
+      opacity:0.28;
+      animation:sketchAtmosphereDrift var(--duration, 14s) ease-in-out infinite alternate;
+    }
+
+    .sketch-effect-trace{
+      position:absolute;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, var(--effect-color, rgba(255,255,255,0.76)) 22%, rgba(255,255,255,0.96) 52%, transparent);
+      box-shadow:0 0 14px var(--effect-glow, rgba(255,255,255,0.34));
+      opacity:0.68;
+      filter:blur(0.35px);
+      pointer-events:none;
+      transform:rotate(var(--angle, -12deg));
+      transform-origin:center;
+      animation:sketchTraceFloat var(--duration, 8s) ease-in-out infinite;
+    }
+
+    .sketch-surface.has-glass-effect .sketch-hero,
+    .sketch-surface.has-glass-effect .sketch-note,
+    .sketch-surface.has-glass-effect .sketch-section{
+      background:linear-gradient(180deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.18),
+        0 12px 30px rgba(18,28,42,0.08);
+      backdrop-filter:blur(14px);
+    }
+
+    .sketch-surface.has-glass-effect .sketch-chip,
+    .sketch-surface.has-glass-effect .palette-chip{
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.16);
+    }
+
     .generated-brief{
       position:relative;
       z-index:2;
@@ -1162,6 +1223,26 @@
       --sketch-glow-b: rgba(145,106,137,0.2);
     }
 
+    @keyframes sketchAtmosphereDrift{
+      0%{
+        transform:translate3d(0, 0, 0) scale(1);
+      }
+      100%{
+        transform:translate3d(var(--drift-x, 28px), var(--drift-y, -20px), 0) scale(var(--scale-end, 1.08));
+      }
+    }
+
+    @keyframes sketchTraceFloat{
+      0%, 100%{
+        opacity:0.26;
+        transform:translate3d(-18px, 8px, 0) rotate(var(--angle, -12deg));
+      }
+      50%{
+        opacity:0.82;
+        transform:translate3d(14px, -10px, 0) rotate(calc(var(--angle, -12deg) + 1deg));
+      }
+    }
+
     .sketch-section-title{
       width:62%;
       height:12px;
@@ -1400,6 +1481,8 @@
                     <p class="generated-copy" id="generated-brief-copy">Her kommer en kort oppsummering over skissen, slik at kunden forstår hvorfor akkurat denne retningen ble generert.</p>
                   </div>
 
+                  <div class="sketch-effects" id="sketch-effects"></div>
+
                   <div class="sketch-head">
                     <div class="sketch-topline" id="wireframe-topline">Førsteskisse / Standard</div>
                     <div class="sketch-chip" id="wireframe-chip">Retning</div>
@@ -1611,7 +1694,6 @@
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Lyslinje ved musepeker" /><span class="brief-choice-text">Interaktiv lyslinje ved musepeker</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Atmosfærisk bakgrunn" /><span class="brief-choice-text">Atmosfærisk bevegelse i bakgrunn</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Glow og glass" /><span class="brief-choice-text">Glow, glass og lysflater</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Helt rolig uttrykk" /><span class="brief-choice-text">Helt rolig uttrykk uten effekter</span></label>
                   </div>
                 </div>
 
@@ -1647,6 +1729,7 @@
       const randomButton = document.getElementById("random-brief-button");
       const sketchBoard = document.querySelector(".sketch-board");
       const sketchSurface = document.getElementById("sketch-surface");
+      const sketchEffects = document.getElementById("sketch-effects");
       const wireframeTopline = document.getElementById("wireframe-topline");
       const wireframeChip = document.getElementById("wireframe-chip");
       const wireframeTitleBlock = document.getElementById("wireframe-title-block");
@@ -1900,6 +1983,45 @@
         sketchSurface.style.transform = "rotate(" + styleTheme.tilt + ")";
       }
 
+      function renderEffects(state, palette) {
+        const paletteSet = paletteSets[palette] || paletteSets.cool;
+        const traceColor = paletteSet[2].color;
+        const softColor = paletteSet[1].color;
+        const warmColor = paletteSet[0].color;
+        const hasTrace = state.effects.indexOf("Lyslinje ved musepeker") !== -1;
+        const hasAtmosphere = state.effects.indexOf("Atmosfærisk bakgrunn") !== -1;
+        const hasGlass = state.effects.indexOf("Glow og glass") !== -1;
+
+        sketchSurface.classList.toggle("has-glass-effect", hasGlass);
+
+        if (!sketchEffects) return;
+
+        const pieces = [];
+
+        if (hasAtmosphere) {
+          pieces.push(
+            '<span class="sketch-effect-atmosphere" style="left:-8%; top:8%; width:42%; height:26%; --effect-color:' + softColor + '66; --drift-x:34px; --drift-y:-16px; --scale-end:1.1; --duration:16s;"></span>',
+            '<span class="sketch-effect-atmosphere" style="right:-10%; bottom:14%; width:48%; height:30%; --effect-color:' + warmColor + '5c; --drift-x:-28px; --drift-y:18px; --scale-end:1.14; --duration:20s;"></span>'
+          );
+        }
+
+        if (hasTrace) {
+          pieces.push(
+            '<span class="sketch-effect-trace" style="left:8%; top:26%; width:34%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '55; --angle:-14deg; --duration:7s;"></span>',
+            '<span class="sketch-effect-trace" style="right:12%; top:52%; width:28%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '44; --angle:11deg; --duration:9s;"></span>'
+          );
+        }
+
+        if (hasGlass) {
+          pieces.push(
+            '<span class="sketch-effect-glow" style="left:16%; top:18%; width:22%; height:16%; --effect-color:' + warmColor + '55; --drift-x:12px; --drift-y:-10px; --scale-end:1.06; --duration:12s;"></span>',
+            '<span class="sketch-effect-glow" style="right:10%; top:12%; width:26%; height:18%; --effect-color:' + softColor + '4a; --drift-x:-16px; --drift-y:14px; --scale-end:1.08; --duration:14s;"></span>'
+          );
+        }
+
+        sketchEffects.innerHTML = pieces.join("");
+      }
+
       function getState() {
         return {
           company: form.company.value.trim(),
@@ -2114,6 +2236,7 @@
         sketchSurface.dataset.palette = palette;
         renderPalette(palette);
         applyTheme(state, level, palette);
+        renderEffects(state, palette);
 
         wireframeTitleBlock.innerHTML =
           '<div class="sketch-title-line sketch-title-line--heavy" style="width:96%;"></div>' +
