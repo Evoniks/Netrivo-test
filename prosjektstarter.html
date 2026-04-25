@@ -822,16 +822,16 @@
     }
 
     .sketch-effect-atmosphere{
-      background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.34)) 0%, rgba(255,255,255,0.12) 36%, transparent 74%);
-      filter:blur(30px);
-      opacity:0.72;
+      background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.48)) 0%, rgba(255,255,255,0.18) 42%, transparent 78%);
+      filter:blur(38px);
+      opacity:0.9;
       animation:sketchAtmosphereDrift var(--duration, 18s) ease-in-out infinite alternate;
     }
 
     .sketch-effect-glow{
-      background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, var(--effect-color, rgba(255,255,255,0.18)) 38%, transparent 72%);
-      filter:blur(18px);
-      opacity:0.66;
+      background:radial-gradient(circle, rgba(255,255,255,0.42) 0%, var(--effect-color, rgba(255,255,255,0.28)) 42%, transparent 76%);
+      filter:blur(24px);
+      opacity:0.86;
       animation:sketchAtmosphereDrift var(--duration, 14s) ease-in-out infinite alternate;
     }
 
@@ -904,11 +904,11 @@
     .sketch-surface.has-glass-effect .sketch-hero,
     .sketch-surface.has-glass-effect .sketch-note,
     .sketch-surface.has-glass-effect .sketch-section{
-      background:linear-gradient(180deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08));
+      background:linear-gradient(180deg, rgba(255,255,255,0.42), rgba(255,255,255,0.16));
       box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.18),
-        0 12px 30px rgba(18,28,42,0.08);
-      backdrop-filter:blur(14px);
+        inset 0 0 0 1px rgba(255,255,255,0.26),
+        0 18px 36px rgba(18,28,42,0.16);
+      backdrop-filter:blur(18px) saturate(1.12);
     }
 
     .sketch-surface.has-glass-effect .sketch-chip,
@@ -943,10 +943,19 @@
     }
 
     .generated-entity{
-      margin-top:8px;
-      font-size:0.92rem;
-      color:#8a7868;
-      line-height:1.4;
+      margin-top:10px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.6);
+      border:1px solid rgba(97,77,54,0.16);
+      font-size:1.02rem;
+      font-weight:700;
+      letter-spacing:-0.01em;
+      color:#5f4c3d;
+      line-height:1.2;
     }
 
     .generated-title{
@@ -1543,22 +1552,6 @@
       z-index:0;
     }
 
-    .sketch-box-trace{
-      position:absolute;
-      left:-24%;
-      top:50%;
-      width:148%;
-      height:2px;
-      border-radius:999px;
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(-50%) rotate(var(--trace-angle, -6deg));
-      transform-origin:center;
-      transition:opacity .22s ease;
-      animation:sketchTraceSweep var(--trace-duration, 4.6s) linear infinite;
-      z-index:1;
-    }
-
     .sketch-box-content{
       position:relative;
       z-index:2;
@@ -1568,17 +1561,13 @@
       opacity:0.44;
     }
 
-    .sketch-surface.effect-trace-on .sketch-box-trace{
-      opacity:0.82;
-    }
-
     .sketch-surface.effect-glass-on .sketch-hero,
     .sketch-surface.effect-glass-on .sketch-note,
     .sketch-surface.effect-glass-on .sketch-section{
       box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.24),
-        0 16px 34px rgba(12,18,26,0.22);
-      backdrop-filter:blur(12px) saturate(1.08);
+        inset 0 0 0 1px rgba(255,255,255,0.34),
+        0 20px 42px rgba(12,18,26,0.26);
+      backdrop-filter:blur(18px) saturate(1.2);
     }
 
     @keyframes sketchBoxPulse{
@@ -1587,15 +1576,6 @@
       }
       100%{
         transform:translate3d(14px, -9px, 0) scale(1.06);
-      }
-    }
-
-    @keyframes sketchTraceSweep{
-      0%{
-        transform:translate3d(-14%, -50%, 0) rotate(var(--trace-angle, -6deg));
-      }
-      100%{
-        transform:translate3d(14%, -50%, 0) rotate(var(--trace-angle, -6deg));
       }
     }
 
@@ -1781,11 +1761,11 @@
     }
 
     .sketch-surface[data-tone="base"] .sketch-effects{
-      opacity:0.4;
+      opacity:0.78;
     }
 
     .sketch-surface[data-tone="scene"] .sketch-effects{
-      opacity:0.78;
+      opacity:0.92;
     }
 
     .sketch-surface[data-tone="contrast"] .sketch-effects{
@@ -2784,7 +2764,6 @@
 
         sketchSurface.classList.toggle("has-glass-effect", hasGlass);
         sketchSurface.classList.toggle("effect-atmosphere-on", hasAtmosphere || hasGlass);
-        sketchSurface.classList.toggle("effect-trace-on", hasTrace);
         sketchSurface.classList.toggle("effect-glass-on", hasGlass);
 
         if (!sketchEffects) return;
@@ -2842,7 +2821,7 @@
             box.appendChild(content);
           }
 
-          Array.from(box.querySelectorAll(".sketch-box-overlay, .sketch-box-trace")).forEach(function (node) {
+          Array.from(box.querySelectorAll(".sketch-box-overlay")).forEach(function (node) {
             node.remove();
           });
 
@@ -2856,15 +2835,6 @@
             box.appendChild(overlay);
           }
 
-          if (hasTrace) {
-            const trace = document.createElement("span");
-            trace.className = "sketch-box-trace";
-            trace.style.setProperty("--trace-angle", ((index % 2 === 0 ? -1 : 1) * (4 + index % 5)) + "deg");
-            trace.style.setProperty("--trace-duration", (4.2 + (index % 4) * 0.75) + "s");
-            trace.style.background = "linear-gradient(90deg, transparent, " + traceColor + "22 18%, " + traceColor + "cc 48%, " + traceColor + "22 82%, transparent)";
-            trace.style.boxShadow = "0 0 16px " + traceColor + "66";
-            box.appendChild(trace);
-          }
         });
 
         traceEnabled = hasTrace;
