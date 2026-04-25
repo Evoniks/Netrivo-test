@@ -667,7 +667,7 @@
 
     .sketch-sidebars{
       display:grid;
-      grid-template-rows:minmax(0, 1fr) auto;
+      grid-template-rows:minmax(0, 1fr);
       gap:14px;
       min-height:516px;
     }
@@ -704,6 +704,18 @@
     .live-option-group{
       display:grid;
       gap:8px;
+    }
+
+    .live-select{
+      width:100%;
+      min-height:44px;
+      border-radius:14px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:rgba(255,255,255,0.74);
+      color:#3f352d;
+      padding:10px 12px;
+      font:inherit;
+      font-size:0.88rem;
     }
 
     .live-option-label{
@@ -1329,35 +1341,6 @@
       color:var(--sketch-ink-soft);
     }
 
-    .sketch-controls{
-      position:relative;
-      z-index:2;
-      width:100%;
-      display:grid;
-      gap:12px;
-      padding:16px;
-      border-radius:24px;
-      border:1px solid rgba(97,77,54,0.14);
-      background:rgba(255,255,255,0.52);
-      backdrop-filter:blur(18px);
-      box-shadow:0 18px 34px rgba(63,43,25,0.08);
-      align-self:start;
-      min-height:230px;
-    }
-
-    .sketch-controls h4{
-      margin:0;
-      font-size:0.94rem;
-      letter-spacing:-0.03em;
-    }
-
-    .sketch-controls p{
-      margin:0;
-      color:#6c5d4f;
-      font-size:0.84rem;
-      line-height:1.5;
-    }
-
     .control-group{
       display:grid;
       gap:8px;
@@ -1368,12 +1351,6 @@
       text-transform:uppercase;
       letter-spacing:0.18em;
       color:#7e7062;
-    }
-
-    .control-row{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
     }
 
     .control-chip{
@@ -1400,11 +1377,7 @@
       border-color:transparent;
     }
 
-    .control-footnote{
-      color:#7e7062;
-      font-size:0.78rem;
-      line-height:1.5;
-    }
+    .control-footnote{display:none}
 
     .generated-right{
       display:grid;
@@ -1699,8 +1672,7 @@
         grid-template-columns:1fr;
       }
 
-      .sketch-live-options,
-      .sketch-controls{
+      .sketch-live-options{
         margin-top:0;
         min-height:0;
       }
@@ -1953,6 +1925,31 @@
                       <h4>Live-valg for skisse</h4>
                       <p>Trykk her for å se endringer i skissa med en gang.</p>
                     </div>
+                    <div class="live-option-group">
+                      <div class="live-option-label">Bransje</div>
+                      <select class="live-select" id="live-industry">
+                        <option value="Rådgivning og tjenester">Rådgivning og tjenester</option>
+                        <option value="Kafe og servering">Kafe og servering</option>
+                        <option value="Håndverk og service">Håndverk og service</option>
+                        <option value="Helse og trening">Helse og trening</option>
+                        <option value="Opplevelse og reiseliv">Opplevelse og reiseliv</option>
+                        <option value="Butikk og livsstil">Butikk og livsstil</option>
+                        <option value="Tech og SaaS">Tech og SaaS</option>
+                        <option value="Personlig brand">Personlig brand</option>
+                        <option value="Annet">Annet</option>
+                      </select>
+                    </div>
+                    <div class="live-option-group">
+                      <div class="live-option-label">Ønsket stil</div>
+                      <select class="live-select" id="live-style">
+                        <option value="varm">Varm og nær</option>
+                        <option value="tillit" selected>Rolig og tillitsvekkende</option>
+                        <option value="direkte">Direkte og salgsdrevet</option>
+                        <option value="moderne">Mørk og moderne</option>
+                        <option value="eksklusiv">Eksklusiv og kuratert</option>
+                        <option value="energi">Energisk og fremoverlent</option>
+                      </select>
+                    </div>
                     <div class="content-amount">
                       <div class="live-option-label">Innholdsmengde</div>
                       <div class="live-option-grid" id="live-content-options">
@@ -1980,22 +1977,6 @@
                         <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
                       </div>
                     </div>
-                  </aside>
-
-                  <aside class="sketch-controls">
-                    <div class="control-group">
-                      <h4>Små justeringer</h4>
-                      <p>Dette er lette UI-grep. Større endringer i retning eller innhold bør løses med ny generering.</p>
-                    </div>
-                    <div class="control-group">
-                      <div class="control-label">Kontrast</div>
-                      <div class="control-row" id="contrast-controls">
-                        <button class="control-chip is-active" data-tone="base" type="button">Base</button>
-                        <button class="control-chip" data-tone="scene" type="button">Scene</button>
-                        <button class="control-chip" data-tone="contrast" type="button">Kontrast</button>
-                      </div>
-                    </div>
-                    <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
                   </aside>
                 </div>
               </div>
@@ -2030,7 +2011,7 @@
                   <input id="brief-company" name="company" type="text" placeholder="Eksempel: Fjord & Form" />
                 </div>
 
-                <div class="brief-field">
+                <div class="brief-field legacy-choice-fields">
                   <label for="brief-industry">Bransje</label>
                   <select id="brief-industry" name="industry">
                     <option value="Rådgivning og tjenester">Rådgivning og tjenester</option>
@@ -2045,7 +2026,7 @@
                   </select>
                 </div>
 
-                <div class="brief-field">
+                <div class="brief-field legacy-choice-fields">
                   <label for="brief-style">Ønsket stil</label>
                   <select id="brief-style" name="style">
                     <option value="varm">Varm og nær</option>
@@ -2131,7 +2112,8 @@
       const generatedBriefCopy = document.getElementById("generated-brief-copy");
       const generatedPalette = document.getElementById("generated-palette");
       const densityControls = document.getElementById("density-controls");
-      const contrastControls = document.getElementById("contrast-controls");
+      const liveIndustry = document.getElementById("live-industry");
+      const liveStyle = document.getElementById("live-style");
       const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
       const contentSelect = document.getElementById("brief-content");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
@@ -2150,7 +2132,7 @@
 
       const uiState = {
         density: "balanced",
-        tone: "base",
+        tone: "scene",
         palette: "auto",
         variant: 0,
         layout: "default"
@@ -2338,7 +2320,7 @@
         const allowedFeatures = levelAllowed.filter(function (feature) {
           return contentAllowed.indexOf(feature) !== -1;
         });
-        const effectsEnabled = true;
+        const effectsEnabled = selectedLevel === "premium";
 
         Array.from(form.industry.options).forEach(function (option) {
           const isAllowed = allowedIndustries.indexOf(option.value) !== -1;
@@ -2385,6 +2367,9 @@
           button.classList.toggle("is-active", !!input.checked && !input.disabled);
           button.classList.toggle("is-disabled", !!input.disabled);
         });
+
+        if (liveIndustry) liveIndustry.value = form.industry.value;
+        if (liveStyle) liveStyle.value = form.style.value;
       }
 
       function buildGeneratedBrief(state, recommendation, title) {
@@ -2779,25 +2764,29 @@
         update();
       });
 
-      contrastControls.addEventListener("click", function (event) {
-        const chip = event.target.closest("[data-tone]");
-        if (!chip) return;
-        uiState.tone = chip.getAttribute("data-tone");
-        setActiveChip(contrastControls, uiState.tone, "data-tone");
-        update();
-      });
-
       randomButton.addEventListener("click", function () {
         const state = getState();
         const seed = hashString([state.company, state.industry, state.style, state.notes, Date.now(), uiState.variant].join("|"));
         uiState.variant = (uiState.variant + 1 + (seed % 5)) % 12;
         uiState.palette = uiState.variant % 3 === 0 ? "warm" : uiState.variant % 3 === 1 ? "cool" : "editorial";
         uiState.density = uiState.variant % 3 === 0 ? "airy" : uiState.variant % 3 === 1 ? "balanced" : "compact";
-        uiState.tone = uiState.variant % 3 === 0 ? "base" : uiState.variant % 3 === 1 ? "scene" : "contrast";
         setActiveChip(densityControls, uiState.density, "data-density");
-        setActiveChip(contrastControls, uiState.tone, "data-tone");
         update();
       });
+
+      if (liveIndustry) {
+        liveIndustry.addEventListener("change", function () {
+          form.industry.value = liveIndustry.value;
+          update();
+        });
+      }
+
+      if (liveStyle) {
+        liveStyle.addEventListener("change", function () {
+          form.style.value = liveStyle.value;
+          update();
+        });
+      }
 
       liveOptionButtons.forEach(function (button) {
         button.addEventListener("click", function () {

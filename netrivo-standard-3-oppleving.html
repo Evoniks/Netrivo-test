@@ -191,7 +191,10 @@
 
     .right {
       padding: 28px;
-      background: linear-gradient(150deg, #345f49, #8aac86);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(238,255,226,0.34), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(197,232,178,0.26), transparent 34%),
+        linear-gradient(145deg,#91b79a 0%,#537b60 54%,#263f30 100%);
       color: #f4fbf5;
       display: flex;
       flex-direction: column;
@@ -199,6 +202,16 @@
       gap: 14px;
       position: relative;
       overflow: hidden;
+    }
+
+    .right::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.10), transparent 42%),
+        radial-gradient(ellipse at 78% 62%, rgba(189,224,170,0.26), transparent 44%);
+      pointer-events:none;
     }
 
     .right::after {
