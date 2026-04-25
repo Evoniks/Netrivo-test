@@ -408,7 +408,7 @@
 
     .workspace-grid{
       display:grid;
-      grid-template-columns:0.98fr 1.02fr;
+      grid-template-columns:1fr;
       gap:20px;
       align-items:start;
     }
@@ -585,7 +585,6 @@
     .sketch-board{
       position:relative;
       overflow:hidden;
-      min-height:560px;
       padding:22px;
       border-radius:32px;
       border:1px solid rgba(21,21,21,0.08);
@@ -615,6 +614,15 @@
         radial-gradient(circle at 18% 18%, rgba(126,98,73,0.12), transparent 22%),
         radial-gradient(circle at 84% 74%, rgba(126,98,73,0.1), transparent 24%);
       filter:blur(28px);
+    }
+
+    .sketch-stage{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 244px;
+      gap:18px;
+      align-items:start;
     }
 
     .sketch-surface{
@@ -924,11 +932,9 @@
     }
 
     .sketch-controls{
-      position:absolute;
-      top:24px;
-      right:24px;
-      z-index:3;
-      width:min(228px, calc(100% - 48px));
+      position:relative;
+      z-index:2;
+      width:100%;
       display:grid;
       gap:12px;
       padding:16px;
@@ -1121,19 +1127,14 @@
 
     @media (max-width:1180px){
       .hero-grid,
-      .workspace-grid,
       .brief-form-grid,
       .brief-choice-grid,
       .sketch-layout{
         grid-template-columns:1fr;
       }
 
-      .sketch-controls{
-        position:relative;
-        top:auto;
-        right:auto;
-        width:100%;
-        margin:16px 18px 18px;
+      .sketch-stage{
+        grid-template-columns:1fr;
       }
     }
 
@@ -1254,6 +1255,167 @@
 
     <section class="workspace" id="starter">
       <div class="container workspace-grid">
+        <div class="panel" id="resultat">
+          <div class="panel-inner">
+            <div class="output-top">
+              <div class="badge" id="brief-badge">Anbefalt nivå / Standard</div>
+              <div class="score" id="brief-score">Basert på behov, stil og omfang</div>
+            </div>
+
+            <div class="recommendation">
+              <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
+              <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
+            </div>
+
+            <div class="generator-toolbar">
+              <div class="generator-note">Beskrivelsen styrer retningen, og kunden får en halvåpen skisse med fargeforslag, scene og struktur som kan justeres litt før neste runde.</div>
+              <button class="btn btn-secondary" id="random-brief-button" type="button">Ny variant</button>
+            </div>
+
+            <div class="sketch-board">
+              <div class="sketch-stage">
+                <div class="sketch-surface" id="sketch-surface">
+                  <div class="generated-brief">
+                    <div class="generated-brief-top">
+                      <div>
+                        <div class="generated-kicker">Generert retning</div>
+                        <h3 class="generated-title" id="generated-brief-title">Standard med rolig struktur og tydelig retning.</h3>
+                      </div>
+                      <div class="generated-palette" id="generated-palette">
+                        <span class="palette-chip"><span class="palette-dot" style="background:#d7c9bb;"></span> Base</span>
+                        <span class="palette-chip"><span class="palette-dot" style="background:#aebed0;"></span> Scene</span>
+                        <span class="palette-chip"><span class="palette-dot" style="background:#566f86;"></span> Kontrast</span>
+                      </div>
+                    </div>
+                    <p class="generated-copy" id="generated-brief-copy">Her kommer en kort oppsummering over skissen, slik at kunden forstår hvorfor akkurat denne retningen ble generert.</p>
+                  </div>
+
+                  <div class="sketch-head">
+                    <div class="sketch-topline" id="wireframe-topline">Førsteskisse / Standard</div>
+                    <div class="sketch-chip" id="wireframe-chip">Retning</div>
+                  </div>
+
+                  <div class="sketch-layout">
+                    <div class="sketch-hero">
+                      <div class="sketch-hero-brow"></div>
+                      <div class="sketch-title" id="wireframe-title-block">
+                        <div class="sketch-title-line sketch-title-line--heavy" style="width:94%;"></div>
+                        <div class="sketch-title-line sketch-title-line--heavy" style="width:82%;"></div>
+                        <div class="sketch-title-line sketch-title-line--heavy" style="width:74%;"></div>
+                      </div>
+                      <div class="sketch-body" id="wireframe-copy-block">
+                        <div class="sketch-body-line" style="width:100%;"></div>
+                        <div class="sketch-body-line" style="width:92%;"></div>
+                        <div class="sketch-body-line" style="width:78%;"></div>
+                      </div>
+                      <div class="sketch-actions">
+                        <div class="sketch-button sketch-button--solid"></div>
+                        <div class="sketch-button"></div>
+                      </div>
+                    </div>
+
+                    <div class="sketch-rail">
+                      <div class="sketch-note">
+                        <div class="sketch-note-title"></div>
+                        <div class="sketch-note-lines">
+                          <div class="sketch-note-line" style="width:100%;"></div>
+                          <div class="sketch-note-line" style="width:84%;"></div>
+                          <div class="sketch-note-line" style="width:66%;"></div>
+                        </div>
+                      </div>
+                      <div class="sketch-note" style="transform:rotate(1deg);">
+                        <div class="sketch-note-title" style="width:44%;"></div>
+                        <div class="sketch-note-lines">
+                          <div class="sketch-note-line" style="width:100%;"></div>
+                          <div class="sketch-note-line" style="width:74%;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="sketch-sections" id="wireframe-sections">
+                    <div class="sketch-section" style="--sketch-tilt:-1.2deg;">
+                      <div class="sketch-section-title"></div>
+                      <div class="sketch-line-stack">
+                        <div class="sketch-line" style="width:96%;"></div>
+                        <div class="sketch-line" style="width:72%;"></div>
+                      </div>
+                    </div>
+                    <div class="sketch-section" style="--sketch-tilt:1deg;">
+                      <div class="sketch-section-title" style="width:56%;"></div>
+                      <div class="sketch-line-stack">
+                        <div class="sketch-line" style="width:92%;"></div>
+                        <div class="sketch-line" style="width:68%;"></div>
+                      </div>
+                    </div>
+                    <div class="sketch-section" style="--sketch-tilt:-0.8deg;">
+                      <div class="sketch-section-title" style="width:52%;"></div>
+                      <div class="sketch-line-stack">
+                        <div class="sketch-line" style="width:94%;"></div>
+                        <div class="sketch-line" style="width:62%;"></div>
+                      </div>
+                    </div>
+                    <div class="sketch-section" style="--sketch-tilt:1.4deg;">
+                      <div class="sketch-section-title" style="width:48%;"></div>
+                      <div class="sketch-line-stack">
+                        <div class="sketch-line" style="width:90%;"></div>
+                        <div class="sketch-line" style="width:74%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <aside class="sketch-controls">
+                  <div class="control-group">
+                    <h4>Små justeringer</h4>
+                    <p>Dette er lette UI-grep. Større endringer i retning eller innhold bør løses med ny generering.</p>
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label">Tetthet</div>
+                    <div class="control-row" id="density-controls">
+                      <button class="control-chip is-active" data-density="balanced" type="button">Balansert</button>
+                      <button class="control-chip" data-density="airy" type="button">Mer luft</button>
+                      <button class="control-chip" data-density="compact" type="button">Tettere</button>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label">Kontrast</div>
+                    <div class="control-row" id="contrast-controls">
+                      <button class="control-chip is-active" data-contrast="soft" type="button">Myk</button>
+                      <button class="control-chip" data-contrast="high" type="button">Tydeligere</button>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label">Palette</div>
+                    <div class="control-row" id="palette-controls">
+                      <button class="control-chip is-active" data-palette="auto" type="button">Auto</button>
+                      <button class="control-chip" data-palette="warm" type="button">Varm</button>
+                      <button class="control-chip" data-palette="cool" type="button">Kald</button>
+                      <button class="control-chip" data-palette="editorial" type="button">Signatur</button>
+                    </div>
+                  </div>
+                  <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
+                </aside>
+              </div>
+            </div>
+
+            <div class="summary">
+              <h3>Klar brief til deg</h3>
+              <p id="brief-summary-copy">Systemet oppsummerer behov, foreslår nivå og lager en enkel første retning som kan brukes som utgangspunkt for videre dialog.</p>
+              <ul id="brief-summary-list">
+                <li>Foreslått nivå: Standard</li>
+                <li>Primært mål: mer tillit og tydeligere struktur</li>
+                <li>Viktige elementer: kontakt, tjenester og sosialt bevis</li>
+              </ul>
+              <div class="summary-actions">
+                <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
+                <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
+              </div>
+              <div class="summary-note">Dette er en mer kuratert prosjektstarter. Når du vil, kan neste steg være ekte AI-generering, automatisk innsending og lagring i backend.</div>
+            </div>
+          </div>
+        </div>
+
         <div class="panel">
           <div class="panel-inner">
             <h2>Beskriv prosjektet</h2>
@@ -1341,165 +1503,6 @@
             </form>
           </div>
         </div>
-
-        <div class="panel" id="resultat">
-          <div class="panel-inner">
-            <div class="output-top">
-              <div class="badge" id="brief-badge">Anbefalt nivå / Standard</div>
-              <div class="score" id="brief-score">Basert på behov, stil og omfang</div>
-            </div>
-
-            <div class="recommendation">
-              <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
-              <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
-            </div>
-
-            <div class="generator-toolbar">
-              <div class="generator-note">Beskrivelsen styrer retningen, og kunden får en halvåpen skisse med fargeforslag, scene og struktur som kan justeres litt før neste runde.</div>
-              <button class="btn btn-secondary" id="random-brief-button" type="button">Ny variant</button>
-            </div>
-
-            <div class="sketch-board">
-              <div class="sketch-surface" id="sketch-surface">
-                <div class="generated-brief">
-                  <div class="generated-brief-top">
-                    <div>
-                      <div class="generated-kicker">Generert retning</div>
-                      <h3 class="generated-title" id="generated-brief-title">Standard med rolig struktur og tydelig retning.</h3>
-                    </div>
-                    <div class="generated-palette" id="generated-palette">
-                      <span class="palette-chip"><span class="palette-dot" style="background:#d7c9bb;"></span> Base</span>
-                      <span class="palette-chip"><span class="palette-dot" style="background:#aebed0;"></span> Scene</span>
-                      <span class="palette-chip"><span class="palette-dot" style="background:#566f86;"></span> Kontrast</span>
-                    </div>
-                  </div>
-                  <p class="generated-copy" id="generated-brief-copy">Her kommer en kort oppsummering over skissen, slik at kunden forstår hvorfor akkurat denne retningen ble generert.</p>
-                </div>
-
-                <div class="sketch-head">
-                  <div class="sketch-topline" id="wireframe-topline">Førsteskisse / Standard</div>
-                  <div class="sketch-chip" id="wireframe-chip">Retning</div>
-                </div>
-
-                <div class="sketch-layout">
-                  <div class="sketch-hero">
-                    <div class="sketch-hero-brow"></div>
-                    <div class="sketch-title" id="wireframe-title-block">
-                      <div class="sketch-title-line sketch-title-line--heavy" style="width:94%;"></div>
-                      <div class="sketch-title-line sketch-title-line--heavy" style="width:82%;"></div>
-                      <div class="sketch-title-line sketch-title-line--heavy" style="width:74%;"></div>
-                    </div>
-                    <div class="sketch-body" id="wireframe-copy-block">
-                      <div class="sketch-body-line" style="width:100%;"></div>
-                      <div class="sketch-body-line" style="width:92%;"></div>
-                      <div class="sketch-body-line" style="width:78%;"></div>
-                    </div>
-                    <div class="sketch-actions">
-                      <div class="sketch-button sketch-button--solid"></div>
-                      <div class="sketch-button"></div>
-                    </div>
-                  </div>
-
-                  <div class="sketch-rail">
-                    <div class="sketch-note">
-                      <div class="sketch-note-title"></div>
-                      <div class="sketch-note-lines">
-                        <div class="sketch-note-line" style="width:100%;"></div>
-                        <div class="sketch-note-line" style="width:84%;"></div>
-                        <div class="sketch-note-line" style="width:66%;"></div>
-                      </div>
-                    </div>
-                    <div class="sketch-note" style="transform:rotate(1deg);">
-                      <div class="sketch-note-title" style="width:44%;"></div>
-                      <div class="sketch-note-lines">
-                        <div class="sketch-note-line" style="width:100%;"></div>
-                        <div class="sketch-note-line" style="width:74%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="sketch-sections" id="wireframe-sections">
-                  <div class="sketch-section" style="--sketch-tilt:-1.2deg;">
-                    <div class="sketch-section-title"></div>
-                    <div class="sketch-line-stack">
-                      <div class="sketch-line" style="width:96%;"></div>
-                      <div class="sketch-line" style="width:72%;"></div>
-                    </div>
-                  </div>
-                  <div class="sketch-section" style="--sketch-tilt:1deg;">
-                    <div class="sketch-section-title" style="width:56%;"></div>
-                    <div class="sketch-line-stack">
-                      <div class="sketch-line" style="width:92%;"></div>
-                      <div class="sketch-line" style="width:68%;"></div>
-                    </div>
-                  </div>
-                  <div class="sketch-section" style="--sketch-tilt:-0.8deg;">
-                    <div class="sketch-section-title" style="width:52%;"></div>
-                    <div class="sketch-line-stack">
-                      <div class="sketch-line" style="width:94%;"></div>
-                      <div class="sketch-line" style="width:62%;"></div>
-                    </div>
-                  </div>
-                  <div class="sketch-section" style="--sketch-tilt:1.4deg;">
-                    <div class="sketch-section-title" style="width:48%;"></div>
-                    <div class="sketch-line-stack">
-                      <div class="sketch-line" style="width:90%;"></div>
-                      <div class="sketch-line" style="width:74%;"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <aside class="sketch-controls">
-                  <div class="control-group">
-                    <h4>Små justeringer</h4>
-                    <p>Dette er lette UI-grep. Større endringer i retning eller innhold bør løses med ny generering.</p>
-                  </div>
-                  <div class="control-group">
-                    <div class="control-label">Tetthet</div>
-                    <div class="control-row" id="density-controls">
-                      <button class="control-chip is-active" data-density="balanced" type="button">Balansert</button>
-                      <button class="control-chip" data-density="airy" type="button">Mer luft</button>
-                      <button class="control-chip" data-density="compact" type="button">Tettere</button>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <div class="control-label">Kontrast</div>
-                    <div class="control-row" id="contrast-controls">
-                      <button class="control-chip is-active" data-contrast="soft" type="button">Myk</button>
-                      <button class="control-chip" data-contrast="high" type="button">Tydeligere</button>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <div class="control-label">Palette</div>
-                    <div class="control-row" id="palette-controls">
-                      <button class="control-chip is-active" data-palette="auto" type="button">Auto</button>
-                      <button class="control-chip" data-palette="warm" type="button">Varm</button>
-                      <button class="control-chip" data-palette="cool" type="button">Kald</button>
-                      <button class="control-chip" data-palette="editorial" type="button">Signatur</button>
-                    </div>
-                  </div>
-                  <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
-                </aside>
-              </div>
-            </div>
-
-            <div class="summary">
-              <h3>Klar brief til deg</h3>
-              <p id="brief-summary-copy">Systemet oppsummerer behov, foreslår nivå og lager en enkel første retning som kan brukes som utgangspunkt for videre dialog.</p>
-              <ul id="brief-summary-list">
-                <li>Foreslått nivå: Standard</li>
-                <li>Primært mål: mer tillit og tydeligere struktur</li>
-                <li>Viktige elementer: kontakt, tjenester og sosialt bevis</li>
-              </ul>
-              <div class="summary-actions">
-                <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
-                <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
-              </div>
-              <div class="summary-note">Dette er en mer kuratert prosjektstarter. Når du vil, kan neste steg være ekte AI-generering, automatisk innsending og lagring i backend.</div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -1522,6 +1525,7 @@
       const emailLink = document.getElementById("brief-email-link");
       const copyButton = document.getElementById("brief-copy-button");
       const randomButton = document.getElementById("random-brief-button");
+      const sketchBoard = document.querySelector(".sketch-board");
       const sketchSurface = document.getElementById("sketch-surface");
       const wireframeTopline = document.getElementById("wireframe-topline");
       const wireframeChip = document.getElementById("wireframe-chip");
@@ -1602,6 +1606,27 @@
         ]
       };
 
+      const industryThemes = {
+        "Rådgivning og tjenester": { board: "#eef4fb", scene: "#7ea0c5", contrast: "#48617c" },
+        "Kafe og servering": { board: "#fbefe2", scene: "#c88758", contrast: "#76452f" },
+        "Håndverk og service": { board: "#edf4ed", scene: "#769a78", contrast: "#3f5d49" },
+        "Helse og trening": { board: "#f6ece4", scene: "#cc835d", contrast: "#7e4635" },
+        "Opplevelse og reiseliv": { board: "#edf7f1", scene: "#79b192", contrast: "#3f745d" },
+        "Butikk og livsstil": { board: "#f7ede8", scene: "#c99386", contrast: "#7f514a" },
+        "Tech og SaaS": { board: "#edf4fc", scene: "#6ea6d5", contrast: "#31587c" },
+        "Personlig brand": { board: "#f7edf5", scene: "#c492b6", contrast: "#704c67" },
+        "Annet": { board: "#f3efe9", scene: "#b59a7d", contrast: "#6b5848" }
+      };
+
+      const styleAdjustments = {
+        varm: { palette: "warm", glow: 0.28, tilt: "0deg" },
+        tillit: { palette: "cool", glow: 0.2, tilt: "0deg" },
+        direkte: { palette: "warm", glow: 0.18, tilt: "-0.4deg" },
+        moderne: { palette: "cool", glow: 0.26, tilt: "0.4deg" },
+        eksklusiv: { palette: "editorial", glow: 0.22, tilt: "0.8deg" },
+        energi: { palette: "warm", glow: 0.32, tilt: "-0.8deg" }
+      };
+
       function hashString(value) {
         return value.split("").reduce(function (acc, char) {
           return (acc * 31 + char.charCodeAt(0)) % 2147483647;
@@ -1610,10 +1635,11 @@
 
       function pickPalette(state, level) {
         if (uiState.palette !== "auto") return uiState.palette;
-        if (state.style === "eksklusiv" || state.style === "moderne" || level === "premium") return uiState.variant % 2 === 0 ? "editorial" : "warm";
-        if (state.style === "tillit" || level === "standard") return uiState.variant % 3 === 0 ? "cool" : "warm";
-        if (state.style === "varm" || state.style === "direkte") return "warm";
-        return "cool";
+        const stylePalette = styleAdjustments[state.style] ? styleAdjustments[state.style].palette : null;
+        if (stylePalette === "editorial") return uiState.variant % 2 === 0 ? "editorial" : "warm";
+        if (stylePalette === "warm") return uiState.variant % 3 === 0 && level === "standard" ? "cool" : "warm";
+        if (stylePalette === "cool") return uiState.variant % 4 === 0 && level === "premium" ? "editorial" : "cool";
+        return level === "premium" ? "editorial" : "cool";
       }
 
       function setActiveChip(container, value, attr) {
@@ -1641,6 +1667,25 @@
         generatedPalette.innerHTML = set.map(function (item) {
           return '<span class="palette-chip"><span class="palette-dot" style="background:' + item.color + ';"></span>' + item.label + "</span>";
         }).join("");
+      }
+
+      function applyTheme(state, level, palette) {
+        const industryTheme = industryThemes[state.industry] || industryThemes.Annet;
+        const styleTheme = styleAdjustments[state.style] || styleAdjustments.tillit;
+        const paletteSet = paletteSets[palette] || paletteSets.cool;
+
+        sketchBoard.style.background =
+          "linear-gradient(180deg, rgba(254,251,246,0.98), rgba(244,236,227,0.96)), radial-gradient(circle at 14% 12%, " + industryTheme.board + "99, transparent 24%), radial-gradient(circle at 86% 78%, " + paletteSet[1].color + "26, transparent 24%)";
+        sketchSurface.style.setProperty("--sketch-tint", paletteSet[1].color + "2e");
+        sketchSurface.style.setProperty("--sketch-glow-a", paletteSet[0].color + "66");
+        sketchSurface.style.setProperty("--sketch-glow-b", paletteSet[1].color + "4d");
+        sketchSurface.style.borderColor = industryTheme.contrast + "30";
+        wireframeChip.style.background = paletteSet[0].color + "55";
+        wireframeChip.style.borderColor = paletteSet[1].color + "33";
+        wireframeChip.style.color = industryTheme.contrast;
+        generatedBriefTitle.style.color = industryTheme.contrast;
+        generatedBriefCopy.style.color = industryTheme.contrast + "cc";
+        sketchSurface.style.transform = "rotate(" + styleTheme.tilt + ")";
       }
 
       function getState() {
@@ -1831,6 +1876,7 @@
         sketchSurface.dataset.contrast = uiState.contrast;
         sketchSurface.dataset.palette = palette;
         renderPalette(palette);
+        applyTheme(state, level, palette);
 
         wireframeTitleBlock.innerHTML =
           '<div class="sketch-title-line sketch-title-line--heavy" style="width:96%;"></div>' +
