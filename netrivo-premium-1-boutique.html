@@ -645,11 +645,26 @@
       inset: 0;
       display: grid;
       place-items: center;
+      color: rgba(236,216,189,0.24);
+      transform: translateY(-8px);
+      text-align: center;
+      gap: 10px;
+    }
+
+    .scene-monogram-main {
+      display: block;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(5.6rem, 12vw, 9.5rem);
-      letter-spacing: -0.12em;
-      color: rgba(236,216,189,0.14);
-      transform: translateY(-22px);
+      font-size: clamp(4.8rem, 10vw, 7.2rem);
+      line-height: 0.9;
+      letter-spacing: 0.08em;
+      text-shadow: 0 8px 24px rgba(10,6,4,0.28);
+    }
+
+    .scene-monogram-sub {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.34em;
+      color: rgba(236,216,189,0.42);
     }
 
     .scene-plinth {
@@ -979,7 +994,7 @@
               <div class="tag">Premium demo / boutique og luksus</div>
               <h1>En nettside som får merkevaren til å føles dyrere, roligere og mer eksklusiv.</h1>
               <div class="lead">
-                En varm premiumretning med mer ro, mer sceneplass og en tydeligere følelse av kvalitet i hvert ledd.
+                Ei kuratert premiumretning med meir ro, meir materialitet og tydelegare luksus i heile flyten.
               </div>
 
               <div class="actions">
@@ -1017,7 +1032,7 @@
             </div>
 
             <div class="boutique-scene" aria-hidden="true">
-              <div class="scene-monogram">MF</div>
+              <div class="scene-monogram"><span class="scene-monogram-main">M · F</span><span class="scene-monogram-sub">MAISON FJELL</span></div>
               <div class="scene-plinth"></div>
               <div class="material-strip">
                 <span></span>
@@ -1040,7 +1055,7 @@
       <div class="section-head">
         <div>
           <div class="kicker">Opplevelse</div>
-          <h2>Premium med luksus, varme og høy opplevd kvalitet.</h2>
+          <h2>Premium med kuratert varme, luksus og meir visuell tyngde.</h2>
         </div>
         <div class="section-copy">
           Denne retningen lar atmosfæren få mer plass, slik at nettsiden føles som en naturlig forlengelse av merkevaren.

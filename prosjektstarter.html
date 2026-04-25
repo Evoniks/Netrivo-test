@@ -632,9 +632,7 @@
       padding:22px;
       border-radius:32px;
       border:1px solid rgba(21,21,21,0.08);
-      background:
-        linear-gradient(180deg, rgba(254,251,246,0.98), rgba(244,236,227,0.96)),
-        radial-gradient(circle at 14% 12%, rgba(255,255,255,0.76), transparent 22%);
+      background:linear-gradient(180deg, rgba(255,254,251,0.98), rgba(248,242,234,0.97));
       box-shadow:var(--shadow);
     }
 
@@ -642,22 +640,20 @@
       content:"";
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(rgba(98,74,53,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(98,74,53,0.05) 1px, transparent 1px);
-      background-size:30px 30px;
-      opacity:0.42;
-      mix-blend-mode:multiply;
+      background:linear-gradient(rgba(98,74,53,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(98,74,53,0.035) 1px, transparent 1px);
+      background-size:42px 42px;
+      opacity:0.28;
+      pointer-events:none;
     }
 
     .sketch-board::after{
       content:"";
       position:absolute;
       inset:0;
-      background:
-        radial-gradient(circle at 18% 18%, rgba(126,98,73,0.12), transparent 22%),
-        radial-gradient(circle at 84% 74%, rgba(126,98,73,0.1), transparent 24%);
-      filter:blur(28px);
+      background:radial-gradient(circle at 18% 18%, rgba(126,98,73,0.08), transparent 22%);
+      filter:blur(20px);
+      opacity:0.5;
+      pointer-events:none;
     }
 
     .sketch-stage{
@@ -708,14 +704,14 @@
     .sketch-effect-atmosphere{
       background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.34)) 0%, rgba(255,255,255,0.12) 36%, transparent 74%);
       filter:blur(30px);
-      opacity:0.34;
+      opacity:0.56;
       animation:sketchAtmosphereDrift var(--duration, 18s) ease-in-out infinite alternate;
     }
 
     .sketch-effect-glow{
       background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, var(--effect-color, rgba(255,255,255,0.18)) 38%, transparent 72%);
       filter:blur(18px);
-      opacity:0.28;
+      opacity:0.52;
       animation:sketchAtmosphereDrift var(--duration, 14s) ease-in-out infinite alternate;
     }
 
@@ -725,7 +721,7 @@
       border-radius:999px;
       background:linear-gradient(90deg, transparent, var(--effect-color, rgba(255,255,255,0.76)) 22%, rgba(255,255,255,0.96) 52%, transparent);
       box-shadow:0 0 14px var(--effect-glow, rgba(255,255,255,0.34));
-      opacity:0.68;
+      opacity:0.9;
       filter:blur(0.35px);
       pointer-events:none;
       transform:rotate(var(--angle, -12deg));
@@ -1474,7 +1470,6 @@
                 Kunden fyller inn behov, stil og funksjoner. Systemet foreslår nivå, lager en halv-generert skisse og bygger en brief som gjør det lettere å starte en god dialog raskt.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#starter">Start prosjektstarter</a>
                 <a class="btn btn-secondary" href="./index.html">Tilbake til forsiden</a>
               </div>
             </div>
@@ -1531,7 +1526,7 @@
           <div class="panel-inner">
             <div class="output-top">
               <div class="badge" id="brief-badge">Anbefalt nivå / Standard</div>
-              <div class="score" id="brief-score">Basert på behov, stil og omfang</div>
+              <div class="score" id="brief-score">Basert på behov, stil og innholdsmengde</div>
             </div>
 
             <div class="recommendation">
@@ -1685,7 +1680,7 @@
         <div class="panel" id="starter-form">
           <div class="panel-inner">
             <h2>Beskriv prosjektet</h2>
-            <p class="panel-copy">Velg bransje, stil og behov. Du kan velge nivå selv, eller la systemet foreslå om dette bør være Enkel, Standard eller Premium.</p>
+            <p class="panel-copy">Velg bransje, stil og behov. Innholdsmengde styrer nivå og omfang automatisk, slik at retningen blir tydeligere.</p>
 
             <form class="brief-form" id="project-brief-form">
               <div class="brief-form-grid">
@@ -1722,30 +1717,11 @@
                 </div>
 
                 <div class="brief-field">
-                  <label for="brief-level">Ønsket nivå</label>
-                  <select id="brief-level" name="level">
-                    <option value="auto" selected>Vet ikke – foreslå for meg</option>
-                    <option value="enkel">Enkel</option>
-                    <option value="standard">Standard</option>
-                    <option value="premium">Premium</option>
-                  </select>
-                </div>
-
-                <div class="brief-field">
                   <label for="brief-content">Innholdsmengde</label>
                   <select id="brief-content" name="content">
                     <option value="kort">Kort og direkte</option>
                     <option value="balansert" selected>Balansert med tydelig struktur</option>
                     <option value="rik">Mer innhold, flere seksjoner og mer tyngde</option>
-                  </select>
-                </div>
-
-                <div class="brief-field">
-                  <label for="brief-pages">Omfang</label>
-                  <select id="brief-pages" name="pages">
-                    <option value="1">1 side / enkel landing page</option>
-                    <option value="4" selected>3 til 5 sider</option>
-                    <option value="8">6 sider eller mer</option>
                   </select>
                 </div>
 
@@ -1816,6 +1792,11 @@
       const contrastControls = document.getElementById("contrast-controls");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
       const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
+      const contentProfiles = {
+        kort: { level: "enkel", pages: 2, pagesLabel: "1 til 2 sider" },
+        balansert: { level: "standard", pages: 4, pagesLabel: "3 til 5 sider" },
+        rik: { level: "premium", pages: 7, pagesLabel: "6 sider eller mer" }
+      };
 
       const uiState = {
         density: "balanced",
@@ -1976,9 +1957,10 @@
       }
 
       function syncOptionAccess() {
-        const selectedLevel = form.level.value;
-        const allowedFeatures = selectedLevel === "auto" ? null : levelFeatureAccess[selectedLevel];
-        const effectsEnabled = selectedLevel === "auto" || selectedLevel === "premium";
+        const selectedProfile = contentProfiles[form.content.value] || contentProfiles.balansert;
+        const selectedLevel = selectedProfile.level;
+        const allowedFeatures = levelFeatureAccess[selectedLevel];
+        const effectsEnabled = selectedLevel === "premium";
 
         featureInputs.forEach(function (input) {
           const label = input.closest(".brief-choice");
@@ -2111,17 +2093,16 @@
       }
 
       function getState() {
+        const selectedProfile = contentProfiles[form.content.value] || contentProfiles.balansert;
         return {
           company: form.company.value.trim(),
           industry: form.industry.value,
           style: form.style.value,
           styleLabel: form.style.options[form.style.selectedIndex].text,
-          level: form.level.value,
-          levelLabel: form.level.options[form.level.selectedIndex].text,
           content: form.content.value,
           contentLabel: form.content.options[form.content.selectedIndex].text,
-          pages: Number(form.pages.value),
-          pagesLabel: form.pages.options[form.pages.selectedIndex].text,
+          pages: selectedProfile.pages,
+          pagesLabel: selectedProfile.pagesLabel,
           notes: form.notes.value.trim(),
           features: Array.from(form.querySelectorAll('input[name="feature"]:checked')).map(function (input) {
             return input.value;
@@ -2133,16 +2114,9 @@
       }
 
       function recommendLevel(state) {
-        if (state.level !== "auto") {
-          return {
-            level: state.level,
-            mode: "manual",
-            reason: "Kunden har valgt nivå selv.",
-            confidence: "Valgt manuelt"
-          };
-        }
-
+        const selectedProfile = contentProfiles[state.content] || contentProfiles.balansert;
         const scores = { enkel: 0, standard: 0, premium: 0 };
+        scores[selectedProfile.level] += 6;
 
         if (state.effects.length > 0) {
           scores.premium += 6;
@@ -2219,10 +2193,8 @@
         return {
           level: level,
           mode: "auto",
-          reason: state.effects.length > 0
-            ? "Effekter og ønsket uttrykk peker mot premium-nivå."
-            : "Forslaget er basert på omfang, ønsket stil og funksjonene kunden trenger.",
-          confidence: state.features.length + " valgte behov / " + state.pages + " side(r)"
+          reason: "Innholdsmengde styrer nivå automatisk og finjusteres av stil, behov og effektvalg.",
+          confidence: state.contentLabel + " / " + state.pagesLabel
         };
       }
 
@@ -2246,8 +2218,8 @@
           "Foreslått nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
           "Bransje: " + state.industry,
           "Ønsket stil: " + state.styleLabel,
-          "Omfang: " + state.pagesLabel,
-          "Innhold: " + state.contentLabel,
+          "Innholdsmengde: " + state.contentLabel,
+          "Sideomfang: " + state.pagesLabel,
           "Viktige funksjoner: " + (state.features.join(", ") || "Ingen valgt"),
           "Ønskede effekter: " + (state.effects.join(", ") || "Ingen valgt")
         ];
@@ -2283,9 +2255,9 @@
           "Navn på virksomhet: " + (state.company || "-"),
           "Bransje: " + state.industry,
           "Ønsket stil: " + state.styleLabel,
-          "Ønsket nivå: " + state.levelLabel,
           "Innholdsmengde: " + state.contentLabel,
-          "Omfang: " + state.pagesLabel,
+          "Automatisk nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
+          "Sideomfang: " + state.pagesLabel,
           "Funksjoner: " + (state.features.join(", ") || "-"),
           "Effekter: " + (state.effects.join(", ") || "-"),
           "Notater: " + (state.notes || "-"),
@@ -2307,7 +2279,7 @@
         const title = buildDisplayTitle(state, level);
         const generated = buildGeneratedBrief(state, recommendation, title);
 
-        badge.textContent = (recommendation.mode === "manual" ? "Valgt nivå / " : "Anbefalt nivå / ") + level.charAt(0).toUpperCase() + level.slice(1);
+        badge.textContent = "Anbefalt nivå / " + level.charAt(0).toUpperCase() + level.slice(1);
         score.textContent = recommendation.confidence + " - " + recommendation.reason;
         recommendationTitle.textContent = levelCopy[level].title;
         recommendationCopy.textContent = levelCopy[level].copy;
@@ -2380,8 +2352,13 @@
 
       randomButton.addEventListener("click", function () {
         const state = getState();
-        const seed = hashString([state.company, state.industry, state.style, state.notes, Date.now()].join("|"));
-        uiState.variant = seed % 7;
+        const seed = hashString([state.company, state.industry, state.style, state.notes, Date.now(), uiState.variant].join("|"));
+        uiState.variant = (uiState.variant + 1 + (seed % 5)) % 12;
+        uiState.palette = uiState.variant % 3 === 0 ? "warm" : uiState.variant % 3 === 1 ? "cool" : "editorial";
+        uiState.density = uiState.variant % 3 === 0 ? "airy" : uiState.variant % 3 === 1 ? "balanced" : "compact";
+        uiState.contrast = uiState.variant % 2 === 0 ? "high" : "soft";
+        setActiveChip(densityControls, uiState.density, "data-density");
+        setActiveChip(contrastControls, uiState.contrast, "data-contrast");
         update();
       });
 
