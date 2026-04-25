@@ -774,6 +774,19 @@
       --sketch-scene-opacity: 0.78;
     }
 
+    .sketch-hover-trail{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity .2s ease;
+    }
+
+    .sketch-surface.is-drawing .sketch-hover-trail{
+      opacity:1;
+    }
+
     /* Sketch effects */
     .sketch-effects{
       position:absolute;
@@ -795,14 +808,14 @@
     .sketch-effect-atmosphere{
       background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.34)) 0%, rgba(255,255,255,0.12) 36%, transparent 74%);
       filter:blur(30px);
-      opacity:0.56;
+      opacity:0.72;
       animation:sketchAtmosphereDrift var(--duration, 18s) ease-in-out infinite alternate;
     }
 
     .sketch-effect-glow{
       background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, var(--effect-color, rgba(255,255,255,0.18)) 38%, transparent 72%);
       filter:blur(18px);
-      opacity:0.52;
+      opacity:0.66;
       animation:sketchAtmosphereDrift var(--duration, 14s) ease-in-out infinite alternate;
     }
 
@@ -812,7 +825,7 @@
       border-radius:999px;
       background:linear-gradient(90deg, transparent, var(--effect-color, rgba(255,255,255,0.76)) 22%, rgba(255,255,255,0.96) 52%, transparent);
       box-shadow:0 0 14px var(--effect-glow, rgba(255,255,255,0.34));
-      opacity:0.9;
+      opacity:0.96;
       filter:blur(0.35px);
       pointer-events:none;
       transform:rotate(var(--angle, -12deg));
@@ -1307,6 +1320,13 @@
       gap:10px;
       align-content:start;
       transform:rotate(var(--sketch-tilt, 0deg));
+    }
+
+    .sketch-section-label{
+      font-size:0.68rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      color:var(--sketch-ink-soft);
     }
 
     .sketch-controls{
@@ -1826,6 +1846,7 @@
             <div class="sketch-board">
               <div class="sketch-stage">
                 <div class="sketch-surface" id="sketch-surface">
+                  <canvas class="sketch-hover-trail" id="sketch-hover-trail" aria-hidden="true"></canvas>
                   <div class="generated-brief">
                     <div class="generated-brief-top">
                     <div>
@@ -2099,6 +2120,7 @@
       const sketchBoard = document.querySelector(".sketch-board");
       const sketchSurface = document.getElementById("sketch-surface");
       const sketchEffects = document.getElementById("sketch-effects");
+      const sketchTrail = document.getElementById("sketch-hover-trail");
       const wireframeTopline = document.getElementById("wireframe-topline");
       const wireframeChip = document.getElementById("wireframe-chip");
       const wireframeTitleBlock = document.getElementById("wireframe-title-block");
@@ -2120,6 +2142,12 @@
         rik: { level: "premium", pages: 7, pagesLabel: "6 sider eller mer" }
       };
 
+      const industryAccessByContent = {
+        kort: ["Rådgivning og tjenester", "Kafe og servering", "Håndverk og service"],
+        balansert: ["Rådgivning og tjenester", "Kafe og servering", "Håndverk og service", "Helse og trening", "Opplevelse og reiseliv", "Butikk og livsstil"],
+        rik: ["Rådgivning og tjenester", "Kafe og servering", "Håndverk og service", "Helse og trening", "Opplevelse og reiseliv", "Butikk og livsstil", "Tech og SaaS", "Personlig brand", "Annet"]
+      };
+
       const uiState = {
         density: "balanced",
         tone: "base",
@@ -2127,6 +2155,7 @@
         variant: 0,
         layout: "default"
       };
+      let traceEnabled = false;
 
       const levelCopy = {
         enkel: {
@@ -2162,12 +2191,12 @@
       };
 
       const featureSections = {
-        Kontaktinformasjon: { title: "Kontakt", copy: "Lav friksjon og tydelig CTA" },
-        Booking: { title: "Booking", copy: "Tidspunkter, flyt og klar handling" },
-        Bestilling: { title: "Bestilling", copy: "Produkter, forespørsel eller kjøp" },
-        Cases: { title: "Prosjekter", copy: "Arbeid, resultater og referanser" },
-        Galleri: { title: "Galleri", copy: "Bilder, meny eller visuelle høydepunkt" },
-        "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet" }
+        Kontaktinformasjon: { title: "Kontakt", copy: "Lav friksjon og tydelig CTA", sketchLabel: "Kontakt / henvendelser" },
+        Booking: { title: "Booking", copy: "Tidspunkter, flyt og klar handling", sketchLabel: "Booking / timebestilling" },
+        Bestilling: { title: "Bestilling", copy: "Produkter, forespørsel eller kjøp", sketchLabel: "Bestilling / forespørsel" },
+        Cases: { title: "Prosjekter", copy: "Arbeid, resultater og referanser", sketchLabel: "Cases / referanser" },
+        Galleri: { title: "Galleri", copy: "Bilder, meny eller visuelle høydepunkt", sketchLabel: "Bilder / galleri" },
+        "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet", sketchLabel: "Om oss / åpningstider" }
       };
 
       const paletteSets = {
@@ -2305,10 +2334,19 @@
         const selectedLevel = selectedProfile.level;
         const levelAllowed = levelFeatureAccess[selectedLevel] || [];
         const contentAllowed = contentFeatureAccess[form.content.value] || [];
+        const allowedIndustries = industryAccessByContent[form.content.value] || industryAccessByContent.balansert;
         const allowedFeatures = levelAllowed.filter(function (feature) {
           return contentAllowed.indexOf(feature) !== -1;
         });
         const effectsEnabled = true;
+
+        Array.from(form.industry.options).forEach(function (option) {
+          const isAllowed = allowedIndustries.indexOf(option.value) !== -1;
+          option.disabled = !isAllowed;
+        });
+        if (allowedIndustries.indexOf(form.industry.value) === -1) {
+          form.industry.value = allowedIndustries[0];
+        }
 
         featureInputs.forEach(function (input) {
           const label = input.closest(".brief-choice");
@@ -2401,10 +2439,10 @@
         const sceneProfile = sceneProfiles[scene] || sceneProfiles.calm;
         const layout = pickSceneLayout(scene, level);
         const toneLayer = uiState.tone === "contrast"
-          ? "radial-gradient(circle at 82% 18%, " + paletteSet[2].color + "55, transparent 24%)"
+          ? "radial-gradient(circle at 82% 18%, " + paletteSet[2].color + "75, transparent 22%)"
           : uiState.tone === "scene"
-            ? "radial-gradient(circle at 72% 24%, " + paletteSet[1].color + "46, transparent 28%)"
-            : "radial-gradient(circle at 68% 20%, " + paletteSet[0].color + "24, transparent 26%)";
+            ? "radial-gradient(circle at 72% 24%, " + paletteSet[1].color + "62, transparent 26%)"
+            : "radial-gradient(circle at 68% 20%, " + paletteSet[0].color + "2e, transparent 28%)";
 
         sketchBoard.style.background =
           sceneProfile.board + ", radial-gradient(circle at 14% 12%, " + industryTheme.board + "88, transparent 24%), " + toneLayer;
@@ -2421,6 +2459,11 @@
         generatedBriefTitle.style.color = industryTheme.contrast;
         generatedBriefCopy.style.color = industryTheme.contrast + "cc";
         sketchSurface.style.transform = "rotate(" + styleTheme.tilt + ")";
+        sketchSurface.style.filter = uiState.tone === "contrast"
+          ? "saturate(1.18) contrast(1.08)"
+          : uiState.tone === "scene"
+            ? "saturate(1.1) contrast(1.02)"
+            : "saturate(1) contrast(1)";
         uiState.layout = layout;
       }
 
@@ -2433,7 +2476,7 @@
         const hasAtmosphere = state.effects.indexOf("Atmosfærisk bakgrunn") !== -1 || uiState.tone !== "base";
         const hasGlass = state.effects.indexOf("Glow og glass") !== -1 || uiState.tone === "contrast";
         const scene = sketchSurface.dataset.scene || "calm";
-        const boost = uiState.tone === "contrast" ? 1.35 : uiState.tone === "scene" ? 1.15 : 1;
+        const boost = uiState.tone === "contrast" ? 1.58 : uiState.tone === "scene" ? 1.34 : 1;
 
         sketchSurface.classList.toggle("has-glass-effect", hasGlass);
 
@@ -2443,23 +2486,28 @@
 
         if (hasAtmosphere) {
           pieces.push(
-            '<span class="sketch-effect-atmosphere" style="left:-8%; top:8%; width:' + (42 * boost) + '%; height:' + (26 * boost) + '%; --effect-color:' + softColor + '88; --drift-x:34px; --drift-y:-16px; --scale-end:1.12; --duration:16s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="right:-10%; bottom:14%; width:' + (48 * boost) + '%; height:' + (30 * boost) + '%; --effect-color:' + warmColor + '7a; --drift-x:-28px; --drift-y:18px; --scale-end:1.16; --duration:20s;"></span>'
+            '<span class="sketch-effect-atmosphere" style="left:-10%; top:6%; width:' + (46 * boost) + '%; height:' + (30 * boost) + '%; --effect-color:' + softColor + 'bb; --drift-x:34px; --drift-y:-16px; --scale-end:1.12; --duration:16s;"></span>',
+            '<span class="sketch-effect-atmosphere" style="right:-12%; bottom:10%; width:' + (54 * boost) + '%; height:' + (36 * boost) + '%; --effect-color:' + warmColor + 'a6; --drift-x:-28px; --drift-y:18px; --scale-end:1.16; --duration:20s;"></span>'
           );
         }
 
         if (hasTrace) {
           pieces.push(
             '<span class="sketch-effect-trace" style="left:8%; top:26%; width:' + (34 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88; --angle:-14deg; --duration:7s;"></span>',
-            '<span class="sketch-effect-trace" style="right:12%; top:52%; width:' + (28 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '66; --angle:11deg; --duration:9s;"></span>',
-            '<span class="sketch-effect-cursor" style="--effect-color:' + softColor + '; --effect-glow:' + traceColor + '99;"></span>'
+            '<span class="sketch-effect-trace" style="right:12%; top:52%; width:' + (28 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '66; --angle:11deg; --duration:9s;"></span>'
           );
         }
 
         if (hasGlass) {
           pieces.push(
-            '<span class="sketch-effect-glow" style="left:16%; top:18%; width:' + (22 * boost) + '%; height:' + (16 * boost) + '%; --effect-color:' + warmColor + '8a; --drift-x:12px; --drift-y:-10px; --scale-end:1.08; --duration:12s;"></span>',
-            '<span class="sketch-effect-glow" style="right:10%; top:12%; width:' + (26 * boost) + '%; height:' + (18 * boost) + '%; --effect-color:' + softColor + '78; --drift-x:-16px; --drift-y:14px; --scale-end:1.1; --duration:14s;"></span>'
+            '<span class="sketch-effect-glow" style="left:14%; top:14%; width:' + (28 * boost) + '%; height:' + (20 * boost) + '%; --effect-color:' + warmColor + 'b4; --drift-x:12px; --drift-y:-10px; --scale-end:1.08; --duration:12s;"></span>',
+            '<span class="sketch-effect-glow" style="right:8%; top:10%; width:' + (32 * boost) + '%; height:' + (22 * boost) + '%; --effect-color:' + softColor + '9e; --drift-x:-16px; --drift-y:14px; --scale-end:1.1; --duration:14s;"></span>'
+          );
+        }
+
+        if (uiState.tone === "scene" || uiState.tone === "contrast") {
+          pieces.push(
+            '<span class="sketch-effect-atmosphere" style="left:26%; top:-8%; width:' + (30 * boost) + '%; height:' + (22 * boost) + '%; --effect-color:' + traceColor + '8a; --drift-x:12px; --drift-y:10px; --scale-end:1.08; --duration:12s;"></span>'
           );
         }
 
@@ -2468,6 +2516,7 @@
         }
 
         sketchEffects.innerHTML = pieces.join("");
+        traceEnabled = hasTrace;
       }
 
       function getState() {
@@ -2574,15 +2623,12 @@
       }
 
       function buildSections(state, level) {
-        const sections = [{ title: "Hero", copy: "Retning og tydelig førsteinntrykk" }];
+        const sections = [{ title: "Hero", copy: "Retning og tydelig førsteinntrykk", sketchLabel: "Hero" }];
 
         state.features.forEach(function (feature) {
           const section = featureSections[feature];
           if (section) sections.push(section);
         });
-
-        if (sections.length < 4) sections.push({ title: "Tjenester", copy: "Oversikt over det viktigste tilbudet" });
-        if (sections.length < 5) sections.push({ title: "Tillit", copy: "Grunner til å velge deg" });
 
         const sectionLimit = level === "premium" ? 6 : level === "standard" ? 5 : 3;
         return sections.slice(0, sectionLimit);
@@ -2615,6 +2661,7 @@
           const tilt = tiltSet[index] || 0;
           return '' +
             '<div class="sketch-section" style="--sketch-tilt:' + tilt + 'deg;">' +
+              '<div class="sketch-section-label">' + (section.sketchLabel || section.title || "Seksjon") + '</div>' +
               '<div class="sketch-section-title" style="width:' + (42 + index * 6) + '%;"></div>' +
               '<div class="sketch-line-stack">' +
                 makeSketchLines(2, 94 - index * 4, 20, "sketch-line") +
@@ -2769,22 +2816,117 @@
         });
       });
 
-      sketchSurface.addEventListener("mousemove", function (event) {
-        if (!sketchEffects || !sketchEffects.querySelector(".sketch-effect-cursor")) return;
-        const rect = sketchSurface.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width) * 100;
-        const y = ((event.clientY - rect.top) / rect.height) * 100;
-        const angle = -18 + (x / 100) * 34;
-        sketchEffects.style.setProperty("--cursor-x", x.toFixed(2) + "%");
-        sketchEffects.style.setProperty("--cursor-y", y.toFixed(2) + "%");
-        sketchEffects.style.setProperty("--cursor-angle", angle.toFixed(2) + "deg");
-        sketchEffects.dataset.pointerActive = "true";
-      });
+      (function setupInteractiveTrail() {
+        if (!sketchTrail) return;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+        if (prefersReducedMotion || !hasFinePointer) return;
 
-      sketchSurface.addEventListener("mouseleave", function () {
-        if (!sketchEffects) return;
-        sketchEffects.dataset.pointerActive = "false";
-      });
+        const ctx = sketchTrail.getContext("2d");
+        const points = [];
+        const trailLife = 980;
+        const interpolationStep = 7;
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let running = false;
+        let lastPoint = null;
+
+        function resizeCanvas() {
+          const rect = sketchSurface.getBoundingClientRect();
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = rect.width;
+          height = rect.height;
+          sketchTrail.width = Math.floor(width * dpr);
+          sketchTrail.height = Math.floor(height * dpr);
+          sketchTrail.style.width = width + "px";
+          sketchTrail.style.height = height + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function addPoint(x, y, time) {
+          const point = { x: x, y: y, time: time };
+          if (!lastPoint) {
+            points.push(point);
+            lastPoint = point;
+            return;
+          }
+          const distance = Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y);
+          if (distance < 3) return;
+          const steps = Math.min(120, Math.max(1, Math.floor(distance / interpolationStep)));
+          for (let step = 1; step <= steps; step += 1) {
+            const progress = step / steps;
+            points.push({
+              x: lastPoint.x + (point.x - lastPoint.x) * progress,
+              y: lastPoint.y + (point.y - lastPoint.y) * progress,
+              time: lastPoint.time + (time - lastPoint.time) * progress
+            });
+          }
+          lastPoint = point;
+        }
+
+        function draw(now) {
+          ctx.clearRect(0, 0, width, height);
+          while (points.length && now - points[0].time > trailLife) points.shift();
+
+          for (let i = 1; i < points.length; i += 1) {
+            const previous = points[i - 1];
+            const current = points[i];
+            const next = points[i + 1] || current;
+            const age = now - current.time;
+            const opacity = Math.max(0, 1 - age / trailLife);
+            const endX = (current.x + next.x) / 2;
+            const endY = (current.y + next.y) / 2;
+
+            ctx.beginPath();
+            ctx.moveTo(previous.x, previous.y);
+            ctx.quadraticCurveTo(previous.x, previous.y, endX, endY);
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.lineWidth = 2 + opacity * 2;
+            ctx.shadowBlur = 14 + opacity * 20;
+            ctx.shadowColor = "rgba(236,188,255,0.9)";
+            ctx.strokeStyle = "rgba(236,188,255," + (opacity * 0.74) + ")";
+            ctx.stroke();
+
+            ctx.lineWidth = 0.9;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "rgba(255,240,255,0.86)";
+            ctx.strokeStyle = "rgba(255,240,255," + (opacity * 0.62) + ")";
+            ctx.stroke();
+          }
+
+          if (points.length) {
+            requestAnimationFrame(draw);
+          } else {
+            running = false;
+            sketchSurface.classList.remove("is-drawing");
+          }
+        }
+
+        function onMove(event) {
+          if (!traceEnabled) return;
+          const samples = typeof event.getCoalescedEvents === "function" ? event.getCoalescedEvents() : [event];
+          const rect = sketchSurface.getBoundingClientRect();
+          const now = performance.now();
+          for (const sample of samples) {
+            addPoint(sample.clientX - rect.left, sample.clientY - rect.top, now);
+          }
+          sketchSurface.classList.add("is-drawing");
+          if (!running) {
+            running = true;
+            requestAnimationFrame(draw);
+          }
+        }
+
+        resizeCanvas();
+        sketchSurface.addEventListener("pointerenter", resizeCanvas);
+        sketchSurface.addEventListener("pointermove", onMove, { passive: true });
+        sketchSurface.addEventListener("pointerleave", function () {
+          lastPoint = null;
+        });
+        window.addEventListener("resize", resizeCanvas);
+      })();
 
       update();
     })();
