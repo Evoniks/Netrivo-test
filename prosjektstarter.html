@@ -660,9 +660,16 @@
       position:relative;
       z-index:1;
       display:grid;
-      grid-template-columns:270px minmax(0, 1fr) 244px;
+      grid-template-columns:minmax(0, 1fr) 286px;
       gap:18px;
-      align-items:stretch;
+      align-items:start;
+    }
+
+    .sketch-sidebars{
+      display:grid;
+      grid-template-rows:minmax(0, 1fr) auto;
+      gap:14px;
+      min-height:516px;
     }
 
     .sketch-live-options{
@@ -677,7 +684,8 @@
       background:rgba(255,255,255,0.56);
       backdrop-filter:blur(14px);
       box-shadow:0 16px 30px rgba(63,43,25,0.08);
-      min-height:516px;
+      min-height:0;
+      height:100%;
     }
 
     .sketch-live-options h4{
@@ -1256,10 +1264,8 @@
       background:rgba(255,255,255,0.52);
       backdrop-filter:blur(18px);
       box-shadow:0 18px 34px rgba(63,43,25,0.08);
-      margin-top:0;
       align-self:start;
-      transform:translateY(160px);
-      min-height:206px;
+      min-height:230px;
     }
 
     .sketch-controls h4{
@@ -1321,6 +1327,25 @@
       color:#7e7062;
       font-size:0.78rem;
       line-height:1.5;
+    }
+
+    .generated-right{
+      display:grid;
+      justify-items:end;
+      gap:10px;
+    }
+
+    .generated-density{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .generated-density .control-chip{
+      padding:7px 10px;
+      font-size:0.72rem;
+      letter-spacing:0.04em;
     }
 
     .sketch-surface[data-density="airy"] .sketch-layout,
@@ -1595,7 +1620,10 @@
       .sketch-controls{
         margin-top:0;
         min-height:0;
-        transform:none;
+      }
+
+      .sketch-sidebars{
+        min-height:0;
       }
     }
 
@@ -1734,32 +1762,6 @@
 
             <div class="sketch-board">
               <div class="sketch-stage">
-                <aside class="sketch-live-options" aria-label="Live valg for skisse">
-                  <div class="control-group">
-                    <h4>Live-valg for skisse</h4>
-                    <p>Trykk her for å se endringer i skissa med en gang.</p>
-                  </div>
-                  <div class="live-option-group">
-                    <div class="live-option-label">Hva er viktig på siden?</div>
-                    <div class="live-option-grid" id="live-feature-options">
-                      <button class="live-option is-active" data-type="feature" data-value="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler</button>
-                      <button class="live-option" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
-                      <button class="live-option" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
-                      <button class="live-option" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
-                      <button class="live-option" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
-                      <button class="live-option" data-type="feature" data-value="Om oss" type="button">Om oss, åpningstider</button>
-                    </div>
-                  </div>
-                  <div class="live-option-group">
-                    <div class="live-option-label">Ønskede effekter</div>
-                    <div class="live-option-grid" id="live-effect-options">
-                      <button class="live-option" data-type="effect" data-value="Lyslinje ved musepeker" type="button">Interaktiv lyslinje ved musepeker</button>
-                      <button class="live-option" data-type="effect" data-value="Atmosfærisk bakgrunn" type="button">Atmosfærisk bevegelse i bakgrunn</button>
-                      <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
-                    </div>
-                  </div>
-                </aside>
-
                 <div class="sketch-surface" id="sketch-surface">
                   <div class="generated-brief">
                     <div class="generated-brief-top">
@@ -1768,10 +1770,17 @@
                       <div class="generated-entity" id="generated-entity-name">Navn eller bransje vises her</div>
                       <h3 class="generated-title" id="generated-brief-title">Standard med rolig struktur og tydelig retning.</h3>
                     </div>
-                      <div class="generated-palette" id="generated-palette">
-                        <span class="palette-chip"><span class="palette-dot" style="background:#d7c9bb;"></span> Base</span>
-                        <span class="palette-chip"><span class="palette-dot" style="background:#aebed0;"></span> Scene</span>
-                        <span class="palette-chip"><span class="palette-dot" style="background:#566f86;"></span> Kontrast</span>
+                      <div class="generated-right">
+                        <div class="generated-palette" id="generated-palette">
+                          <span class="palette-chip"><span class="palette-dot" style="background:#d7c9bb;"></span> Base</span>
+                          <span class="palette-chip"><span class="palette-dot" style="background:#aebed0;"></span> Scene</span>
+                          <span class="palette-chip"><span class="palette-dot" style="background:#566f86;"></span> Kontrast</span>
+                        </div>
+                        <div class="generated-density" id="density-controls">
+                          <button class="control-chip is-active" data-density="balanced" type="button">Balansert</button>
+                          <button class="control-chip" data-density="airy" type="button">Mer luft</button>
+                          <button class="control-chip" data-density="compact" type="button">Tettere</button>
+                        </div>
                       </div>
                     </div>
                     <p class="generated-copy" id="generated-brief-copy">Her kommer en kort oppsummering over skissen, slik at kunden forstår hvorfor akkurat denne retningen ble generert.</p>
@@ -1854,29 +1863,49 @@
                   </div>
                 </div>
 
-                <aside class="sketch-controls">
-                  <div class="control-group">
-                    <h4>Små justeringer</h4>
-                    <p>Dette er lette UI-grep. Større endringer i retning eller innhold bør løses med ny generering.</p>
-                  </div>
-                  <div class="control-group">
-                    <div class="control-label">Tetthet</div>
-                    <div class="control-row" id="density-controls">
-                      <button class="control-chip is-active" data-density="balanced" type="button">Balansert</button>
-                      <button class="control-chip" data-density="airy" type="button">Mer luft</button>
-                      <button class="control-chip" data-density="compact" type="button">Tettere</button>
+                <div class="sketch-sidebars">
+                  <aside class="sketch-live-options" aria-label="Live valg for skisse">
+                    <div class="control-group">
+                      <h4>Live-valg for skisse</h4>
+                      <p>Trykk her for å se endringer i skissa med en gang.</p>
                     </div>
-                  </div>
-                  <div class="control-group">
-                    <div class="control-label">Kontrast</div>
-                    <div class="control-row" id="contrast-controls">
-                      <button class="control-chip is-active" data-tone="base" type="button">Base</button>
-                      <button class="control-chip" data-tone="scene" type="button">Scene</button>
-                      <button class="control-chip" data-tone="contrast" type="button">Kontrast</button>
+                    <div class="live-option-group">
+                      <div class="live-option-label">Hva er viktig på siden?</div>
+                      <div class="live-option-grid" id="live-feature-options">
+                        <button class="live-option is-active" data-type="feature" data-value="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler</button>
+                        <button class="live-option" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
+                        <button class="live-option" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
+                        <button class="live-option" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
+                        <button class="live-option" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
+                        <button class="live-option" data-type="feature" data-value="Om oss" type="button">Om oss, åpningstider</button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
-                </aside>
+                    <div class="live-option-group">
+                      <div class="live-option-label">Ønskede effekter</div>
+                      <div class="live-option-grid" id="live-effect-options">
+                        <button class="live-option" data-type="effect" data-value="Lyslinje ved musepeker" type="button">Interaktiv lyslinje ved musepeker</button>
+                        <button class="live-option" data-type="effect" data-value="Atmosfærisk bakgrunn" type="button">Atmosfærisk bevegelse i bakgrunn</button>
+                        <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
+                      </div>
+                    </div>
+                  </aside>
+
+                  <aside class="sketch-controls">
+                    <div class="control-group">
+                      <h4>Små justeringer</h4>
+                      <p>Dette er lette UI-grep. Større endringer i retning eller innhold bør løses med ny generering.</p>
+                    </div>
+                    <div class="control-group">
+                      <div class="control-label">Kontrast</div>
+                      <div class="control-row" id="contrast-controls">
+                        <button class="control-chip is-active" data-tone="base" type="button">Base</button>
+                        <button class="control-chip" data-tone="scene" type="button">Scene</button>
+                        <button class="control-chip" data-tone="contrast" type="button">Kontrast</button>
+                      </div>
+                    </div>
+                    <div class="control-footnote">Vil kunden ha ny stil, nytt nivå eller en helt annen komposisjon, er det bedre å generere på nytt.</div>
+                  </aside>
+                </div>
               </div>
             </div>
 
