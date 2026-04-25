@@ -766,6 +766,52 @@
       cursor:not-allowed;
     }
 
+    .style-demo-cta{
+      margin-top:auto;
+      padding-top:10px;
+      display:grid;
+      gap:8px;
+    }
+
+    .style-demo-note{
+      margin:0;
+      font-size:0.74rem;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      color:#7e7062;
+    }
+
+    .style-demo-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:50px;
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:linear-gradient(160deg, rgba(20,20,24,0.96), rgba(38,38,48,0.94));
+      color:#fff8f0;
+      font-weight:700;
+      letter-spacing:-0.01em;
+      text-decoration:none;
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      box-shadow:0 14px 26px rgba(22,14,10,0.18);
+    }
+
+    .style-demo-link:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.06);
+      box-shadow:0 16px 30px rgba(22,14,10,0.24);
+    }
+
+    .style-demo-link.is-disabled{
+      pointer-events:none;
+      opacity:0.55;
+      background:linear-gradient(160deg, rgba(120,110,100,0.26), rgba(92,84,76,0.2));
+      color:#53493f;
+      box-shadow:none;
+    }
+
     .legacy-choice-fields{
       display:none;
     }
@@ -2234,6 +2280,10 @@
                         <button class="live-option" data-type="effect" data-value="Glow og glass" type="button">Glow, glass og lysflater</button>
                       </div>
                     </div>
+                    <div class="style-demo-cta">
+                      <p class="style-demo-note">Gå til full demo</p>
+                      <a class="style-demo-link" id="style-demo-link" href="./netrivo-enkel-2-handverkar.html">Se demo: Fjord</a>
+                    </div>
                   </aside>
                 </div>
               </div>
@@ -2370,10 +2420,22 @@
       const generatedPalette = document.getElementById("generated-palette");
       const densityControls = document.getElementById("density-controls");
       const liveStyle = document.getElementById("live-style");
+      const styleDemoLink = document.getElementById("style-demo-link");
       const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
       const contentSelect = document.getElementById("brief-content");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
       const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
+      const styleDemoRoutes = {
+        "sol-bonner": "./netrivo-enkel-1-kafe.html",
+        fjord: "./netrivo-enkel-2-handverkar.html",
+        studio: "./netrivo-enkel-3-ptstudio.html",
+        nordic: "./netrivo-standard-1-arkitekt.html",
+        arctic: "./netrivo-standard-2-radgiving.html",
+        "glacial-lake": "./netrivo-standard-3-oppleving.html",
+        "maison-fjell": "./netrivo-premium-1-boutique.html",
+        "solar-eclipse": "./netrivo-premium-2-tech.html",
+        "elin-varde": "./netrivo-premium-3-personlegbrand.html"
+      };
       const contentProfiles = {
         kort: { level: "enkel", pages: 2, pagesLabel: "1 til 2 sider" },
         balansert: { level: "standard", pages: 4, pagesLabel: "3 til 5 sider" },
@@ -3035,6 +3097,18 @@
         generatedBriefCopy.textContent = generated.copy;
         wireframeTopline.textContent = levelCopy[level].top;
         wireframeChip.textContent = state.styleLabel;
+        if (styleDemoLink) {
+          const demoHref = styleDemoRoutes[state.styleKey];
+          if (demoHref) {
+            styleDemoLink.href = demoHref;
+            styleDemoLink.textContent = "Se demo: " + state.styleLabel;
+            styleDemoLink.classList.remove("is-disabled");
+          } else {
+            styleDemoLink.href = "#";
+            styleDemoLink.textContent = "Ingen demo koblet";
+            styleDemoLink.classList.add("is-disabled");
+          }
+        }
 
         sketchSurface.classList.remove("is-enkel", "is-standard", "is-premium");
         sketchSurface.classList.add("is-" + level);
