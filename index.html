@@ -434,6 +434,36 @@
     .btn-tier:hover{
       transform:translateY(-1px);
     }
+    .tier-dropdown{
+      margin-top:10px;
+      display:none;
+      width:100%;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(21,21,21,0.12);
+      background:linear-gradient(145deg, rgba(255,255,255,0.94), rgba(246,241,234,0.9));
+      box-shadow:0 14px 28px rgba(21,17,14,0.12);
+    }
+    .tier-dropdown.is-open{
+      display:grid;
+      gap:8px;
+    }
+    .tier-dropdown-link{
+      display:block;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(21,21,21,0.1);
+      background:rgba(255,255,255,0.84);
+      font-size:0.86rem;
+      font-weight:700;
+      color:#1c1814;
+      text-decoration:none;
+      transition:transform .18s ease, background .18s ease;
+    }
+    .tier-dropdown-link:hover{
+      transform:translateY(-1px);
+      background:#fff;
+    }
 
     .offer-band{
       margin-top:22px;
@@ -2406,11 +2436,16 @@
         <div class="demo-tier-grid">
           <article class="demo-tier-card demo-tier-card--enkel">
             <div class="demo-tier-badge">Enkel</div>
-            <h3 class="demo-tier-title">Sol & Bønner / Fjord / Studio</h3>
+            <h3 class="demo-tier-title">Sol & Bønner / Lime / Studio</h3>
             <p class="demo-tier-copy">Raske og tydelege retningar med låg terskel og kort veg til kontakt.</p>
             <div class="demo-tier-actions">
-              <a class="btn-tier" href="./netrivo-enkel-1-kafe.html">Se Enkel-demo</a>
+              <button class="btn-tier demo-tier-trigger" type="button" data-tier="enkel" aria-expanded="false" aria-controls="tier-dropdown-enkel">Se Enkel-demo</button>
               <a class="btn-tier" href="./netrivo-mobil-enkel.html">Se mobil</a>
+            </div>
+            <div class="tier-dropdown" id="tier-dropdown-enkel">
+              <a class="tier-dropdown-link" href="./netrivo-enkel-1-kafe.html">Sol &amp; Bønner</a>
+              <a class="tier-dropdown-link" href="./netrivo-enkel-2-handverkar.html">Lime</a>
+              <a class="tier-dropdown-link" href="./netrivo-enkel-3-ptstudio.html">Studio</a>
             </div>
           </article>
           <article class="demo-tier-card demo-tier-card--standard">
@@ -2418,8 +2453,13 @@
             <h3 class="demo-tier-title">Nordic / Arctic / Glacial Lake</h3>
             <p class="demo-tier-copy">Meir struktur og meir truverd for bedrifter som treng sterkare heilskap.</p>
             <div class="demo-tier-actions">
-              <a class="btn-tier" href="./netrivo-standard-1-arkitekt.html">Se Standard-demo</a>
+              <button class="btn-tier demo-tier-trigger" type="button" data-tier="standard" aria-expanded="false" aria-controls="tier-dropdown-standard">Se Standard-demo</button>
               <a class="btn-tier" href="./netrivo-mobil-standard.html">Se mobil</a>
+            </div>
+            <div class="tier-dropdown" id="tier-dropdown-standard">
+              <a class="tier-dropdown-link" href="./netrivo-standard-1-arkitekt.html">Nordic</a>
+              <a class="tier-dropdown-link" href="./netrivo-standard-2-radgiving.html">Arctic</a>
+              <a class="tier-dropdown-link" href="./netrivo-standard-3-oppleving.html">Glacial Lake</a>
             </div>
           </article>
           <article class="demo-tier-card demo-tier-card--premium">
@@ -2427,8 +2467,13 @@
             <h3 class="demo-tier-title">Maison Fjell / Solar Eclipse / Elin Varde</h3>
             <p class="demo-tier-copy">Kuratert uttrykk med meir sceneplass, tyngde og opplevd verdi.</p>
             <div class="demo-tier-actions">
-              <a class="btn-tier" href="./netrivo-premium-1-boutique.html">Se Premium-demo</a>
+              <button class="btn-tier demo-tier-trigger" type="button" data-tier="premium" aria-expanded="false" aria-controls="tier-dropdown-premium">Se Premium-demo</button>
               <a class="btn-tier" href="./netrivo-mobil-premium-boutique.html">Se mobil</a>
+            </div>
+            <div class="tier-dropdown" id="tier-dropdown-premium">
+              <a class="tier-dropdown-link" href="./netrivo-premium-1-boutique.html">Maison Fjell</a>
+              <a class="tier-dropdown-link" href="./netrivo-premium-2-tech.html">Solar Eclipse</a>
+              <a class="tier-dropdown-link" href="./netrivo-premium-3-personlegbrand.html">Elin Varde</a>
             </div>
           </article>
         </div>
@@ -2627,6 +2672,45 @@
           lastPoint = null;
         });
         window.addEventListener("resize", resizeCanvas);
+      });
+    })();
+
+    (function () {
+      const triggers = Array.from(document.querySelectorAll(".demo-tier-trigger"));
+      if (!triggers.length) return;
+
+      const dropdowns = Array.from(document.querySelectorAll(".tier-dropdown"));
+
+      function closeAll() {
+        dropdowns.forEach(function (dropdown) {
+          dropdown.classList.remove("is-open");
+        });
+        triggers.forEach(function (trigger) {
+          trigger.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function (event) {
+          event.stopPropagation();
+          const targetId = trigger.getAttribute("aria-controls");
+          const target = targetId ? document.getElementById(targetId) : null;
+          const willOpen = !!target && !target.classList.contains("is-open");
+          closeAll();
+          if (willOpen && target) {
+            target.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        const clickedInsideDropdown = event.target.closest(".tier-dropdown") || event.target.closest(".demo-tier-trigger");
+        if (!clickedInsideDropdown) closeAll();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeAll();
       });
     })();
 

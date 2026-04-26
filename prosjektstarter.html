@@ -1131,6 +1131,70 @@
     .sketch-effects[data-pointer-active="true"] .sketch-effect-cursor{
       opacity:0.92;
     }
+    .sketch-effect-spotlight{
+      position:absolute;
+      left:var(--cursor-x, 50%);
+      top:var(--cursor-y, 50%);
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      transform:translate(-50%, -50%);
+      background:radial-gradient(circle, var(--spotlight-core, rgba(255,255,255,0.32)) 0%, var(--spotlight-mid, rgba(255,255,255,0.12)) 34%, transparent 72%);
+      mix-blend-mode:screen;
+      filter:blur(1px);
+      opacity:0;
+      transition:opacity .18s ease;
+      pointer-events:none;
+    }
+    .sketch-effects[data-pointer-active="true"] .sketch-effect-spotlight{
+      opacity:0.88;
+    }
+    .sketch-effect-parallax{
+      position:absolute;
+      border-radius:999px;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      transition:transform .22s ease-out;
+      opacity:0.58;
+    }
+    .sketch-effect-parallax.layer-a{
+      left:-12%;
+      top:8%;
+      width:44%;
+      height:34%;
+      background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.18)) 0%, transparent 74%);
+      transform:translate(calc(var(--parallax-x, 0px) * -0.08), calc(var(--parallax-y, 0px) * -0.08));
+    }
+    .sketch-effect-parallax.layer-b{
+      right:-10%;
+      bottom:-4%;
+      width:38%;
+      height:30%;
+      background:radial-gradient(circle, var(--effect-color, rgba(255,255,255,0.16)) 0%, transparent 74%);
+      transform:translate(calc(var(--parallax-x, 0px) * 0.1), calc(var(--parallax-y, 0px) * 0.1));
+    }
+    .sketch-ripple{
+      position:absolute;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      border:1.5px solid var(--ripple-color, rgba(255,255,255,0.7));
+      box-shadow:0 0 22px var(--ripple-color, rgba(255,255,255,0.5));
+      transform:translate(-50%, -50%) scale(0.2);
+      opacity:0.88;
+      pointer-events:none;
+      animation:sketchRipplePulse .72s ease-out forwards;
+    }
+    @keyframes sketchRipplePulse{
+      0%{
+        transform:translate(-50%, -50%) scale(0.2);
+        opacity:0.82;
+      }
+      100%{
+        transform:translate(-50%, -50%) scale(6.2);
+        opacity:0;
+      }
+    }
 
     .sketch-effect-eclipse{
       position:absolute;
@@ -1176,6 +1240,12 @@
     .sketch-surface.has-glass-effect .sketch-chip,
     .sketch-surface.has-glass-effect .palette-chip{
       box-shadow:inset 0 0 0 1px rgba(255,255,255,0.16);
+    }
+    .sketch-hero,
+    .sketch-note,
+    .sketch-section{
+      transition:transform .18s ease, box-shadow .18s ease;
+      will-change:transform;
     }
 
     .generated-brief{
@@ -2626,7 +2696,7 @@
                         <select class="live-select" id="live-style">
                           <optgroup label="Enkel">
                             <option value="sol-bonner">Sol &amp; Bønner</option>
-                            <option value="fjord" selected>Fjord</option>
+                            <option value="fjord" selected>Lime</option>
                             <option value="studio">Studio</option>
                           </optgroup>
                           <optgroup label="Standard">
@@ -2640,12 +2710,12 @@
                             <option value="elin-varde">Elin Varde</option>
                           </optgroup>
                         </select>
-                        <button class="live-style-trigger" id="live-style-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">Fjord</button>
+                        <button class="live-style-trigger" id="live-style-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">Lime</button>
                         <div class="live-style-menu" id="live-style-menu" role="listbox" aria-label="Ønsket stil">
                           <div class="live-style-group">
                             <div class="live-style-group-label">Enkel</div>
                             <button class="live-style-item" data-style-value="sol-bonner" type="button">Sol &amp; Bønner</button>
-                            <button class="live-style-item is-active" data-style-value="fjord" type="button">Fjord</button>
+                            <button class="live-style-item is-active" data-style-value="fjord" type="button">Lime</button>
                             <button class="live-style-item" data-style-value="studio" type="button">Studio</button>
                           </div>
                           <div class="live-style-group">
@@ -2684,15 +2754,16 @@
                       <div class="live-option-label">Effekter</div>
                       <div class="live-option-grid" id="live-effect-options">
                         <button class="live-option" data-type="effect" data-value="Interaktiv lyslinje" type="button">Interaktiv lyslinje</button>
-                        <button class="live-option" data-type="effect" data-value="Meteorregn" type="button">Meteorregn</button>
-                        <button class="live-option" data-type="effect" data-value="Stjernehimmel" type="button">Stjernehimmel</button>
-                        <button class="live-option" data-type="effect" data-value="Lynglimt" type="button">Lynglimt</button>
                         <button class="live-option" data-type="effect" data-value="Forstørrelsesglass" type="button">Forstørrelsesglass</button>
+                        <button class="live-option" data-type="effect" data-value="Magnetisk hover" type="button">Magnetisk hover</button>
+                        <button class="live-option" data-type="effect" data-value="Soft spotlight" type="button">Soft spotlight</button>
+                        <button class="live-option" data-type="effect" data-value="Parallax drift" type="button">Parallax drift</button>
+                        <button class="live-option" data-type="effect" data-value="Ink ripple" type="button">Ink ripple</button>
                       </div>
                     </div>
                     <div class="style-demo-cta">
-                      <p class="style-demo-note">Gå til full demo</p>
-                      <a class="style-demo-link" id="style-demo-link" href="./netrivo-enkel-2-handverkar.html">Se demo: Fjord</a>
+                      <p class="style-demo-note">Prefabrikert demo (referanse)</p>
+                      <a class="style-demo-link" id="style-demo-link" href="./netrivo-enkel-2-handverkar.html">Åpne prefabrikert demo: Lime</a>
                     </div>
                   </aside>
                 </div>
@@ -2742,7 +2813,7 @@
               <div class="brief-form-grid">
                 <div class="brief-field">
                   <label for="brief-company">Navn på virksomhet</label>
-                  <input id="brief-company" name="company" type="text" placeholder="Eksempel: Fjord & Form" />
+                  <input id="brief-company" name="company" type="text" placeholder="Eksempel: Lime & Form" />
                 </div>
 
                 <div class="brief-field legacy-choice-fields">
@@ -2799,10 +2870,11 @@
                   <div class="brief-legend">Effekter</div>
                   <div class="brief-choice-grid">
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Interaktiv lyslinje" /><span class="brief-choice-text">Interaktiv lyslinje</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Meteorregn" /><span class="brief-choice-text">Meteorregn</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Stjernehimmel" /><span class="brief-choice-text">Stjernehimmel</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Lynglimt" /><span class="brief-choice-text">Lynglimt</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Forstørrelsesglass" /><span class="brief-choice-text">Forstørrelsesglass</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Magnetisk hover" /><span class="brief-choice-text">Magnetisk hover</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Soft spotlight" /><span class="brief-choice-text">Soft spotlight</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Parallax drift" /><span class="brief-choice-text">Parallax drift</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Ink ripple" /><span class="brief-choice-text">Ink ripple</span></label>
                   </div>
                 </div>
 
@@ -2890,7 +2962,7 @@
 
       const styleProfiles = {
         "sol-bonner": { industry: "Kafe og servering", style: "varm", label: "Sol & Bønner" },
-        fjord: { industry: "Håndverk og service", style: "tillit", label: "Fjord" },
+        fjord: { industry: "Håndverk og service", style: "tillit", label: "Lime" },
         studio: { industry: "Helse og trening", style: "energi", label: "Studio" },
         nordic: { industry: "Rådgivning og tjenester", style: "tillit", label: "Nordic" },
         arctic: { industry: "Rådgivning og tjenester", style: "tillit", label: "Arctic" },
@@ -2917,6 +2989,10 @@
       let traceEnabled = false;
       let meteorTimerId = null;
       let magnifierEnabled = false;
+      let pointerReactiveEnabled = false;
+      let magneticEnabled = false;
+      let parallaxEnabled = false;
+      let rippleEnabled = false;
       let featureSelectionOrder = ["Kontaktinformasjon"];
       let mobileGeneratedView = false;
       let trailTheme = {
@@ -3469,28 +3545,36 @@
         const paletteSet = paletteSets[palette] || paletteSets.cool;
         const traceColor = paletteSet[2].color;
         const softColor = paletteSet[1].color;
-        const warmColor = paletteSet[0].color;
         const hasTrace = state.effects.indexOf("Interaktiv lyslinje") !== -1 || state.effects.indexOf("Lyslinje ved musepeker") !== -1;
-        const hasMeteors = state.effects.indexOf("Meteorregn") !== -1;
-        const hasStars = state.effects.indexOf("Stjernehimmel") !== -1;
-        const hasLightning = state.effects.indexOf("Lynglimt") !== -1;
         const hasMagnifier = state.effects.indexOf("Forstørrelsesglass") !== -1;
+        const hasMagnetic = state.effects.indexOf("Magnetisk hover") !== -1;
+        const hasSpotlight = state.effects.indexOf("Soft spotlight") !== -1;
+        const hasParallax = state.effects.indexOf("Parallax drift") !== -1;
+        const hasRipple = state.effects.indexOf("Ink ripple") !== -1;
         const scene = sketchSurface.dataset.scene || "calm";
         const isSolarEclipse = state.styleKey === "solar-eclipse";
         const boost = uiState.tone === "contrast" ? 1.58 : uiState.tone === "scene" ? 1.34 : 1;
 
         sketchSurface.classList.remove("has-glass-effect", "effect-atmosphere-on", "effect-glass-on");
         magnifierEnabled = hasMagnifier;
+        pointerReactiveEnabled = hasTrace || hasSpotlight || hasParallax || hasMagnetic;
+        magneticEnabled = hasMagnetic;
+        parallaxEnabled = hasParallax;
+        rippleEnabled = hasRipple;
         sketchSurface.classList.toggle("has-magnifier-effect", hasMagnifier);
         if (!hasMagnifier && sketchMagnifier) {
           sketchMagnifier.classList.remove("is-visible");
         }
+        sketchSurface.querySelectorAll(".sketch-hero, .sketch-note, .sketch-section").forEach(function (element) {
+          element.style.transform = "";
+        });
         if (meteorTimerId) {
           window.clearTimeout(meteorTimerId);
           meteorTimerId = null;
         }
 
         if (!sketchEffects) return;
+        sketchEffects.style.setProperty("--ripple-color", traceColor + "bb");
 
         const pieces = [];
 
@@ -3498,77 +3582,31 @@
           pieces.push(
             '<span class="sketch-effect-trace" style="left:6%; top:22%; width:' + (42 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + 'aa; --angle:-12deg; --duration:6s;"></span>',
             '<span class="sketch-effect-trace" style="right:8%; top:54%; width:' + (36 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88; --angle:9deg; --duration:7.5s;"></span>',
-            '<span class="sketch-effect-trace" style="left:20%; bottom:18%; width:' + (34 * boost) + '%; --effect-color:' + softColor + '; --effect-glow:' + softColor + '88; --angle:-4deg; --duration:8.2s;"></span>'
+            '<span class="sketch-effect-trace" style="left:20%; bottom:18%; width:' + (34 * boost) + '%; --effect-color:' + softColor + '; --effect-glow:' + softColor + '88; --angle:-4deg; --duration:8.2s;"></span>',
+            '<span class="sketch-effect-cursor" style="--effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88;"></span>'
           );
         }
 
-        if (hasStars) {
+        if (hasParallax) {
           pieces.push(
             '<span class="sketch-effect-atmosphere" style="left:-10%; top:-8%; width:' + (48 * boost) + '%; height:' + (38 * boost) + '%; --effect-color:' + softColor + 'a6; --drift-x:22px; --drift-y:-10px; --scale-end:1.08; --duration:14s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="right:-14%; top:2%; width:' + (44 * boost) + '%; height:' + (34 * boost) + '%; --effect-color:' + traceColor + '96; --drift-x:-18px; --drift-y:12px; --scale-end:1.08; --duration:16s;"></span>'
+            '<span class="sketch-effect-atmosphere" style="right:-14%; top:2%; width:' + (44 * boost) + '%; height:' + (34 * boost) + '%; --effect-color:' + traceColor + '96; --drift-x:-18px; --drift-y:12px; --scale-end:1.08; --duration:16s;"></span>',
+            '<span class="sketch-effect-parallax layer-a" style="--effect-color:' + softColor + '8a;"></span>',
+            '<span class="sketch-effect-parallax layer-b" style="--effect-color:' + traceColor + '84;"></span>'
           );
-          for (let i = 0; i < 54; i += 1) {
-            const x = 4 + (i * 7.3) % 92;
-            const y = 6 + (i * 9.1) % 76;
-            const size = 1 + (i % 4);
-            const delay = (i * 0.23).toFixed(2);
-            const duration = (2.6 + (i % 6) * 0.62).toFixed(2);
-            pieces.push(
-              '<span class="sketch-effect-star" style="left:' + x + '%; top:' + y + '%; width:' + size + 'px; height:' + size + 'px; --star-color:' + softColor + '; --star-glow:' + traceColor + 'aa; --delay:' + delay + 's; --duration:' + duration + 's;"></span>'
-            );
-          }
         }
 
-        if (hasLightning) {
-          for (let i = 0; i < 4; i += 1) {
-            const duration = (4.4 + Math.random() * 6.4).toFixed(2);
-            const delay = (Math.random() * 4.2).toFixed(2);
-            const fullFlash = Math.random() > 0.72;
-            const anchorX = (Math.random() * 100).toFixed(1);
-            const anchorY = (Math.random() * 100).toFixed(1);
-            const spread = (36 + Math.random() * 48).toFixed(1);
-            const flashBg = fullFlash
-              ? "linear-gradient(180deg, rgba(236,245,255,0.34), rgba(194,218,240,0.24))"
-              : "radial-gradient(circle at " + anchorX + "% " + anchorY + "%, rgba(236,245,255,0.56), transparent " + spread + "%), linear-gradient(180deg, rgba(225,240,255,0.22), rgba(180,208,236,0.14))";
-            pieces.push(
-              '<span class="sketch-effect-lightning" style="--duration:' + duration + 's; --delay:' + delay + 's; --flash-bg:' + flashBg + ';"></span>'
-            );
-          }
+        if (hasSpotlight) {
+          pieces.push(
+            '<span class="sketch-effect-spotlight" style="--spotlight-core:' + softColor + '66; --spotlight-mid:' + traceColor + '30;"></span>'
+          );
         }
 
-        if (isSolarEclipse || (scene === "tech" && (hasMeteors || hasTrace || hasStars))) {
+        if (isSolarEclipse || (scene === "tech" && (hasTrace || hasParallax))) {
           pieces.push('<span class="sketch-effect-eclipse"></span>');
         }
 
         sketchEffects.innerHTML = pieces.join("");
-
-        if (hasMeteors) {
-          const spawnMeteor = function () {
-            if (!sketchEffects || !hasMeteors) return;
-            const meteor = document.createElement("span");
-            meteor.className = "sketch-effect-meteor";
-            const left = 6 + Math.random() * 90;
-            const top = 4 + Math.random() * 76;
-            const width = 14 + Math.random() * 18;
-            const angle = -10 - Math.random() * 22;
-            const duration = 0.42 + Math.random() * 0.78;
-            const palettePick = [traceColor, softColor, warmColor, "#ffffff"][Math.floor(Math.random() * 4)];
-            meteor.style.left = left + "%";
-            meteor.style.top = top + "%";
-            meteor.style.width = width + "%";
-            meteor.style.setProperty("--angle", angle + "deg");
-            meteor.style.setProperty("--duration", duration + "s");
-            meteor.style.setProperty("--meteor-color", palettePick);
-            meteor.style.setProperty("--meteor-glow", palettePick + "99");
-            sketchEffects.appendChild(meteor);
-            window.setTimeout(function () {
-              meteor.remove();
-            }, (duration * 1000) + 140);
-            const nextDelay = 320 + Math.random() * 2100;
-            meteorTimerId = window.setTimeout(spawnMeteor, nextDelay);
-          };
-          meteorTimerId = window.setTimeout(spawnMeteor, 220 + Math.random() * 800);
-        }
 
         traceEnabled = hasTrace;
       }
@@ -3781,7 +3819,7 @@
           const demoHref = styleDemoRoutes[state.styleKey];
           if (demoHref) {
             styleDemoLink.href = demoHref;
-            styleDemoLink.textContent = "Se demo: " + state.styleLabel;
+            styleDemoLink.textContent = "Åpne prefabrikert demo: " + state.styleLabel;
             styleDemoLink.classList.remove("is-disabled");
           } else {
             styleDemoLink.href = "#";
@@ -3914,7 +3952,7 @@
         });
         featureSelectionOrder = pickedFeatures.slice();
 
-        const allowedEffects = ["Interaktiv lyslinje", "Meteorregn", "Stjernehimmel", "Lynglimt", "Forstørrelsesglass"];
+        const allowedEffects = ["Interaktiv lyslinje", "Forstørrelsesglass", "Magnetisk hover", "Soft spotlight", "Parallax drift", "Ink ripple"];
         if (level === "premium") {
           const pickedEffects = pickRandomSubset(allowedEffects, 1, 3);
           effectInputs.forEach(function (input) {
@@ -4147,6 +4185,73 @@
         sketchSurface.addEventListener("pointermove", updateLensPosition, { passive: true });
         sketchSurface.addEventListener("pointerleave", function () {
           sketchMagnifier.classList.remove("is-visible");
+        });
+      })();
+
+      (function setupPointerEnhancements() {
+        if (!sketchSurface || !sketchEffects) return;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+        if (prefersReducedMotion || !hasFinePointer) return;
+
+        function resetMagneticTransforms() {
+          sketchSurface.querySelectorAll(".sketch-hero, .sketch-note, .sketch-section").forEach(function (element) {
+            element.style.transform = "";
+          });
+        }
+
+        sketchSurface.addEventListener("pointermove", function (event) {
+          if (!pointerReactiveEnabled) return;
+          const rect = sketchSurface.getBoundingClientRect();
+          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+          const offsetX = x - rect.width / 2;
+          const offsetY = y - rect.height / 2;
+
+          sketchEffects.style.setProperty("--cursor-x", x + "px");
+          sketchEffects.style.setProperty("--cursor-y", y + "px");
+          sketchEffects.style.setProperty("--parallax-x", offsetX.toFixed(2) + "px");
+          sketchEffects.style.setProperty("--parallax-y", offsetY.toFixed(2) + "px");
+          sketchEffects.dataset.pointerActive = "true";
+
+          if (magneticEnabled) {
+            sketchSurface.querySelectorAll(".sketch-hero, .sketch-note, .sketch-section").forEach(function (element) {
+              const elementRect = element.getBoundingClientRect();
+              const centerX = elementRect.left + elementRect.width / 2;
+              const centerY = elementRect.top + elementRect.height / 2;
+              const dx = (event.clientX - centerX) / 16;
+              const dy = (event.clientY - centerY) / 16;
+              const maxShift = 7;
+              const tx = Math.max(-maxShift, Math.min(maxShift, dx));
+              const ty = Math.max(-maxShift, Math.min(maxShift, dy));
+              element.style.transform = "translate3d(" + tx.toFixed(2) + "px," + ty.toFixed(2) + "px,0)";
+            });
+          } else {
+            resetMagneticTransforms();
+          }
+        }, { passive: true });
+
+        sketchSurface.addEventListener("pointerdown", function (event) {
+          if (!rippleEnabled || !sketchEffects) return;
+          const rect = sketchSurface.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const ripple = document.createElement("span");
+          ripple.className = "sketch-ripple";
+          ripple.style.left = x + "px";
+          ripple.style.top = y + "px";
+          ripple.style.setProperty("--ripple-color", getComputedStyle(sketchEffects).getPropertyValue("--ripple-color") || "rgba(255,255,255,0.72)");
+          sketchEffects.appendChild(ripple);
+          window.setTimeout(function () {
+            ripple.remove();
+          }, 760);
+        });
+
+        sketchSurface.addEventListener("pointerleave", function () {
+          sketchEffects.dataset.pointerActive = "false";
+          sketchEffects.style.setProperty("--parallax-x", "0px");
+          sketchEffects.style.setProperty("--parallax-y", "0px");
+          resetMagneticTransforms();
         });
       })();
 
