@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Om oss – Netrivo</title>
+  <meta name="description" content="Netrivo holder til i Ålesund og hjelper små og mellomstore bedrifter og enkeltpersonsforetak med nettsider du eier – fra skisse til ferdig leveranse." />
+  <style>
+    :root{
+      --bg:#f5f1ea;
+      --paper:#fbf8f3;
+      --ink:#151515;
+      --muted:#5f5a53;
+      --line:rgba(21,21,21,0.1);
+      --shadow:0 30px 80px rgba(40,27,17,0.08);
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#f7f3ed 0%,#f2ede5 100%);
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(var(--max), calc(100% - 28px));margin:0 auto}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(247,243,237,0.82);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(21,21,21,0.06);
+    }
+
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 0;
+      flex-wrap:wrap;
+    }
+
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{
+      width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+      background:var(--ink);color:#f7f3ed;font-weight:700;letter-spacing:0.16em;font-size:0.8rem;
+    }
+
+    .brand-copy strong{display:block;font-size:1rem}
+    .brand-copy span{display:block;color:var(--muted);font-size:0.76rem;margin-top:2px}
+
+    .nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    .nav a{
+      font-size:0.88rem;
+      font-weight:600;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{color:var(--ink);border-color:rgba(21,21,21,0.1);background:rgba(255,255,255,0.5)}
+    .nav a.is-active{color:var(--ink);border-color:rgba(21,21,21,0.12);background:#fff}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:11px 16px;border-radius:999px;font-size:0.88rem;font-weight:700;
+      border:1px solid rgba(21,21,21,0.14);background:#fff;
+    }
+    .btn--dark{background:var(--ink);color:#f6f1ea;border-color:var(--ink)}
+
+    .hero{padding:34px 0 8px}
+
+    .hero-shell{
+      border:1px solid var(--line);
+      border-radius:34px;
+      background:rgba(255,255,255,0.5);
+      box-shadow:var(--shadow);
+      padding:36px 28px;
+    }
+
+    .kicker{
+      font-size:0.72rem;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    h1{
+      margin:14px 0 0;
+      font-size:clamp(2rem, 6vw, 3.4rem);
+      line-height:1.02;
+      letter-spacing:-0.05em;
+      max-width:760px;
+    }
+
+    .lead{
+      margin:16px 0 0;
+      color:var(--muted);
+      max-width:720px;
+      line-height:1.75;
+      font-size:1.05rem;
+    }
+
+    .content{padding:12px 0 56px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,0.62);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .card h2{
+      margin:0;
+      font-size:1.35rem;
+      letter-spacing:-0.03em;
+      line-height:1.12;
+    }
+
+    .card p, .card ul{
+      margin:12px 0 0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.98rem;
+    }
+
+    .card ul{padding-left:1.1rem;margin-top:14px}
+
+    .card li{margin:8px 0}
+
+    .note{
+      margin-top:20px;
+      padding:20px 22px;
+      border-radius:22px;
+      border:1px dashed rgba(21,21,21,0.14);
+      background:rgba(255,255,255,0.45);
+      color:var(--muted);
+      font-size:0.95rem;
+      line-height:1.7;
+    }
+
+    .note strong{color:var(--ink)}
+
+    .cta{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="./index.html">
+        <div class="brand-mark">N</div>
+        <div class="brand-copy">
+          <strong>Netrivo</strong>
+          <span>Om oss</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="./index.html">Forside</a>
+        <a href="./index.html#related-demos">Demoer</a>
+        <a href="./prosjektstarter.html">Skisse</a>
+        <a class="is-active" href="./om-oss.html" aria-current="page">Om oss</a>
+        <a href="./faq.html">FAQ</a>
+        <a href="./index.html#contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="kicker">Om Netrivo</div>
+        <h1>Nettsider med tydelig retning – bygd for bedrifter som vil eie resultatet.</h1>
+        <p class="lead">
+          Vi kombinerer skisse, tydelige valg og ferdige maler slik at du slipper uendelige runder og usikkerhet.
+          Målet er en nettside du forstår, godkjenner og kan ta i bruk med én gang – som et produkt du eier, ikke et abonnement du er låst i.
+        </p>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container grid">
+        <article class="card">
+          <h2>Tilholdssted</h2>
+          <p>
+            Vi holder til i <strong>Ålesund</strong> og jobber med kunder på tvers av landet.
+            Lokal forankring betyr kort vei til dialog og forutsigbar oppfølging – uansett om du er i nærområdet eller et annet sted i Norge.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Hvem vi jobber for</h2>
+          <p>
+            Netrivo er særlig rettet mot <strong>små og mellomstore bedrifter</strong> og <strong>enkeltpersonsforetak</strong> som trenger en profesjonell nettside uten byråpris og lang leveranseko.
+            Typiske eksempler er håndverkere, behandlere, konsulenter, lokale tjenester og små team som vil fremstå tydeligere digitalt.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Slik jobber vi</h2>
+          <p>
+            Du starter i skissen: behov, stil og funksjoner. Deretter ser du retningen samlet, godkjenner produktet og betaler når du er trygg på leveransen.
+            Alt er lagt opp for færre overraskelser, tydeligere beslutninger og raskere vei til en ferdig side.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Andre ting som ofte hører hjemme på en «om oss»-side</h2>
+          <p>Her er elementer du med fordel kan utvide med over tid – si fra om du vil at vi skal legge inn noe av dette som fast tekst:</p>
+          <ul>
+            <li><strong>Verdier og løfter</strong> – hva kunden kan forvente av kvalitet, tempo og ærlig rådgivning.</li>
+            <li><strong>Eier og ansvar</strong> – hvem står bak (navn, bakgrunn, kontaktperson).</li>
+            <li><strong>Referanser eller case</strong> – korte eksempler på leveranser (anonymisert om ønskelig).</li>
+            <li><strong>Prinsipper for personvern og drift</strong> – kort om data, hosting og support etter leveranse.</li>
+            <li><strong>Åpning for henvendelse</strong> – tydelig CTA til skisse eller e-post.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="container">
+        <div class="note">
+          <strong>Forslag:</strong> Når du er klar, kan vi bytte ut generiske formuleringer med din stemme – for eksempel én setning om hvorfor du startet Netrivo, og hva du vil at kunder skal huske etter første samtale.
+        </div>
+        <div class="cta">
+          <a class="btn btn--dark" href="./prosjektstarter.html">Start med skissen</a>
+          <a class="btn" href="./index.html#contact">Kontakt oss</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

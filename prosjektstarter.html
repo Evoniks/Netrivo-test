@@ -2693,7 +2693,7 @@
                   <aside class="sketch-live-options" aria-label="Live valg for skisse">
                     <div class="control-group">
                       <h4>Live-valg for skisse</h4>
-                      <p>Trykk her for å se endringer i skissa med en gang.</p>
+                      <p>Trykk her for å se endringer i skissen med en gang.</p>
                     </div>
                     <div class="content-amount">
                       <div class="live-option-label">Innholdsmengde</div>
@@ -2784,10 +2784,10 @@
             </div>
 
             <div class="ai-evaluation" id="ai-evaluation">
-              <h3>AI-vurdering av retninga</h3>
-              <p id="ai-evaluation-intro">Her kjem ei kort vurdering av vala dine, kva som styrkar måloppnåinga, og kva som kan gi enda betre effekt.</p>
+              <h3>AI-vurdering av retningen</h3>
+              <p id="ai-evaluation-intro">Her kommer en kort vurdering av valgene dine, hva som styrker måloppnåelsen, og hva som kan gi enda bedre effekt.</p>
               <ul id="ai-evaluation-points">
-                <li>Val av nivå og funksjonar gir allereie eit tydeleg utgangspunkt for kunden.</li>
+                <li>Valg av nivå og funksjoner gir allerede et tydelig utgangspunkt for kunden.</li>
               </ul>
             </div>
 
@@ -2801,11 +2801,11 @@
               </ul>
               <div class="summary-pricing" id="brief-price-summary">
                 <div class="summary-pricing-title">Oppsummering av pris</div>
-                <div class="summary-price-item" data-level="enkel"><strong>Enkel</strong><span>frå 10 000 NOK</span></div>
-                <div class="summary-price-item is-active" data-level="standard"><strong>Standard</strong><span>frå 25 000 NOK</span></div>
-                <div class="summary-price-item" data-level="premium"><strong>Premium</strong><span>frå 50 000 NOK</span></div>
-                <p>Pris avhenger av innhald, omfang og kor mykje som skal byggast.</p>
-                <p>Tilpassingar utanfor dei etablerte løysingane, spesialbestillingar eller større endringar i ettertid blir utført etter eigne timesatsar og avtales separat.</p>
+                <div class="summary-price-item" data-level="enkel"><strong>Enkel</strong><span>fra 10 000 NOK</span></div>
+                <div class="summary-price-item is-active" data-level="standard"><strong>Standard</strong><span>fra 25 000 NOK</span></div>
+                <div class="summary-price-item" data-level="premium"><strong>Premium</strong><span>fra 50 000 NOK</span></div>
+                <p>Pris avhenger av innhold, omfang og hvor mye som skal bygges.</p>
+                <p>Tilpasninger utenfor de etablerte løsningene, spesialbestillinger eller større endringer i ettertid utføres etter egne timesatser og avtales separat.</p>
               </div>
               <div class="summary-actions">
                 <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
@@ -3148,7 +3148,7 @@
 
       function buildAiEvaluation(state, recommendation) {
         const featureCount = state.features.length;
-        const featureText = featureCount ? getOrderedSelectedFeatures(state).slice(0, 3).join(", ").toLowerCase() : "tydeleg kontaktflyt";
+        const featureText = featureCount ? getOrderedSelectedFeatures(state).slice(0, 3).join(", ").toLowerCase() : "tydelig kontaktflyt";
         const notes = state.notes || "";
         const isCafeOrRetail = /kafe|servering|butikk|livsstil|blomster|plante/i.test(state.industry + " " + state.styleLabel + " " + notes);
         const isServiceTrustDriven = /rådgivning|tjenester|håndverk|service|tech|saas|brand/i.test(state.industry.toLowerCase());
@@ -3156,26 +3156,26 @@
         const improvements = [];
 
         positive.push("Vala peikar mot " + recommendation.level + "-nivå med fokus på " + featureText + ".");
-        if (featureCount >= 3) positive.push("Du har fleire konkrete funksjonar som gjer kundereisa tydelegare.");
-        if (/tillit|trygg|seriøs|struktur/i.test(notes)) positive.push("Notata dine styrkar truverd og fagleg ro i retninga.");
-        if (/rask|direkte|enkel|lav terskel/i.test(notes)) positive.push("Notata prioriterer låg friksjon, noko som ofte gir fleire henvendelsar.");
+        if (featureCount >= 3) positive.push("Du har flere konkrete funksjoner som gjør kundereisen tydeligere.");
+        if (/tillit|trygg|seriøs|struktur/i.test(notes)) positive.push("Notatene dine styrker troverdighet og faglig ro i retningen.");
+        if (/rask|direkte|enkel|lav terskel/i.test(notes)) positive.push("Notatene prioriterer lav friksjon, noe som ofte gir flere henvendelser.");
 
-        if (featureCount <= 1) improvements.push("Legg til minst éin støttefunksjon (t.d. Om oss eller Åpningstider) for meir tryggleik før kontakt.");
-        if (state.content === "kort" && featureCount > 3) improvements.push("Vurder færre funksjonar for å halde fokuset skarpt i kort-modus.");
+        if (featureCount <= 1) improvements.push("Legg til minst én støttefunksjon (f.eks. Om oss eller åpningstider) for mer trygghet før kontakt.");
+        if (state.content === "kort" && featureCount > 3) improvements.push("Vurder færre funksjoner for å holde fokuset skarpt i kort-modus.");
         if (!isCafeOrRetail && isServiceTrustDriven && state.content !== "rik" && (state.features.indexOf("Cases") === -1)) {
-          improvements.push("Vil du auke tillit i denne typen verksemd, kan Cases/referansar vere neste naturlege steg.");
+          improvements.push("Vil du øke tillit i denne typen virksomhet, kan referanser være neste naturlige steg.");
         }
         if (isCafeOrRetail && state.features.indexOf("Åpningstider") === -1) {
-          improvements.push("For denne typen verksemd er tydelege åpningstider ofte viktigare enn fleire avanserte seksjonar.");
+          improvements.push("For denne typen virksomhet er tydelige åpningstider ofte viktigere enn flere avanserte seksjoner.");
         }
-        if (!notes.trim()) improvements.push("Legg inn 1-2 setningar i «Kort om ønsket retning» for endå meir treffsikker AI-retning.");
+        if (!notes.trim()) improvements.push("Legg inn én til to setninger i «Kort om ønsket retning» for enda mer treffsikker AI-retning.");
 
         if (!positive.length) positive.push("Retninga er klar og gir eit godt utgangspunkt for neste designrunde.");
         if (!improvements.length) improvements.push("Noverande val er balanserte; neste steg er å konkretisere bodskap og call-to-action i teksten.");
 
         return {
-          intro: "AI tolkar vala dine opp mot måloppnåing, klarheit og tillit i førsteinntrykket.",
-          points: [positive[0], positive[1] || improvements[0], improvements[1] || "Små justeringar i innhald og prioritering kan gi endå betre effekt."]
+          intro: "AI tolker valgene dine opp mot måloppnåelse, klarhet og tillit i førsteinntrykket.",
+          points: [positive[0], positive[1] || improvements[0], improvements[1] || "Små justeringer i innhold og prioritering kan gi enda bedre effekt."]
         };
       }
 
