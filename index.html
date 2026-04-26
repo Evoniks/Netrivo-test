@@ -378,6 +378,7 @@
       box-shadow:var(--shadow);
       display:grid;
       gap:12px;
+      overflow:visible;
     }
 
     .demo-tier-card::before{
@@ -420,6 +421,7 @@
       gap:10px;
       flex-wrap:wrap;
       margin-top:4px;
+      position:relative;
     }
 
     .btn-tier{
@@ -435,14 +437,17 @@
       transform:translateY(-1px);
     }
     .tier-dropdown{
-      margin-top:10px;
       display:none;
-      width:100%;
+      position:absolute;
+      left:0;
+      top:calc(100% + 10px);
+      width:min(320px, 100%);
+      z-index:14;
       padding:12px;
-      border-radius:18px;
-      border:1px solid rgba(21,21,21,0.12);
-      background:linear-gradient(145deg, rgba(255,255,255,0.94), rgba(246,241,234,0.9));
-      box-shadow:0 14px 28px rgba(21,17,14,0.12);
+      border-radius:20px;
+      border:1px solid rgba(21,21,21,0.1);
+      background:linear-gradient(145deg, rgba(255,255,255,0.98), rgba(248,244,238,0.96));
+      box-shadow:0 20px 38px rgba(21,17,14,0.18);
     }
     .tier-dropdown.is-open{
       display:grid;
@@ -453,16 +458,17 @@
       padding:10px 12px;
       border-radius:12px;
       border:1px solid rgba(21,21,21,0.1);
-      background:rgba(255,255,255,0.84);
+      background:rgba(255,255,255,0.94);
       font-size:0.86rem;
       font-weight:700;
       color:#1c1814;
       text-decoration:none;
-      transition:transform .18s ease, background .18s ease;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .tier-dropdown-link:hover{
       transform:translateY(-1px);
       background:#fff;
+      border-color:rgba(21,21,21,0.2);
     }
 
     .offer-band{
@@ -2392,7 +2398,7 @@
           <div class="hero-copy">
             <div>
               <div class="eyebrow">Netrivo / premium retning med mindre støy</div>
-              <h1>Start med skisse. Få ei ferdig nettside du eig - utan abonnement.</h1>
+              <h1>Frå idé til ferdig nettside på kort tid</h1>
               <p class="lead">
                 Du startar i skissa, vel retning og sender behov. Vi bygger ut heile sida basert på skisse + behov, og du betaler for eit ferdig produkt du faktisk eig.
               </p>
@@ -2441,11 +2447,11 @@
             <div class="demo-tier-actions">
               <button class="btn-tier demo-tier-trigger" type="button" data-tier="enkel" aria-expanded="false" aria-controls="tier-dropdown-enkel">Se Enkel-demo</button>
               <a class="btn-tier" href="./netrivo-mobil-enkel.html">Se mobil</a>
-            </div>
-            <div class="tier-dropdown" id="tier-dropdown-enkel">
-              <a class="tier-dropdown-link" href="./netrivo-enkel-1-kafe.html">Sol &amp; Bønner</a>
-              <a class="tier-dropdown-link" href="./netrivo-enkel-2-handverkar.html">Lime</a>
-              <a class="tier-dropdown-link" href="./netrivo-enkel-3-ptstudio.html">Studio</a>
+              <div class="tier-dropdown" id="tier-dropdown-enkel">
+                <a class="tier-dropdown-link" href="./netrivo-enkel-1-kafe.html">Sol &amp; Bønner</a>
+                <a class="tier-dropdown-link" href="./netrivo-enkel-2-handverkar.html">Lime</a>
+                <a class="tier-dropdown-link" href="./netrivo-enkel-3-ptstudio.html">Studio</a>
+              </div>
             </div>
           </article>
           <article class="demo-tier-card demo-tier-card--standard">
@@ -2455,11 +2461,11 @@
             <div class="demo-tier-actions">
               <button class="btn-tier demo-tier-trigger" type="button" data-tier="standard" aria-expanded="false" aria-controls="tier-dropdown-standard">Se Standard-demo</button>
               <a class="btn-tier" href="./netrivo-mobil-standard.html">Se mobil</a>
-            </div>
-            <div class="tier-dropdown" id="tier-dropdown-standard">
-              <a class="tier-dropdown-link" href="./netrivo-standard-1-arkitekt.html">Nordic</a>
-              <a class="tier-dropdown-link" href="./netrivo-standard-2-radgiving.html">Arctic</a>
-              <a class="tier-dropdown-link" href="./netrivo-standard-3-oppleving.html">Glacial Lake</a>
+              <div class="tier-dropdown" id="tier-dropdown-standard">
+                <a class="tier-dropdown-link" href="./netrivo-standard-1-arkitekt.html">Nordic</a>
+                <a class="tier-dropdown-link" href="./netrivo-standard-2-radgiving.html">Arctic</a>
+                <a class="tier-dropdown-link" href="./netrivo-standard-3-oppleving.html">Glacial Lake</a>
+              </div>
             </div>
           </article>
           <article class="demo-tier-card demo-tier-card--premium">
@@ -2469,11 +2475,11 @@
             <div class="demo-tier-actions">
               <button class="btn-tier demo-tier-trigger" type="button" data-tier="premium" aria-expanded="false" aria-controls="tier-dropdown-premium">Se Premium-demo</button>
               <a class="btn-tier" href="./netrivo-mobil-premium-boutique.html">Se mobil</a>
-            </div>
-            <div class="tier-dropdown" id="tier-dropdown-premium">
-              <a class="tier-dropdown-link" href="./netrivo-premium-1-boutique.html">Maison Fjell</a>
-              <a class="tier-dropdown-link" href="./netrivo-premium-2-tech.html">Solar Eclipse</a>
-              <a class="tier-dropdown-link" href="./netrivo-premium-3-personlegbrand.html">Elin Varde</a>
+              <div class="tier-dropdown" id="tier-dropdown-premium">
+                <a class="tier-dropdown-link" href="./netrivo-premium-1-boutique.html">Maison Fjell</a>
+                <a class="tier-dropdown-link" href="./netrivo-premium-2-tech.html">Solar Eclipse</a>
+                <a class="tier-dropdown-link" href="./netrivo-premium-3-personlegbrand.html">Elin Varde</a>
+              </div>
             </div>
           </article>
         </div>
@@ -2495,18 +2501,18 @@
         <div class="process-grid">
           <article class="step">
             <small>01</small>
-            <strong>Vi lager skisse</strong>
-            <p>Du startar med skisse for å få konkret retning og anbefalt nivå.</p>
+            <strong>Kartlegg behov og send inn</strong>
+            <p>Fortell hva du trenger, ønsket stil og hva nettsiden skal oppnå.</p>
           </article>
           <article class="step">
             <small>02</small>
-            <strong>Du sender behov + godkjenner retning</strong>
-            <p>Vi får grunnlaget vi treng før bygging startar.</p>
+            <strong>Se over og godkjenn retning</strong>
+            <p>Du får forslag til struktur, nivå og uttrykk før bygging starter.</p>
           </article>
           <article class="step">
             <small>03</small>
-            <strong>Vi bygger ferdig nettside</strong>
-            <p>Nettsida blir bygd frå skisse + behov, og levert som ferdig produkt du eig.</p>
+            <strong>Få og ta i bruk nettsiden</strong>
+            <p>Nettsiden blir ferdig levert som et produkt du eier og kan bruke med én gang.</p>
           </article>
         </div>
       </div>
