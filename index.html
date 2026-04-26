@@ -226,9 +226,10 @@
       z-index:1;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
+      justify-content:flex-start;
       min-height:100%;
       padding:40px;
+      gap:22px;
     }
 
     .panel-badge{
@@ -241,11 +242,13 @@
     .panel-card{
       align-self:flex-end;
       width:min(100%, 420px);
-      padding:26px;
+      margin-top:10px;
+      padding:28px;
       border-radius:28px;
-      background:rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.1);
-      backdrop-filter:blur(10px);
+      background:linear-gradient(165deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+      border:1px solid rgba(255,255,255,0.22);
+      box-shadow:0 20px 42px rgba(12,10,10,0.26);
+      backdrop-filter:blur(11px) saturate(1.05);
     }
 
     .panel-card + .panel-card{margin-top:16px}
@@ -2325,7 +2328,6 @@
         </div>
       </a>
       <nav class="nav">
-        <a href="#packages">Pakker</a>
         <a href="#related-demos">Demoer</a>
         <a href="./prosjektstarter.html">Start skisse</a>
         <a href="#process">Prosess</a>
@@ -2348,7 +2350,7 @@
               </p>
               <div class="hero-actions">
                 <a class="btn btn-primary" href="./prosjektstarter.html">Start skisse</a>
-                <a class="btn btn-secondary" href="#packages">Se pakker og pris</a>
+                <a class="btn btn-secondary" href="#related-demos">Se relaterte demoer</a>
               </div>
             </div>
 
@@ -2366,59 +2368,6 @@
               </div>
             </div>
           </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="packages">
-      <div class="container">
-        <div class="services-grid">
-          <article class="service">
-            <div class="service-index">Enkel / frå 10 000 NOK</div>
-            <div>
-              <h3>For deg som vil raskt i gang</h3>
-              <p>Passar for enkle behov med tydeleg bodskap og kort veg til kontakt.</p>
-              <p>- 1-2 sider
-              <br>- Grunnleggande struktur og mobiltilpassing
-              <br>- Klar CTA og enkel leveranse</p>
-              <a class="btn btn-secondary" href="./prosjektstarter.html">Velg Enkel i skissa</a>
-            </div>
-          </article>
-
-          <article class="service">
-            <div class="service-index">Standard / frå 25 000 NOK</div>
-            <div>
-              <h3>For deg som treng meir struktur</h3>
-              <p>Passar for bedrifter som må vise meir innhald og bygge meir tillit.</p>
-              <p>- 3-5 sider
-              <br>- Meir innhaldsstruktur og tydeleg prioritering
-              <br>- Sterkare uttrykk for fagleg truverd</p>
-              <a class="btn btn-secondary" href="./prosjektstarter.html">Velg Standard i skissa</a>
-            </div>
-          </article>
-
-          <article class="service">
-            <div class="service-index">Premium / frå 50 000 NOK</div>
-            <div>
-              <h3>For deg som vil løfte totalinntrykket</h3>
-              <p>Passar når uttrykk, sceneplass og opplevd verdi må vere tydeleg premium.</p>
-              <p>- 6+ sider
-              <br>- Kuratert retning og høgare visuell tyngde
-              <br>- Bygd for merkevarekjensle og salgsstyrke</p>
-              <a class="btn btn-secondary" href="./prosjektstarter.html">Velg Premium i skissa</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="offer-band">
-          <div class="kicker">Tryggheit og eigarskap</div>
-          <div class="offer-manifesto">
-            <p>Bygd som eit prosjekt. Prisa som eit resultat.</p>
-            <p>Dette er ikkje abonnement. Du investerer i ei ferdig nettside som skal jobbe for bedrifta di.</p>
-            <p>Du ser og godkjenner løysinga før sluttføring og betaling.</p>
-            <p>Du betaler for eit produkt du faktisk eig.</p>
-            <p>Pris avheng av innhald og omfang. Spesialtilpassingar utanfor etablerte løysingar blir avtalt separat etter timesats.</p>
-          </div>
         </div>
       </div>
     </section>
