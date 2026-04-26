@@ -3590,9 +3590,6 @@
 
         if (hasTrace) {
           pieces.push(
-            '<span class="sketch-effect-trace" style="left:6%; top:22%; width:' + (42 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + 'aa; --angle:-12deg; --duration:6s;"></span>',
-            '<span class="sketch-effect-trace" style="right:8%; top:54%; width:' + (36 * boost) + '%; --effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88; --angle:9deg; --duration:7.5s;"></span>',
-            '<span class="sketch-effect-trace" style="left:20%; bottom:18%; width:' + (34 * boost) + '%; --effect-color:' + softColor + '; --effect-glow:' + softColor + '88; --angle:-4deg; --duration:8.2s;"></span>',
             '<span class="sketch-effect-cursor" style="--effect-color:' + traceColor + '; --effect-glow:' + traceColor + '88;"></span>'
           );
         }
@@ -4211,11 +4208,12 @@
 
         sketchSurface.addEventListener("pointermove", function (event) {
           if (!pointerReactiveEnabled) return;
-          const rect = sketchSurface.getBoundingClientRect();
-          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left + pointerHotspotX));
-          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top + pointerHotspotY));
-          const offsetX = x - rect.width / 2;
-          const offsetY = y - rect.height / 2;
+          const surfaceRect = sketchSurface.getBoundingClientRect();
+          const effectsRect = sketchEffects.getBoundingClientRect();
+          const x = Math.max(0, Math.min(effectsRect.width, event.clientX - effectsRect.left + pointerHotspotX));
+          const y = Math.max(0, Math.min(effectsRect.height, event.clientY - effectsRect.top + pointerHotspotY));
+          const offsetX = (event.clientX - surfaceRect.left) - surfaceRect.width / 2;
+          const offsetY = (event.clientY - surfaceRect.top) - surfaceRect.height / 2;
 
           sketchEffects.style.setProperty("--cursor-x", x + "px");
           sketchEffects.style.setProperty("--cursor-y", y + "px");
@@ -4242,9 +4240,9 @@
 
         sketchSurface.addEventListener("pointerdown", function (event) {
           if (!rippleEnabled || !sketchEffects) return;
-          const rect = sketchSurface.getBoundingClientRect();
-          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left + pointerHotspotX));
-          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top + pointerHotspotY));
+          const effectsRect = sketchEffects.getBoundingClientRect();
+          const x = Math.max(0, Math.min(effectsRect.width, event.clientX - effectsRect.left + pointerHotspotX));
+          const y = Math.max(0, Math.min(effectsRect.height, event.clientY - effectsRect.top + pointerHotspotY));
           const ripple = document.createElement("span");
           ripple.className = "sketch-ripple";
           ripple.style.left = x + "px";
