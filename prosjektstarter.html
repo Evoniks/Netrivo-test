@@ -706,20 +706,55 @@
       gap:8px;
     }
 
+    .live-select-wrap{
+      position:relative;
+    }
+
+    .live-select-wrap::after{
+      content:"";
+      position:absolute;
+      right:14px;
+      top:50%;
+      width:9px;
+      height:9px;
+      border-right:2px solid rgba(63,53,45,0.62);
+      border-bottom:2px solid rgba(63,53,45,0.62);
+      transform:translateY(-58%) rotate(45deg);
+      pointer-events:none;
+    }
+
     .live-select{
+      appearance:none;
+      -webkit-appearance:none;
       width:100%;
-      min-height:44px;
-      border-radius:14px;
-      border:1px solid rgba(97,77,54,0.14);
-      background:rgba(255,255,255,0.74);
+      min-height:46px;
+      border-radius:15px;
+      border:1px solid rgba(97,77,54,0.18);
+      background:linear-gradient(180deg, rgba(255,255,255,0.94), rgba(250,246,241,0.92));
       color:#3f352d;
-      padding:10px 12px;
+      padding:10px 40px 10px 13px;
       font:inherit;
-      font-size:0.88rem;
+      font-size:0.9rem;
+      box-shadow:0 10px 22px rgba(70,48,30,0.07);
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+      cursor:pointer;
+    }
+
+    .live-select:focus{
+      outline:none;
+      border-color:rgba(97,77,54,0.35);
+      box-shadow:0 0 0 3px rgba(97,77,54,0.14), 0 10px 22px rgba(70,48,30,0.07);
+      background:rgba(255,255,255,0.98);
     }
 
     .live-select option:disabled{
       color:#a89c8f;
+    }
+
+    .live-select optgroup{
+      color:#7c6a5a;
+      font-weight:700;
+      font-size:0.83rem;
     }
 
     .live-option-label{
@@ -2468,27 +2503,37 @@
                       <h4>Live-valg for skisse</h4>
                       <p>Trykk her for å se endringer i skissa med en gang.</p>
                     </div>
-                    <div class="live-option-group">
-                      <div class="live-option-label">Ønsket stil</div>
-                      <select class="live-select" id="live-style">
-                        <option value="sol-bonner">Sol &amp; Bønner</option>
-                        <option value="fjord" selected>Fjord</option>
-                        <option value="studio">Studio</option>
-                        <option value="nordic">Nordic</option>
-                        <option value="arctic">Arctic</option>
-                        <option value="glacial-lake">Glacial Lake</option>
-                        <option value="maison-fjell">Maison Fjell</option>
-                        <option value="solar-eclipse">Solar Eclipse</option>
-                        <option value="elin-varde">Elin Varde</option>
-                        <option value="annet">Annet</option>
-                      </select>
-                    </div>
                     <div class="content-amount">
                       <div class="live-option-label">Innholdsmengde</div>
                       <div class="live-option-grid" id="live-content-options">
                         <button class="live-option" data-type="content" data-value="kort" type="button">Kort og direkte</button>
                         <button class="live-option is-active" data-type="content" data-value="balansert" type="button">Balansert med tydelig struktur</button>
                         <button class="live-option" data-type="content" data-value="rik" type="button">Mer innhold, flere seksjoner og mer tyngde</button>
+                      </div>
+                    </div>
+                    <div class="live-option-group">
+                      <div class="live-option-label">Ønsket stil</div>
+                      <div class="live-select-wrap">
+                        <select class="live-select" id="live-style">
+                          <optgroup label="Enkel">
+                            <option value="sol-bonner">Sol &amp; Bønner</option>
+                            <option value="fjord" selected>Fjord</option>
+                            <option value="studio">Studio</option>
+                          </optgroup>
+                          <optgroup label="Standard">
+                            <option value="nordic">Nordic</option>
+                            <option value="arctic">Arctic</option>
+                            <option value="glacial-lake">Glacial Lake</option>
+                          </optgroup>
+                          <optgroup label="Premium">
+                            <option value="maison-fjell">Maison Fjell</option>
+                            <option value="solar-eclipse">Solar Eclipse</option>
+                            <option value="elin-varde">Elin Varde</option>
+                          </optgroup>
+                          <optgroup label="Annet">
+                            <option value="annet">Annet</option>
+                          </optgroup>
+                        </select>
                       </div>
                     </div>
                     <div class="live-option-group">
