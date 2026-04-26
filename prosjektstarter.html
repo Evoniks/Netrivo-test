@@ -2087,6 +2087,36 @@
       gap:12px;
     }
 
+    .ai-evaluation{
+      margin-top:18px;
+      padding:18px 20px;
+      border-radius:20px;
+      border:1px solid rgba(21,21,21,0.08);
+      background:linear-gradient(145deg, rgba(255,255,255,0.82), rgba(246,239,230,0.74));
+      display:grid;
+      gap:10px;
+    }
+
+    .ai-evaluation h3{
+      margin:0;
+      font-size:1.08rem;
+      letter-spacing:-0.02em;
+    }
+
+    .ai-evaluation p,
+    .ai-evaluation ul{
+      margin:0;
+      color:var(--muted);
+      line-height:1.66;
+      font-size:0.92rem;
+    }
+
+    .ai-evaluation ul{
+      padding-left:18px;
+      display:grid;
+      gap:6px;
+    }
+
     .summary h3{
       margin:0;
       font-size:1.22rem;
@@ -2241,7 +2271,6 @@
       <nav class="nav">
         <a href="./index.html">Forside</a>
         <a href="#starter">Skisse</a>
-        <a href="#resultat">Skisse</a>
         <a href="mailto:post@netrivo.no">Kontakt</a>
       </nav>
     </div>
@@ -2390,33 +2419,14 @@
                     </div>
 
                     <div class="sketch-rail">
-                      <div class="sketch-note sketch-note--a">
-                        <div class="sketch-note-title"></div>
-                        <div class="sketch-note-lines">
-                          <div class="sketch-note-line" style="width:100%;"></div>
-                          <div class="sketch-note-line" style="width:84%;"></div>
-                          <div class="sketch-note-line" style="width:66%;"></div>
-                        </div>
-                      </div>
+                      <div class="sketch-note sketch-note--a" id="hero-note-a"></div>
                       <div class="sketch-media" aria-hidden="true">
                         <div class="sketch-media-frame">
                           <div class="sketch-media-icon"></div>
                         </div>
                       </div>
-                      <div class="sketch-note sketch-note--b">
-                        <div class="sketch-note-title" style="width:44%;"></div>
-                        <div class="sketch-note-lines">
-                          <div class="sketch-note-line" style="width:100%;"></div>
-                          <div class="sketch-note-line" style="width:74%;"></div>
-                        </div>
-                      </div>
-                      <div class="sketch-note sketch-note--c">
-                        <div class="sketch-note-title" style="width:52%;"></div>
-                        <div class="sketch-note-lines">
-                          <div class="sketch-note-line" style="width:92%;"></div>
-                          <div class="sketch-note-line" style="width:68%;"></div>
-                        </div>
-                      </div>
+                      <div class="sketch-note sketch-note--b" id="hero-note-b"></div>
+                      <div class="sketch-note sketch-note--c" id="hero-note-c"></div>
                     </div>
                   </div>
 
@@ -2510,6 +2520,14 @@
                   </aside>
                 </div>
               </div>
+            </div>
+
+            <div class="ai-evaluation" id="ai-evaluation">
+              <h3>AI-vurdering av retninga</h3>
+              <p id="ai-evaluation-intro">Her kjem ei kort vurdering av vala dine, kva som styrkar måloppnåinga, og kva som kan gi enda betre effekt.</p>
+              <ul id="ai-evaluation-points">
+                <li>Val av nivå og funksjonar gir allereie eit tydeleg utgangspunkt for kunden.</li>
+              </ul>
             </div>
 
             <div class="summary">
@@ -2645,6 +2663,11 @@
       const sketchTrail = document.getElementById("sketch-hover-trail");
       const sketchMagnifier = document.getElementById("sketch-magnifier");
       const sketchMagnifierContent = document.getElementById("sketch-magnifier-content");
+      const heroNoteA = document.getElementById("hero-note-a");
+      const heroNoteB = document.getElementById("hero-note-b");
+      const heroNoteC = document.getElementById("hero-note-c");
+      const aiEvaluationIntro = document.getElementById("ai-evaluation-intro");
+      const aiEvaluationPoints = document.getElementById("ai-evaluation-points");
       const wireframeTopline = document.getElementById("wireframe-topline");
       const wireframeChip = document.getElementById("wireframe-chip");
       const wireframeTitleBlock = document.getElementById("wireframe-title-block");
@@ -2710,6 +2733,7 @@
       let traceEnabled = false;
       let meteorTimerId = null;
       let magnifierEnabled = false;
+      let featureSelectionOrder = ["Kontaktinformasjon"];
       let trailTheme = {
         glowRgb: "236,188,255",
         coreRgb: "255,240,255"
@@ -2777,6 +2801,84 @@
         });
         sketchMagnifierContent.style.width = sketchSurface.clientWidth + "px";
         sketchMagnifierContent.style.height = sketchSurface.clientHeight + "px";
+      }
+
+      function syncFeatureSelectionOrder() {
+        const checkedFeatures = featureInputs.filter(function (input) {
+          return input.checked && !input.disabled;
+        }).map(function (input) {
+          return input.value;
+        });
+        featureSelectionOrder = featureSelectionOrder.filter(function (feature) {
+          return checkedFeatures.indexOf(feature) !== -1;
+        });
+        checkedFeatures.forEach(function (feature) {
+          if (featureSelectionOrder.indexOf(feature) === -1) {
+            featureSelectionOrder.push(feature);
+          }
+        });
+      }
+
+      function getOrderedSelectedFeatures(state) {
+        const ordered = featureSelectionOrder.filter(function (feature) {
+          return state.features.indexOf(feature) !== -1;
+        });
+        state.features.forEach(function (feature) {
+          if (ordered.indexOf(feature) === -1) ordered.push(feature);
+        });
+        return ordered;
+      }
+
+      function renderHeroFeatureNotes(state) {
+        const ordered = getOrderedSelectedFeatures(state).slice(0, 3);
+        const defaults = ["Kontaktinformasjon", "Om oss", "Åpningstider"];
+        while (ordered.length < 3) {
+          const nextDefault = defaults[ordered.length] || "Kontaktinformasjon";
+          ordered.push(nextDefault);
+        }
+        const slots = [heroNoteA, heroNoteB, heroNoteC];
+        ordered.forEach(function (feature, index) {
+          const section = featureSections[feature] || featureSections.Kontaktinformasjon;
+          const titleWidth = 34 + ((index * 14) % 32);
+          const lineA = 98 - index * 3;
+          const lineB = 78 - index * 6;
+          const lineC = 60 - index * 5;
+          if (!slots[index]) return;
+          slots[index].innerHTML =
+            '<div class="sketch-note-title" style="width:' + titleWidth + '%;"></div>' +
+            '<div class="sketch-note-lines">' +
+              '<div class="sketch-note-line" style="width:' + lineA + '%;"></div>' +
+              '<div class="sketch-note-line" style="width:' + lineB + '%;"></div>' +
+              '<div class="sketch-note-line" style="width:' + lineC + '%;"></div>' +
+            '</div>' +
+            '<div class="sketch-section-label">' + (section.sketchLabel || section.title || "Seksjon") + '</div>';
+        });
+      }
+
+      function buildAiEvaluation(state, recommendation) {
+        const featureCount = state.features.length;
+        const featureText = featureCount ? getOrderedSelectedFeatures(state).slice(0, 3).join(", ").toLowerCase() : "tydeleg kontaktflyt";
+        const notes = state.notes || "";
+        const positive = [];
+        const improvements = [];
+
+        positive.push("Vala peikar mot " + recommendation.level + "-nivå med fokus på " + featureText + ".");
+        if (featureCount >= 3) positive.push("Du har fleire konkrete funksjonar som gjer kundereisa tydelegare.");
+        if (/tillit|trygg|seriøs|struktur/i.test(notes)) positive.push("Notata dine styrkar truverd og fagleg ro i retninga.");
+        if (/rask|direkte|enkel|lav terskel/i.test(notes)) positive.push("Notata prioriterer låg friksjon, noko som ofte gir fleire henvendelsar.");
+
+        if (featureCount <= 1) improvements.push("Legg til minst éin støttefunksjon (t.d. Om oss eller Åpningstider) for meir tryggleik før kontakt.");
+        if (state.content === "kort" && featureCount > 3) improvements.push("Vurder færre funksjonar for å halde fokuset skarpt i kort-modus.");
+        if (state.content !== "rik" && (state.features.indexOf("Cases") === -1)) improvements.push("Vil du auke tillit, kan Cases/referansar vere neste naturlege steg.");
+        if (!notes.trim()) improvements.push("Legg inn 1-2 setningar i «Kort om ønsket retning» for endå meir treffsikker AI-retning.");
+
+        if (!positive.length) positive.push("Retninga er klar og gir eit godt utgangspunkt for neste designrunde.");
+        if (!improvements.length) improvements.push("Noverande val er balanserte; neste steg er å konkretisere bodskap og call-to-action i teksten.");
+
+        return {
+          intro: "AI tolkar vala dine opp mot måloppnåing, klarheit og tillit i førsteinntrykket.",
+          points: [positive[0], positive[1] || improvements[0], improvements[1] || "Små justeringar i innhald og prioritering kan gi endå betre effekt."]
+        };
       }
 
       const levelCopy = {
@@ -3423,6 +3525,7 @@
 
       function update() {
         syncOptionAccess();
+        syncFeatureSelectionOrder();
         refreshChoiceStates();
         const state = getState();
         const recommendation = recommendLevel(state);
@@ -3486,6 +3589,7 @@
           wireframeCopyBlock.innerHTML = makeSketchLines(level === "premium" ? 4 : 3, 100, 22, "sketch-body-line");
         }
         renderSections(sections);
+        renderHeroFeatureNotes(state);
         renderEffects(state, palette);
         syncMagnifierContent();
 
@@ -3493,6 +3597,13 @@
         summaryList.innerHTML = summaryLines.map(function (line) {
           return "<li>" + line + "</li>";
         }).join("");
+        const aiEvaluation = buildAiEvaluation(state, recommendation);
+        if (aiEvaluationIntro) aiEvaluationIntro.textContent = aiEvaluation.intro;
+        if (aiEvaluationPoints) {
+          aiEvaluationPoints.innerHTML = aiEvaluation.points.map(function (line) {
+            return "<li>" + line + "</li>";
+          }).join("");
+        }
         if (priceSummary) {
           Array.from(priceSummary.querySelectorAll(".summary-price-item")).forEach(function (item) {
             const isActive = item.dataset.level === level;
@@ -3562,6 +3673,7 @@
         featureInputs.forEach(function (input) {
           input.checked = pickedFeatures.indexOf(input.value) !== -1;
         });
+        featureSelectionOrder = pickedFeatures.slice();
 
         const allowedEffects = ["Interaktiv lyslinje", "Meteorregn", "Stjernehimmel", "Lynglimt", "Forstørrelsesglass"];
         if (level === "premium") {
