@@ -605,18 +605,13 @@
       margin-bottom:18px;
     }
 
-    .recommendation strong{
-      display:block;
-      font-size:1.52rem;
-      line-height:1.02;
-      letter-spacing:-0.05em;
-    }
-
     .recommendation p{
-      margin:10px 0 0;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:0.95rem;
+      margin:0;
+      color:#26221d;
+      line-height:1.25;
+      font-size:1.36rem;
+      font-weight:700;
+      letter-spacing:-0.03em;
     }
 
     .generator-toolbar{
@@ -2498,8 +2493,7 @@
         <div class="panel" id="resultat">
           <div class="panel-inner">
             <div class="recommendation">
-              <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
-              <p id="brief-recommendation-copy">Bruk dette skisseverktøyet til å kartlegge behov</p>
+              <p id="brief-recommendation-copy">Bruk dette skisseverktøyet til å kartlegge nettsidens behov</p>
             </div>
 
             <div class="generator-toolbar">
@@ -2834,7 +2828,6 @@
       const form = document.getElementById("project-brief-form");
       if (!form) return;
 
-      const recommendationTitle = document.getElementById("brief-recommendation-title");
       const recommendationCopy = document.getElementById("brief-recommendation-copy");
       const summaryCopy = document.getElementById("brief-summary-copy");
       const summaryList = document.getElementById("brief-summary-list");
@@ -3778,8 +3771,7 @@
         const score = document.getElementById("brief-score");
         if (badge) badge.textContent = "Anbefalt nivå / " + level.charAt(0).toUpperCase() + level.slice(1);
         if (score) score.textContent = recommendation.confidence + " - " + recommendation.reason;
-        recommendationTitle.textContent = levelCopy[level].title;
-        recommendationCopy.textContent = levelCopy[level].copy;
+        if (recommendationCopy) recommendationCopy.textContent = "Bruk dette skisseverktøyet til å kartlegge nettsidens behov";
         generatedEntityName.textContent = state.company || state.industry;
         generatedBriefTitle.textContent = generated.title;
         generatedBriefCopy.textContent = generated.copy;
