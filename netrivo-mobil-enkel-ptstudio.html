@@ -402,6 +402,28 @@
         window.location.href = "./netrivo-enkel-3-ptstudio.html";
       }
     })();
+
+    (function () {
+      const contactCard = document.querySelector("#kontakt .contact-card");
+      if (!contactCard || contactCard.querySelector("[data-directions-link]")) return;
+
+      const latitude = 59.9139;
+      const longitude = 10.7522;
+      const destination = latitude + "," + longitude;
+      const isAppleDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      const directionsUrl = isAppleDevice
+        ? "https://maps.apple.com/?daddr=" + encodeURIComponent(destination) + "&dirflg=d"
+        : "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(destination);
+
+      const link = document.createElement("a");
+      link.href = directionsUrl;
+      link.className = "btn btn-primary";
+      link.setAttribute("data-directions-link", "true");
+      link.textContent = "Få veibeskrivelse";
+      link.style.display = "block";
+      link.style.marginTop = "14px";
+      contactCard.appendChild(link);
+    })();
   </script>
 </body>
 </html>

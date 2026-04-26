@@ -1308,19 +1308,15 @@
           </div>
           <div class="map-showcase" data-map-showcase>
             <div class="map-style-controls">
-              <button class="map-style-btn is-active" type="button" data-map-style="standard">Google map</button>
+              <button class="map-style-btn is-active" type="button" data-map-style="standard">Basic</button>
               <button class="map-style-btn" type="button" data-map-style="classic">Klassisk</button>
-              <button class="map-style-btn" type="button" data-map-style="midcentury">Mid-century</button>
               <button class="map-style-btn" type="button" data-map-style="dark">Mørk</button>
-              <button class="map-style-btn" type="button" data-map-style="nova">Nova</button>
-              <button class="map-style-btn" type="button" data-map-style="pencil">Colored pencil</button>
-              <button class="map-style-btn" type="button" data-map-style="tron">Tron</button>
             </div>
             <div class="map-canvas-wrapper" data-map-frame>
               <iframe
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-                src="https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+                src="https://www.google.com/maps?q=61.1307,6.7031&z=12&output=embed"
                 title="Demo kartvisning"
               ></iframe>
             </div>
@@ -1365,13 +1361,9 @@
       if (!frame || !buttons.length) return;
 
       const mapSources = {
-        standard: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer",
-        classic: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/VintageShadedRelief/MapServer",
-        midcentury: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
-        dark: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer",
-        nova: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer",
-        pencil: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer",
-        tron: "https://arcgis.com/apps/Embed/index.html?mapOnly=true&center=6.7031,61.1307&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer"
+        standard: "https://www.google.com/maps?q=61.1307,6.7031&z=12&output=embed",
+        classic: "https://www.google.com/maps?q=61.1307,6.7031&z=12&output=embed",
+        dark: "https://www.google.com/maps?q=61.1307,6.7031&z=12&output=embed"
       };
       function applyMapStyle(style) {
         const resolved = mapSources[style] || mapSources.standard;
