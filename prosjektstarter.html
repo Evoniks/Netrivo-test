@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netrivo Skisse</title>
   <meta name="description" content="Skisse fra Netrivo. Beskriv behovet, få anbefalt nivå og se en første skisseretning for nettsiden." />
+  <script>
+    (function () {
+      const isDesktopOverride = /[?&]desktop=1\b/.test(window.location.search);
+      const isMobileWidth = window.matchMedia("(max-width: 760px)").matches;
+      if (!isDesktopOverride && isMobileWidth) {
+        window.location.replace("./prosjektstarter-mobil.html");
+      }
+    })();
+  </script>
   <style>
     :root{
       --bg:#f5f1ea;
@@ -827,6 +836,37 @@
 
     .live-select-wrap.is-open::after{
       transform:translateY(-40%) rotate(-135deg);
+    }
+
+    .mobile-preview-card,
+    .mobile-generate-button,
+    .mobile-back-button{
+      display:none;
+    }
+
+    .mobile-preview-card{
+      border-radius:20px;
+      border:1px solid rgba(97,77,54,0.16);
+      min-height:112px;
+      padding:14px;
+      background:linear-gradient(145deg, rgba(255,255,255,0.86), rgba(247,239,230,0.74));
+      box-shadow:0 12px 24px rgba(43,30,20,0.1);
+    }
+
+    .mobile-preview-card strong{
+      display:block;
+      font-size:0.82rem;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:#6d5e50;
+      margin-bottom:8px;
+    }
+
+    .mobile-preview-color{
+      min-height:66px;
+      border-radius:14px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:linear-gradient(180deg, rgba(249,252,255,0.96), rgba(236,242,248,0.84));
     }
 
     .live-option-label{
@@ -2362,6 +2402,31 @@
       }
 
       .hero{padding-top:20px}
+
+      .mobile-preview-card,
+      .mobile-generate-button{
+        display:block;
+      }
+
+      .mobile-generate-button{
+        margin-top:10px;
+      }
+
+      body.mobile-sketch-edit .sketch-surface,
+      body.mobile-sketch-edit #ai-evaluation,
+      body.mobile-sketch-edit .summary{
+        display:none;
+      }
+
+      body.mobile-sketch-view .sketch-sidebars,
+      body.mobile-sketch-view .generator-toolbar{
+        display:none;
+      }
+
+      body.mobile-sketch-view .mobile-back-button{
+        display:block;
+        margin:0 0 12px auto;
+      }
     }
   </style>
 </head>
@@ -2462,6 +2527,7 @@
             <div class="generator-toolbar">
               <div class="generator-note">Beskrivelsen styrer retningen, og kunden får en halvåpen skisse med fargeforslag, scene og struktur som kan justeres litt før neste runde.</div>
               <button class="btn btn-secondary" id="random-brief-button" type="button">Tilfeldig variant</button>
+              <button class="btn btn-primary mobile-generate-button" id="mobile-generate-button" type="button">Generer skisse</button>
             </div>
 
             <div class="sketch-board">
@@ -2602,9 +2668,6 @@
                             <option value="solar-eclipse">Solar Eclipse</option>
                             <option value="elin-varde">Elin Varde</option>
                           </optgroup>
-                          <optgroup label="Annet">
-                            <option value="annet">Annet</option>
-                          </optgroup>
                         </select>
                         <button class="live-style-trigger" id="live-style-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">Fjord</button>
                         <div class="live-style-menu" id="live-style-menu" role="listbox" aria-label="Ønsket stil">
@@ -2626,12 +2689,12 @@
                             <button class="live-style-item" data-style-value="solar-eclipse" type="button">Solar Eclipse</button>
                             <button class="live-style-item" data-style-value="elin-varde" type="button">Elin Varde</button>
                           </div>
-                          <div class="live-style-group">
-                            <div class="live-style-group-label">Annet</div>
-                            <button class="live-style-item" data-style-value="annet" type="button">Annet</button>
-                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div class="mobile-preview-card" id="mobile-preview-card">
+                      <strong>Forhåndsvisning fargetone</strong>
+                      <div class="mobile-preview-color" id="mobile-preview-color"></div>
                     </div>
                     <div class="live-option-group">
                       <div class="live-option-label">Hva er viktig på siden?</div>
@@ -2663,6 +2726,7 @@
                   </aside>
                 </div>
               </div>
+              <button class="btn btn-secondary mobile-back-button" id="mobile-back-button" type="button">Velg på nytt</button>
             </div>
 
             <div class="ai-evaluation" id="ai-evaluation">
@@ -2802,8 +2866,12 @@
       const emailLink = document.getElementById("brief-email-link");
       const copyButton = document.getElementById("brief-copy-button");
       const randomButton = document.getElementById("random-brief-button");
+      const mobileGenerateButton = document.getElementById("mobile-generate-button");
+      const mobileBackButton = document.getElementById("mobile-back-button");
+      const mobilePreviewColor = document.getElementById("mobile-preview-color");
       const sketchBoard = document.querySelector(".sketch-board");
       const sketchSurface = document.getElementById("sketch-surface");
+      const sketchSidebars = document.querySelector(".sketch-sidebars");
       const sketchEffects = document.getElementById("sketch-effects");
       const sketchTrail = document.getElementById("sketch-hover-trail");
       const sketchMagnifier = document.getElementById("sketch-magnifier");
@@ -2861,14 +2929,13 @@
         "glacial-lake": { industry: "Opplevelse og reiseliv", style: "varm", label: "Glacial Lake" },
         "maison-fjell": { industry: "Butikk og livsstil", style: "eksklusiv", label: "Maison Fjell" },
         "solar-eclipse": { industry: "Tech og SaaS", style: "moderne", label: "Solar Eclipse" },
-        "elin-varde": { industry: "Personlig brand", style: "eksklusiv", label: "Elin Varde" },
-        annet: { industry: "Annet", style: "tillit", label: "Annet" }
+        "elin-varde": { industry: "Personlig brand", style: "eksklusiv", label: "Elin Varde" }
       };
 
       const styleAccessByContent = {
         kort: ["sol-bonner", "fjord", "studio"],
         balansert: ["sol-bonner", "fjord", "studio", "nordic", "arctic", "glacial-lake"],
-        rik: ["sol-bonner", "fjord", "studio", "nordic", "arctic", "glacial-lake", "maison-fjell", "solar-eclipse", "elin-varde", "annet"]
+        rik: ["sol-bonner", "fjord", "studio", "nordic", "arctic", "glacial-lake", "maison-fjell", "solar-eclipse", "elin-varde"]
       };
 
       const uiState = {
@@ -2883,10 +2950,25 @@
       let meteorTimerId = null;
       let magnifierEnabled = false;
       let featureSelectionOrder = ["Kontaktinformasjon"];
+      let mobileGeneratedView = false;
       let trailTheme = {
         glowRgb: "236,188,255",
         coreRgb: "255,240,255"
       };
+
+      function isCompactMobileView() {
+        return window.matchMedia("(max-width: 760px)").matches;
+      }
+
+      function applyMobileSketchMode() {
+        if (!document.body) return;
+        if (!isCompactMobileView()) {
+          document.body.classList.remove("mobile-sketch-edit", "mobile-sketch-view");
+          return;
+        }
+        document.body.classList.toggle("mobile-sketch-view", mobileGeneratedView);
+        document.body.classList.toggle("mobile-sketch-edit", !mobileGeneratedView);
+      }
 
       function syncLiveStyleUi() {
         if (!liveStyle || !liveStyleTrigger) return;
@@ -3747,6 +3829,14 @@
         if (heroLayoutControls) setActiveChip(heroLayoutControls, uiState.heroAlt, "data-hero-alt");
         renderPalette(palette);
         applyTheme(state, level, palette);
+        if (mobilePreviewColor) {
+          const previewByLevel = {
+            enkel: "linear-gradient(180deg, rgba(255,248,236,0.98), rgba(236,214,191,0.9))",
+            standard: "linear-gradient(180deg, rgba(240,247,255,0.98), rgba(188,207,228,0.92))",
+            premium: "linear-gradient(180deg, rgba(246,239,252,0.98), rgba(194,161,214,0.92))"
+          };
+          mobilePreviewColor.style.background = previewByLevel[level] || previewByLevel.standard;
+        }
 
         if (sketchSurface.dataset.scene === "editorial") {
           wireframeTitleBlock.innerHTML =
@@ -3927,6 +4017,31 @@
         });
       });
 
+      if (mobileGenerateButton) {
+        mobileGenerateButton.addEventListener("click", function () {
+          if (!isCompactMobileView()) return;
+          mobileGeneratedView = true;
+          applyMobileSketchMode();
+          if (sketchBoard) {
+            const top = sketchBoard.getBoundingClientRect().top + window.scrollY - 10;
+            window.scrollTo({ top: top, behavior: "smooth" });
+          }
+        });
+      }
+
+      if (mobileBackButton) {
+        mobileBackButton.addEventListener("click", function () {
+          mobileGeneratedView = false;
+          applyMobileSketchMode();
+          if (sketchSidebars) {
+            const top = sketchSidebars.getBoundingClientRect().top + window.scrollY - 10;
+            window.scrollTo({ top: top, behavior: "smooth" });
+          }
+        });
+      }
+
+      window.addEventListener("resize", applyMobileSketchMode);
+
       (function setupInteractiveTrail() {
         if (!sketchTrail) return;
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -4066,6 +4181,7 @@
         });
       })();
 
+      applyMobileSketchMode();
       update();
     })();
   </script>

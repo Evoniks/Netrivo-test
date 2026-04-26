@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netrivo - Lag skisse (mobil)</title>
+  <meta name="description" content="Mobilversjon av skissegeneratoren. Velg retning og generer skisse i to enkle steg." />
+  <style>
+    :root{
+      --bg:#f4efe7;
+      --panel:#fffaf3;
+      --ink:#1a1816;
+      --muted:#64594d;
+      --line:rgba(60,44,30,0.15);
+      --shadow:0 20px 36px rgba(40,26,14,0.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#f7f2ea,#efe7dc);
+    }
+    .wrap{
+      width:min(720px,calc(100% - 20px));
+      margin:14px auto 32px;
+      display:grid;
+      gap:12px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,0.7);
+      box-shadow:var(--shadow);
+    }
+    .topbar strong{font-size:0.95rem}
+    .topbar a{
+      text-decoration:none;
+      color:var(--ink);
+      font-size:0.85rem;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:8px 12px;
+      background:#fff;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:14px;
+      background:rgba(255,255,255,0.8);
+      box-shadow:var(--shadow);
+    }
+    .kicker{
+      font-size:0.72rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(1.75rem,9vw,2.8rem);
+      line-height:0.95;
+      letter-spacing:-0.04em;
+    }
+    p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:0.95rem;
+    }
+    .field{display:grid;gap:8px;margin-top:12px}
+    .label{
+      font-size:0.72rem;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:#7b6e61;
+    }
+    .option-grid{display:grid;gap:8px}
+    .option{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      color:#493f35;
+      text-align:left;
+      padding:11px 12px;
+      font:inherit;
+      font-size:0.92rem;
+      cursor:pointer;
+    }
+    .option.is-active{
+      background:#171717;
+      color:#fff7ef;
+      border-color:transparent;
+    }
+    .style-select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:#40362e;
+      padding:10px 14px;
+      font:inherit;
+      font-size:1rem;
+    }
+    .preview{
+      border:1px solid var(--line);
+      border-radius:16px;
+      min-height:86px;
+      transition:background .2s ease;
+      background:linear-gradient(180deg,#f1f7ff,#d7e6f7);
+    }
+    .actions{display:grid;gap:8px;margin-top:14px}
+    .btn{
+      width:100%;
+      border-radius:999px;
+      border:1px solid transparent;
+      padding:12px 14px;
+      font:inherit;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn-primary{background:#151515;color:#fff6ec}
+    .btn-secondary{background:#fff;color:#221b16;border-color:var(--line)}
+    .result{display:none}
+    body.show-result .setup{display:none}
+    body.show-result .result{display:grid;gap:12px}
+    .result-hero{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(255,255,255,0.85);
+    }
+    .result-title{
+      margin:0;
+      font-size:1.6rem;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+    }
+    .mock{
+      border:1px solid rgba(60,44,30,0.18);
+      border-radius:18px;
+      padding:12px;
+      background:#fff;
+      display:grid;
+      gap:10px;
+    }
+    .line{height:10px;border-radius:999px;background:rgba(30,25,20,0.16)}
+    .line.dark{background:rgba(30,25,20,0.3)}
+    .chips{display:flex;gap:6px;flex-wrap:wrap}
+    .chip{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:5px 10px;
+      font-size:0.75rem;
+      color:#54483d;
+      background:rgba(255,255,255,0.75);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <strong>Netrivo - mobil skisse</strong>
+      <a href="./prosjektstarter.html?desktop=1">Desktopversjon</a>
+    </div>
+
+    <section class="card setup">
+      <div class="kicker">Steg 1</div>
+      <h1>Velg retning</h1>
+      <p>Vel innholdsmengde og stil. Når du er klar, trykk Generer skisse.</p>
+
+      <div class="field">
+        <div class="label">Innholdsmengde</div>
+        <div class="option-grid" id="content-options">
+          <button class="option" data-content="kort" type="button">Kort og direkte</button>
+          <button class="option is-active" data-content="balansert" type="button">Balansert med tydelig struktur</button>
+          <button class="option" data-content="rik" type="button">Mer innhold, flere seksjoner og mer tyngde</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label">Ønsket stil</div>
+        <select id="style-select" class="style-select">
+          <option value="sol-bonner">Sol & Bønner</option>
+          <option value="fjord" selected>Fjord</option>
+          <option value="studio">Studio</option>
+          <option value="nordic">Nordic</option>
+          <option value="arctic">Arctic</option>
+          <option value="glacial-lake">Glacial Lake</option>
+          <option value="maison-fjell">Maison Fjell</option>
+          <option value="solar-eclipse">Solar Eclipse</option>
+          <option value="elin-varde">Elin Varde</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="label">Forhåndsvisning fargetone</div>
+        <div id="preview" class="preview"></div>
+      </div>
+
+      <div class="actions">
+        <button id="generate" class="btn btn-primary" type="button">Generer skisse</button>
+      </div>
+    </section>
+
+    <section class="card result">
+      <div class="kicker">Steg 2</div>
+      <h2 id="result-level" class="result-title">Standard skisse</h2>
+      <div class="result-hero">
+        <div class="chips">
+          <span id="result-content-chip" class="chip">Balansert</span>
+          <span id="result-style-chip" class="chip">Fjord</span>
+        </div>
+        <p id="result-copy">Skissa er generert frå vala dine. Her kan du vise retning utan å ha fleire val oppe samtidig.</p>
+      </div>
+      <div id="result-mock" class="mock">
+        <div class="line dark" style="width:78%;"></div>
+        <div class="line dark" style="width:62%;"></div>
+        <div class="line" style="width:92%;"></div>
+        <div class="line" style="width:74%;"></div>
+        <div class="line" style="width:66%;"></div>
+      </div>
+      <button id="regenerate" class="btn btn-secondary" type="button">Velg på nytt</button>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const contentOptions = Array.from(document.querySelectorAll("[data-content]"));
+      const styleSelect = document.getElementById("style-select");
+      const preview = document.getElementById("preview");
+      const resultMock = document.getElementById("result-mock");
+      const resultLevel = document.getElementById("result-level");
+      const resultStyleChip = document.getElementById("result-style-chip");
+      const resultContentChip = document.getElementById("result-content-chip");
+      const generate = document.getElementById("generate");
+      const regenerate = document.getElementById("regenerate");
+
+      const styleLabels = {
+        "sol-bonner": "Sol & Bønner",
+        fjord: "Fjord",
+        studio: "Studio",
+        nordic: "Nordic",
+        arctic: "Arctic",
+        "glacial-lake": "Glacial Lake",
+        "maison-fjell": "Maison Fjell",
+        "solar-eclipse": "Solar Eclipse",
+        "elin-varde": "Elin Varde"
+      };
+
+      const styleByContent = {
+        kort: ["sol-bonner", "fjord", "studio"],
+        balansert: ["sol-bonner", "fjord", "studio", "nordic", "arctic", "glacial-lake"],
+        rik: ["sol-bonner", "fjord", "studio", "nordic", "arctic", "glacial-lake", "maison-fjell", "solar-eclipse", "elin-varde"]
+      };
+
+      const bgByContent = {
+        kort: "linear-gradient(180deg,#fff7ec,#ead6c0)",
+        balansert: "linear-gradient(180deg,#f1f7ff,#d7e6f7)",
+        rik: "linear-gradient(180deg,#f7f1ff,#dbc5ee)"
+      };
+
+      let selectedContent = "balansert";
+
+      function syncStyleAccess() {
+        const allowed = styleByContent[selectedContent];
+        Array.from(styleSelect.options).forEach(function (option) {
+          option.disabled = allowed.indexOf(option.value) === -1;
+        });
+        if (allowed.indexOf(styleSelect.value) === -1) styleSelect.value = allowed[0];
+      }
+
+      function syncPreview() {
+        preview.style.background = bgByContent[selectedContent];
+      }
+
+      function levelLabel() {
+        if (selectedContent === "kort") return "Enkel skisse";
+        if (selectedContent === "rik") return "Premium skisse";
+        return "Standard skisse";
+      }
+
+      function generateSketch() {
+        const bg = bgByContent[selectedContent];
+        document.body.classList.add("show-result");
+        resultMock.style.background = bg;
+        resultLevel.textContent = levelLabel();
+        resultStyleChip.textContent = styleLabels[styleSelect.value] || styleSelect.value;
+        resultContentChip.textContent = selectedContent === "kort" ? "Kort" : selectedContent === "rik" ? "Rik" : "Balansert";
+      }
+
+      contentOptions.forEach(function (button) {
+        button.addEventListener("click", function () {
+          selectedContent = button.dataset.content;
+          contentOptions.forEach(function (candidate) {
+            candidate.classList.toggle("is-active", candidate === button);
+          });
+          syncStyleAccess();
+          syncPreview();
+        });
+      });
+
+      styleSelect.addEventListener("change", syncPreview);
+      generate.addEventListener("click", generateSketch);
+      regenerate.addEventListener("click", function () {
+        document.body.classList.remove("show-result");
+      });
+
+      syncStyleAccess();
+      syncPreview();
+    })();
+  </script>
+</body>
+</html>
