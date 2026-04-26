@@ -2455,27 +2455,12 @@
           <div class="hero-copy">
             <div>
               <div class="eyebrow">Netrivo / skisse</div>
-              <h1>Få en første skisseretning før du tar neste steg.</h1>
+              <h1>Kartlegg behov</h1>
               <p class="lead">
-                Kunden fyller inn behov, stil og funksjoner. Systemet foreslår nivå, lager en halv-generert skisse og bygger en brief som gjør det lettere å starte en god dialog raskt.
+                Fyll inn behov, stil og funksjoner, send inn brief og få tilbake et forslag til nettside innen kort tid.
               </p>
               <div class="hero-actions">
                 <a class="btn btn-secondary" href="./index.html">Tilbake til forsiden</a>
-              </div>
-            </div>
-
-            <div class="hero-notes">
-              <div class="hero-note">
-                <strong>Mer presist</strong>
-                <span>Du får et tydeligere utgangspunkt enn en vanlig kontaktskjema-henvendelse.</span>
-              </div>
-              <div class="hero-note">
-                <strong>Mer salgbart</strong>
-                <span>Kunden ser retning og nivå med en gang, uten at alt føles ferdig.</span>
-              </div>
-              <div class="hero-note">
-                <strong>Mer brukbart</strong>
-                <span>Briefen kan kopieres eller sendes videre til deg som arbeidsgrunnlag.</span>
               </div>
             </div>
           </div>
@@ -2483,9 +2468,7 @@
           <div class="hero-preview">
             <div class="preview-card">
               <div class="preview-intro">
-                <div class="preview-kicker">Førsteskisse / AI-retning</div>
                 <h2>Et inntrykk av hvordan siden kan bygges opp.</h2>
-                <p>Ikke ferdig design. Ikke full løsning. Bare nok til at kunden ser retningen og vil ta den videre.</p>
               </div>
 
               <div class="preview-paper">
@@ -2514,18 +2497,12 @@
       <div class="container workspace-grid">
         <div class="panel" id="resultat">
           <div class="panel-inner">
-            <div class="output-top">
-              <div class="badge" id="brief-badge">Anbefalt nivå / Standard</div>
-              <div class="score" id="brief-score">Basert på behov, stil og innholdsmengde</div>
-            </div>
-
             <div class="recommendation">
               <strong id="brief-recommendation-title">Standard ser riktig ut for denne retningen.</strong>
-              <p id="brief-recommendation-copy">Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.</p>
+              <p id="brief-recommendation-copy">Bruk dette skisseverktøyet til å kartlegge behov</p>
             </div>
 
             <div class="generator-toolbar">
-              <div class="generator-note">Beskrivelsen styrer retningen, og kunden får en halvåpen skisse med fargeforslag, scene og struktur som kan justeres litt før neste runde.</div>
               <button class="btn btn-secondary" id="random-brief-button" type="button">Tilfeldig variant</button>
               <button class="btn btn-primary mobile-generate-button" id="mobile-generate-button" type="button">Generer skisse</button>
             </div>
@@ -2857,8 +2834,6 @@
       const form = document.getElementById("project-brief-form");
       if (!form) return;
 
-      const badge = document.getElementById("brief-badge");
-      const score = document.getElementById("brief-score");
       const recommendationTitle = document.getElementById("brief-recommendation-title");
       const recommendationCopy = document.getElementById("brief-recommendation-copy");
       const summaryCopy = document.getElementById("brief-summary-copy");
@@ -3128,19 +3103,19 @@
         enkel: {
           badge: "Anbefalt nivå / Enkel",
           title: "Enkel ser riktig ut for denne retningen.",
-          copy: "Behovet peker mot en side med lav friksjon, tydelig budskap og rask vei til kontakt eller handling.",
+          copy: "Bruk dette skisseverktøyet til å kartlegge behov",
           top: "Førsteskisse / Enkel"
         },
         standard: {
           badge: "Anbefalt nivå / Standard",
           title: "Standard ser riktig ut for denne retningen.",
-          copy: "Behovet peker mot en løsning med mer struktur, mer tillit og mer dybde enn enkel-nivået, uten at siden trenger full premium-sceneplass.",
+          copy: "Bruk dette skisseverktøyet til å kartlegge behov",
           top: "Førsteskisse / Standard"
         },
         premium: {
           badge: "Anbefalt nivå / Premium",
           title: "Premium ser riktig ut for denne retningen.",
-          copy: "Behovet peker mot en mer iscenesatt løsning med tydelig identitet, mer sceneplass og høyere opplevd verdi.",
+          copy: "Bruk dette skisseverktøyet til å kartlegge behov",
           top: "Førsteskisse / Premium"
         }
       };
@@ -3799,8 +3774,10 @@
         const title = buildDisplayTitle(state, level);
         const generated = buildGeneratedBrief(state, recommendation, title);
 
-        badge.textContent = "Anbefalt nivå / " + level.charAt(0).toUpperCase() + level.slice(1);
-        score.textContent = recommendation.confidence + " - " + recommendation.reason;
+        const badge = document.getElementById("brief-badge");
+        const score = document.getElementById("brief-score");
+        if (badge) badge.textContent = "Anbefalt nivå / " + level.charAt(0).toUpperCase() + level.slice(1);
+        if (score) score.textContent = recommendation.confidence + " - " + recommendation.reason;
         recommendationTitle.textContent = levelCopy[level].title;
         recommendationCopy.textContent = levelCopy[level].copy;
         generatedEntityName.textContent = state.company || state.industry;
