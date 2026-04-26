@@ -849,6 +849,42 @@
       opacity:1;
     }
 
+    .sketch-magnifier{
+      position:absolute;
+      left:0;
+      top:0;
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      overflow:hidden;
+      border:2px solid rgba(255,255,255,0.72);
+      box-shadow:0 12px 34px rgba(17,10,8,0.34), inset 0 0 0 1px rgba(28,18,14,0.24);
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%, -50%);
+      z-index:4;
+      transition:opacity .16s ease;
+      backdrop-filter:saturate(1.12);
+    }
+
+    .sketch-surface.has-magnifier-effect .sketch-magnifier.is-visible{
+      opacity:1;
+    }
+
+    .sketch-magnifier-content{
+      position:absolute;
+      left:0;
+      top:0;
+      transform-origin:top left;
+      pointer-events:none;
+    }
+
+    .sketch-magnifier-content .sketch-effects,
+    .sketch-magnifier-content .sketch-hover-trail,
+    .sketch-magnifier-content .sketch-magnifier{
+      display:none !important;
+    }
+
     /* Sketch effects */
     .sketch-effects{
       position:absolute;
@@ -927,9 +963,7 @@
       inset:0;
       pointer-events:none;
       opacity:0;
-      background:
-        radial-gradient(circle at 48% 36%, rgba(235,245,255,0.46), transparent 62%),
-        linear-gradient(180deg, rgba(225,240,255,0.34), rgba(180,208,236,0.22));
+      background:var(--flash-bg, radial-gradient(circle at 48% 36%, rgba(235,245,255,0.46), transparent 62%));
       mix-blend-mode:soft-light;
       animation:sketchLightningFlash var(--duration, 7.6s) ease-in-out infinite;
       animation-delay:var(--delay, 0s);
@@ -1251,6 +1285,35 @@
     .sketch-surface[data-layout="stacked-hero"] .sketch-rail{
       grid-template-columns:1fr 1fr;
       display:grid;
+    }
+
+    .sketch-note--a{ grid-area:a; }
+    .sketch-note--b{ grid-area:b; }
+    .sketch-note--c{ grid-area:c; }
+    .sketch-media{ grid-area:media; }
+
+    .sketch-surface[data-hero-alt="alt1"] .sketch-rail{
+      grid-template-areas:
+        "a"
+        "media"
+        "b"
+        "c";
+    }
+
+    .sketch-surface[data-hero-alt="alt2"] .sketch-rail{
+      grid-template-areas:
+        "media"
+        "a"
+        "b"
+        "c";
+    }
+
+    .sketch-surface[data-hero-alt="alt3"] .sketch-rail{
+      grid-template-areas:
+        "a"
+        "b"
+        "c"
+        "media";
     }
 
     /* Live-skisse: stilpresets som speiler desktop-demoene tettere */
@@ -1578,6 +1641,59 @@
       transform:rotate(0deg);
     }
 
+    .sketch-media{
+      min-height:168px;
+      border-radius:22px;
+      border:1.5px solid var(--sketch-ink);
+      background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.72));
+      display:grid;
+      place-items:center;
+      padding:10px;
+    }
+
+    .sketch-media-frame{
+      width:100%;
+      height:100%;
+      border-radius:18px;
+      border:1.5px dashed var(--sketch-ink-faint);
+      display:grid;
+      place-items:center;
+      background:linear-gradient(140deg, rgba(255,255,255,0.44), rgba(255,255,255,0.12));
+    }
+
+    .sketch-media-icon{
+      width:64%;
+      height:56%;
+      border-radius:16px;
+      border:1.5px solid var(--sketch-ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.2)),
+        radial-gradient(circle at 76% 24%, var(--sketch-ink-faint), transparent 26%);
+      position:relative;
+    }
+
+    .sketch-media-icon::before{
+      content:"";
+      position:absolute;
+      left:14%;
+      bottom:18%;
+      width:68%;
+      height:38%;
+      border-radius:999px 999px 24px 24px;
+      border:1.5px solid var(--sketch-ink-faint);
+    }
+
+    .sketch-media-icon::after{
+      content:"";
+      position:absolute;
+      right:14%;
+      top:16%;
+      width:18%;
+      aspect-ratio:1;
+      border-radius:50%;
+      background:var(--sketch-ink-faint);
+    }
+
     .sketch-note-title{
       width:50%;
       height:14px;
@@ -1685,6 +1801,19 @@
     }
 
     .generated-density .control-chip{
+      padding:7px 10px;
+      font-size:0.72rem;
+      letter-spacing:0.04em;
+    }
+
+    .generated-layout-controls{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .generated-layout-controls .control-chip{
       padding:7px 10px;
       font-size:0.72rem;
       letter-spacing:0.04em;
@@ -1994,6 +2123,50 @@
       line-height:1.65;
     }
 
+    .summary-pricing{
+      border:1px solid rgba(21,21,21,0.08);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(255,255,255,0.7);
+      display:grid;
+      gap:8px;
+    }
+
+    .summary-pricing-title{
+      font-weight:700;
+      letter-spacing:-0.01em;
+      color:#251f1a;
+    }
+
+    .summary-price-item{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border-radius:12px;
+      padding:8px 10px;
+      border:1px solid rgba(97,77,54,0.14);
+      background:rgba(255,255,255,0.55);
+      color:#594a3d;
+    }
+
+    .summary-price-item.is-inactive{
+      opacity:0.45;
+      filter:grayscale(0.25);
+    }
+
+    .summary-price-item.is-active{
+      background:var(--ink);
+      color:#fff8f0;
+      border-color:transparent;
+    }
+
+    .summary-pricing p{
+      margin:0;
+      font-size:0.84rem;
+      line-height:1.55;
+      color:var(--muted);
+    }
+
     footer{
       padding:0 0 42px;
       color:var(--muted);
@@ -2152,13 +2325,16 @@
 
             <div class="generator-toolbar">
               <div class="generator-note">Beskrivelsen styrer retningen, og kunden får en halvåpen skisse med fargeforslag, scene og struktur som kan justeres litt før neste runde.</div>
-              <button class="btn btn-secondary" id="random-brief-button" type="button">Ny variant</button>
+              <button class="btn btn-secondary" id="random-brief-button" type="button">Tilfeldig variant</button>
             </div>
 
             <div class="sketch-board">
               <div class="sketch-stage">
                 <div class="sketch-surface" id="sketch-surface">
                   <canvas class="sketch-hover-trail" id="sketch-hover-trail" aria-hidden="true"></canvas>
+                  <div class="sketch-magnifier" id="sketch-magnifier" aria-hidden="true">
+                    <div class="sketch-magnifier-content" id="sketch-magnifier-content"></div>
+                  </div>
                   <div class="generated-brief">
                     <div class="generated-brief-top">
                     <div>
@@ -2176,6 +2352,11 @@
                           <button class="control-chip is-active" data-density="balanced" type="button">Balansert</button>
                           <button class="control-chip" data-density="airy" type="button">Mer luft</button>
                           <button class="control-chip" data-density="compact" type="button">Tettere</button>
+                        </div>
+                        <div class="generated-layout-controls" id="hero-layout-controls">
+                          <button class="control-chip is-active" data-hero-alt="alt1" type="button">Alternativ 1</button>
+                          <button class="control-chip" data-hero-alt="alt2" type="button">Alternativ 2</button>
+                          <button class="control-chip" data-hero-alt="alt3" type="button">Alternativ 3</button>
                         </div>
                       </div>
                     </div>
@@ -2209,7 +2390,7 @@
                     </div>
 
                     <div class="sketch-rail">
-                      <div class="sketch-note">
+                      <div class="sketch-note sketch-note--a">
                         <div class="sketch-note-title"></div>
                         <div class="sketch-note-lines">
                           <div class="sketch-note-line" style="width:100%;"></div>
@@ -2217,11 +2398,23 @@
                           <div class="sketch-note-line" style="width:66%;"></div>
                         </div>
                       </div>
-                      <div class="sketch-note">
+                      <div class="sketch-media" aria-hidden="true">
+                        <div class="sketch-media-frame">
+                          <div class="sketch-media-icon"></div>
+                        </div>
+                      </div>
+                      <div class="sketch-note sketch-note--b">
                         <div class="sketch-note-title" style="width:44%;"></div>
                         <div class="sketch-note-lines">
                           <div class="sketch-note-line" style="width:100%;"></div>
                           <div class="sketch-note-line" style="width:74%;"></div>
+                        </div>
+                      </div>
+                      <div class="sketch-note sketch-note--c">
+                        <div class="sketch-note-title" style="width:52%;"></div>
+                        <div class="sketch-note-lines">
+                          <div class="sketch-note-line" style="width:92%;"></div>
+                          <div class="sketch-note-line" style="width:68%;"></div>
                         </div>
                       </div>
                     </div>
@@ -2291,12 +2484,13 @@
                     <div class="live-option-group">
                       <div class="live-option-label">Hva er viktig på siden?</div>
                       <div class="live-option-grid" id="live-feature-options">
-                        <button class="live-option is-active" data-type="feature" data-value="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler</button>
-                        <button class="live-option" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
-                        <button class="live-option" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
-                        <button class="live-option" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
-                        <button class="live-option" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
-                        <button class="live-option" data-type="feature" data-value="Om oss" type="button">Om oss, åpningstider</button>
+                        <button class="live-option is-active" data-rank="1" data-type="feature" data-value="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler</button>
+                        <button class="live-option" data-rank="2" data-type="feature" data-value="Om oss" type="button">Om oss</button>
+                        <button class="live-option" data-rank="3" data-type="feature" data-value="Åpningstider" type="button">Åpningstider</button>
+                        <button class="live-option" data-rank="4" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
+                        <button class="live-option" data-rank="5" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
+                        <button class="live-option" data-rank="6" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
+                        <button class="live-option" data-rank="7" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
                       </div>
                     </div>
                     <div class="live-option-group">
@@ -2306,6 +2500,7 @@
                         <button class="live-option" data-type="effect" data-value="Meteorregn" type="button">Meteorregn</button>
                         <button class="live-option" data-type="effect" data-value="Stjernehimmel" type="button">Stjernehimmel</button>
                         <button class="live-option" data-type="effect" data-value="Lynglimt" type="button">Lynglimt</button>
+                        <button class="live-option" data-type="effect" data-value="Forstørrelsesglass" type="button">Forstørrelsesglass</button>
                       </div>
                     </div>
                     <div class="style-demo-cta">
@@ -2325,6 +2520,14 @@
                 <li>Primært mål: mer tillit og tydeligere struktur</li>
                 <li>Viktige elementer: kontakt, tjenester og sosialt bevis</li>
               </ul>
+              <div class="summary-pricing" id="brief-price-summary">
+                <div class="summary-pricing-title">Oppsummering av pris</div>
+                <div class="summary-price-item" data-level="enkel"><strong>Enkel</strong><span>frå 10 000 NOK</span></div>
+                <div class="summary-price-item is-active" data-level="standard"><strong>Standard</strong><span>frå 25 000 NOK</span></div>
+                <div class="summary-price-item" data-level="premium"><strong>Premium</strong><span>frå 50 000 NOK</span></div>
+                <p>Pris avhenger av innhald, omfang og kor mykje som skal byggast.</p>
+                <p>Tilpassingar utanfor dei etablerte løysingane, spesialbestillingar eller større endringar i ettertid blir utført etter eigne timesatsar og avtales separat.</p>
+              </div>
               <div class="summary-actions">
                 <a class="btn btn-primary" id="brief-email-link" href="mailto:post@netrivo.no">Send brief</a>
                 <button class="btn btn-secondary" id="brief-copy-button" type="button">Kopier brief</button>
@@ -2386,11 +2589,12 @@
                   <div class="brief-legend">Hva er viktig på siden?</div>
                   <div class="brief-choice-grid">
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked /><span class="brief-choice-text">Kontakt, henvendelser og forespørsler</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" /><span class="brief-choice-text">Om oss</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Åpningstider" /><span class="brief-choice-text">Åpningstider</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" /><span class="brief-choice-text">Booking eller timebestilling</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" /><span class="brief-choice-text">Bestilling, kjøp eller forespørsler</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" /><span class="brief-choice-text">Cases, prosjekter eller referanser</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Galleri" /><span class="brief-choice-text">Bilder og galleri</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" /><span class="brief-choice-text">Om oss, åpningstider</span></label>
                   </div>
                 </div>
 
@@ -2401,6 +2605,7 @@
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Meteorregn" /><span class="brief-choice-text">Meteorregn</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Stjernehimmel" /><span class="brief-choice-text">Stjernehimmel</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Lynglimt" /><span class="brief-choice-text">Lynglimt</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="effect" value="Forstørrelsesglass" /><span class="brief-choice-text">Forstørrelsesglass</span></label>
                   </div>
                 </div>
 
@@ -2438,6 +2643,8 @@
       const sketchSurface = document.getElementById("sketch-surface");
       const sketchEffects = document.getElementById("sketch-effects");
       const sketchTrail = document.getElementById("sketch-hover-trail");
+      const sketchMagnifier = document.getElementById("sketch-magnifier");
+      const sketchMagnifierContent = document.getElementById("sketch-magnifier-content");
       const wireframeTopline = document.getElementById("wireframe-topline");
       const wireframeChip = document.getElementById("wireframe-chip");
       const wireframeTitleBlock = document.getElementById("wireframe-title-block");
@@ -2448,8 +2655,10 @@
       const generatedBriefCopy = document.getElementById("generated-brief-copy");
       const generatedPalette = document.getElementById("generated-palette");
       const densityControls = document.getElementById("density-controls");
+      const heroLayoutControls = document.getElementById("hero-layout-controls");
       const liveStyle = document.getElementById("live-style");
       const styleDemoLink = document.getElementById("style-demo-link");
+      const priceSummary = document.getElementById("brief-price-summary");
       const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
       const contentSelect = document.getElementById("brief-content");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
@@ -2495,10 +2704,80 @@
         tone: "base",
         palette: "auto",
         variant: 0,
-        layout: "default"
+        layout: "default",
+        heroAlt: "alt1"
       };
       let traceEnabled = false;
       let meteorTimerId = null;
+      let magnifierEnabled = false;
+      let trailTheme = {
+        glowRgb: "236,188,255",
+        coreRgb: "255,240,255"
+      };
+
+      function pickRandomFrom(list) {
+        if (!list || !list.length) return null;
+        return list[Math.floor(Math.random() * list.length)];
+      }
+
+      function pickRandomSubset(list, minCount, maxCount) {
+        const pool = list.slice();
+        const picked = [];
+        const max = Math.max(minCount, Math.min(maxCount, pool.length));
+        const count = Math.max(0, Math.min(pool.length, minCount + Math.floor(Math.random() * (max - minCount + 1))));
+        while (pool.length && picked.length < count) {
+          const index = Math.floor(Math.random() * pool.length);
+          picked.push(pool.splice(index, 1)[0]);
+        }
+        return picked;
+      }
+
+      function getTrailTheme(paletteName) {
+        const themes = {
+          warm: {
+            glowRgb: "255,197,145",
+            coreRgb: "255,235,211"
+          },
+          cool: {
+            glowRgb: "165,210,255",
+            coreRgb: "224,243,255"
+          },
+          editorial: {
+            glowRgb: "236,188,255",
+            coreRgb: "255,240,255"
+          },
+          eclipse: {
+            glowRgb: "255,177,109",
+            coreRgb: "255,220,188"
+          },
+          glacial: {
+            glowRgb: "154,247,210",
+            coreRgb: "223,255,244"
+          }
+        };
+        return themes[paletteName] || themes.editorial;
+      }
+
+      function cloneWithoutIds(node) {
+        const clone = node.cloneNode(true);
+        if (clone.removeAttribute) clone.removeAttribute("id");
+        Array.from(clone.querySelectorAll("[id]")).forEach(function (item) {
+          item.removeAttribute("id");
+        });
+        return clone;
+      }
+
+      function syncMagnifierContent() {
+        if (!sketchMagnifierContent || !sketchSurface) return;
+        sketchMagnifierContent.innerHTML = "";
+        ["generated-brief", "sketch-head", "sketch-layout", "sketch-sections"].forEach(function (className) {
+          const source = sketchSurface.querySelector("." + className);
+          if (!source) return;
+          sketchMagnifierContent.appendChild(cloneWithoutIds(source));
+        });
+        sketchMagnifierContent.style.width = sketchSurface.clientWidth + "px";
+        sketchMagnifierContent.style.height = sketchSurface.clientHeight + "px";
+      }
 
       const levelCopy = {
         enkel: {
@@ -2539,7 +2818,8 @@
         Bestilling: { title: "Bestilling", copy: "Produkter, forespørsel eller kjøp", sketchLabel: "Bestilling / forespørsel" },
         Cases: { title: "Prosjekter", copy: "Arbeid, resultater og referanser", sketchLabel: "Cases / referanser" },
         Galleri: { title: "Galleri", copy: "Bilder, meny eller visuelle høydepunkt", sketchLabel: "Bilder / galleri" },
-        "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet", sketchLabel: "Om oss / åpningstider" }
+        "Om oss": { title: "Om oss", copy: "Mennesker, faglighet og trygghet", sketchLabel: "Om oss" },
+        "Åpningstider": { title: "Åpningstider", copy: "Tidspunkter, tilgjengelighet og praktisk info", sketchLabel: "Åpningstider" }
       };
 
       const paletteSets = {
@@ -2628,15 +2908,15 @@
       };
 
       const levelFeatureAccess = {
-        enkel: ["Kontaktinformasjon", "Om oss"],
-        standard: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"],
-        premium: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"]
+        enkel: ["Kontaktinformasjon", "Om oss", "Åpningstider"],
+        standard: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Cases", "Galleri"],
+        premium: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Cases", "Galleri"]
       };
 
       const contentFeatureAccess = {
-        kort: ["Kontaktinformasjon", "Om oss"],
-        balansert: ["Kontaktinformasjon", "Booking", "Bestilling", "Galleri", "Om oss"],
-        rik: ["Kontaktinformasjon", "Booking", "Bestilling", "Cases", "Galleri", "Om oss"]
+        kort: ["Kontaktinformasjon", "Om oss", "Åpningstider"],
+        balansert: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Galleri"],
+        rik: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Cases", "Galleri"]
       };
 
       function hashString(value) {
@@ -2726,6 +3006,23 @@
           if (!effectsEnabled) input.checked = false;
           if (label) label.classList.toggle("is-disabled", !effectsEnabled);
         });
+
+        const featureGroup = document.getElementById("live-feature-options");
+        if (featureGroup) {
+          const ordered = Array.from(featureGroup.querySelectorAll('[data-type="feature"]')).sort(function (a, b) {
+            const inputA = form.querySelector('input[name="feature"][value="' + a.dataset.value + '"]');
+            const inputB = form.querySelector('input[name="feature"][value="' + b.dataset.value + '"]');
+            const enabledA = inputA && !inputA.disabled ? 1 : 0;
+            const enabledB = inputB && !inputB.disabled ? 1 : 0;
+            if (enabledA !== enabledB) return enabledB - enabledA;
+            const rankA = Number(a.dataset.rank || 999);
+            const rankB = Number(b.dataset.rank || 999);
+            return rankA - rankB;
+          });
+          ordered.forEach(function (button) {
+            featureGroup.appendChild(button);
+          });
+        }
       }
 
       function refreshChoiceStates() {
@@ -2827,6 +3124,7 @@
         sketchSurface.dataset.scene = scene;
         sketchSurface.dataset.layout = layout;
         sketchSurface.dataset.stylePreset = state.styleKey || "";
+        sketchSurface.dataset.heroAlt = uiState.heroAlt;
         wireframeChip.style.background = paletteSet[0].color + "55";
         wireframeChip.style.borderColor = paletteSet[1].color + "33";
         wireframeChip.style.color = industryTheme.contrast;
@@ -2850,11 +3148,17 @@
         const hasMeteors = state.effects.indexOf("Meteorregn") !== -1;
         const hasStars = state.effects.indexOf("Stjernehimmel") !== -1;
         const hasLightning = state.effects.indexOf("Lynglimt") !== -1;
+        const hasMagnifier = state.effects.indexOf("Forstørrelsesglass") !== -1;
         const scene = sketchSurface.dataset.scene || "calm";
         const isSolarEclipse = state.styleKey === "solar-eclipse";
         const boost = uiState.tone === "contrast" ? 1.58 : uiState.tone === "scene" ? 1.34 : 1;
 
         sketchSurface.classList.remove("has-glass-effect", "effect-atmosphere-on", "effect-glass-on");
+        magnifierEnabled = hasMagnifier;
+        sketchSurface.classList.toggle("has-magnifier-effect", hasMagnifier);
+        if (!hasMagnifier && sketchMagnifier) {
+          sketchMagnifier.classList.remove("is-visible");
+        }
         if (meteorTimerId) {
           window.clearTimeout(meteorTimerId);
           meteorTimerId = null;
@@ -2890,11 +3194,20 @@
         }
 
         if (hasLightning) {
-          pieces.push(
-            '<span class="sketch-effect-lightning" style="--duration:5.8s; --delay:0.5s;"></span>',
-            '<span class="sketch-effect-lightning" style="--duration:8.4s; --delay:1.8s;"></span>',
-            '<span class="sketch-effect-lightning" style="--duration:11.2s; --delay:3.4s;"></span>'
-          );
+          for (let i = 0; i < 4; i += 1) {
+            const duration = (4.4 + Math.random() * 6.4).toFixed(2);
+            const delay = (Math.random() * 4.2).toFixed(2);
+            const fullFlash = Math.random() > 0.72;
+            const anchorX = (Math.random() * 100).toFixed(1);
+            const anchorY = (Math.random() * 100).toFixed(1);
+            const spread = (36 + Math.random() * 48).toFixed(1);
+            const flashBg = fullFlash
+              ? "linear-gradient(180deg, rgba(236,245,255,0.34), rgba(194,218,240,0.24))"
+              : "radial-gradient(circle at " + anchorX + "% " + anchorY + "%, rgba(236,245,255,0.56), transparent " + spread + "%), linear-gradient(180deg, rgba(225,240,255,0.22), rgba(180,208,236,0.14))";
+            pieces.push(
+              '<span class="sketch-effect-lightning" style="--duration:' + duration + 's; --delay:' + delay + 's; --flash-bg:' + flashBg + ';"></span>'
+            );
+          }
         }
 
         if (isSolarEclipse || (scene === "tech" && (hasMeteors || hasTrace || hasStars))) {
@@ -2908,8 +3221,8 @@
             if (!sketchEffects || !hasMeteors) return;
             const meteor = document.createElement("span");
             meteor.className = "sketch-effect-meteor";
-            const left = 54 + Math.random() * 44;
-            const top = 6 + Math.random() * 52;
+            const left = 6 + Math.random() * 90;
+            const top = 4 + Math.random() * 76;
             const width = 14 + Math.random() * 18;
             const angle = -10 - Math.random() * 22;
             const duration = 0.42 + Math.random() * 0.78;
@@ -3117,6 +3430,7 @@
         const sections = buildSections(state, level);
         const summaryLines = buildSummary(state, recommendation);
         const palette = pickPalette(state, level);
+        trailTheme = getTrailTheme(palette);
         const title = buildDisplayTitle(state, level);
         const generated = buildGeneratedBrief(state, recommendation, title);
 
@@ -3147,6 +3461,7 @@
         sketchSurface.dataset.density = uiState.density;
         sketchSurface.dataset.tone = uiState.tone;
         sketchSurface.dataset.palette = palette;
+        if (heroLayoutControls) setActiveChip(heroLayoutControls, uiState.heroAlt, "data-hero-alt");
         renderPalette(palette);
         applyTheme(state, level, palette);
 
@@ -3172,11 +3487,19 @@
         }
         renderSections(sections);
         renderEffects(state, palette);
+        syncMagnifierContent();
 
         summaryCopy.textContent = "Kunden får et tydelig forslag til retning, nivå og struktur som kan brukes som utgangspunkt for rask videreutvikling.";
         summaryList.innerHTML = summaryLines.map(function (line) {
           return "<li>" + line + "</li>";
         }).join("");
+        if (priceSummary) {
+          Array.from(priceSummary.querySelectorAll(".summary-price-item")).forEach(function (item) {
+            const isActive = item.dataset.level === level;
+            item.classList.toggle("is-active", isActive);
+            item.classList.toggle("is-inactive", !isActive);
+          });
+        }
 
         const subject = encodeURIComponent("Prosjektbrief - " + (state.company || state.industry));
         const body = encodeURIComponent(buildEmailBody(state, recommendation, summaryLines));
@@ -3209,13 +3532,55 @@
         update();
       });
 
+      if (heroLayoutControls) {
+        heroLayoutControls.addEventListener("click", function (event) {
+          const chip = event.target.closest("[data-hero-alt]");
+          if (!chip) return;
+          uiState.heroAlt = chip.getAttribute("data-hero-alt");
+          setActiveChip(heroLayoutControls, uiState.heroAlt, "data-hero-alt");
+          update();
+        });
+      }
+
       randomButton.addEventListener("click", function () {
-        const state = getState();
-        const seed = hashString([state.company, state.industry, state.style, state.notes, Date.now(), uiState.variant].join("|"));
-        uiState.variant = (uiState.variant + 1 + (seed % 5)) % 12;
-        uiState.palette = uiState.variant % 3 === 0 ? "warm" : uiState.variant % 3 === 1 ? "cool" : "editorial";
-        uiState.density = uiState.variant % 3 === 0 ? "airy" : uiState.variant % 3 === 1 ? "balanced" : "compact";
+        const contentKey = form.content.value;
+        const contentProfile = contentProfiles[contentKey] || contentProfiles.balansert;
+        const level = contentProfile.level;
+        const allowedStyles = (styleAccessByContent[contentKey] || styleAccessByContent.balansert).slice();
+        const chosenStyle = pickRandomFrom(allowedStyles);
+        if (liveStyle && chosenStyle) liveStyle.value = chosenStyle;
+
+        const allowedFeatures = (levelFeatureAccess[level] || []).filter(function (feature) {
+          return (contentFeatureAccess[contentKey] || []).indexOf(feature) !== -1;
+        });
+        const featureCountRange = contentKey === "kort"
+          ? [1, 2]
+          : contentKey === "balansert"
+            ? [2, 4]
+            : [3, Math.max(3, allowedFeatures.length)];
+        const pickedFeatures = pickRandomSubset(allowedFeatures, featureCountRange[0], featureCountRange[1]);
+        featureInputs.forEach(function (input) {
+          input.checked = pickedFeatures.indexOf(input.value) !== -1;
+        });
+
+        const allowedEffects = ["Interaktiv lyslinje", "Meteorregn", "Stjernehimmel", "Lynglimt", "Forstørrelsesglass"];
+        if (level === "premium") {
+          const pickedEffects = pickRandomSubset(allowedEffects, 1, 3);
+          effectInputs.forEach(function (input) {
+            input.checked = pickedEffects.indexOf(input.value) !== -1;
+          });
+        } else {
+          effectInputs.forEach(function (input) {
+            input.checked = false;
+          });
+        }
+
+        uiState.variant = Math.floor(Math.random() * 12);
+        uiState.palette = "auto";
+        uiState.density = pickRandomFrom(["balanced", "airy", "compact"]) || "balanced";
+        uiState.heroAlt = pickRandomFrom(["alt1", "alt2", "alt3"]) || "alt1";
         setActiveChip(densityControls, uiState.density, "data-density");
+        if (heroLayoutControls) setActiveChip(heroLayoutControls, uiState.heroAlt, "data-hero-alt");
         update();
       });
 
@@ -3311,14 +3676,14 @@
             ctx.lineJoin = "round";
             ctx.lineWidth = 2 + opacity * 2;
             ctx.shadowBlur = 14 + opacity * 20;
-            ctx.shadowColor = "rgba(236,188,255,0.9)";
-            ctx.strokeStyle = "rgba(236,188,255," + (opacity * 0.74) + ")";
+            ctx.shadowColor = "rgba(" + trailTheme.glowRgb + ",0.9)";
+            ctx.strokeStyle = "rgba(" + trailTheme.glowRgb + "," + (opacity * 0.74) + ")";
             ctx.stroke();
 
             ctx.lineWidth = 0.9;
             ctx.shadowBlur = 10;
-            ctx.shadowColor = "rgba(255,240,255,0.86)";
-            ctx.strokeStyle = "rgba(255,240,255," + (opacity * 0.62) + ")";
+            ctx.shadowColor = "rgba(" + trailTheme.coreRgb + ",0.86)";
+            ctx.strokeStyle = "rgba(" + trailTheme.coreRgb + "," + (opacity * 0.62) + ")";
             ctx.stroke();
           }
 
@@ -3352,6 +3717,33 @@
           lastPoint = null;
         });
         window.addEventListener("resize", resizeCanvas);
+      })();
+
+      (function setupMagnifier() {
+        if (!sketchMagnifier || !sketchMagnifierContent || !sketchSurface) return;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+        if (prefersReducedMotion || !hasFinePointer) return;
+
+        const lensRadius = 75;
+        const zoom = 1.35;
+
+        function updateLensPosition(event) {
+          if (!magnifierEnabled) return;
+          const rect = sketchSurface.getBoundingClientRect();
+          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+          sketchMagnifier.style.left = x + "px";
+          sketchMagnifier.style.top = y + "px";
+          sketchMagnifier.classList.add("is-visible");
+          sketchMagnifierContent.style.transform =
+            "translate(" + (-x * zoom + lensRadius) + "px, " + (-y * zoom + lensRadius) + "px) scale(" + zoom + ")";
+        }
+
+        sketchSurface.addEventListener("pointermove", updateLensPosition, { passive: true });
+        sketchSurface.addEventListener("pointerleave", function () {
+          sketchMagnifier.classList.remove("is-visible");
+        });
       })();
 
       update();
