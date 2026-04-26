@@ -1010,6 +1010,22 @@
       filter: sepia(0.68) saturate(0.7) contrast(0.92) brightness(0.95);
     }
 
+    .map-canvas-wrapper.is-midcentury iframe {
+      filter: sepia(0.54) saturate(1.05) hue-rotate(-10deg) contrast(0.94) brightness(1.03);
+    }
+
+    .map-canvas-wrapper.is-dark iframe {
+      filter: grayscale(0.88) invert(0.86) contrast(1.14) brightness(0.84);
+    }
+
+    .map-canvas-wrapper.is-nova iframe {
+      filter: hue-rotate(172deg) saturate(1.85) contrast(1.12) brightness(0.82);
+    }
+
+    .map-canvas-wrapper.is-pencil iframe {
+      filter: sepia(0.36) saturate(0.84) contrast(0.86) brightness(1.08);
+    }
+
     .map-canvas-wrapper.is-tron iframe {
       filter: hue-rotate(168deg) saturate(1.5) contrast(1.08) brightness(0.86);
     }
@@ -1294,6 +1310,10 @@
             <div class="map-style-controls">
               <button class="map-style-btn is-active" type="button" data-map-style="standard">Google map</button>
               <button class="map-style-btn" type="button" data-map-style="classic">Klassisk</button>
+              <button class="map-style-btn" type="button" data-map-style="midcentury">Mid-century</button>
+              <button class="map-style-btn" type="button" data-map-style="dark">Mørk</button>
+              <button class="map-style-btn" type="button" data-map-style="nova">Nova</button>
+              <button class="map-style-btn" type="button" data-map-style="pencil">Colored pencil</button>
               <button class="map-style-btn" type="button" data-map-style="tron">Tron</button>
             </div>
             <div class="map-canvas-wrapper" data-map-frame>
@@ -1344,9 +1364,17 @@
       const buttons = Array.from(showcase.querySelectorAll("[data-map-style]"));
       if (!frame || !buttons.length) return;
 
+      const mapStyleClasses = ["is-classic", "is-midcentury", "is-dark", "is-nova", "is-pencil", "is-tron"];
       function applyMapStyle(style) {
-        frame.classList.toggle("is-classic", style === "classic");
-        frame.classList.toggle("is-tron", style === "tron");
+        mapStyleClasses.forEach(function (className) {
+          frame.classList.remove(className);
+        });
+        if (style === "classic") frame.classList.add("is-classic");
+        if (style === "midcentury") frame.classList.add("is-midcentury");
+        if (style === "dark") frame.classList.add("is-dark");
+        if (style === "nova") frame.classList.add("is-nova");
+        if (style === "pencil") frame.classList.add("is-pencil");
+        if (style === "tron") frame.classList.add("is-tron");
         buttons.forEach(function (button) {
           button.classList.toggle("is-active", button.dataset.mapStyle === style);
         });
