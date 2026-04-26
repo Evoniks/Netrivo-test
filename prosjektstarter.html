@@ -714,18 +714,27 @@
       content:"";
       position:absolute;
       right:14px;
-      top:50%;
+      top:23px;
       width:9px;
       height:9px;
       border-right:2px solid rgba(63,53,45,0.62);
       border-bottom:2px solid rgba(63,53,45,0.62);
       transform:translateY(-58%) rotate(45deg);
       pointer-events:none;
+      z-index:3;
     }
 
     .live-select{
       appearance:none;
       -webkit-appearance:none;
+      position:absolute;
+      width:0;
+      height:0;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .live-style-trigger{
       width:100%;
       min-height:46px;
       border-radius:999px;
@@ -735,26 +744,89 @@
       padding:10px 42px 10px 15px;
       font:inherit;
       font-size:0.9rem;
+      text-align:left;
       box-shadow:0 10px 22px rgba(70,48,30,0.07);
       transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
       cursor:pointer;
+      font-family:inherit;
     }
 
-    .live-select:focus{
+    .live-style-trigger:focus-visible{
       outline:none;
       border-color:rgba(97,77,54,0.35);
       box-shadow:0 0 0 3px rgba(97,77,54,0.14), 0 10px 22px rgba(70,48,30,0.07);
       background:rgba(255,255,255,0.98);
     }
 
-    .live-select option:disabled{
-      color:#a89c8f;
+    .live-style-menu{
+      position:absolute;
+      left:0;
+      right:0;
+      top:calc(100% + 8px);
+      z-index:10;
+      display:none;
+      max-height:320px;
+      overflow:auto;
+      border-radius:20px;
+      border:1px solid rgba(97,77,54,0.22);
+      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(252,248,243,0.97));
+      box-shadow:0 18px 34px rgba(43,30,20,0.16);
+      padding:10px 8px;
     }
 
-    .live-select optgroup{
+    .live-select-wrap.is-open .live-style-menu{
+      display:block;
+    }
+
+    .live-style-group{
+      padding:4px 6px 8px;
+    }
+
+    .live-style-group + .live-style-group{
+      margin-top:3px;
+      border-top:1px solid rgba(97,77,54,0.09);
+      padding-top:10px;
+    }
+
+    .live-style-group-label{
+      font-size:0.8rem;
+      letter-spacing:-0.01em;
       color:#7c6a5a;
       font-weight:700;
-      font-size:0.83rem;
+      margin:0 0 4px;
+      padding:0 8px;
+    }
+
+    .live-style-item{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:#4a3f35;
+      text-align:left;
+      border-radius:999px;
+      padding:7px 10px;
+      cursor:pointer;
+      font:inherit;
+      font-size:0.95rem;
+      font-family:inherit;
+    }
+
+    .live-style-item:hover{
+      background:rgba(97,77,54,0.09);
+    }
+
+    .live-style-item.is-active{
+      background:rgba(25,23,26,0.92);
+      color:#fff8ef;
+    }
+
+    .live-style-item.is-disabled{
+      opacity:0.38;
+      cursor:not-allowed;
+    }
+
+    .live-select-wrap.is-open::after{
+      transform:translateY(-40%) rotate(-135deg);
     }
 
     .live-option-label{
@@ -2534,6 +2606,31 @@
                             <option value="annet">Annet</option>
                           </optgroup>
                         </select>
+                        <button class="live-style-trigger" id="live-style-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">Fjord</button>
+                        <div class="live-style-menu" id="live-style-menu" role="listbox" aria-label="Ønsket stil">
+                          <div class="live-style-group">
+                            <div class="live-style-group-label">Enkel</div>
+                            <button class="live-style-item" data-style-value="sol-bonner" type="button">Sol &amp; Bønner</button>
+                            <button class="live-style-item is-active" data-style-value="fjord" type="button">Fjord</button>
+                            <button class="live-style-item" data-style-value="studio" type="button">Studio</button>
+                          </div>
+                          <div class="live-style-group">
+                            <div class="live-style-group-label">Standard</div>
+                            <button class="live-style-item" data-style-value="nordic" type="button">Nordic</button>
+                            <button class="live-style-item" data-style-value="arctic" type="button">Arctic</button>
+                            <button class="live-style-item" data-style-value="glacial-lake" type="button">Glacial Lake</button>
+                          </div>
+                          <div class="live-style-group">
+                            <div class="live-style-group-label">Premium</div>
+                            <button class="live-style-item" data-style-value="maison-fjell" type="button">Maison Fjell</button>
+                            <button class="live-style-item" data-style-value="solar-eclipse" type="button">Solar Eclipse</button>
+                            <button class="live-style-item" data-style-value="elin-varde" type="button">Elin Varde</button>
+                          </div>
+                          <div class="live-style-group">
+                            <div class="live-style-group-label">Annet</div>
+                            <button class="live-style-item" data-style-value="annet" type="button">Annet</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="live-option-group">
@@ -2728,6 +2825,10 @@
       const densityControls = document.getElementById("density-controls");
       const heroLayoutControls = document.getElementById("hero-layout-controls");
       const liveStyle = document.getElementById("live-style");
+      const liveStyleWrap = document.querySelector(".live-select-wrap");
+      const liveStyleTrigger = document.getElementById("live-style-trigger");
+      const liveStyleMenu = document.getElementById("live-style-menu");
+      const liveStyleItems = Array.from(document.querySelectorAll(".live-style-item"));
       const styleDemoLink = document.getElementById("style-demo-link");
       const priceSummary = document.getElementById("brief-price-summary");
       const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
@@ -2786,6 +2887,15 @@
         glowRgb: "236,188,255",
         coreRgb: "255,240,255"
       };
+
+      function syncLiveStyleUi() {
+        if (!liveStyle || !liveStyleTrigger) return;
+        const selectedOption = liveStyle.options[liveStyle.selectedIndex];
+        liveStyleTrigger.textContent = selectedOption ? selectedOption.textContent : "Velg stil";
+        liveStyleItems.forEach(function (item) {
+          item.classList.toggle("is-active", item.dataset.styleValue === liveStyle.value);
+        });
+      }
 
       function pickRandomFrom(list) {
         if (!list || !list.length) return null;
@@ -3143,6 +3253,16 @@
             option.disabled = !isAllowed;
           });
           liveStyle.value = activeStyleKey;
+          liveStyleItems.forEach(function (item) {
+            const styleValue = item.dataset.styleValue;
+            const styleOption = Array.from(liveStyle.options).find(function (option) {
+              return option.value === styleValue;
+            });
+            const isDisabled = !styleOption || styleOption.disabled;
+            item.classList.toggle("is-disabled", isDisabled);
+            item.setAttribute("aria-disabled", isDisabled ? "true" : "false");
+          });
+          syncLiveStyleUi();
         }
         form.industry.value = styleProfile.industry;
         form.style.value = styleProfile.style;
@@ -3758,9 +3878,37 @@
 
       if (liveStyle) {
         liveStyle.addEventListener("change", function () {
+          syncLiveStyleUi();
           update();
         });
       }
+
+      if (liveStyleTrigger && liveStyleWrap && liveStyleMenu) {
+        liveStyleTrigger.addEventListener("click", function () {
+          const willOpen = !liveStyleWrap.classList.contains("is-open");
+          liveStyleWrap.classList.toggle("is-open", willOpen);
+          liveStyleTrigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        });
+      }
+
+      liveStyleItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+          if (!liveStyle || item.classList.contains("is-disabled")) return;
+          const nextValue = item.dataset.styleValue;
+          if (!nextValue) return;
+          liveStyle.value = nextValue;
+          liveStyle.dispatchEvent(new Event("change"));
+          if (liveStyleWrap) liveStyleWrap.classList.remove("is-open");
+          if (liveStyleTrigger) liveStyleTrigger.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!liveStyleWrap || !liveStyleWrap.classList.contains("is-open")) return;
+        if (liveStyleWrap.contains(event.target)) return;
+        liveStyleWrap.classList.remove("is-open");
+        if (liveStyleTrigger) liveStyleTrigger.setAttribute("aria-expanded", "false");
+      });
 
       liveOptionButtons.forEach(function (button) {
         button.addEventListener("click", function () {
