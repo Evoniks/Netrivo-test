@@ -2497,10 +2497,11 @@
                         <button class="live-option is-active" data-rank="1" data-type="feature" data-value="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler</button>
                         <button class="live-option" data-rank="2" data-type="feature" data-value="Om oss" type="button">Om oss</button>
                         <button class="live-option" data-rank="3" data-type="feature" data-value="Åpningstider" type="button">Åpningstider</button>
-                        <button class="live-option" data-rank="4" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
-                        <button class="live-option" data-rank="5" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
-                        <button class="live-option" data-rank="6" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
-                        <button class="live-option" data-rank="7" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
+                        <button class="live-option" data-rank="4" data-type="feature" data-value="Kart" type="button">Vis kundens adresse på kart</button>
+                        <button class="live-option" data-rank="5" data-type="feature" data-value="Booking" type="button">Booking eller timebestilling</button>
+                        <button class="live-option" data-rank="6" data-type="feature" data-value="Bestilling" type="button">Bestilling, kjøp eller forespørsler</button>
+                        <button class="live-option" data-rank="7" data-type="feature" data-value="Cases" type="button">Cases, prosjekter eller referanser</button>
+                        <button class="live-option" data-rank="8" data-type="feature" data-value="Galleri" type="button">Bilder og galleri</button>
                       </div>
                     </div>
                     <div class="live-option-group">
@@ -2609,6 +2610,7 @@
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Kontaktinformasjon" checked /><span class="brief-choice-text">Kontakt, henvendelser og forespørsler</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Om oss" /><span class="brief-choice-text">Om oss</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Åpningstider" /><span class="brief-choice-text">Åpningstider</span></label>
+                    <label class="brief-choice"><input type="checkbox" name="feature" value="Kart" /><span class="brief-choice-text">Vis kundens adresse på kart</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Booking" /><span class="brief-choice-text">Booking eller timebestilling</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Bestilling" /><span class="brief-choice-text">Bestilling, kjøp eller forespørsler</span></label>
                     <label class="brief-choice"><input type="checkbox" name="feature" value="Cases" /><span class="brief-choice-text">Cases, prosjekter eller referanser</span></label>
@@ -2919,6 +2921,7 @@
 
       const featureSections = {
         Kontaktinformasjon: { title: "Kontakt", copy: "Lav friksjon og tydelig CTA", sketchLabel: "Kontakt / henvendelser" },
+        Kart: { title: "Kart og adresse", copy: "Viser adresse, plassering og enkel veibeskrivelse", sketchLabel: "Kart / adresse" },
         Booking: { title: "Booking", copy: "Tidspunkter, flyt og klar handling", sketchLabel: "Booking / timebestilling" },
         Bestilling: { title: "Bestilling", copy: "Produkter, forespørsel eller kjøp", sketchLabel: "Bestilling / forespørsel" },
         Cases: { title: "Prosjekter", copy: "Arbeid, resultater og referanser", sketchLabel: "Cases / referanser" },
@@ -3013,15 +3016,15 @@
       };
 
       const levelFeatureAccess = {
-        enkel: ["Kontaktinformasjon", "Om oss", "Åpningstider"],
-        standard: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Cases", "Galleri"],
-        premium: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Cases", "Galleri"]
+        enkel: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart"],
+        standard: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart", "Booking", "Bestilling", "Cases", "Galleri"],
+        premium: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart", "Booking", "Bestilling", "Cases", "Galleri"]
       };
 
       const contentFeatureAccess = {
-        kort: ["Kontaktinformasjon", "Om oss", "Åpningstider"],
-        balansert: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Galleri"],
-        rik: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Booking", "Bestilling", "Cases", "Galleri"]
+        kort: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart"],
+        balansert: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart", "Booking", "Bestilling", "Galleri"],
+        rik: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart", "Booking", "Bestilling", "Cases", "Galleri"]
       };
 
       function hashString(value) {
@@ -3065,8 +3068,9 @@
         });
       }
 
-      function pickSceneLayout(scene, level) {
+      function pickSceneLayout(scene, level, state) {
         const variants = sceneLayouts[scene] || ["default"];
+        if (state && state.styleKey === "fjord") return "default";
         if (level === "enkel") return variants.indexOf("stacked-hero") >= 0 ? "stacked-hero" : "default";
         return variants[uiState.variant % variants.length];
       }
@@ -3213,7 +3217,7 @@
         const paletteSet = paletteSets[palette] || paletteSets.cool;
         const scene = pickScene(state, level);
         const sceneProfile = sceneProfiles[scene] || sceneProfiles.calm;
-        const layout = pickSceneLayout(scene, level);
+        const layout = pickSceneLayout(scene, level, state);
         const toneLayer = uiState.tone === "contrast"
           ? "radial-gradient(circle at 82% 18%, " + paletteSet[2].color + "75, transparent 22%)"
           : uiState.tone === "scene"
@@ -3411,6 +3415,10 @@
 
         state.features.forEach(function (feature) {
           if (feature === "Kontaktinformasjon") {
+            scores.enkel += 1;
+            scores.standard += 1;
+          }
+          if (feature === "Kart") {
             scores.enkel += 1;
             scores.standard += 1;
           }
