@@ -519,6 +519,79 @@
       box-shadow: var(--shadow);
     }
 
+    .map-showcase {
+      margin-top: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-style-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .map-style-btn {
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: #dbe1ff;
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .map-style-btn.is-active {
+      background: #0f1528;
+      border-color: rgba(162,188,255,0.5);
+      color: #ffffff;
+    }
+
+    .map-canvas-wrapper {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid rgba(162,188,255,0.24);
+      overflow: hidden;
+      min-height: 260px;
+      background: #091223;
+    }
+
+    .map-canvas-wrapper iframe {
+      width: 100%;
+      min-height: 260px;
+      border: 0;
+      display: block;
+      filter: none;
+      transition: filter .2s ease;
+    }
+
+    .map-canvas-wrapper.is-classic iframe {
+      filter: sepia(0.72) saturate(0.74) contrast(0.88) brightness(0.9);
+    }
+
+    .map-canvas-wrapper.is-tron iframe {
+      filter: hue-rotate(168deg) saturate(1.62) contrast(1.16) brightness(0.84);
+    }
+
+    .map-canvas-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+
+    .map-canvas-wrapper.is-tron::after {
+      opacity: 1;
+      background:
+        linear-gradient(transparent 95%, rgba(103,224,255,0.28) 96%),
+        linear-gradient(90deg, transparent 95%, rgba(103,224,255,0.2) 96%);
+      background-size: 20px 20px, 20px 20px;
+      mix-blend-mode: screen;
+    }
+
     .contact-item + .contact-item {
       margin-top: 16px;
     }
@@ -738,6 +811,21 @@
           <div class="copy">
             En premiumretning for digitale merkevarer som vil kjennes skarpere, mer modne og mer påkostede.
           </div>
+          <div class="map-showcase" data-map-showcase>
+            <div class="map-style-controls">
+              <button class="map-style-btn is-active" type="button" data-map-style="standard">Google map</button>
+              <button class="map-style-btn" type="button" data-map-style="classic">Klassisk</button>
+              <button class="map-style-btn" type="button" data-map-style="tron">Tron</button>
+            </div>
+            <div class="map-canvas-wrapper" data-map-frame>
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=59.9139,10.7522&z=12&output=embed"
+                title="Demo kartvisning"
+              ></iframe>
+            </div>
+          </div>
         </div>
 
         <div class="box">
@@ -768,6 +856,28 @@
       if (forceView !== "desktop" && isMobile) {
         window.location.href = "./netrivo-mobil-premium-tech.html";
       }
+    })();
+
+    (function () {
+      const showcase = document.querySelector("[data-map-showcase]");
+      if (!showcase) return;
+      const frame = showcase.querySelector("[data-map-frame]");
+      const buttons = Array.from(showcase.querySelectorAll("[data-map-style]"));
+      if (!frame || !buttons.length) return;
+
+      function applyMapStyle(style) {
+        frame.classList.toggle("is-classic", style === "classic");
+        frame.classList.toggle("is-tron", style === "tron");
+        buttons.forEach(function (button) {
+          button.classList.toggle("is-active", button.dataset.mapStyle === style);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          applyMapStyle(button.dataset.mapStyle || "standard");
+        });
+      });
     })();
 
     (function () {
