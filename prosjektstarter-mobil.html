@@ -4,82 +4,87 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Netrivo - Lag skisse (mobil)</title>
-  <meta name="description" content="Mobilversjon av skissegeneratoren. Velg retning og generer skisse i to enkle steg." />
+  <meta name="description" content="Mobil skissegenerator med tydelig to-stegs flyt: velg innhold og stil, generer skisse, og juster ved behov." />
   <style>
     :root{
-      --bg:#f4efe7;
-      --panel:#fffaf3;
-      --ink:#1a1816;
-      --muted:#64594d;
-      --line:rgba(60,44,30,0.15);
-      --shadow:0 20px 36px rgba(40,26,14,0.12);
+      --ink:#171412;
+      --muted:#655a4f;
+      --line:rgba(74,56,40,0.16);
+      --card:#fffaf4;
+      --bg:#f3ece3;
+      --shadow:0 20px 34px rgba(32,22,14,0.12);
+      --theme-bg:linear-gradient(180deg,#f7f0e8,#ebddcc);
+      --theme-hero:linear-gradient(160deg,#fffdf9,#f4e9da);
+      --theme-accent:#8f6b4f;
+      --theme-dark:#2b241d;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       color:var(--ink);
-      background:linear-gradient(180deg,#f7f2ea,#efe7dc);
+      background:var(--theme-bg);
+      transition:background .2s ease;
     }
     .wrap{
-      width:min(720px,calc(100% - 20px));
-      margin:14px auto 32px;
+      width:min(720px, calc(100% - 20px));
+      margin:14px auto 30px;
       display:grid;
       gap:12px;
     }
     .topbar{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,0.74);
+      box-shadow:var(--shadow);
+      padding:12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,0.7);
-      box-shadow:var(--shadow);
     }
-    .topbar strong{font-size:0.95rem}
+    .topbar strong{font-size:0.92rem}
     .topbar a{
       text-decoration:none;
       color:var(--ink);
-      font-size:0.85rem;
       border:1px solid var(--line);
       border-radius:999px;
       padding:8px 12px;
       background:#fff;
+      font-size:0.84rem;
     }
     .card{
       border:1px solid var(--line);
       border-radius:20px;
-      padding:14px;
-      background:rgba(255,255,255,0.8);
+      background:rgba(255,255,255,0.84);
       box-shadow:var(--shadow);
+      padding:14px;
     }
     .kicker{
+      margin:0 0 8px;
       font-size:0.72rem;
-      letter-spacing:0.18em;
       text-transform:uppercase;
+      letter-spacing:0.18em;
       color:var(--muted);
-      margin-bottom:8px;
     }
     h1{
       margin:0;
-      font-size:clamp(1.75rem,9vw,2.8rem);
-      line-height:0.95;
-      letter-spacing:-0.04em;
+      font-size:clamp(1.8rem, 9vw, 2.8rem);
+      line-height:0.94;
+      letter-spacing:-0.05em;
     }
     p{
       margin:10px 0 0;
       color:var(--muted);
       line-height:1.55;
-      font-size:0.95rem;
+      font-size:0.94rem;
     }
     .field{display:grid;gap:8px;margin-top:12px}
     .label{
       font-size:0.72rem;
-      letter-spacing:0.16em;
       text-transform:uppercase;
-      color:#7b6e61;
+      letter-spacing:0.16em;
+      color:#7b6d60;
     }
     .option-grid{display:grid;gap:8px}
     .option{
@@ -87,7 +92,7 @@
       border:1px solid var(--line);
       border-radius:14px;
       background:#fff;
-      color:#493f35;
+      color:#4f4338;
       text-align:left;
       padding:11px 12px;
       font:inherit;
@@ -95,7 +100,7 @@
       cursor:pointer;
     }
     .option.is-active{
-      background:#171717;
+      background:#181818;
       color:#fff7ef;
       border-color:transparent;
     }
@@ -104,19 +109,68 @@
       border:1px solid var(--line);
       border-radius:999px;
       background:#fff;
-      color:#40362e;
+      color:#43392f;
       padding:10px 14px;
       font:inherit;
       font-size:1rem;
     }
+    .content-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .content-option{
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      color:#4f4338;
+      text-align:left;
+      padding:10px 10px;
+      font:inherit;
+      font-size:0.86rem;
+      line-height:1.34;
+      cursor:pointer;
+      position:relative;
+      min-height:62px;
+    }
+    .content-option.is-active{
+      background:rgba(27,22,17,0.92);
+      color:#fff7ee;
+      border-color:transparent;
+    }
+    .content-order{
+      position:absolute;
+      top:6px;
+      right:7px;
+      min-width:18px;
+      height:18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.28);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      font-size:0.7rem;
+      font-weight:700;
+      color:#fff;
+      background:rgba(255,255,255,0.1);
+    }
+    .content-option.is-active .content-order{display:flex}
     .preview{
       border:1px solid var(--line);
       border-radius:16px;
-      min-height:86px;
-      transition:background .2s ease;
-      background:linear-gradient(180deg,#f1f7ff,#d7e6f7);
+      background:var(--theme-hero);
+      min-height:92px;
+      padding:10px;
+      display:grid;
+      gap:8px;
+      align-content:center;
     }
-    .actions{display:grid;gap:8px;margin-top:14px}
+    .preview-line{
+      height:10px;
+      border-radius:999px;
+      background:color-mix(in srgb, var(--theme-accent) 35%, white);
+    }
+    .actions{display:grid;gap:8px;margin-top:12px}
     .btn{
       width:100%;
       border-radius:999px;
@@ -126,42 +180,96 @@
       font-weight:700;
       cursor:pointer;
     }
-    .btn-primary{background:#151515;color:#fff6ec}
+    .btn-primary{background:#151515;color:#fff5ec}
     .btn-secondary{background:#fff;color:#221b16;border-color:var(--line)}
     .result{display:none}
     body.show-result .setup{display:none}
     body.show-result .result{display:grid;gap:12px}
-    .result-hero{
+    .result-head{
       border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-      background:rgba(255,255,255,0.85);
+      border-radius:16px;
+      padding:12px;
+      background:rgba(255,255,255,0.86);
     }
     .result-title{
-      margin:0;
-      font-size:1.6rem;
-      line-height:1.02;
+      margin:2px 0 0;
+      font-size:1.44rem;
+      line-height:1.04;
       letter-spacing:-0.04em;
     }
-    .mock{
-      border:1px solid rgba(60,44,30,0.18);
-      border-radius:18px;
-      padding:12px;
-      background:#fff;
-      display:grid;
-      gap:10px;
+    .result-chips{
+      margin-top:10px;
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
     }
-    .line{height:10px;border-radius:999px;background:rgba(30,25,20,0.16)}
-    .line.dark{background:rgba(30,25,20,0.3)}
-    .chips{display:flex;gap:6px;flex-wrap:wrap}
     .chip{
       border:1px solid var(--line);
       border-radius:999px;
       padding:5px 10px;
+      background:rgba(255,255,255,0.8);
       font-size:0.75rem;
-      color:#54483d;
-      background:rgba(255,255,255,0.75);
+      color:#4f4338;
     }
+    .mobile-mock{
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:var(--theme-hero);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .mock-top{
+      padding:12px;
+      border-bottom:1px solid rgba(255,255,255,0.28);
+      background:linear-gradient(160deg,color-mix(in srgb,var(--theme-dark) 86%, black),color-mix(in srgb,var(--theme-dark) 66%, var(--theme-accent)));
+      color:#fff4ea;
+      display:grid;
+      gap:8px;
+    }
+    .mock-kicker{
+      font-size:0.66rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      opacity:0.8;
+    }
+    .mock-headline{
+      height:12px;
+      border-radius:999px;
+      background:rgba(255,244,233,0.65);
+    }
+    .mock-headline.big{height:16px;width:82%}
+    .mock-content{
+      padding:12px;
+      display:grid;
+      gap:10px;
+    }
+    .selected-content-stack{
+      display:grid;
+      gap:8px;
+    }
+    .selected-content-box{
+      border:1px solid color-mix(in srgb, var(--theme-accent) 40%, rgba(255,255,255,0.6));
+      border-radius:14px;
+      padding:10px;
+      background:rgba(255,255,255,0.75);
+      display:grid;
+      gap:7px;
+    }
+    .selected-content-label{
+      font-size:0.74rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      color:color-mix(in srgb, var(--theme-dark) 70%, #46372a);
+      font-weight:700;
+    }
+    .faux{
+      height:8px;
+      border-radius:999px;
+      background:color-mix(in srgb, var(--theme-dark) 22%, white);
+    }
+    .faux.wide{width:92%}
+    .faux.mid{width:76%}
+    .faux.short{width:58%}
   </style>
 </head>
 <body>
@@ -173,8 +281,8 @@
 
     <section class="card setup">
       <div class="kicker">Steg 1</div>
-      <h1>Velg retning</h1>
-      <p>Vel innholdsmengde og stil. Når du er klar, trykk Generer skisse.</p>
+      <h1>Velg innhold og stil</h1>
+      <p>Fargene følger både innholdsmengde og stil. Trykk Generer skisse når du er klar.</p>
 
       <div class="field">
         <div class="label">Innholdsmengde</div>
@@ -201,8 +309,26 @@
       </div>
 
       <div class="field">
+        <div class="label">Innhold</div>
+        <div id="content-feature-options" class="content-grid">
+          <button class="content-option is-active" data-feature="Kontaktinformasjon" type="button">Kontakt, henvendelser og forespørsler <span class="content-order">1</span></button>
+          <button class="content-option" data-feature="Om oss" type="button">Om oss <span class="content-order"></span></button>
+          <button class="content-option" data-feature="Åpningstider" type="button">Åpningstider <span class="content-order"></span></button>
+          <button class="content-option" data-feature="Kart" type="button">Vis kundens adresse på kart <span class="content-order"></span></button>
+          <button class="content-option" data-feature="Booking" type="button">Booking eller timebestilling <span class="content-order"></span></button>
+          <button class="content-option" data-feature="Bestilling" type="button">Bestilling, kjøp eller forespørsler <span class="content-order"></span></button>
+          <button class="content-option" data-feature="Cases" type="button">Cases, prosjekter eller referanser <span class="content-order"></span></button>
+          <button class="content-option" data-feature="Galleri" type="button">Bilder og galleri <span class="content-order"></span></button>
+        </div>
+      </div>
+
+      <div class="field">
         <div class="label">Forhåndsvisning fargetone</div>
-        <div id="preview" class="preview"></div>
+        <div id="preview" class="preview">
+          <div class="preview-line" style="width:82%;"></div>
+          <div class="preview-line" style="width:64%;"></div>
+          <div class="preview-line" style="width:72%;"></div>
+        </div>
       </div>
 
       <div class="actions">
@@ -212,21 +338,25 @@
 
     <section class="card result">
       <div class="kicker">Steg 2</div>
-      <h2 id="result-level" class="result-title">Standard skisse</h2>
-      <div class="result-hero">
-        <div class="chips">
+      <div class="result-head">
+        <h2 id="result-level" class="result-title">Standard skisse</h2>
+        <div class="result-chips">
           <span id="result-content-chip" class="chip">Balansert</span>
           <span id="result-style-chip" class="chip">Fjord</span>
         </div>
-        <p id="result-copy">Skissa er generert frå vala dine. Her kan du vise retning utan å ha fleire val oppe samtidig.</p>
       </div>
-      <div id="result-mock" class="mock">
-        <div class="line dark" style="width:78%;"></div>
-        <div class="line dark" style="width:62%;"></div>
-        <div class="line" style="width:92%;"></div>
-        <div class="line" style="width:74%;"></div>
-        <div class="line" style="width:66%;"></div>
-      </div>
+
+      <article id="mobile-mock" class="mobile-mock">
+        <div class="mock-top">
+          <div class="mock-kicker" id="mock-kicker">MOBIL SKISSE / FJORD</div>
+          <div class="mock-headline big"></div>
+          <div class="mock-headline"></div>
+        </div>
+        <div class="mock-content">
+          <div id="selected-content-stack" class="selected-content-stack"></div>
+        </div>
+      </article>
+
       <button id="regenerate" class="btn btn-secondary" type="button">Velg på nytt</button>
     </section>
   </main>
@@ -235,11 +365,13 @@
     (function () {
       const contentOptions = Array.from(document.querySelectorAll("[data-content]"));
       const styleSelect = document.getElementById("style-select");
+      const featureOptions = Array.from(document.querySelectorAll(".content-option"));
       const preview = document.getElementById("preview");
-      const resultMock = document.getElementById("result-mock");
       const resultLevel = document.getElementById("result-level");
       const resultStyleChip = document.getElementById("result-style-chip");
       const resultContentChip = document.getElementById("result-content-chip");
+      const selectedContentStack = document.getElementById("selected-content-stack");
+      const mockKicker = document.getElementById("mock-kicker");
       const generate = document.getElementById("generate");
       const regenerate = document.getElementById("regenerate");
 
@@ -261,13 +393,33 @@
         rik: ["sol-bonner", "fjord", "studio", "nordic", "arctic", "glacial-lake", "maison-fjell", "solar-eclipse", "elin-varde"]
       };
 
-      const bgByContent = {
-        kort: "linear-gradient(180deg,#fff7ec,#ead6c0)",
-        balansert: "linear-gradient(180deg,#f1f7ff,#d7e6f7)",
-        rik: "linear-gradient(180deg,#f7f1ff,#dbc5ee)"
+      const themeByStyle = {
+        "sol-bonner": { bg:"linear-gradient(180deg,#f8f1e7,#ead7c1)", hero:"linear-gradient(165deg,#fffdf9,#f3e6d5)", accent:"#a97445", dark:"#3a2a1e" },
+        fjord: { bg:"linear-gradient(180deg,#eef5fb,#d8e7f4)", hero:"linear-gradient(165deg,#f8fcff,#deedf7)", accent:"#5c88ad", dark:"#1f3448" },
+        studio: { bg:"linear-gradient(180deg,#f8efe8,#edd9ca)", hero:"linear-gradient(165deg,#fff8f1,#f5ddca)", accent:"#b3754f", dark:"#3f2b1f" },
+        nordic: { bg:"linear-gradient(180deg,#eef3f9,#d6e0ee)", hero:"linear-gradient(165deg,#f6f9fd,#dde6f1)", accent:"#6d88aa", dark:"#243649" },
+        arctic: { bg:"linear-gradient(180deg,#edf7fb,#d2e8f1)", hero:"linear-gradient(165deg,#f6fdff,#dbeff7)", accent:"#4f8cb0", dark:"#19394a" },
+        "glacial-lake": { bg:"linear-gradient(180deg,#edf8f3,#d6ebdf)", hero:"linear-gradient(165deg,#f7fdf9,#ddeee4)", accent:"#5e9478", dark:"#1f4132" },
+        "maison-fjell": { bg:"linear-gradient(180deg,#f6f0ec,#e5d6ca)", hero:"linear-gradient(165deg,#fcf8f4,#ecdfd6)", accent:"#9d7459", dark:"#3a2a21" },
+        "solar-eclipse": { bg:"linear-gradient(180deg,#121c28,#213243)", hero:"linear-gradient(165deg,#1a2b3a,#24384a)", accent:"#ff9a5c", dark:"#0e141c" },
+        "elin-varde": { bg:"linear-gradient(180deg,#f8eef7,#ebd7ea)", hero:"linear-gradient(165deg,#fff7fe,#f2e1f1)", accent:"#a971ad", dark:"#3f2744" }
       };
 
+      const baseSectionCount = { kort: 2, balansert: 4, rik: 6 };
       let selectedContent = "balansert";
+      let featureOrder = ["Kontaktinformasjon"];
+
+      function levelLabel() {
+        if (selectedContent === "kort") return "Enkel skisse";
+        if (selectedContent === "rik") return "Premium skisse";
+        return "Standard skisse";
+      }
+
+      function contentLabel() {
+        if (selectedContent === "kort") return "Kort og direkte";
+        if (selectedContent === "rik") return "Mer innhold";
+        return "Balansert";
+      }
 
       function syncStyleAccess() {
         const allowed = styleByContent[selectedContent];
@@ -277,23 +429,57 @@
         if (allowed.indexOf(styleSelect.value) === -1) styleSelect.value = allowed[0];
       }
 
-      function syncPreview() {
-        preview.style.background = bgByContent[selectedContent];
+      function syncFeatureOrderUi() {
+        featureOptions.forEach(function (button) {
+          const index = featureOrder.indexOf(button.dataset.feature);
+          const isActive = index !== -1;
+          button.classList.toggle("is-active", isActive);
+          const badge = button.querySelector(".content-order");
+          if (badge) badge.textContent = isActive ? String(index + 1) : "";
+        });
       }
 
-      function levelLabel() {
-        if (selectedContent === "kort") return "Enkel skisse";
-        if (selectedContent === "rik") return "Premium skisse";
-        return "Standard skisse";
+      function applyTheme() {
+        const theme = themeByStyle[styleSelect.value] || themeByStyle.fjord;
+        document.documentElement.style.setProperty("--theme-bg", theme.bg);
+        document.documentElement.style.setProperty("--theme-hero", theme.hero);
+        document.documentElement.style.setProperty("--theme-accent", theme.accent);
+        document.documentElement.style.setProperty("--theme-dark", theme.dark);
+      }
+
+      function syncPreview() {
+        applyTheme();
+      }
+
+      function fakeSectionHtml(title) {
+        return [
+          '<article class="selected-content-box">',
+          '<div class="selected-content-label">' + title + "</div>",
+          '<div class="faux wide"></div>',
+          '<div class="faux mid"></div>',
+          '<div class="faux short"></div>',
+          "</article>"
+        ].join("");
+      }
+
+      function renderGeneratedStack() {
+        const minimum = baseSectionCount[selectedContent] || 4;
+        const picked = featureOrder.slice();
+        const fallback = ["Introduksjon", "Område", "Kontakt"];
+        while (picked.length < minimum) {
+          picked.push(fallback[picked.length % fallback.length] + " " + (picked.length - featureOrder.length + 1));
+        }
+        selectedContentStack.innerHTML = picked.map(fakeSectionHtml).join("");
       }
 
       function generateSketch() {
-        const bg = bgByContent[selectedContent];
         document.body.classList.add("show-result");
-        resultMock.style.background = bg;
         resultLevel.textContent = levelLabel();
         resultStyleChip.textContent = styleLabels[styleSelect.value] || styleSelect.value;
-        resultContentChip.textContent = selectedContent === "kort" ? "Kort" : selectedContent === "rik" ? "Rik" : "Balansert";
+        resultContentChip.textContent = contentLabel();
+        mockKicker.textContent = "MOBIL SKISSE / " + (styleLabels[styleSelect.value] || styleSelect.value).toUpperCase();
+        syncPreview();
+        renderGeneratedStack();
       }
 
       contentOptions.forEach(function (button) {
@@ -307,6 +493,22 @@
         });
       });
 
+      featureOptions.forEach(function (button) {
+        button.addEventListener("click", function () {
+          const feature = button.dataset.feature;
+          const existingIndex = featureOrder.indexOf(feature);
+          if (existingIndex !== -1) {
+            featureOrder.splice(existingIndex, 1);
+          } else {
+            featureOrder.push(feature);
+          }
+          if (!featureOrder.length) {
+            featureOrder = ["Kontaktinformasjon"];
+          }
+          syncFeatureOrderUi();
+        });
+      });
+
       styleSelect.addEventListener("change", syncPreview);
       generate.addEventListener("click", generateSketch);
       regenerate.addEventListener("click", function () {
@@ -314,6 +516,7 @@
       });
 
       syncStyleAccess();
+      syncFeatureOrderUi();
       syncPreview();
     })();
   </script>
