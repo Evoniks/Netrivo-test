@@ -1787,18 +1787,6 @@
 
     .control-footnote{display:none}
 
-    .sr-only{
-      position:absolute;
-      width:1px;
-      height:1px;
-      padding:0;
-      margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;
-      border:0;
-    }
-
     .generated-right{
       display:grid;
       justify-items:end;
@@ -2526,18 +2514,6 @@
                         <button class="live-option" data-type="effect" data-value="Forstørrelsesglass" type="button">Forstørrelsesglass</button>
                       </div>
                     </div>
-                    <div class="live-option-group">
-                      <div class="live-option-label">Kartstil</div>
-                      <div class="live-option-grid" id="live-map-options">
-                        <button class="live-option is-active" data-type="mapStyle" data-value="standard" type="button">Normal</button>
-                        <button class="live-option" data-type="mapStyle" data-value="classic" type="button">Klassisk</button>
-                        <button class="live-option" data-type="mapStyle" data-value="midcentury" type="button">Mid-century</button>
-                        <button class="live-option" data-type="mapStyle" data-value="dark" type="button">Mørk</button>
-                        <button class="live-option" data-type="mapStyle" data-value="nova" type="button">Nova</button>
-                        <button class="live-option" data-type="mapStyle" data-value="pencil" type="button">Colored pencil</button>
-                        <button class="live-option" data-type="mapStyle" data-value="tron" type="button">Tron</button>
-                      </div>
-                    </div>
                     <div class="style-demo-cta">
                       <p class="style-demo-note">Gå til full demo</p>
                       <a class="style-demo-link" id="style-demo-link" href="./netrivo-enkel-2-handverkar.html">Se demo: Fjord</a>
@@ -2653,18 +2629,6 @@
                   </div>
                 </div>
 
-                <div class="brief-field legacy-choice-fields sr-only" aria-hidden="true">
-                  <label for="brief-map-style">Kartstil</label>
-                  <select id="brief-map-style" name="mapStyle">
-                    <option value="standard" selected>Normal</option>
-                    <option value="classic">Klassisk</option>
-                    <option value="midcentury">Mid-century</option>
-                    <option value="dark">Mørk</option>
-                    <option value="nova">Nova</option>
-                    <option value="pencil">Colored pencil</option>
-                    <option value="tron">Tron</option>
-                  </select>
-                </div>
 
                 <div class="brief-field brief-field--full">
                   <label for="brief-notes">Kort om ønsket retning</label>
@@ -2723,7 +2687,6 @@
       const priceSummary = document.getElementById("brief-price-summary");
       const liveOptionButtons = Array.from(document.querySelectorAll(".live-option"));
       const contentSelect = document.getElementById("brief-content");
-      const mapStyleSelect = document.getElementById("brief-map-style");
       const featureInputs = Array.from(form.querySelectorAll('input[name="feature"]'));
       const effectInputs = Array.from(form.querySelectorAll('input[name="effect"]'));
       const styleDemoRoutes = {
@@ -3065,22 +3028,6 @@
         rik: ["Kontaktinformasjon", "Om oss", "Åpningstider", "Kart", "Booking", "Bestilling", "Cases", "Galleri"]
       };
 
-      const mapStyleLabels = {
-        standard: "Normal",
-        classic: "Klassisk",
-        midcentury: "Mid-century",
-        dark: "Mørk",
-        nova: "Nova",
-        pencil: "Colored pencil",
-        tron: "Tron"
-      };
-
-      const mapStyleAccessByLevel = {
-        enkel: ["standard"],
-        standard: ["standard", "classic", "midcentury", "dark", "nova", "pencil", "tron"],
-        premium: ["standard", "classic", "midcentury", "dark", "nova", "pencil", "tron"]
-      };
-
       function hashString(value) {
         return value.split("").reduce(function (acc, char) {
           return (acc * 31 + char.charCodeAt(0)) % 2147483647;
@@ -3139,7 +3086,6 @@
           return contentAllowed.indexOf(feature) !== -1;
         });
         const effectsEnabled = selectedLevel === "premium";
-        const allowedMapStyles = mapStyleAccessByLevel[selectedLevel] || mapStyleAccessByLevel.enkel;
 
         const chosenStyleKey = liveStyle ? liveStyle.value : "fjord";
         const fallbackStyleKey = allowedStyles[0];
@@ -3170,15 +3116,6 @@
           if (!effectsEnabled) input.checked = false;
           if (label) label.classList.toggle("is-disabled", !effectsEnabled);
         });
-
-        if (mapStyleSelect) {
-          Array.from(mapStyleSelect.options).forEach(function (option) {
-            option.disabled = allowedMapStyles.indexOf(option.value) === -1;
-          });
-          if (allowedMapStyles.indexOf(mapStyleSelect.value) === -1) {
-            mapStyleSelect.value = "standard";
-          }
-        }
 
         const featureGroup = document.getElementById("live-feature-options");
         if (featureGroup) {
@@ -3212,15 +3149,6 @@
           if (type === "content") {
             button.classList.toggle("is-active", form.content.value === value);
             button.classList.remove("is-disabled");
-            return;
-          }
-          if (type === "mapStyle") {
-            const mapValue = mapStyleSelect ? mapStyleSelect.value : "standard";
-            const selectedProfile = contentProfiles[form.content.value] || contentProfiles.balansert;
-            const allowedMapStyles = mapStyleAccessByLevel[selectedProfile.level] || mapStyleAccessByLevel.enkel;
-            const isAllowedMap = allowedMapStyles.indexOf(value) !== -1;
-            button.classList.toggle("is-active", mapValue === value && isAllowedMap);
-            button.classList.toggle("is-disabled", !isAllowedMap);
             return;
           }
           const input = form.querySelector('input[name="' + type + '"][value="' + value + '"]');
@@ -3444,8 +3372,6 @@
           contentLabel: form.content.options[form.content.selectedIndex].text,
           pages: selectedProfile.pages,
           pagesLabel: selectedProfile.pagesLabel,
-          mapStyle: mapStyleSelect ? mapStyleSelect.value : "standard",
-          mapStyleLabel: mapStyleLabels[mapStyleSelect ? mapStyleSelect.value : "standard"] || "Normal",
           notes: form.notes.value.trim(),
           features: Array.from(form.querySelectorAll('input[name="feature"]:checked')).map(function (input) {
             return input.value;
@@ -3563,7 +3489,6 @@
           "Ønsket stil: " + state.styleLabel,
           "Innholdsmengde: " + state.contentLabel,
           "Sideomfang: " + state.pagesLabel,
-          "Kartstil: " + state.mapStyleLabel,
           "Viktige funksjoner: " + (orderedFeatures.join(", ") || "Ingen valgt"),
           "Effekter: " + (state.effects.join(", ") || "Ingen valgt")
         ];
@@ -3777,11 +3702,6 @@
           });
         }
 
-        if (mapStyleSelect) {
-          const allowedMapStyles = mapStyleAccessByLevel[level] || mapStyleAccessByLevel.enkel;
-          mapStyleSelect.value = pickRandomFrom(allowedMapStyles) || "standard";
-        }
-
         uiState.variant = Math.floor(Math.random() * 12);
         uiState.palette = "auto";
         uiState.density = pickRandomFrom(["balanced", "airy", "compact"]) || "balanced";
@@ -3804,14 +3724,6 @@
           if (!type || !value) return;
           if (type === "content") {
             if (contentSelect) contentSelect.value = value;
-            update();
-            return;
-          }
-          if (type === "mapStyle") {
-            if (mapStyleSelect) {
-              const option = mapStyleSelect.querySelector('option[value="' + value + '"]');
-              if (option && !option.disabled) mapStyleSelect.value = value;
-            }
             update();
             return;
           }

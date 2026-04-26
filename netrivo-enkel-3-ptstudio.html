@@ -415,6 +415,27 @@
       padding: 30px;
     }
 
+    .map-showcase {
+      margin-top: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-canvas-wrapper {
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      min-height: 240px;
+      background: #ece0d5;
+    }
+
+    .map-canvas-wrapper iframe {
+      width: 100%;
+      min-height: 240px;
+      border: 0;
+      display: block;
+    }
+
     .small {
       font-size: 0.9rem;
       color: var(--muted);
@@ -617,6 +638,16 @@
           <h2>Tre ulike enkle retninger kan selges forskjellig.</h2>
           <div class="copy">
             Denne viser at enkel ikke trenger å bety samme stil hver gang. Du kan spisse tema, energi og oppsett og fortsatt holde deg på samme nivå.
+          </div>
+          <div class="map-showcase">
+            <div class="map-canvas-wrapper">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.7522,59.9139&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+                title="Kartvisning"
+              ></iframe>
+            </div>
           </div>
         </div>
 
