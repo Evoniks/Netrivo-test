@@ -2831,27 +2831,23 @@
 
       function renderHeroFeatureNotes(state) {
         const ordered = getOrderedSelectedFeatures(state).slice(0, 3);
-        const defaults = ["Kontaktinformasjon", "Om oss", "Åpningstider"];
-        while (ordered.length < 3) {
-          const nextDefault = defaults[ordered.length] || "Kontaktinformasjon";
-          ordered.push(nextDefault);
-        }
         const slots = [heroNoteA, heroNoteB, heroNoteC];
-        ordered.forEach(function (feature, index) {
-          const section = featureSections[feature] || featureSections.Kontaktinformasjon;
+        slots.forEach(function (slot, index) {
+          const feature = ordered[index];
+          const section = feature ? (featureSections[feature] || featureSections.Kontaktinformasjon) : null;
           const titleWidth = 34 + ((index * 14) % 32);
           const lineA = 98 - index * 3;
           const lineB = 78 - index * 6;
           const lineC = 60 - index * 5;
-          if (!slots[index]) return;
-          slots[index].innerHTML =
+          if (!slot) return;
+          slot.innerHTML =
             '<div class="sketch-note-title" style="width:' + titleWidth + '%;"></div>' +
             '<div class="sketch-note-lines">' +
               '<div class="sketch-note-line" style="width:' + lineA + '%;"></div>' +
               '<div class="sketch-note-line" style="width:' + lineB + '%;"></div>' +
               '<div class="sketch-note-line" style="width:' + lineC + '%;"></div>' +
             '</div>' +
-            '<div class="sketch-section-label">' + (section.sketchLabel || section.title || "Seksjon") + '</div>';
+            '<div class="sketch-section-label">' + (section ? (section.sketchLabel || section.title || "Seksjon") : "Ledig prioritet") + '</div>';
         });
       }
 
@@ -2859,6 +2855,8 @@
         const featureCount = state.features.length;
         const featureText = featureCount ? getOrderedSelectedFeatures(state).slice(0, 3).join(", ").toLowerCase() : "tydeleg kontaktflyt";
         const notes = state.notes || "";
+        const isCafeOrRetail = /kafe|servering|butikk|livsstil|blomster|plante/i.test(state.industry + " " + state.styleLabel + " " + notes);
+        const isServiceTrustDriven = /rådgivning|tjenester|håndverk|service|tech|saas|brand/i.test(state.industry.toLowerCase());
         const positive = [];
         const improvements = [];
 
@@ -2869,7 +2867,12 @@
 
         if (featureCount <= 1) improvements.push("Legg til minst éin støttefunksjon (t.d. Om oss eller Åpningstider) for meir tryggleik før kontakt.");
         if (state.content === "kort" && featureCount > 3) improvements.push("Vurder færre funksjonar for å halde fokuset skarpt i kort-modus.");
-        if (state.content !== "rik" && (state.features.indexOf("Cases") === -1)) improvements.push("Vil du auke tillit, kan Cases/referansar vere neste naturlege steg.");
+        if (!isCafeOrRetail && isServiceTrustDriven && state.content !== "rik" && (state.features.indexOf("Cases") === -1)) {
+          improvements.push("Vil du auke tillit i denne typen verksemd, kan Cases/referansar vere neste naturlege steg.");
+        }
+        if (isCafeOrRetail && state.features.indexOf("Åpningstider") === -1) {
+          improvements.push("For denne typen verksemd er tydelege åpningstider ofte viktigare enn fleire avanserte seksjonar.");
+        }
         if (!notes.trim()) improvements.push("Legg inn 1-2 setningar i «Kort om ønsket retning» for endå meir treffsikker AI-retning.");
 
         if (!positive.length) positive.push("Retninga er klar og gir eit godt utgangspunkt for neste designrunde.");
@@ -3152,8 +3155,9 @@
       }
 
       function buildGeneratedBrief(state, recommendation, title) {
-        const featureText = state.features.length
-          ? state.features.slice(0, 3).join(", ").toLowerCase()
+        const orderedFeatures = getOrderedSelectedFeatures(state);
+        const featureText = orderedFeatures.length
+          ? orderedFeatures.slice(0, 3).join(", ").toLowerCase()
           : "tydelig kontakt og enkel flyt";
         const notesText = state.notes
           ? state.notes.charAt(0).toLowerCase() + state.notes.slice(1)
@@ -3457,8 +3461,9 @@
 
       function buildSections(state, level) {
         const sections = [];
+        const orderedFeatures = getOrderedSelectedFeatures(state);
 
-        state.features.forEach(function (feature) {
+        orderedFeatures.slice(3).forEach(function (feature) {
           const section = featureSections[feature];
           if (section) sections.push(section);
         });
@@ -3468,13 +3473,14 @@
       }
 
       function buildSummary(state, recommendation) {
+        const orderedFeatures = getOrderedSelectedFeatures(state);
         return [
           "Foreslått nivå: " + recommendation.level.charAt(0).toUpperCase() + recommendation.level.slice(1),
           "Bransje: " + state.industry,
           "Ønsket stil: " + state.styleLabel,
           "Innholdsmengde: " + state.contentLabel,
           "Sideomfang: " + state.pagesLabel,
-          "Viktige funksjoner: " + (state.features.join(", ") || "Ingen valgt"),
+          "Viktige funksjoner: " + (orderedFeatures.join(", ") || "Ingen valgt"),
           "Effekter: " + (state.effects.join(", ") || "Ingen valgt")
         ];
       }
