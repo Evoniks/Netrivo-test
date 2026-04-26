@@ -182,6 +182,22 @@
     }
     .btn-primary{background:#151515;color:#fff5ec}
     .btn-secondary{background:#fff;color:#221b16;border-color:var(--line)}
+    .demo-cta{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(140deg, color-mix(in srgb, var(--theme-dark) 92%, #000), color-mix(in srgb, var(--theme-accent) 64%, #1a1512));
+      color:#fff4ea;
+      border:1px solid color-mix(in srgb, var(--theme-accent) 40%, rgba(255,255,255,0.2));
+      box-shadow:0 14px 24px color-mix(in srgb, var(--theme-dark) 45%, transparent);
+      letter-spacing:-0.01em;
+      transition:transform .18s ease, filter .18s ease;
+    }
+    .demo-cta:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+    }
     .result{display:none}
     body.show-result .setup{display:none}
     body.show-result .result{display:grid;gap:12px}
@@ -217,6 +233,130 @@
       background:var(--theme-hero);
       overflow:hidden;
       box-shadow:var(--shadow);
+    }
+    .mobile-mock[data-style="solar-eclipse"] .mock-top{
+      background:linear-gradient(160deg,#131f2c,#21354a 62%,#3e2a27);
+    }
+    .mobile-mock[data-style="solar-eclipse"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(20,28,38,0.88), rgba(31,46,61,0.86));
+      border-color:rgba(255,160,106,0.28);
+    }
+    .mobile-mock[data-style="solar-eclipse"] .selected-content-label{
+      color:#ffd3b3;
+    }
+    .mobile-mock[data-style="solar-eclipse"] .faux{
+      background:rgba(227,238,248,0.26);
+    }
+
+    .mobile-mock[data-style="elin-varde"] .mock-top{
+      background:linear-gradient(160deg,#402748,#653968 62%,#7d5582);
+    }
+    .mobile-mock[data-style="elin-varde"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(255,246,255,0.86), rgba(249,236,251,0.84));
+      border-color:rgba(167,112,174,0.38);
+    }
+    .mobile-mock[data-style="elin-varde"] .selected-content-label{
+      color:#6b3571;
+    }
+    .mobile-mock[data-style="elin-varde"] .faux{
+      background:rgba(107,53,113,0.2);
+    }
+
+    .mobile-mock[data-style="fjord"] .mock-top{
+      background:linear-gradient(160deg,#1d3a53,#426a8b 62%,#5a86ab);
+    }
+    .mobile-mock[data-style="fjord"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(246,252,255,0.88), rgba(236,246,252,0.84));
+      border-color:rgba(92,136,173,0.35);
+    }
+    .mobile-mock[data-style="fjord"] .selected-content-label{
+      color:#2b597a;
+    }
+    .mobile-mock[data-style="fjord"] .faux{
+      background:rgba(43,89,122,0.2);
+    }
+    .mobile-mock[data-style="sol-bonner"] .mock-top{
+      background:linear-gradient(160deg,#3b2b1f,#7c5439 62%,#ad7a53);
+    }
+    .mobile-mock[data-style="sol-bonner"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(255,250,245,0.9), rgba(247,232,216,0.84));
+      border-color:rgba(169,116,69,0.34);
+    }
+    .mobile-mock[data-style="sol-bonner"] .selected-content-label{
+      color:#7c4b29;
+    }
+    .mobile-mock[data-style="sol-bonner"] .faux{
+      background:rgba(124,75,41,0.2);
+    }
+
+    .mobile-mock[data-style="studio"] .mock-top{
+      background:linear-gradient(160deg,#3a2419,#6d4028 58%,#a26139);
+    }
+    .mobile-mock[data-style="studio"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(255,248,243,0.9), rgba(246,228,212,0.84));
+      border-color:rgba(179,117,79,0.34);
+    }
+    .mobile-mock[data-style="studio"] .selected-content-label{
+      color:#8f4f28;
+    }
+    .mobile-mock[data-style="studio"] .faux{
+      background:rgba(143,79,40,0.2);
+    }
+
+    .mobile-mock[data-style="nordic"] .mock-top{
+      background:linear-gradient(160deg,#22384c,#3f5f7e 60%,#7394b7);
+    }
+    .mobile-mock[data-style="nordic"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(246,251,255,0.9), rgba(230,240,249,0.84));
+      border-color:rgba(109,136,170,0.36);
+    }
+    .mobile-mock[data-style="nordic"] .selected-content-label{
+      color:#365a80;
+    }
+    .mobile-mock[data-style="nordic"] .faux{
+      background:rgba(54,90,128,0.2);
+    }
+
+    .mobile-mock[data-style="arctic"] .mock-top{
+      background:linear-gradient(160deg,#1a3a4b,#2f5d75 60%,#4f8cb0);
+    }
+    .mobile-mock[data-style="arctic"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(242,252,255,0.9), rgba(222,242,250,0.84));
+      border-color:rgba(79,140,176,0.35);
+    }
+    .mobile-mock[data-style="arctic"] .selected-content-label{
+      color:#2b6b8f;
+    }
+    .mobile-mock[data-style="arctic"] .faux{
+      background:rgba(43,107,143,0.2);
+    }
+
+    .mobile-mock[data-style="glacial-lake"] .mock-top{
+      background:linear-gradient(160deg,#1f4132,#35634f 60%,#5e9478);
+    }
+    .mobile-mock[data-style="glacial-lake"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(245,253,248,0.9), rgba(226,242,233,0.84));
+      border-color:rgba(94,148,120,0.34);
+    }
+    .mobile-mock[data-style="glacial-lake"] .selected-content-label{
+      color:#2f6b50;
+    }
+    .mobile-mock[data-style="glacial-lake"] .faux{
+      background:rgba(47,107,80,0.2);
+    }
+
+    .mobile-mock[data-style="maison-fjell"] .mock-top{
+      background:linear-gradient(160deg,#3a2a21,#604638 60%,#9d7459);
+    }
+    .mobile-mock[data-style="maison-fjell"] .selected-content-box{
+      background:linear-gradient(180deg, rgba(255,250,246,0.9), rgba(245,232,221,0.84));
+      border-color:rgba(157,116,89,0.35);
+    }
+    .mobile-mock[data-style="maison-fjell"] .selected-content-label{
+      color:#7b553e;
+    }
+    .mobile-mock[data-style="maison-fjell"] .faux{
+      background:rgba(123,85,62,0.2);
     }
     .mock-top{
       padding:12px;
@@ -357,7 +497,7 @@
         </div>
       </article>
 
-      <a id="result-demo-link" class="btn btn-primary" href="./netrivo-enkel-2-handverkar.html">Se relatert demo</a>
+      <a id="result-demo-link" class="btn demo-cta" href="./netrivo-enkel-2-handverkar.html">Fjord</a>
       <button id="regenerate" class="btn btn-secondary" type="button">Velg på nytt</button>
     </section>
   </main>
@@ -373,6 +513,7 @@
       const resultContentChip = document.getElementById("result-content-chip");
       const selectedContentStack = document.getElementById("selected-content-stack");
       const mockKicker = document.getElementById("mock-kicker");
+      const mobileMock = document.getElementById("mobile-mock");
       const resultDemoLink = document.getElementById("result-demo-link");
       const generate = document.getElementById("generate");
       const regenerate = document.getElementById("regenerate");
@@ -494,7 +635,10 @@
         mockKicker.textContent = "MOBIL SKISSE / " + (styleLabels[styleSelect.value] || styleSelect.value).toUpperCase();
         if (resultDemoLink) {
           resultDemoLink.href = styleDemoRoutes[styleSelect.value] || "./index.html";
-          resultDemoLink.textContent = "Se relatert demo: " + (styleLabels[styleSelect.value] || "Vald stil");
+          resultDemoLink.textContent = styleLabels[styleSelect.value] || "Demo";
+        }
+        if (mobileMock) {
+          mobileMock.dataset.style = styleSelect.value;
         }
         syncPreview();
         renderGeneratedStack();
