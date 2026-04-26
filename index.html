@@ -220,31 +220,6 @@
       border-color:rgba(21,21,21,0.12);
     }
 
-    .hero-bottom{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-top:48px;
-    }
-
-    .metric{
-      padding-top:22px;
-      border-top:1px solid rgba(21,21,21,0.12);
-    }
-
-    .metric strong{
-      display:block;
-      font-size:1.42rem;
-      letter-spacing:-0.04em;
-    }
-
-    .metric span{
-      display:block;
-      margin-top:8px;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:0.92rem;
-    }
 
     .panel-inner{
       position:relative;
@@ -275,29 +250,6 @@
 
     .panel-card + .panel-card{margin-top:16px}
 
-    .panel-manifesto{
-      align-self:flex-end;
-      width:min(100%, 420px);
-      margin:18px 0;
-      padding:26px;
-      border-radius:28px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.12);
-      backdrop-filter:blur(8px);
-    }
-
-    .panel-manifesto p{
-      margin:0;
-      color:rgba(244,238,231,0.88);
-      line-height:1.72;
-      font-size:1rem;
-    }
-
-    .panel-manifesto p + p{
-      margin-top:12px;
-      color:rgba(244,238,231,0.78);
-      font-size:0.96rem;
-    }
 
     .panel-title{
       font-size:1.55rem;
@@ -388,6 +340,78 @@
       color:var(--muted);
       line-height:1.75;
       font-size:0.95rem;
+    }
+
+    .demo-tier-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .demo-tier-card{
+      position:relative;
+      padding:28px;
+      border-radius:30px;
+      border:1px solid var(--line);
+      background:linear-gradient(145deg, rgba(255,255,255,0.66), rgba(244,238,229,0.44));
+      box-shadow:var(--shadow);
+      display:grid;
+      gap:12px;
+    }
+
+    .demo-tier-card::before{
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:6px;
+      border-radius:30px 0 0 30px;
+      background:rgba(21,21,21,0.15);
+    }
+
+    .demo-tier-card--enkel::before{background:linear-gradient(180deg,#b4896a,#d8bda7)}
+    .demo-tier-card--standard::before{background:linear-gradient(180deg,#6e8ba8,#a8bfd2)}
+    .demo-tier-card--premium::before{background:linear-gradient(180deg,#7f678f,#c9a5de)}
+
+    .demo-tier-badge{
+      font-size:0.72rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .demo-tier-title{
+      margin:0;
+      font-size:2rem;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+    }
+
+    .demo-tier-copy{
+      margin:0;
+      color:var(--muted);
+      line-height:1.72;
+      font-size:0.95rem;
+      min-height:52px;
+    }
+
+    .demo-tier-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:4px;
+    }
+
+    .btn-tier{
+      padding:11px 16px;
+      border-radius:999px;
+      border:1px solid rgba(21,21,21,0.12);
+      font-size:0.88rem;
+      font-weight:700;
+      background:#fff;
+    }
+
+    .btn-tier:hover{
+      transform:translateY(-1px);
     }
 
     .offer-band{
@@ -2203,13 +2227,13 @@
       .section-head,
       .level-head,
       .services-grid,
+      .demo-tier-grid,
       .simple-grid,
       .standard-grid,
       .mobile-grid,
       .brief-grid,
       .process-grid,
       .contact-grid,
-      .hero-bottom,
       .premium-feature,
       .theme-simple-cafe .simple-inner,
       .theme-simple-build .simple-inner,
@@ -2306,7 +2330,7 @@
         <a href="#related-demos">Demoer</a>
         <a href="./prosjektstarter.html">Start skisse</a>
         <a href="#process">Prosess</a>
-        <a href="#faq">FAQ</a>
+        <a href="./faq.html">FAQ</a>
         <a href="#contact">Kontakt</a>
       </nav>
     </div>
@@ -2329,30 +2353,11 @@
               </div>
             </div>
 
-            <div class="hero-bottom">
-              <div class="metric">
-                <strong>Ikkje abonnement</strong>
-                <span>Du investerer i eit ferdig produkt, ikkje ein løpande kostnad.</span>
-              </div>
-              <div class="metric">
-                <strong>Skisse først</strong>
-                <span>Du ser retning tidleg og godkjenner før vi bygger vidare.</span>
-              </div>
-              <div class="metric">
-                <strong>Eigarskap</strong>
-                <span>Du betaler for ei løysing som er bygd ferdig for di bedrift.</span>
-              </div>
-            </div>
           </div>
 
           <aside class="hero-panel">
             <div class="panel-inner">
               <div class="panel-badge">Netrivo / portefølje</div>
-              <div class="panel-manifesto">
-                <p>Bygd som eit prosjekt. Prisa som eit resultat.</p>
-                <p>Dette er ikkje eit nytt abonnement. Du investerer i ei ferdig nettside som skal jobbe for bedrifta di - ikkje enda ein fast kostnad.</p>
-                <p>Du ser og godkjenner løysinga før sluttføring og betaling. Målet er at du skal vite kva du får - ikkje kjøpe noko uferdig eller uklart.</p>
-              </div>
 
               <div>
                 <div class="panel-card">
@@ -2455,10 +2460,34 @@
             Demoane er referansar - ikkje eit eige produkt. Start i skissa for å få rett demo for din retning.
           </div>
         </div>
-        <div class="services-grid">
-          <article class="service"><div class="service-index">Enkel</div><div><h3>Sol & Bønner / Fjord / Studio</h3><p>Raske, tydelege retningar for enkel leveranse.</p><a class="btn btn-secondary" href="./netrivo-enkel-1-kafe.html">Se Enkel-demoer</a></div></article>
-          <article class="service"><div class="service-index">Standard</div><div><h3>Nordic / Arctic / Glacial Lake</h3><p>Meir struktur, meir truverd og meir innhald.</p><a class="btn btn-secondary" href="./netrivo-standard-1-arkitekt.html">Se Standard-demoer</a></div></article>
-          <article class="service"><div class="service-index">Premium</div><div><h3>Maison Fjell / Solar Eclipse / Elin Varde</h3><p>Kuratert uttrykk med høgare opplevd verdi.</p><a class="btn btn-secondary" href="./netrivo-premium-1-boutique.html">Se Premium-demoer</a></div></article>
+        <div class="demo-tier-grid">
+          <article class="demo-tier-card demo-tier-card--enkel">
+            <div class="demo-tier-badge">Enkel</div>
+            <h3 class="demo-tier-title">Sol & Bønner / Fjord / Studio</h3>
+            <p class="demo-tier-copy">Raske og tydelege retningar med låg terskel og kort veg til kontakt.</p>
+            <div class="demo-tier-actions">
+              <a class="btn-tier" href="./netrivo-enkel-1-kafe.html">Se Enkel-demo</a>
+              <a class="btn-tier" href="./netrivo-mobil-enkel.html">Se mobil</a>
+            </div>
+          </article>
+          <article class="demo-tier-card demo-tier-card--standard">
+            <div class="demo-tier-badge">Standard</div>
+            <h3 class="demo-tier-title">Nordic / Arctic / Glacial Lake</h3>
+            <p class="demo-tier-copy">Meir struktur og meir truverd for bedrifter som treng sterkare heilskap.</p>
+            <div class="demo-tier-actions">
+              <a class="btn-tier" href="./netrivo-standard-1-arkitekt.html">Se Standard-demo</a>
+              <a class="btn-tier" href="./netrivo-mobil-standard.html">Se mobil</a>
+            </div>
+          </article>
+          <article class="demo-tier-card demo-tier-card--premium">
+            <div class="demo-tier-badge">Premium</div>
+            <h3 class="demo-tier-title">Maison Fjell / Solar Eclipse / Elin Varde</h3>
+            <p class="demo-tier-copy">Kuratert uttrykk med meir sceneplass, tyngde og opplevd verdi.</p>
+            <div class="demo-tier-actions">
+              <a class="btn-tier" href="./netrivo-premium-1-boutique.html">Se Premium-demo</a>
+              <a class="btn-tier" href="./netrivo-mobil-premium-boutique.html">Se mobil</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -2495,25 +2524,6 @@
       </div>
     </section>
 
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">FAQ</div>
-            <h2>Det viktigaste før du bestemmer deg.</h2>
-          </div>
-        </div>
-        <div class="services-grid">
-          <article class="service"><div class="service-index">01</div><div><h3>Er dette abonnement?</h3><p>Nei. Dette er ein engangspris for ferdig produkt.</p></div></article>
-          <article class="service"><div class="service-index">02</div><div><h3>Når betaler eg?</h3><p>Du ser og godkjenner løysinga før sluttføring og betaling.</p></div></article>
-          <article class="service"><div class="service-index">03</div><div><h3>Kva om eg vil endre noko seinare?</h3><p>Endringar i ettertid eller spesialbestillingar blir utført etter eigne timesatsar.</p></div></article>
-          <article class="service"><div class="service-index">04</div><div><h3>Kan eg få noko utanfor malane?</h3><p>Ja. Spesialtilpassa løysingar kan byggast etter behov.</p></div></article>
-          <article class="service"><div class="service-index">05</div><div><h3>Eig eg nettsida sjølv?</h3><p>Ja. Du betaler for eit faktisk produkt du eig.</p></div></article>
-          <article class="service"><div class="service-index">06</div><div><h3>Kor lang tid tek det?</h3><p>Avheng av omfang, men prosessen startar alltid med skisse og tydeleg retning.</p></div></article>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="contact">
       <div class="container contact-grid">
         <div class="contact-cta">
@@ -2521,6 +2531,9 @@
           <h2>Klar for neste steg? Start med skisse eller send melding.</h2>
           <div class="section-copy">
             Målet er enkelt: færre usikre val, raskare beslutning og ferdig nettside du eig.
+          </div>
+          <div class="hero-actions" style="margin-top:22px;">
+            <a class="btn btn-secondary" href="./faq.html">Les FAQ</a>
           </div>
         </div>
 
