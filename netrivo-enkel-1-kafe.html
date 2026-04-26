@@ -439,6 +439,27 @@
       align-content: start;
     }
 
+    .map-showcase {
+      margin-top: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-canvas-wrapper {
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      min-height: 240px;
+      background: #eadfce;
+    }
+
+    .map-canvas-wrapper iframe {
+      width: 100%;
+      min-height: 240px;
+      border: 0;
+      display: block;
+    }
+
     .contact-item small {
       display: block;
       color: var(--muted);
@@ -640,6 +661,16 @@
           <h3>Enkel, varm og effektiv.</h3>
           <div class="section-copy">
             Dette er typen nettside som viser at “enkel” fortsatt kan ha identitet, stemning og kvalitet.
+          </div>
+          <div class="map-showcase">
+            <div class="map-canvas-wrapper">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=5.32415,60.39299&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+                title="Kartvisning"
+              ></iframe>
+            </div>
           </div>
         </div>
 

@@ -417,6 +417,78 @@
       padding: 32px;
     }
 
+    .map-showcase {
+      margin-top: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-style-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .map-style-btn {
+      border: 1px solid rgba(53,73,90,0.2);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.76);
+      color: #2e4658;
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .map-style-btn.is-active {
+      background: #1a3246;
+      border-color: transparent;
+      color: #edf6ff;
+    }
+
+    .map-canvas-wrapper {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid rgba(53,73,90,0.2);
+      overflow: hidden;
+      min-height: 250px;
+      background: #dce7f0;
+    }
+
+    .map-canvas-wrapper iframe {
+      width: 100%;
+      min-height: 250px;
+      border: 0;
+      display: block;
+      filter: none;
+      transition: filter .2s ease;
+    }
+
+    .map-canvas-wrapper.is-classic iframe { filter: sepia(0.68) saturate(0.7) contrast(0.92) brightness(0.95); }
+    .map-canvas-wrapper.is-midcentury iframe { filter: sepia(0.54) saturate(1.05) hue-rotate(-10deg) contrast(0.94) brightness(1.03); }
+    .map-canvas-wrapper.is-dark iframe { filter: grayscale(0.88) invert(0.86) contrast(1.14) brightness(0.84); }
+    .map-canvas-wrapper.is-nova iframe { filter: hue-rotate(172deg) saturate(1.85) contrast(1.12) brightness(0.82); }
+    .map-canvas-wrapper.is-pencil iframe { filter: sepia(0.36) saturate(0.84) contrast(0.86) brightness(1.08); }
+    .map-canvas-wrapper.is-tron iframe { filter: hue-rotate(168deg) saturate(1.5) contrast(1.08) brightness(0.86); }
+
+    .map-canvas-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+
+    .map-canvas-wrapper.is-tron::after {
+      opacity: 1;
+      background:
+        linear-gradient(transparent 95%, rgba(124,232,255,0.24) 96%),
+        linear-gradient(90deg, transparent 95%, rgba(124,232,255,0.18) 96%);
+      background-size: 20px 20px, 20px 20px;
+      mix-blend-mode: screen;
+    }
+
     .contact-item + .contact-item {
       margin-top: 16px;
     }
@@ -624,6 +696,25 @@
           <div class="copy">
             Denne viser at standardnivået kan være både nøkternt, seriøst og salgbart – og fortsatt oppleves som gjennomarbeidet.
           </div>
+          <div class="map-showcase" data-map-showcase>
+            <div class="map-style-controls">
+              <button class="map-style-btn is-active" type="button" data-map-style="standard">Google map</button>
+              <button class="map-style-btn" type="button" data-map-style="classic">Klassisk</button>
+              <button class="map-style-btn" type="button" data-map-style="midcentury">Mid-century</button>
+              <button class="map-style-btn" type="button" data-map-style="dark">Mørk</button>
+              <button class="map-style-btn" type="button" data-map-style="nova">Nova</button>
+              <button class="map-style-btn" type="button" data-map-style="pencil">Colored pencil</button>
+              <button class="map-style-btn" type="button" data-map-style="tron">Tron</button>
+            </div>
+            <div class="map-canvas-wrapper" data-map-frame>
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+                title="Demo kartvisning"
+              ></iframe>
+            </div>
+          </div>
         </div>
 
         <div class="card box">
@@ -657,6 +748,38 @@
       if (forceView !== "desktop" && isMobile) {
         window.location.href = "./netrivo-mobil-standard-radgiving.html";
       }
+    })();
+
+    (function () {
+      const showcase = document.querySelector("[data-map-showcase]");
+      if (!showcase) return;
+      const frame = showcase.querySelector("[data-map-frame]");
+      const buttons = Array.from(showcase.querySelectorAll("[data-map-style]"));
+      if (!frame || !buttons.length) return;
+
+      const mapSources = {
+        standard: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer",
+        classic: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/VintageShadedRelief/MapServer",
+        midcentury: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+        dark: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer",
+        nova: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer",
+        pencil: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer",
+        tron: "https://www.arcgis.com/apps/mapviewer/index.html?mapOnly=true&center=10.3951,63.4305&level=12&basemapUrl=https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer"
+      };
+      function applyMapStyle(style) {
+        const resolved = mapSources[style] || mapSources.standard;
+        const iframe = frame.querySelector("iframe");
+        if (iframe) iframe.src = resolved;
+        buttons.forEach(function (button) {
+          button.classList.toggle("is-active", button.dataset.mapStyle === style);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          applyMapStyle(button.dataset.mapStyle || "standard");
+        });
+      });
     })();
   </script>
 </body>
