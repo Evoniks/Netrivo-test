@@ -30,6 +30,113 @@
       color: var(--ink);
     }
 
+    .tron-trail-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .tron-cursor-dot {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(-50%, -50%, 0);
+      background: #ffbb7a;
+      box-shadow:
+        0 0 12px rgba(255,187,122,0.96),
+        0 0 28px rgba(255,166,74,0.76),
+        0 0 48px rgba(122,98,255,0.42);
+      transition: opacity .18s ease;
+    }
+
+    .tron-cursor-dot.is-visible {
+      opacity: 0.92;
+      animation: tronPulse 1.35s ease-in-out infinite;
+    }
+
+    @keyframes tronPulse {
+      0%, 100% { transform: translate3d(-50%, -50%, 0) scale(0.76); }
+      50% { transform: translate3d(-50%, -50%, 0) scale(1.22); }
+    }
+
+    .tron-toggle {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 10000;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(162,188,255,0.34);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,187,122,0.28), transparent 42%),
+        linear-gradient(145deg, rgba(84,66,188,0.42), rgba(8,14,28,0.86));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 16px 40px rgba(0,0,0,0.34),
+        0 0 26px rgba(122,98,255,0.36);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform .18s ease, opacity .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .tron-toggle:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,187,122,0.7);
+    }
+
+    .tron-toggle::before {
+      content: "";
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,187,122,0.92);
+      box-shadow:
+        0 0 12px rgba(255,187,122,0.74),
+        0 0 22px rgba(122,98,255,0.34);
+    }
+
+    .tron-toggle::after {
+      content: "";
+      position: absolute;
+      width: 23px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,187,122,0), rgba(255,187,122,0.95), rgba(122,98,255,0.5));
+      transform: translate(-8px, 9px) rotate(-28deg);
+      box-shadow: 0 0 12px rgba(255,187,122,0.82);
+    }
+
+    .tron-toggle.is-dot-only::after {
+      opacity: 0;
+      transform: translate(-8px, 9px) rotate(-28deg) scaleX(0.2);
+    }
+
+    .tron-toggle.is-off {
+      opacity: 0.52;
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+    }
+
+    .tron-toggle.is-off::before {
+      border-color: rgba(255,255,255,0.38);
+      box-shadow: none;
+    }
+
+    .tron-toggle.is-off::after {
+      background: rgba(255,255,255,0.46);
+      box-shadow: none;
+    }
+
     a {
       text-decoration: none;
       color: inherit;
@@ -661,6 +768,140 @@
       if (forceView !== "desktop" && isMobile) {
         window.location.href = "./netrivo-mobil-premium-tech.html";
       }
+    })();
+
+    (function () {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+      if (prefersReducedMotion || !hasFinePointer) return;
+
+      const canvas = document.createElement("canvas");
+      const dot = document.createElement("div");
+      const toggle = document.createElement("button");
+      const ctx = canvas.getContext("2d");
+      const points = [];
+      const trailLife = 1450;
+      const minPointDistance = 3;
+      const interpolationStep = 7;
+      const maxBridgeDistance = 1400;
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let lastPoint = null;
+      let running = false;
+      let trailMode = localStorage.getItem("solarEclipseTrailMode") || "trail";
+      if (!["trail", "dot", "off"].includes(trailMode)) trailMode = "trail";
+
+      canvas.className = "tron-trail-canvas";
+      dot.className = "tron-cursor-dot";
+      toggle.className = "tron-toggle";
+      toggle.type = "button";
+      toggle.setAttribute("aria-label", "Bytt museeffekt");
+      document.body.append(canvas, dot, toggle);
+
+      function syncToggle() {
+        const hasTrail = trailMode === "trail";
+        const hasDot = trailMode !== "off";
+        canvas.style.display = hasTrail ? "block" : "none";
+        dot.style.display = hasDot ? "block" : "none";
+        toggle.classList.toggle("is-dot-only", trailMode === "dot");
+        toggle.classList.toggle("is-off", trailMode === "off");
+      }
+
+      function resizeCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function addTrailPoint(x, y, time) {
+        const point = { x: x, y: y, time: time };
+        if (!lastPoint) {
+          points.push(point);
+          lastPoint = point;
+          return;
+        }
+        const distance = Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y);
+        if (distance < minPointDistance || distance > maxBridgeDistance) {
+          lastPoint = point;
+          return;
+        }
+        const steps = Math.max(1, Math.floor(distance / interpolationStep));
+        for (let step = 1; step <= steps; step += 1) {
+          const progress = step / steps;
+          points.push({
+            x: lastPoint.x + (point.x - lastPoint.x) * progress,
+            y: lastPoint.y + (point.y - lastPoint.y) * progress,
+            time: lastPoint.time + (time - lastPoint.time) * progress
+          });
+        }
+        lastPoint = point;
+      }
+
+      function addPoint(event) {
+        if (trailMode === "off") return;
+        const samples = typeof event.getCoalescedEvents === "function" ? event.getCoalescedEvents() : [event];
+        const now = performance.now();
+        const sample = samples[samples.length - 1] || event;
+        dot.style.left = sample.clientX + "px";
+        dot.style.top = sample.clientY + "px";
+        dot.classList.add("is-visible");
+        if (trailMode !== "trail") return;
+        for (const s of samples) addTrailPoint(s.clientX, s.clientY, now);
+        if (!running) {
+          running = true;
+          requestAnimationFrame(drawTrail);
+        }
+      }
+
+      function drawTrail(now) {
+        ctx.clearRect(0, 0, width, height);
+        while (points.length && now - points[0].time > trailLife) points.shift();
+        for (let i = 1; i < points.length; i += 1) {
+          const previous = points[i - 1];
+          const current = points[i];
+          const next = points[i + 1] || current;
+          const age = now - current.time;
+          const opacity = Math.max(0, 1 - age / trailLife);
+          const endX = (current.x + next.x) / 2;
+          const endY = (current.y + next.y) / 2;
+          ctx.beginPath();
+          ctx.moveTo(previous.x, previous.y);
+          ctx.quadraticCurveTo(previous.x, previous.y, endX, endY);
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.lineWidth = 2 + opacity * 2;
+          ctx.shadowBlur = 14 + opacity * 20;
+          ctx.shadowColor = "rgba(255,187,122,0.9)";
+          ctx.strokeStyle = "rgba(255,187,122," + (opacity * 0.74) + ")";
+          ctx.stroke();
+          ctx.lineWidth = 1;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(122,98,255,0.86)";
+          ctx.strokeStyle = "rgba(122,98,255," + (opacity * 0.62) + ")";
+          ctx.stroke();
+        }
+        if (points.length) requestAnimationFrame(drawTrail);
+        else running = false;
+      }
+
+      resizeCanvas();
+      syncToggle();
+      window.addEventListener("resize", resizeCanvas);
+      window.addEventListener("onpointerrawupdate" in window ? "pointerrawupdate" : "pointermove", addPoint, { passive: true });
+      window.addEventListener("pointerleave", function () {
+        dot.classList.remove("is-visible");
+      });
+      toggle.addEventListener("click", function () {
+        trailMode = trailMode === "trail" ? "dot" : trailMode === "dot" ? "off" : "trail";
+        localStorage.setItem("solarEclipseTrailMode", trailMode);
+        syncToggle();
+      });
     })();
   </script>
 </body>
