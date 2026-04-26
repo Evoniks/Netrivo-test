@@ -357,6 +357,7 @@
         </div>
       </article>
 
+      <a id="result-demo-link" class="btn btn-primary" href="./netrivo-enkel-2-handverkar.html">Se relatert demo</a>
       <button id="regenerate" class="btn btn-secondary" type="button">Velg på nytt</button>
     </section>
   </main>
@@ -372,6 +373,7 @@
       const resultContentChip = document.getElementById("result-content-chip");
       const selectedContentStack = document.getElementById("selected-content-stack");
       const mockKicker = document.getElementById("mock-kicker");
+      const resultDemoLink = document.getElementById("result-demo-link");
       const generate = document.getElementById("generate");
       const regenerate = document.getElementById("regenerate");
 
@@ -385,6 +387,18 @@
         "maison-fjell": "Maison Fjell",
         "solar-eclipse": "Solar Eclipse",
         "elin-varde": "Elin Varde"
+      };
+
+      const styleDemoRoutes = {
+        "sol-bonner": "./netrivo-enkel-1-kafe.html",
+        fjord: "./netrivo-enkel-2-handverkar.html",
+        studio: "./netrivo-enkel-3-ptstudio.html",
+        nordic: "./netrivo-standard-1-arkitekt.html",
+        arctic: "./netrivo-standard-2-radgiving.html",
+        "glacial-lake": "./netrivo-standard-3-oppleving.html",
+        "maison-fjell": "./netrivo-premium-1-boutique.html",
+        "solar-eclipse": "./netrivo-premium-2-tech.html",
+        "elin-varde": "./netrivo-premium-3-personlegbrand.html"
       };
 
       const styleByContent = {
@@ -478,6 +492,10 @@
         resultStyleChip.textContent = styleLabels[styleSelect.value] || styleSelect.value;
         resultContentChip.textContent = contentLabel();
         mockKicker.textContent = "MOBIL SKISSE / " + (styleLabels[styleSelect.value] || styleSelect.value).toUpperCase();
+        if (resultDemoLink) {
+          resultDemoLink.href = styleDemoRoutes[styleSelect.value] || "./index.html";
+          resultDemoLink.textContent = "Se relatert demo: " + (styleLabels[styleSelect.value] || "Vald stil");
+        }
         syncPreview();
         renderGeneratedStack();
       }
