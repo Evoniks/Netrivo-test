@@ -247,6 +247,16 @@
     .mobile-mock[data-style="solar-eclipse"] .faux{
       background:rgba(227,238,248,0.26);
     }
+    .mobile-mock[data-style="solar-eclipse"] .mock-intro{
+      background:linear-gradient(180deg, rgba(24,34,46,0.94), rgba(34,48,64,0.9));
+      border-color:rgba(255,160,106,0.28);
+    }
+    .mobile-mock[data-style="solar-eclipse"] .mock-intro-title{
+      color:#ffd8bf;
+    }
+    .mobile-mock[data-style="solar-eclipse"] .mock-intro-copy{
+      background:rgba(226,238,249,0.26);
+    }
 
     .mobile-mock[data-style="elin-varde"] .mock-top{
       background:linear-gradient(160deg,#402748,#653968 62%,#7d5582);
@@ -261,6 +271,16 @@
     .mobile-mock[data-style="elin-varde"] .faux{
       background:rgba(107,53,113,0.2);
     }
+    .mobile-mock[data-style="elin-varde"] .mock-intro{
+      background:linear-gradient(180deg, rgba(90,54,101,0.9), rgba(121,77,130,0.84));
+      border-color:rgba(203,154,214,0.42);
+    }
+    .mobile-mock[data-style="elin-varde"] .mock-intro-title{
+      color:#f5dbfa;
+    }
+    .mobile-mock[data-style="elin-varde"] .mock-intro-copy{
+      background:rgba(248,234,252,0.34);
+    }
 
     .mobile-mock[data-style="fjord"] .mock-top{
       background:linear-gradient(160deg,#1d3a53,#426a8b 62%,#5a86ab);
@@ -274,6 +294,10 @@
     }
     .mobile-mock[data-style="fjord"] .faux{
       background:rgba(43,89,122,0.2);
+    }
+    .mobile-mock[data-style="fjord"] .mock-intro{
+      background:linear-gradient(180deg, rgba(242,250,255,0.9), rgba(226,241,251,0.84));
+      border-color:rgba(92,136,173,0.34);
     }
     .mobile-mock[data-style="sol-bonner"] .mock-top{
       background:linear-gradient(160deg,#3b2b1f,#7c5439 62%,#ad7a53);
@@ -386,6 +410,43 @@
     .selected-content-stack{
       display:grid;
       gap:8px;
+    }
+    .mock-intro{
+      border:1px solid color-mix(in srgb, var(--theme-accent) 36%, rgba(255,255,255,0.54));
+      border-radius:16px;
+      padding:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.86), rgba(246,236,224,0.8));
+      display:grid;
+      gap:8px;
+    }
+    .mock-intro-title{
+      font-size:0.92rem;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      color:color-mix(in srgb, var(--theme-dark) 74%, #1b1510);
+    }
+    .mock-intro-copy{
+      height:8px;
+      border-radius:999px;
+      background:color-mix(in srgb, var(--theme-dark) 20%, white);
+    }
+    .mock-intro-copy.wide{width:96%}
+    .mock-intro-copy.mid{width:78%}
+    .mock-intro-copy.short{width:62%}
+    .mock-intro-actions{
+      display:grid;
+      gap:8px;
+      margin-top:2px;
+    }
+    .mock-intro-btn{
+      min-height:34px;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--theme-accent) 40%, rgba(255,255,255,0.4));
+      background:rgba(255,255,255,0.88);
+    }
+    .mock-intro-btn.dark{
+      border-color:rgba(255,255,255,0.18);
+      background:linear-gradient(150deg, color-mix(in srgb, var(--theme-dark) 94%, #000), color-mix(in srgb, var(--theme-dark) 76%, var(--theme-accent)));
     }
     .selected-content-box{
       border:1px solid color-mix(in srgb, var(--theme-accent) 40%, rgba(255,255,255,0.6));
@@ -617,6 +678,29 @@
         ].join("");
       }
 
+      function buildIntroBlock(styleKey) {
+        const introTitleByStyle = {
+          "elin-varde": "Ekspert. Foredrag. Signatur.",
+          "solar-eclipse": "Mørk scene med tydeleg retning.",
+          "maison-fjell": "Kuratert uttrykk med premium-kjensle.",
+          fjord: "Tillit, klarheit og enkel flyt.",
+          arctic: "Stram struktur med kald, roleg profil."
+        };
+        const introTitle = introTitleByStyle[styleKey] || "Retning med klar mobilstruktur.";
+        return [
+          '<article class="mock-intro">',
+          '<div class="mock-intro-title">' + introTitle + '</div>',
+          '<div class="mock-intro-copy wide"></div>',
+          '<div class="mock-intro-copy mid"></div>',
+          '<div class="mock-intro-copy short"></div>',
+          '<div class="mock-intro-actions">',
+          '<div class="mock-intro-btn dark"></div>',
+          '<div class="mock-intro-btn"></div>',
+          '</div>',
+          '</article>'
+        ].join("");
+      }
+
       function renderGeneratedStack() {
         const minimum = baseSectionCount[selectedContent] || 4;
         const picked = featureOrder.slice();
@@ -624,7 +708,9 @@
         while (picked.length < minimum) {
           picked.push(fallback[picked.length % fallback.length] + " " + (picked.length - featureOrder.length + 1));
         }
-        selectedContentStack.innerHTML = picked.map(fakeSectionHtml).join("");
+        const needsLead = selectedContent === "rik" || styleSelect.value === "elin-varde" || styleSelect.value === "solar-eclipse";
+        const leadHtml = needsLead ? buildIntroBlock(styleSelect.value) : "";
+        selectedContentStack.innerHTML = leadHtml + picked.map(fakeSectionHtml).join("");
       }
 
       function generateSketch() {
