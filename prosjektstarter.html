@@ -1149,6 +1149,19 @@
     .sketch-effects[data-pointer-active="true"] .sketch-effect-spotlight{
       opacity:0.88;
     }
+    .sketch-effect-spotlight::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      transform:translate(-50%, -50%);
+      background:rgba(255,255,255,0.86);
+      box-shadow:0 0 10px rgba(255,255,255,0.66);
+      opacity:0.92;
+    }
     .sketch-effect-parallax{
       position:absolute;
       border-radius:999px;
@@ -2757,7 +2770,6 @@
                         <button class="live-option" data-type="effect" data-value="Forstørrelsesglass" type="button">Forstørrelsesglass</button>
                         <button class="live-option" data-type="effect" data-value="Magnetisk hover" type="button">Magnetisk hover</button>
                         <button class="live-option" data-type="effect" data-value="Soft spotlight" type="button">Soft spotlight</button>
-                        <button class="live-option" data-type="effect" data-value="Parallax drift" type="button">Parallax drift</button>
                         <button class="live-option" data-type="effect" data-value="Ink ripple" type="button">Ink ripple</button>
                       </div>
                     </div>
@@ -2873,7 +2885,6 @@
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Forstørrelsesglass" /><span class="brief-choice-text">Forstørrelsesglass</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Magnetisk hover" /><span class="brief-choice-text">Magnetisk hover</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Soft spotlight" /><span class="brief-choice-text">Soft spotlight</span></label>
-                    <label class="brief-choice"><input type="checkbox" name="effect" value="Parallax drift" /><span class="brief-choice-text">Parallax drift</span></label>
                     <label class="brief-choice"><input type="checkbox" name="effect" value="Ink ripple" /><span class="brief-choice-text">Ink ripple</span></label>
                   </div>
                 </div>
@@ -3549,7 +3560,6 @@
         const hasMagnifier = state.effects.indexOf("Forstørrelsesglass") !== -1;
         const hasMagnetic = state.effects.indexOf("Magnetisk hover") !== -1;
         const hasSpotlight = state.effects.indexOf("Soft spotlight") !== -1;
-        const hasParallax = state.effects.indexOf("Parallax drift") !== -1;
         const hasRipple = state.effects.indexOf("Ink ripple") !== -1;
         const scene = sketchSurface.dataset.scene || "calm";
         const isSolarEclipse = state.styleKey === "solar-eclipse";
@@ -3557,9 +3567,9 @@
 
         sketchSurface.classList.remove("has-glass-effect", "effect-atmosphere-on", "effect-glass-on");
         magnifierEnabled = hasMagnifier;
-        pointerReactiveEnabled = hasTrace || hasSpotlight || hasParallax || hasMagnetic;
+        pointerReactiveEnabled = hasTrace || hasSpotlight || hasMagnetic;
         magneticEnabled = hasMagnetic;
-        parallaxEnabled = hasParallax;
+        parallaxEnabled = false;
         rippleEnabled = hasRipple;
         sketchSurface.classList.toggle("has-magnifier-effect", hasMagnifier);
         if (!hasMagnifier && sketchMagnifier) {
@@ -3587,14 +3597,10 @@
           );
         }
 
-        if (hasParallax) {
-          pieces.push(
-            '<span class="sketch-effect-atmosphere" style="left:-10%; top:-8%; width:' + (48 * boost) + '%; height:' + (38 * boost) + '%; --effect-color:' + softColor + 'a6; --drift-x:22px; --drift-y:-10px; --scale-end:1.08; --duration:14s;"></span>',
-            '<span class="sketch-effect-atmosphere" style="right:-14%; top:2%; width:' + (44 * boost) + '%; height:' + (34 * boost) + '%; --effect-color:' + traceColor + '96; --drift-x:-18px; --drift-y:12px; --scale-end:1.08; --duration:16s;"></span>',
-            '<span class="sketch-effect-parallax layer-a" style="--effect-color:' + softColor + '8a;"></span>',
-            '<span class="sketch-effect-parallax layer-b" style="--effect-color:' + traceColor + '84;"></span>'
-          );
-        }
+        pieces.push(
+          '<span class="sketch-effect-atmosphere" style="left:-10%; top:-8%; width:' + (48 * boost) + '%; height:' + (38 * boost) + '%; --effect-color:' + softColor + 'a6; --drift-x:22px; --drift-y:-10px; --scale-end:1.08; --duration:14s;"></span>',
+          '<span class="sketch-effect-atmosphere" style="right:-14%; top:2%; width:' + (44 * boost) + '%; height:' + (34 * boost) + '%; --effect-color:' + traceColor + '96; --drift-x:-18px; --drift-y:12px; --scale-end:1.08; --duration:16s;"></span>'
+        );
 
         if (hasSpotlight) {
           pieces.push(
@@ -3602,7 +3608,7 @@
           );
         }
 
-        if (isSolarEclipse || (scene === "tech" && (hasTrace || hasParallax))) {
+        if (isSolarEclipse || (scene === "tech" && hasTrace)) {
           pieces.push('<span class="sketch-effect-eclipse"></span>');
         }
 
@@ -3952,7 +3958,7 @@
         });
         featureSelectionOrder = pickedFeatures.slice();
 
-        const allowedEffects = ["Interaktiv lyslinje", "Forstørrelsesglass", "Magnetisk hover", "Soft spotlight", "Parallax drift", "Ink ripple"];
+        const allowedEffects = ["Interaktiv lyslinje", "Forstørrelsesglass", "Magnetisk hover", "Soft spotlight", "Ink ripple"];
         if (level === "premium") {
           const pickedEffects = pickRandomSubset(allowedEffects, 1, 3);
           effectInputs.forEach(function (input) {
@@ -4194,6 +4200,9 @@
         const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
         if (prefersReducedMotion || !hasFinePointer) return;
 
+        const pointerHotspotX = 0;
+        const pointerHotspotY = 0;
+
         function resetMagneticTransforms() {
           sketchSurface.querySelectorAll(".sketch-hero, .sketch-note, .sketch-section").forEach(function (element) {
             element.style.transform = "";
@@ -4203,8 +4212,8 @@
         sketchSurface.addEventListener("pointermove", function (event) {
           if (!pointerReactiveEnabled) return;
           const rect = sketchSurface.getBoundingClientRect();
-          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
-          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left + pointerHotspotX));
+          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top + pointerHotspotY));
           const offsetX = x - rect.width / 2;
           const offsetY = y - rect.height / 2;
 
@@ -4234,8 +4243,8 @@
         sketchSurface.addEventListener("pointerdown", function (event) {
           if (!rippleEnabled || !sketchEffects) return;
           const rect = sketchSurface.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
+          const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left + pointerHotspotX));
+          const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top + pointerHotspotY));
           const ripple = document.createElement("span");
           ripple.className = "sketch-ripple";
           ripple.style.left = x + "px";
