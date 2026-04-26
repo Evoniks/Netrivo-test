@@ -259,27 +259,42 @@
     }
 
     .mobile-mock[data-style="elin-varde"] .mock-top{
-      background:linear-gradient(160deg,#402748,#653968 62%,#7d5582);
+      background:linear-gradient(160deg,#121d31,#1f2b46 62%,#3f2f5d);
+    }
+    .mobile-mock[data-style="elin-varde"]{
+      background:linear-gradient(180deg,#0f1930,#1a2440 54%,#2f2a4a);
+      border-color:rgba(171,145,225,0.28);
+    }
+    .mobile-mock[data-style="elin-varde"] .mock-content{
+      background:linear-gradient(180deg, rgba(17,26,44,0.64), rgba(39,33,63,0.56));
     }
     .mobile-mock[data-style="elin-varde"] .selected-content-box{
-      background:linear-gradient(180deg, rgba(255,246,255,0.86), rgba(249,236,251,0.84));
-      border-color:rgba(167,112,174,0.38);
+      background:linear-gradient(180deg, rgba(34,28,55,0.84), rgba(54,42,79,0.78));
+      border-color:rgba(183,141,214,0.44);
     }
     .mobile-mock[data-style="elin-varde"] .selected-content-label{
-      color:#6b3571;
+      color:#efd7ff;
     }
     .mobile-mock[data-style="elin-varde"] .faux{
-      background:rgba(107,53,113,0.2);
+      background:rgba(226,206,247,0.26);
     }
     .mobile-mock[data-style="elin-varde"] .mock-intro{
-      background:linear-gradient(180deg, rgba(90,54,101,0.9), rgba(121,77,130,0.84));
-      border-color:rgba(203,154,214,0.42);
+      background:linear-gradient(180deg, rgba(126,58,105,0.86), rgba(89,46,90,0.82));
+      border-color:rgba(224,168,214,0.4);
     }
     .mobile-mock[data-style="elin-varde"] .mock-intro-title{
       color:#f5dbfa;
     }
     .mobile-mock[data-style="elin-varde"] .mock-intro-copy{
-      background:rgba(248,234,252,0.34);
+      background:rgba(243,223,255,0.36);
+    }
+    .mobile-mock[data-style="elin-varde"] .mock-intro-btn{
+      background:rgba(255,241,250,0.9);
+      border-color:rgba(234,187,225,0.54);
+    }
+    .mobile-mock[data-style="elin-varde"] .mock-intro-btn.dark{
+      background:linear-gradient(145deg, rgba(38,24,55,0.98), rgba(84,42,83,0.9));
+      border-color:rgba(255,220,242,0.28);
     }
 
     .mobile-mock[data-style="fjord"] .mock-top{
@@ -447,6 +462,43 @@
     .mock-intro-btn.dark{
       border-color:rgba(255,255,255,0.18);
       background:linear-gradient(150deg, color-mix(in srgb, var(--theme-dark) 94%, #000), color-mix(in srgb, var(--theme-dark) 76%, var(--theme-accent)));
+    }
+    .mock-intro.mock-intro--split{
+      grid-template-columns:0.42fr 0.58fr;
+      align-items:stretch;
+      gap:10px;
+    }
+    .mock-intro-visual{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.22);
+      background:linear-gradient(165deg, rgba(183,77,113,0.5), rgba(119,50,89,0.4) 58%, rgba(36,22,47,0.6));
+      min-height:138px;
+      position:relative;
+      overflow:hidden;
+    }
+    .mock-intro-visual::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.2));
+      pointer-events:none;
+    }
+    .mock-intro-visual-label{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      right:10px;
+      color:#ffe9f6;
+      font-size:0.88rem;
+      line-height:1.04;
+      letter-spacing:-0.02em;
+      font-weight:700;
+      z-index:1;
+    }
+    .mock-intro-main{
+      display:grid;
+      gap:8px;
+      align-content:start;
     }
     .selected-content-box{
       border:1px solid color-mix(in srgb, var(--theme-accent) 40%, rgba(255,255,255,0.6));
@@ -618,7 +670,7 @@
         "glacial-lake": { bg:"linear-gradient(180deg,#edf8f3,#d6ebdf)", hero:"linear-gradient(165deg,#f7fdf9,#ddeee4)", accent:"#5e9478", dark:"#1f4132" },
         "maison-fjell": { bg:"linear-gradient(180deg,#f6f0ec,#e5d6ca)", hero:"linear-gradient(165deg,#fcf8f4,#ecdfd6)", accent:"#9d7459", dark:"#3a2a21" },
         "solar-eclipse": { bg:"linear-gradient(180deg,#121c28,#213243)", hero:"linear-gradient(165deg,#1a2b3a,#24384a)", accent:"#ff9a5c", dark:"#0e141c" },
-        "elin-varde": { bg:"linear-gradient(180deg,#f8eef7,#ebd7ea)", hero:"linear-gradient(165deg,#fff7fe,#f2e1f1)", accent:"#a971ad", dark:"#3f2744" }
+        "elin-varde": { bg:"linear-gradient(180deg,#0e1730,#1a2744 54%,#342f53)", hero:"linear-gradient(165deg,#1a2541,#2f2b4c)", accent:"#bf6f9f", dark:"#16162a" }
       };
 
       const baseSectionCount = { kort: 2, balansert: 4, rik: 6 };
@@ -679,6 +731,23 @@
       }
 
       function buildIntroBlock(styleKey) {
+        if (styleKey === "elin-varde") {
+          return [
+            '<article class="mock-intro mock-intro--split">',
+            '<div class="mock-intro-visual"><div class="mock-intro-visual-label">Ekspert.<br>Foredrag.<br>Signatur.</div></div>',
+            '<div class="mock-intro-main">',
+            '<div class="mock-intro-title">Signaturprofil med meir sceneplass.</div>',
+            '<div class="mock-intro-copy wide"></div>',
+            '<div class="mock-intro-copy mid"></div>',
+            '<div class="mock-intro-copy short"></div>',
+            '<div class="mock-intro-actions">',
+            '<div class="mock-intro-btn dark"></div>',
+            '<div class="mock-intro-btn"></div>',
+            '</div>',
+            '</div>',
+            '</article>'
+          ].join("");
+        }
         const introTitleByStyle = {
           "elin-varde": "Ekspert. Foredrag. Signatur.",
           "solar-eclipse": "Mørk scene med tydeleg retning.",
